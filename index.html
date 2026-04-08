@@ -3,160 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wonder Way | Kribi Package Experiences</title>
+    <title>Wonder Way | Kribi Premier Packages</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        .package-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent; }
-        .package-card:hover { transform: translateY(-10px); }
-        .package-card.active { border-color: #fbbf24; background: #fffdf5; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-        .tab-btn.active { background: #fbbf24; color: black; border-color: #fbbf24; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Outfit:wght@200;400;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hero-font { font-family: 'Outfit', sans-serif; }
+        .package-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid #e2e8f0; }
+        .package-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); }
+        .active-tab { background: #fbbf24; color: black; border-color: #fbbf24; }
+        .highlight-gold { border: 2px solid #fbbf24; position: relative; }
+        .highlight-gold::before { content: "MOST BOOKED"; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #fbbf24; color: black; padding: 2px 15px; border-radius: 50px; font-size: 10px; font-weight: 900; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b px-6 py-4 flex justify-between items-center">
-        <div class="font-extrabold text-xl tracking-tighter text-blue-600">Wonder Way</div>
-        <div class="flex bg-slate-100 p-1 rounded-xl">
-            <button onclick="updateCurrency('CFA', 1)" id="btn-CFA" class="px-4 py-1 rounded-lg text-xs font-bold bg-white shadow-sm">CFA</button>
-            <button onclick="updateCurrency('USD', 0.0016)" id="btn-USD" class="px-4 py-1 rounded-lg text-xs font-bold">USD</button>
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md px-6 py-4 border-b flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center font-black">W</div>
+            <span class="font-extrabold text-xl tracking-tighter uppercase hero-font">Wonder Way</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex gap-6 text-xs font-black uppercase tracking-widest text-slate-400">
+                <a href="#packages" class="hover:text-yellow-500">Packages</a>
+                <a href="#gallery" class="hover:text-yellow-500">Gallery</a>
+            </div>
+            <div class="flex bg-slate-100 p-1 rounded-xl">
+                <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-3 py-1 rounded-lg text-[10px] font-black bg-white shadow-sm">CFA</button>
+                <button onclick="setCurrency('USD', 0.0016)" id="curr-USD" class="px-3 py-1 rounded-lg text-[10px] font-black">USD</button>
+            </div>
         </div>
     </nav>
 
-    <header class="pt-32 pb-16 text-center px-6">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Your Kribi Escape</h1>
-        <p class="text-slate-500 max-w-2xl mx-auto italic">"We exclude transportation to keep your stay affordable, whether you arrive by private car or bike."</p>
-        
-        <div class="flex justify-center gap-4 mt-12">
-            <button onclick="switchGroup('couple')" id="tab-couple" class="tab-btn active px-6 py-3 rounded-full border-2 font-bold transition">Couples</button>
-            <button onclick="switchGroup('group4')" id="tab-group4" class="tab-btn px-6 py-3 rounded-full border-2 font-bold transition">Group of 4</button>
-            <button onclick="switchGroup('group6')" id="tab-group6" class="tab-btn px-6 py-3 rounded-full border-2 font-bold transition">Group of 6</button>
+    <header class="pt-40 pb-20 px-6 text-center bg-white border-b">
+        <h1 class="hero-font text-5xl md:text-7xl font-black tracking-tighter mb-4">THE KRIBI COLLECTIONS.</h1>
+        <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base mb-12">
+            Because most clients arrive with private cars or bikes, we don't include transport—keeping your luxury stay affordable.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="showGroup('couple')" id="tab-couple" class="group-tab active-tab px-8 py-4 rounded-2xl border-2 font-black text-sm transition">FOR COUPLES</button>
+            <button onclick="showGroup('group4')" id="tab-group4" class="group-tab px-8 py-4 rounded-2xl border-2 font-black text-sm transition">GROUP OF 4</button>
+            <button onclick="showGroup('group6')" id="tab-group6" class="group-tab px-8 py-4 rounded-2xl border-2 font-black text-sm transition">GROUP OF 6</button>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 pb-32">
-        <div id="package-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <main id="packages" class="max-w-7xl mx-auto px-6 py-20">
+        <div id="package-display" class="grid grid-cols-1 md:grid-cols-3 gap-8">
             </div>
 
-        <section class="mt-24 border-t pt-16">
-            <h3 class="text-2xl font-bold mb-8 text-center">Add Extras</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-blue-500 transition cursor-pointer">
-                    <i class="fas fa-birthday-cake text-blue-500 mb-2"></i>
-                    <p class="text-sm font-bold">Cakes & Surprises</p>
+        <section class="mt-32">
+            <h2 class="text-center hero-font text-3xl font-black mb-12 uppercase tracking-widest">Available Extras</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="bg-white p-6 rounded-3xl border text-center hover:border-yellow-500 transition cursor-pointer">
+                    <i class="fas fa-gift text-yellow-500 text-xl mb-4"></i>
+                    <p class="text-xs font-black uppercase">Decorations</p>
                 </div>
-                <div class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-blue-500 transition cursor-pointer">
-                    <i class="fas fa-car text-blue-500 mb-2"></i>
-                    <p class="text-sm font-bold">Transportation</p>
+                <div class="bg-white p-6 rounded-3xl border text-center hover:border-yellow-500 transition cursor-pointer">
+                    <i class="fas fa-birthday-cake text-yellow-500 text-xl mb-4"></i>
+                    <p class="text-xs font-black uppercase">Cakes</p>
                 </div>
-                <div class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-blue-500 transition cursor-pointer">
-                    <i class="fas fa-camera text-blue-500 mb-2"></i>
-                    <p class="text-sm font-bold">Pro Photo</p>
+                <div class="bg-white p-6 rounded-3xl border text-center hover:border-yellow-500 transition cursor-pointer">
+                    <i class="fas fa-car text-yellow-500 text-xl mb-4"></i>
+                    <p class="text-xs font-black uppercase">Transport</p>
                 </div>
-                <div class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-blue-500 transition cursor-pointer">
-                    <i class="fas fa-golf-ball text-blue-500 mb-2"></i>
-                    <p class="text-sm font-bold">Golf Session</p>
+                <div class="bg-white p-6 rounded-3xl border text-center hover:border-yellow-500 transition cursor-pointer">
+                    <i class="fas fa-camera text-yellow-500 text-xl mb-4"></i>
+                    <p class="text-xs font-black uppercase">Pro Photos</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border text-center hover:border-yellow-500 transition cursor-pointer">
+                    <i class="fas fa-golf-ball text-yellow-500 text-xl mb-4"></i>
+                    <p class="text-xs font-black uppercase">Golfing</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <div id="selection-bar" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-6 translate-y-full transition-transform duration-500 z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div>
-                <p id="selected-package-name" class="text-xs text-yellow-500 font-bold uppercase tracking-widest">Select a package</p>
-                <div class="text-2xl font-bold"><span id="total-val">0</span> <span class="curr-label">CFA</span></div>
-            </div>
-            <button onclick="bookWhatsApp()" class="bg-yellow-500 text-black px-10 py-3 rounded-full font-black hover:scale-105 transition">BOOK THIS TRIP</button>
-        </div>
-    </div>
-
     <script>
-        const data = {
+        const store = {
             couple: [
-                { name: "Mini Love Adventure", tier: "Silver", price: 90000, slogan: "Perfect for young couples & spontaneous love trips", items: ["Lodging (2 days)", "Jet Ski", "Quad", "Museum Visit", "Lobe Tour", "Visit Pygmies", "2 Beaches", "Mini Boat Tour", "Mobile Content & Pictures"], color: "slate" },
-                { name: "Couple’s Paradise Escape", tier: "Gold", price: 250000, slogan: "Most Popular", items: ["Everything in Silver", "Sip & Paints", "Romantic Dinner", "Camp Fire"], color: "yellow" },
-                { name: "Royal Romance Experience", tier: "Premium", price: 350000, slogan: "Proposals & Luxury Lovers", items: ["Everything in Gold", "Boat Cruise with Wine", "Seaport Visit", "Beach Couple Games"], color: "blue" }
+                { name: "Mini Love Adventure", tier: "Silver", price: 90000, img: "image_046cff.jpg", desc: "For young couples & spontaneous love trips", items: ["Lodging (2 Days)", "Jet Ski", "Quad", "Museum Visit", "Lobe Tour", "Pygmies Visit", "2 Beaches", "Mini Boat Tour", "Mobile Content & Pictures"] },
+                { name: "Couple’s Paradise Escape", tier: "Gold", price: 250000, img: "image_046d25.jpg", desc: "Our most popular romantic choice", items: ["All Silver Features", "Sip & Paints", "Romantic Dinner", "Camp Fire"] },
+                { name: "The Royal Romance", tier: "Premium", price: 350000, img: "image_046da0.jpg", desc: "For proposals & luxury lovers", items: ["All Gold Features", "Boat Cruise w/ Wine", "Seaport Visit", "Beach Games"] }
             ],
             group4: [
-                { name: "Crew Chill Package", tier: "Explorer", price: 230000, slogan: "Mostly for discovery", items: ["Lodging (2 days)", "Jet Ski", "Quad", "Museum Visit", "Lobe Tour", "Visit Pygmies", "2 Beaches", "Mini Boat Tour", "Mobile Content & Pictures"], color: "slate" },
-                { name: "Vibes & Memories", tier: "Experience", price: 350000, slogan: "Most Booked", items: ["Everything in Explorer", "Sip & Paints", "Group Dinner", "Camp Fire"], color: "yellow" },
-                { name: "VIP Vibes Getaway", tier: "Elite", price: 420000, slogan: "Best Value", items: ["Everything in Experience", "Boat Cruise with Wine", "Seaport Visit", "Beach Games"], color: "blue" }
+                { name: "Crew Chill Package", tier: "Explorer", price: 230000, img: "image_046cff.jpg", desc: "Mostly for discovery", items: ["Lodging (2 Days)", "Jet Ski", "Quad", "Museum Visit", "Lobe Tour", "Pygmies Visit", "2 Beaches", "Mini Boat Tour", "Mobile Content & Pictures"] },
+                { name: "Vibes & Memories", tier: "Experience", price: 350000, img: "image_046d25.jpg", desc: "Most Booked Group Plan", items: ["All Explorer Features", "Sip & Paints", "Group Dinner", "Camp Fire"] },
+                { name: "VIP Vibes Getaway", tier: "Elite", price: 420000, img: "image_046da0.jpg", desc: "Best value for elite groups", items: ["All Experience Features", "Boat Cruise w/ Wine", "Seaport Visit", "Beach Games"] }
             ],
             group6: [
-                { name: "Friends & Waves Escape", tier: "Silver Crew", price: 270000, slogan: "Value Packed Deal", items: ["Lodging (2 days)", "Jet Ski", "Quad", "Museum Visit", "Lobe Tour", "Visit Pygmies", "2 Beaches", "Mini Boat Tour", "Mobile Content & Pictures"], color: "slate" },
-                { name: "Golden Crew Getaway", tier: "Gold Crew", price: 440000, slogan: "Trending Package", items: ["Everything in Silver", "Sip & Paints", "Group Dinner", "Camp Fire"], color: "yellow" },
-                { name: "Paradise Circle Retreat", tier: "Platinum Crew", price: 530000, slogan: "Top Tier Experience", items: ["Everything in Gold", "Boat Cruise with Wine", "Seaport Visit", "Beach Games"], color: "blue" }
+                { name: "Friends & Waves Escape", tier: "Silver Crew", price: 270000, img: "image_046cff.jpg", desc: "Value Packed Deal", items: ["Lodging (2 Days)", "Jet Ski", "Quad", "Museum Visit", "Lobe Tour", "Pygmies Visit", "2 Beaches", "Mini Boat Tour", "Mobile Content & Pictures"] },
+                { name: "Golden Crew Getaway", tier: "Gold Crew", price: 440000, img: "image_046d25.jpg", desc: "Trending Package", items: ["All Silver Features", "Sip & Paints", "Group Dinner", "Camp Fire"] },
+                { name: "Paradise Circle Retreat", tier: "Platinum Crew", price: 530000, img: "image_046da0.jpg", desc: "Top Tier Experience", items: ["All Gold Features", "Boat Cruise w/ Wine", "Seaport Visit", "Beach Games"] }
             ]
         };
 
-        let currentGroup = 'couple';
         let currentRate = 1;
-        let selectedPrice = 0;
-        let selectedName = "";
+        let activeGroup = 'couple';
 
-        function switchGroup(group) {
-            currentGroup = group;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('tab-' + group).classList.add('active');
-            renderCards();
-            hideBar();
+        function showGroup(group) {
+            activeGroup = group;
+            document.querySelectorAll('.group-tab').forEach(t => t.classList.remove('active-tab'));
+            document.getElementById('tab-' + group).classList.add('active-tab');
+            render();
         }
 
-        function renderCards() {
-            const container = document.getElementById('package-container');
-            container.innerHTML = data[currentGroup].map((pkg, idx) => `
-                <div onclick="selectPackage(${pkg.price}, '${pkg.name}', ${idx})" id="card-${idx}" class="package-card bg-white p-8 rounded-[32px] flex flex-col cursor-pointer">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-${pkg.color}-500 mb-2">${pkg.tier} Package</span>
-                    <h3 class="text-2xl font-extrabold mb-1">${pkg.name}</h3>
-                    <p class="text-slate-400 text-xs mb-6 italic">"${pkg.slogan}"</p>
+        function setCurrency(label, rate) {
+            currentRate = rate;
+            document.getElementById('curr-CFA').classList.toggle('bg-white', label === 'CFA');
+            document.getElementById('curr-USD').classList.toggle('bg-white', label === 'USD');
+            render();
+        }
+
+        function render() {
+            const container = document.getElementById('package-display');
+            container.innerHTML = store[activeGroup].map((p, i) => `
+                <div class="package-card bg-white rounded-[40px] p-6 flex flex-col ${i === 1 ? 'highlight-gold' : ''}">
+                    <img src="${p.img}" class="w-full h-48 object-cover rounded-[30px] mb-6">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">${p.tier} Package</span>
+                    <h3 class="hero-font text-2xl font-black leading-tight mb-2">${p.name}</h3>
+                    <p class="text-xs text-slate-400 mb-6 italic">"${p.desc}"</p>
                     <div class="text-3xl font-black mb-8">
-                        ${(pkg.price * currentRate).toLocaleString()} <small class="text-sm font-medium curr-label">${currentRate === 1 ? 'CFA' : 'USD'}</small>
+                        ${(p.price * currentRate).toLocaleString()} <small class="text-xs opacity-50 uppercase">${currentRate === 1 ? 'CFA' : 'USD'}</small>
                     </div>
-                    <ul class="space-y-3 mb-8 flex-grow">
-                        ${pkg.items.map(item => `<li class="text-sm flex items-center gap-2"><i class="fas fa-check-circle text-green-500 text-[10px]"></i> ${item}</li>`).join('')}
+                    <ul class="space-y-3 mb-10 flex-grow">
+                        ${p.items.map(item => `<li class="text-xs font-semibold flex items-center gap-2"><i class="fas fa-check text-green-500"></i> ${item}</li>`).join('')}
                     </ul>
-                    <button class="w-full py-4 rounded-2xl bg-slate-100 font-bold group-hover:bg-yellow-500 transition">Select Plan</button>
+                    <a href="https://wa.me/237653827999" class="w-full py-4 bg-slate-900 text-white text-center rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition">Book Trip</a>
                 </div>
             `).join('');
         }
 
-        function selectPackage(price, name, id) {
-            selectedPrice = price;
-            selectedName = name;
-            document.querySelectorAll('.package-card').forEach(c => c.classList.remove('active'));
-            document.getElementById('card-' + id).classList.add('active');
-            
-            document.getElementById('selected-package-name').innerText = name;
-            document.getElementById('total-val').innerText = (price * currentRate).toLocaleString();
-            document.getElementById('selection-bar').classList.remove('translate-y-full');
-        }
-
-        function updateCurrency(label, rate) {
-            currentRate = rate;
-            document.querySelectorAll('.curr-label').forEach(el => el.innerText = label);
-            document.getElementById('btn-CFA').classList.toggle('bg-white', label === 'CFA');
-            document.getElementById('btn-USD').classList.toggle('bg-white', label === 'USD');
-            renderCards();
-            if(selectedPrice > 0) {
-                document.getElementById('total-val').innerText = (selectedPrice * currentRate).toLocaleString();
-            }
-        }
-
-        function hideBar() {
-            document.getElementById('selection-bar').classList.add('translate-y-full');
-            selectedPrice = 0;
-        }
-
-        function bookWhatsApp() {
-            const msg = encodeURIComponent(`Hello Wonder Way! I would like to book the ${selectedName} for our Kribi trip.`);
-            window.open(`https://wa.me/237653827999?text=${msg}`);
-        }
-
-        // Initial Render
-        renderCards();
+        render(); // Initial load
     </script>
 </body>
 </html>
