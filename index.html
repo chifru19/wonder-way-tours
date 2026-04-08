@@ -3,254 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wonder Way | Kribi Luxury & Security</title>
+    <title>Wonder Way | Transparent Luxury Kribi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
-        
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        
-        /* Premium Background Gradient */
         .hero-section {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('http://googleusercontent.com/image_collection/image_retrieval/6501377190421903537_0');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Parallax effect for quality feel */
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
-
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .premium-card {
-            background: white;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid #e2e8f0;
-        }
-
-        .premium-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            border-color: #fbbf24;
-        }
-
-        /* Dark Mode adjustments */
         .dark { background-color: #020617; color: #f8fafc; }
-        .dark .premium-card { background: #1e293b; border-color: #334155; }
+        .price-card { transition: all 0.3s ease; border: 1px solid #f1f5f9; }
+        .price-card:hover { border-color: #fbbf24; transform: translateY(-5px); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-900">
 
-    <nav class="fixed top-0 w-full z-[100] transition-all duration-500" id="nav">
+    <nav class="fixed top-0 w-full z-[100] bg-slate-900/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center text-slate-900 font-extrabold shadow-lg">WW</div>
-                <span class="text-white font-extrabold tracking-tighter text-xl">WONDER WAY</span>
+                <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center text-slate-900 font-extrabold">WW</div>
+                <span class="text-white font-extrabold text-xl tracking-tighter">WONDER WAY</span>
             </div>
-            
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4">
                 <select onchange="updateCurrency(this.value)" class="bg-white/10 text-white text-xs font-bold px-3 py-2 rounded-lg border border-white/20 outline-none">
                     <option value="CFA" class="text-black">CFA</option>
                     <option value="USD" class="text-black">USD</option>
-                    <option value="EUR" class="text-black">EUR</option>
                 </select>
-                <button onclick="toggleTheme()" class="text-white text-lg"><i id="theme-icon" class="fas fa-adjust"></i></button>
-                <a href="#booking" class="hidden md:block bg-yellow-500 text-slate-900 px-6 py-2 rounded-full font-bold hover:bg-white transition">Book Now</a>
+                <button onclick="document.body.classList.toggle('dark')" class="text-white"><i class="fas fa-adjust"></i></button>
             </div>
         </div>
     </nav>
 
-    <section class="hero-section h-screen flex items-center justify-center relative">
-        <div class="text-center px-6" data-aos="fade-up">
-            <h1 class="text-6xl md:text-8xl font-extrabold text-white mb-6 tracking-tighter">KRIBI <span class="text-yellow-500">REDEFINED.</span></h1>
-            <p class="text-xl text-slate-200 max-w-2xl mx-auto mb-10 leading-relaxed font-light">Experience luxury coastal tours where the Atlantic meets the Lobe Falls in a perfect cascade.</p>
-            <div class="flex gap-4 justify-center">
-                <button class="bg-yellow-500 text-slate-900 px-10 py-4 rounded-2xl font-black shadow-2xl hover:scale-105 transition">EXPLORE PACKAGES</button>
-            </div>
-        </div>
-        <div class="absolute bottom-10 animate-bounce text-white opacity-50"><i class="fas fa-chevron-down"></i></div>
-    </section>
-
-    <div class="bg-slate-900 py-6">
-        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition duration-500">
-            <span class="text-white font-bold tracking-widest text-xs uppercase"><i class="fas fa-shield-check mr-2"></i> Secured by Frank Fru Cybersecurity</span>
-            <span class="text-white font-bold tracking-widest text-xs uppercase"><i class="fas fa-clock mr-2"></i> 24/7 Concierge</span>
-            <span class="text-white font-bold tracking-widest text-xs uppercase"><i class="fas fa-map-marked-alt mr-2"></i> Licensed Operators</span>
-        </div>
-    </div>
-
-    <main id="activities" class="max-w-7xl mx-auto px-6 py-24">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            
-            <div class="premium-card rounded-[2.5rem] overflow-hidden p-4 group" data-aos="fade-up">
-                <div class="relative h-64 rounded-[2rem] overflow-hidden mb-6">
-                    <img src="https://images.unsplash.com/photo-1544666504-226343355598?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
-                    <div class="absolute top-4 right-4 bg-white/90 px-4 py-1 rounded-full text-xs font-bold text-slate-900">ADVENTURE</div>
-                </div>
-                <div class="px-4 pb-4">
-                    <h3 class="text-2xl font-bold mb-2">Quad Beach Racing</h3>
-                    <p class="text-slate-500 text-sm mb-6">Master the sand dunes with professional instructors and safety gear.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-extrabold text-slate-900 dark:text-white"><span class="price-display" data-base="75000">75,000</span> <small class="text-xs curr-text">CFA</small></span>
-                        <input type="number" min="0" placeholder="Qty" data-price="75000" oninput="calculateTotal()" class="qty-input w-20 p-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold outline-none focus:ring-2 focus:ring-yellow-500">
-                    </div>
-                </div>
-            </div>
-
-            <div class="premium-card rounded-[2.5rem] overflow-hidden p-4 group" data-aos="fade-up" data-aos-delay="100">
-                <div class="relative h-64 rounded-[2rem] overflow-hidden mb-6">
-                    <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
-                    <div class="absolute top-4 right-4 bg-white/90 px-4 py-1 rounded-full text-xs font-bold text-slate-900">CULTURE</div>
-                </div>
-                <div class="px-4 pb-4">
-                    <h3 class="text-2xl font-bold mb-2">Pygmy Village Tour</h3>
-                    <p class="text-slate-500 text-sm mb-6">Discover ancestral history with a guided ethical cultural exchange.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-extrabold text-slate-900 dark:text-white"><span class="price-display" data-base="10000">10,000</span> <small class="text-xs curr-text">CFA</small></span>
-                        <input type="number" id="pygmy-input" min="0" placeholder="Qty" data-price="10000" oninput="calculateTotal()" class="qty-input w-20 p-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold outline-none focus:ring-2 focus:ring-yellow-500">
-                    </div>
-                </div>
-            </div>
-
-            <div class="premium-card rounded-[2.5rem] overflow-hidden p-4 group" data-aos="fade-up" data-aos-delay="200">
-                <div class="relative h-64 rounded-[2rem] overflow-hidden mb-6">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
-                    <div class="absolute top-4 right-4 bg-yellow-500 px-4 py-1 rounded-full text-xs font-bold text-slate-900">BEST SELLER</div>
-                </div>
-                <div class="px-4 pb-4">
-                    <h3 class="text-2xl font-bold mb-2">Sunset Falls Dinner</h3>
-                    <p class="text-slate-500 text-sm mb-6">Private beachfront dining where the falls meet the Atlantic.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-extrabold text-slate-900 dark:text-white"><span class="price-display" data-base="25000">25,000</span> <small class="text-xs curr-text">CFA</small></span>
-                        <input type="number" min="0" placeholder="Qty" data-price="25000" oninput="calculateTotal()" class="qty-input w-20 p-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold outline-none focus:ring-2 focus:ring-yellow-500">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <section class="bg-slate-100 dark:bg-slate-900 py-24">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-12">Traveler Voices</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm text-left border-l-4 border-yellow-500">
-                    <p class="italic text-slate-500 mb-6">"Wonder Way provided the most secured and high-quality tour I've ever had in Cameroon. Highly professional."</p>
-                    <p class="font-bold">- Sarah J., USA</p>
-                </div>
-                </div>
+    <section class="hero-section h-[60vh] flex items-center justify-center text-center">
+        <div class="px-6" data-aos="fade-up">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tighter">EXPLORE KRIBI</h1>
+            <p class="text-lg text-slate-200 max-w-xl mx-auto font-light">Transparent pricing. Premium security. Unforgettable memories.</p>
         </div>
     </section>
 
-    <section id="booking" class="max-w-4xl mx-auto px-6 py-32">
-        <div class="bg-white dark:bg-slate-800 p-8 md:p-16 rounded-[3rem] shadow-2xl">
-            <h2 class="text-4xl font-bold mb-4 text-center">Request Reservation</h2>
-            <p class="text-center text-slate-500 mb-10">We prioritize your safety. All data is encrypted.</p>
+    <main class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             
-            <form id="reservationForm" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Full Name</label>
-                        <input type="text" required id="name" class="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border-none outline-none focus:ring-2 focus:ring-yellow-500">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Travel Date</label>
-                        <input type="date" required id="date" class="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border-none outline-none focus:ring-2 focus:ring-yellow-500">
-                    </div>
-                </div>
-                <button type="submit" class="w-full bg-slate-900 text-white dark:bg-yellow-500 dark:text-slate-900 p-5 rounded-2xl font-black text-xl hover:scale-[1.02] transition shadow-xl">CONFIRM VIA WHATSAPP</button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="text-center py-10 opacity-50 text-xs tracking-[0.2em] font-bold">
-        DEVELOPED & SECURED BY FRANK FRU CYBERSECURITY &copy; 2026
-    </footer>
-
-    <div id="priceBar" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-slate-900/90 backdrop-blur-xl rounded-full p-5 text-white flex justify-between items-center shadow-2xl border border-white/10 z-[100] translate-y-40 transition-transform duration-700">
-        <div>
-            <p class="text-[10px] font-black uppercase text-slate-400">Total Calculation</p>
-            <p class="text-2xl font-bold"><span id="grandTotal">0</span> <span class="curr-text">CFA</span></p>
-        </div>
-        <button onclick="window.location.href='#booking'" class="bg-yellow-500 text-slate-900 px-10 py-3 rounded-full font-bold">Proceed</button>
-    </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-
-        // Security Feature: Form Sanitization & Validation
-        document.getElementById('reservationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const date = document.getElementById('date').value;
-            
-            if(!name || !date) {
-                alert("Security Check: Please provide all required fields.");
-                return;
-            }
-            
-            alert(`Verified. Redirecting to WhatsApp for finalization...`);
-            // Here you would link to window.open("whatsapp link with text")
-        });
-
-        // Theme Toggle
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-            const icon = document.getElementById('theme-icon');
-            icon.classList.toggle('fa-sun');
-        }
-
-        // Navigation Scroll Effect
-        window.onscroll = function() {
-            const nav = document.getElementById('nav');
-            if (window.pageYOffset > 100) {
-                nav.classList.add('glass-nav');
-            } else {
-                nav.classList.remove('glass-nav');
-            }
-        };
-
-        // Currency Rates (Mock)
-        const rates = { CFA: 1, USD: 0.0016, EUR: 0.0015 };
-        let currentCurrency = 'CFA';
-
-        function updateCurrency(val) {
-            currentCurrency = val;
-            document.querySelectorAll('.curr-text').forEach(el => el.innerText = val);
-            document.querySelectorAll('.price-display').forEach(el => {
-                const base = parseInt(el.getAttribute('data-base'));
-                el.innerText = (base * rates[val]).toLocaleString(undefined, { maximumFractionDigits: 2 });
-            });
-            calculateTotal();
-        }
-
-        // Real-Time Calculation
-        function calculateTotal() {
-            let total = 0;
-            const inputs = document.querySelectorAll('.qty-input');
-            const pygmyInput = document.getElementById('pygmy-input');
-
-            inputs.forEach(input => {
-                const qty = parseInt(input.value) || 0;
-                let price = parseInt(input.getAttribute('data-price'));
+            <div class="space-y-6" data-aos="fade-up">
+                <h2 class="text-xl font-black uppercase tracking-widest text-blue-600 flex items-center gap-2">
+                    <i class="fas fa-water"></i> Speed & Waves
+                </h2>
                 
-                // Group Logic
-                if(input.id === 'pygmy-input' && qty >= 10) price = 3500;
-                
-                total += qty * price;
-            });
+                <div class="price-card bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm">
+                    <h3 class="font-bold text-lg mb-4">Quad Racing</h3>
+                    <div class="space-y-3 text-sm mb-6">
+                        <div class="flex justify-between pb-2 border-b border-slate-50 dark:border-slate-700">
+                            <span>1 Turn</span> <span class="font-bold text-blue-600"><span class="price-display" data-base="5000">5,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                        <div class="flex justify-between pb-2 border-b border-slate-50 dark:border-slate-700">
+                            <span>30 Minutes</span> <span class="font-bold text-blue-600"><span class="price-display" data-base="45000">45,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>1 Hour</span> <span class="font-bold text-blue-600"><span class="price-display" data-base="75000">75,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-900 p-3 rounded-xl">
+                        <span class="text-xs font-bold text-slate-400">BOOK QTY:</span>
+                        <input type="number" min="0" placeholder="0" data-price="75000" oninput="calculateTotal()" class="qty-input bg-transparent w-full text-right font-black outline-none">
+                    </div>
+                </div>
 
-            document.getElementById('grandTotal').innerText = (total * rates[currentCurrency]).toLocaleString(undefined, { maximumFractionDigits: 2 });
-            const bar = document.getElementById('priceBar');
-            if(total > 0) bar.classList.remove('translate-y-40');
-            else bar.classList.add('translate-y-40');
-        }
-    </script>
-</body>
-</html>
+                <div class="price-card bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm">
+                    <h3 class="font-bold text-lg mb-4">Jetskiing</h3>
+                    <div class="space-y-3 text-sm mb-6">
+                        <div class="flex justify-between pb-2 border-b border-slate-50 dark:border-slate-700">
+                            <span>1 Turn</span> <span class="font-bold text-blue-600"><span class="price-display" data-base="10000">10,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>1 Hour</span> <span class="font-bold text-blue-600"><span class="price-display" data-base="120000">120,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-900 p-3 rounded-xl">
+                        <span class="text-xs font-bold text-slate-400">BOOK QTY:</span>
+                        <input type="number" min="0" placeholder="0" data-price="120000" oninput="calculateTotal()" class="qty-input bg-transparent w-full text-right font-black outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-xl font-black uppercase tracking-widest text-green-600 flex items-center gap-2">
+                    <i class="fas fa-om"></i> Discovery
+                </h2>
+                
+                <div class="price-card bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm border-l-4 border-green-500">
+                    <h3 class="font-bold text-lg mb-2">Pygmies Village</h3>
+                    <p class="text-[10px] text-green-600 font-bold mb-4 uppercase">Special Group Discount (10+)</p>
+                    <div class="space-y-3 text-sm mb-6">
+                        <div class="flex justify-between pb-2 border-b border-slate-50 dark:border-slate-700">
+                            <span>Solo Explorer</span> <span class="font-bold"><span class="price-display" data-base="10000">10,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                        <div class="flex justify-between text-green-600">
+                            <span>Group (10+)</span> <span class="font-black"><span class="price-display" data-base="3500">3,500</span> <small class="curr-text">/ea</small></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-900 p-3 rounded-xl">
+                        <span class="text-xs font-bold text-slate-400">PEOPLE:</span>
+                        <input type="number" id="pygmy-input" min="0" placeholder="0" data-price="10000" oninput="calculateTotal()" class="qty-input bg-transparent w-full text-right font-black outline-none">
+                    </div>
+                </div>
+
+                <div class="price-card bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm">
+                    <h3 class="font-bold text-lg mb-4">Zorb Ball</h3>
+                    <div class="space-y-3 text-sm mb-6">
+                        <div class="flex justify-between pb-2 border-b border-slate-50 dark:border-slate-700">
+                            <span>Solo</span> <span class="font-bold"><span class="price-display" data-base="20000">20,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Couple</span> <span class="font-bold text-pink-500"><span class="price-display" data-base="30000">30,000</span> <small class="curr-text">CFA</small></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="text-xl font-black uppercase tracking-widest text-orange-600 flex items-center gap-2">
+                    <i class="fas fa-utensils"></i> Sip & Dine
+                </h2>
+                
+                <div class="price-card bg-orange-50 dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-orange-500 text-white text-[10px] px-3 py-1 font-bold">POPULAR</div>
+                    <h3 class="font-bold text-lg mb-2">Sip & Paint</h3>
+                    <p class="text-xs text-slate-500 mb-4 italic">Wine, Pizza, & Canvas Setup</p>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-2xl font-black text-orange-600"><span class="price-display" data-base="15000">15,000</span> <small class="curr-text text-xs">CFA</small></span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/50 dark:bg-slate-900 p-3 rounded-xl">
+                        <span class="text-xs font-bold text-slate-400">BOOK QTY:</span>
+                        <input type="number" min="0" placeholder="0" data-price="15000" oninput="calculateTotal()" class="qty-input bg-transparent w-full text-right font-black outline-none">
+                    </div>
+                </div>
+
+                <div class="price-card bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm">
+                    <h3 class="font-bold text-lg mb-2">Beach Diner</h3>
+                    <p class="text-xs text-slate-500 mb-4">Under the stars at Lobe Falls</p>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-2xl font-black text-slate-800 dark:text-white"><span class="price-display" data-base="25000">25,000</span> <small class="curr-text text-xs">CFA</small></span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-900 p-3 rounded-xl">
+                        <span class="text-xs font-bold text-slate-400">BOOK QTY:</span>
+                        <input type="number" min="0" placeholder="0" data-price="25000" on
