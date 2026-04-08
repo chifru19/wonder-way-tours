@@ -36,6 +36,7 @@
     </nav>
 
     <header class="pt-48 pb-24 px-6 text-center bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-yellow-500/10 to-transparent pointer-events-none"></div>
         <div class="relative z-10" data-aos="zoom-in">
             <div class="mb-10 inline-block p-2 bg-black rounded-[40px] shadow-2xl border border-slate-800">
                 <img src="images/logo.jpg" alt="Logo" class="w-64 md:w-80 h-auto rounded-[30px]">
@@ -56,12 +57,12 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="hero-font text-4xl md:text-6xl font-black uppercase mb-12">The Kribi <span class="text-yellow-500">Vibe.</span></h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <img src="images/jetski-action.jpg" class="w-full h-64 object-cover rounded-3xl shadow-md" alt="Jet Ski">
+                <img src="images/jetski-action.jpg" class="w-full h-64 object-cover rounded-3xl shadow-md" alt="Jet Ski 1">
                 <img src="images/group-boat.jpg" class="w-full h-64 object-cover rounded-3xl shadow-md" alt="Group Boat">
                 <img src="images/dinner-setup.jpg" class="w-full h-64 object-cover rounded-3xl shadow-md" alt="Dinner">
                 <img src="images/beach-portrait.jpg" class="w-full h-64 object-cover rounded-3xl shadow-md" alt="Portrait">
+                <img src="images/jetski-action.jpg" class="w-full h-64 object-cover rounded-3xl shadow-md" alt="Jet Ski 2">
                 <img src="images/jet-ski-fun.jpg" class="w-full h-64 object-cover rounded-3xl shadow-md" alt="Fun">
-                <img src="images/logo.jpg" class="w-full h-64 object-contain bg-black p-4 rounded-3xl shadow-md" alt="Logo">
             </div>
         </div>
     </section>
@@ -89,6 +90,9 @@
             ]
         };
 
+        let currentRate = 1;
+        let activeGroup = 'couple';
+
         function render() {
             const grid = document.getElementById('package-grid');
             grid.innerHTML = store[activeGroup].map((pkg, i) => `
@@ -105,8 +109,6 @@
             `).join('');
         }
 
-        let currentRate = 1;
-        let activeGroup = 'couple';
         function showGroup(g) { activeGroup = g; document.querySelectorAll('.group-tab').forEach(t => t.classList.remove('active-tab')); document.getElementById('tab-'+g).classList.add('active-tab'); render(); }
         function setCurrency(l, r) { currentRate = r; document.getElementById('curr-CFA').className = l === 'CFA' ? 'px-4 py-1 rounded-lg text-xs font-black bg-white text-slate-900 shadow-sm' : 'px-4 py-1 rounded-lg text-xs font-black'; document.getElementById('curr-USD').className = l === 'USD' ? 'px-4 py-1 rounded-lg text-xs font-black bg-white text-slate-900 shadow-sm' : 'px-4 py-1 rounded-lg text-xs font-black'; render(); }
         render();
