@@ -18,6 +18,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #e2e8f0; 
             border-radius: 40px;
+            background: white;
         }
         
         .package-card:hover { 
@@ -91,10 +92,6 @@
                     <p class="text-[10px] font-black uppercase">Decorations</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border hover:border-yellow-500 transition cursor-pointer">
-                    <i class="fas fa-seedling text-yellow-500 mb-3 text-xl"></i>
-                    <p class="text-[10px] font-black uppercase">Bouquets</p>
-                </div>
-                <div class="bg-white p-6 rounded-3xl border hover:border-yellow-500 transition cursor-pointer">
                     <i class="fas fa-birthday-cake text-yellow-500 mb-3 text-xl"></i>
                     <p class="text-[10px] font-black uppercase">Cakes</p>
                 </div>
@@ -106,17 +103,16 @@
                     <i class="fas fa-camera text-yellow-500 mb-3 text-xl"></i>
                     <p class="text-[10px] font-black uppercase">Photography</p>
                 </div>
-                <div class="bg-white p-6 rounded-3xl border hover:border-yellow-500 transition cursor-pointer">
-                    <i class="fas fa-golf-ball text-yellow-500 mb-3 text-xl"></i>
-                    <p class="text-[10px] font-black uppercase">Golfing</p>
-                </div>
             </div>
         </section>
     </main>
 
     <footer class="bg-slate-900 text-white py-20 px-6 text-center">
-        <p class="hero-font text-2xl font-black mb-4">WONDER WAY TOURS</p>
-        <p class="text-slate-500 text-xs tracking-widest uppercase">Secured by Frank Fru Cybersecurity 2026</p>
+        <p class="hero-font text-2xl font-black mb-4 uppercase tracking-tighter">Wonder Way Tours</p>
+        <div class="w-12 h-1 bg-yellow-500 mx-auto mb-6"></div>
+        <p class="text-slate-400 text-xs tracking-[0.3em] uppercase mb-2">Designed & Secured By</p>
+        <p class="text-yellow-500 font-black text-lg tracking-widest uppercase italic">Frank Fru</p>
+        <p class="text-slate-600 text-[10px] mt-4 uppercase">Cybersecurity Specialist & Developer 2026</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -161,8 +157,8 @@
         function render() {
             const grid = document.getElementById('package-grid');
             grid.innerHTML = store[activeGroup].map((pkg, i) => `
-                <div class="package-card bg-white p-6 flex flex-col ${i === 1 ? 'gold-highlight shadow-xl' : ''}" data-aos="fade-up" data-aos-delay="${i * 100}">
-                    <img src="${pkg.img}" class="w-full h-56 object-cover rounded-[30px] mb-6">
+                <div class="package-card p-6 flex flex-col ${i === 1 ? 'gold-highlight shadow-xl' : ''}" data-aos="fade-up" data-aos-delay="${i * 100}">
+                    <img src="${pkg.img}" class="w-full h-56 object-cover rounded-[30px] mb-6" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Missing+Check+Folder'">
                     <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">${pkg.tier} Package</span>
                     <h3 class="hero-font text-2xl font-black leading-tight mb-2">${pkg.name}</h3>
                     <p class="text-[11px] text-slate-400 mb-6 italic">"${pkg.slogan}"</p>
