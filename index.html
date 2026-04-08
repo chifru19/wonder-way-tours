@@ -41,27 +41,38 @@
 </head>
 <body class="bg-slate-50 text-slate-900 overflow-x-hidden">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md px-6 py-4 border-b flex justify-between items-center">
-        <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center font-black text-white">W</div>
-            <span class="font-extrabold text-xl tracking-tighter uppercase hero-font">Wonder Way</span>
+    <nav class="fixed top-0 w-full z-50 bg-slate-900/90 backdrop-blur-md px-6 py-4 border-b border-slate-800 flex justify-between items-center text-white">
+        <div class="flex items-center gap-3">
+            <img src="images/logo.jpg" class="w-8 h-8 rounded-full border border-yellow-500" alt="W">
+            <span class="font-black text-xl tracking-tighter uppercase hero-font">Wonder Way</span>
         </div>
-        <div class="flex bg-slate-100 p-1 rounded-xl">
-            <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-4 py-1 rounded-lg text-xs font-black bg-white shadow-sm transition-all">CFA</button>
+        <div class="flex bg-slate-800 p-1 rounded-xl">
+            <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-4 py-1 rounded-lg text-xs font-black bg-white text-slate-900 shadow-sm transition-all">CFA</button>
             <button onclick="setCurrency('USD', 0.0016)" id="curr-USD" class="px-4 py-1 rounded-lg text-xs font-black transition-all">USD</button>
         </div>
     </nav>
 
-    <header class="pt-40 pb-20 px-6 text-center bg-white border-b">
-        <h1 class="hero-font text-5xl md:text-8xl font-black tracking-tighter mb-6 uppercase">The Kribi Collection.</h1>
-        <p class="text-slate-500 max-w-2xl mx-auto text-sm italic mb-12 leading-relaxed">
-            "Because most clients arrive with private cars or bikes, we don't include transport in our packages to keep your luxury stay affordable."
-        </p>
+    <header class="pt-48 pb-24 px-6 text-center bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-yellow-500/10 to-transparent pointer-events-none"></div>
 
-        <div class="flex flex-wrap justify-center gap-4 mt-8">
-            <button onclick="showGroup('couple')" id="tab-couple" class="group-tab active-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest uppercase">Couples</button>
-            <button onclick="showGroup('group4')" id="tab-group4" class="group-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest uppercase">Group of 4</button>
-            <button onclick="showGroup('group6')" id="tab-group6" class="group-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest uppercase">Group of 6</button>
+        <div class="relative z-10">
+            <div class="mb-10 inline-block p-2 bg-black rounded-[40px] shadow-2xl border border-slate-800">
+                <img src="images/logo.jpg" alt="Wonder Way Official Logo" class="w-64 md:w-80 h-auto rounded-[30px]" onerror="this.src='https://via.placeholder.com/400x400?text=Logo+Not+Found'">
+            </div>
+            
+            <h1 class="hero-font text-5xl md:text-8xl font-black tracking-tighter mb-6 uppercase leading-none">
+                The Kribi <span class="text-yellow-500">Collection.</span>
+            </h1>
+            
+            <p class="text-slate-400 max-w-2xl mx-auto text-sm italic mb-12 leading-relaxed">
+                "Because most clients arrive with private cars or bikes, we don't include transport in our packages to keep your luxury stay affordable."
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="showGroup('couple')" id="tab-couple" class="group-tab active-tab px-10 py-4 rounded-2xl border-2 border-yellow-500 font-black text-sm transition tracking-widest uppercase">Couples</button>
+                <button onclick="showGroup('group4')" id="tab-group4" class="group-tab px-10 py-4 rounded-2xl border-2 border-slate-700 font-black text-sm transition tracking-widest uppercase hover:border-yellow-500">Group of 4</button>
+                <button onclick="showGroup('group6')" id="tab-group6" class="group-tab px-10 py-4 rounded-2xl border-2 border-slate-700 font-black text-sm transition tracking-widest uppercase hover:border-yellow-500">Group of 6</button>
+            </div>
         </div>
     </header>
 
@@ -102,8 +113,13 @@
 
         function showGroup(group) {
             activeGroup = group;
-            document.querySelectorAll('.group-tab').forEach(t => t.classList.remove('active-tab'));
-            document.getElementById('tab-' + group).classList.add('active-tab');
+            document.querySelectorAll('.group-tab').forEach(t => {
+                t.classList.remove('active-tab');
+                t.classList.add('border-slate-700');
+            });
+            const activeBtn = document.getElementById('tab-' + group);
+            activeBtn.classList.add('active-tab');
+            activeBtn.classList.remove('border-slate-700');
             render();
         }
 
@@ -111,9 +127,9 @@
             currentRate = rate;
             currencyLabel = label;
             document.getElementById('curr-CFA').classList.toggle('bg-white', label === 'CFA');
-            document.getElementById('curr-CFA').classList.toggle('shadow-sm', label === 'CFA');
+            document.getElementById('curr-CFA').classList.toggle('text-slate-900', label === 'CFA');
             document.getElementById('curr-USD').classList.toggle('bg-white', label === 'USD');
-            document.getElementById('curr-USD').classList.toggle('shadow-sm', label === 'USD');
+            document.getElementById('curr-USD').classList.toggle('text-slate-900', label === 'USD');
             render();
         }
 
@@ -121,7 +137,6 @@
             const grid = document.getElementById('package-grid');
             grid.innerHTML = store[activeGroup].map((pkg, i) => {
                 const formattedPrice = (pkg.price * currentRate).toLocaleString();
-                // Custom WhatsApp message
                 const waMessage = encodeURIComponent(`Hi Wonder Way! I'm interested in the ${pkg.name} (${pkg.tier} Tier) for ${formattedPrice} ${currencyLabel}.`);
                 
                 return `
@@ -152,7 +167,6 @@
             }).join('');
         }
 
-        // Initial render
         render();
     </script>
 </body>
