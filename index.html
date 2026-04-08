@@ -3,258 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wonder Way Tour Cameroon | Explore Kribi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Wonder Way Tour - Explore Kribi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { 
-            --navy: #1a2a3a; 
-            --gold: #d4af37; 
-            --accent: #e67e22; 
-            --light: #f4f7f6;
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--light); color: #333; line-height: 1.6; }
-        
-        /* Glass Navigation */
-        nav { 
-            background: rgba(255, 255, 255, 0.8); 
-            backdrop-filter: blur(10px); 
-            padding: 10px 0; 
-            position: fixed; width: 100%; top: 0; z-index: 1000; 
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
         }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo-nav { height: 50px; }
 
-        /* Modern Hero Section */
-        .hero { 
-            height: 90vh; 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('images/hero-bg.jpg'); 
-            background-size: cover; background-position: center;
-            display: flex; align-items: center; justify-content: center; color: white; text-align: center;
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
         }
-        .hero h1 { font-weight: 800; letter-spacing: 2px; font-size: 5rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 30px; }
 
-        /* Section Styling */
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-header h2 { font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; }
-        .section-header hr { width: 60px; height: 4px; background: var(--accent); margin: 20px auto; border: none; }
+        /* Smooth scroll for navigation */
+        html { scroll-behavior: smooth; }
 
-        /* Activity Cards */
-        .card { 
-            background: white; border-radius: 15px; overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.4s; height: 100%;
-            border: 1px solid #eee;
+        /* Remove arrows from number input */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 45px rgba(0,0,0,0.15); }
-        .card-img { width: 100%; height: 220px; object-fit: cover; }
-        .card-content { padding: 25px; }
-        .card-content h5 { margin-bottom: 10px; font-weight: 700; color: var(--navy); }
-
-        /* Pricing Lists */
-        .pricing { list-style: none; padding: 0; margin-top: 15px; }
-        .pricing li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; }
-        .pricing li span { font-weight: bold; color: var(--accent); }
-
-        /* Dark Menu Section */
-        .menu-section { background: #1c1c1c; color: #eee; padding: 80px 0; }
-        .menu-card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
-
-        /* Booking Form */
-        #booking { padding: 100px 0; background: white; }
-        .booking-box { background: var(--navy); color: white; padding: 50px; border-radius: 20px; }
-        input, select, textarea { width: 100%; border-radius: 8px; border: none; padding: 12px; }
-        .btn-gold { 
-            background: var(--accent); color: white; border: none; 
-            width: 100%; padding: 15px; font-weight: bold; border-radius: 8px; 
-            text-transform: uppercase; cursor: pointer; transition: 0.3s;
-        }
-        .btn-gold:hover { background: #d35400; }
-
-        footer { padding: 50px 0; background: #f4f7f6; text-align: center; border-top: 1px solid #ddd; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 mb-32">
 
-    <nav>
-        <div class="container nav-container">
-            <img src="images/WONDER-WAY-NEW.jpg" alt="WonderWay" class="logo-nav">
-            <a href="#booking" class="button button-primary">Book Now</a>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="container">
-            <h1>EXPLORE KRIBI</h1>
-            <p>Experience the serenity of Lobe Falls and the rich culture of Cameroon's coast.</p>
-            <a href="#activities" class="button">View Activities</a>
+    <header class="hero-bg h-[70vh] flex items-center justify-center text-center text-white px-4 relative">
+        <div class="z-10">
+            <span class="uppercase tracking-[0.3em] text-sm mb-4 block animate-pulse">Cameroon's Hidden Paradise</span>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 drop-shadow-2xl">KRIBI</h1>
+            <p class="text-xl md:text-2xl font-light max-w-2xl mx-auto drop-shadow-md opacity-90">
+                Lobe Falls, Atlantic Breezes, and Ancient Cultures.
+            </p>
+            <a href="#activities" class="mt-10 inline-block bg-white text-slate-900 px-10 py-4 rounded-full font-bold hover:bg-yellow-400 transition-all transform hover:scale-105 shadow-xl">Start Exploring</a>
         </div>
     </header>
 
-    <div class="container" id="activities" style="margin-top: 80px;">
-        <div class="section-header">
-            <h2>Lobe Falls Adventures</h2>
-            <hr>
-        </div>
+    <main id="activities" class="max-w-6xl mx-auto px-4 py-20">
         
-        <div class="row">
-            <div class="four columns">
-                <div class="card">
-                    <img src="images/quad.jpg" class="card-img">
-                    <div class="card-content">
-                        <h5>Quad Racing</h5>
-                        <ul class="pricing">
-                            <li>1 Turn <span>5,000 CFA</span></li>
-                            <li>30 Minutes <span>45,000 CFA</span></li>
-                            <li>1 Hour <span>75,000 CFA</span></li>
-                        </ul>
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-slate-800">Choose Your Adventure</h2>
+            <p class="text-slate-500 mt-2">Enter quantities to build your custom Kribi itinerary.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="space-y-8">
+                <h3 class="flex items-center text-xl font-bold text-blue-600 uppercase tracking-widest"><i class="fas fa-bolt mr-3"></i> Adrenaline</h3>
+                
+                <div class="glass-card p-6 rounded-3xl">
+                    <h4 class="font-bold text-lg">Quad Racing (1hr)</h4>
+                    <p class="text-sm text-slate-500 mb-4">Ride through sandy beach trails.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xl text-slate-700">75,000 <small class="text-[10px]">CFA</small></span>
+                        <input type="number" min="0" placeholder="0" data-price="75000" oninput="calculateTotal()" 
+                               class="activity-input w-16 p-3 bg-slate-100 rounded-xl text-center font-bold focus:ring-2 focus:ring-blue-400 outline-none">
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl">
+                    <h4 class="font-bold text-lg">Jetskiing (1hr)</h4>
+                    <p class="text-sm text-slate-500 mb-4">Master the Atlantic waves.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xl text-slate-700">120,000 <small class="text-[10px]">CFA</small></span>
+                        <input type="number" min="0" placeholder="0" data-price="120000" oninput="calculateTotal()" 
+                               class="activity-input w-16 p-3 bg-slate-100 rounded-xl text-center font-bold focus:ring-2 focus:ring-blue-400 outline-none">
                     </div>
                 </div>
             </div>
-            <div class="four columns">
-                <div class="card">
-                    <img src="images/jetski.jpg" class="card-img">
-                    <div class="card-content">
-                        <h5>Jetskiing</h5>
-                        <ul class="pricing">
-                            <li>1 Turn <span>10,000 CFA</span></li>
-                            <li>30 Minutes <span>70,000 CFA</span></li>
-                            <li>1 Hour <span>120,000 CFA</span></li>
-                        </ul>
+
+            <div class="space-y-8">
+                <h3 class="flex items-center text-xl font-bold text-green-600 uppercase tracking-widest"><i class="fas fa-leaf mr-3"></i> Discovery</h3>
+                
+                <div class="glass-card p-6 rounded-3xl border-l-4 border-green-500">
+                    <div class="flex justify-between items-start">
+                        <h4 class="font-bold text-lg">Pygmy Village</h4>
+                        <span class="bg-green-100 text-green-700 text-[10px] px-2 py-1 rounded-full font-bold">GROUP SAVINGS</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mb-4">10,000 solo | 3,500 for groups of 10+</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xl text-slate-700">Varies</span>
+                        <input type="number" id="pygmy-input" min="0" placeholder="0" data-price="10000" oninput="calculateTotal()" 
+                               class="activity-input w-16 p-3 bg-slate-100 rounded-xl text-center font-bold focus:ring-2 focus:ring-green-400 outline-none">
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl">
+                    <h4 class="font-bold text-lg">Zorb Ball (Couple)</h4>
+                    <p class="text-sm text-slate-500 mb-4">Roll on the beach together.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xl text-slate-700">30,000 <small class="text-[10px]">CFA</small></span>
+                        <input type="number" min="0" placeholder="0" data-price="30000" oninput="calculateTotal()" 
+                               class="activity-input w-16 p-3 bg-slate-100 rounded-xl text-center font-bold focus:ring-2 focus:ring-green-400 outline-none">
                     </div>
                 </div>
             </div>
-            <div class="four columns">
-                <div class="card">
-                    <img src="images/boat.jpg" class="card-img">
-                    <div class="card-content">
-                        <h5>Boat Cruise</h5>
-                        <ul class="pricing">
-                            <li>Solo <span>5,000 CFA</span></li>
-                            <li>30 Minutes <span>60,000 CFA</span></li>
-                            <li>1 Hour <span>120,000 CFA</span></li>
-                        </ul>
+
+            <div class="space-y-8">
+                <h3 class="flex items-center text-xl font-bold text-orange-600 uppercase tracking-widest"><i class="fas fa-glass-cheers mr-3"></i> Lifestyle</h3>
+                
+                <div class="glass-card p-6 rounded-3xl bg-orange-50/50">
+                    <h4 class="font-bold text-lg">Sip & Paint</h4>
+                    <p class="text-sm text-slate-500 mb-4">Wine, Pizza, & Canvas.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xl text-slate-700">15,000 <small class="text-[10px]">CFA</small></span>
+                        <input type="number" min="0" placeholder="0" data-price="15000" oninput="calculateTotal()" 
+                               class="activity-input w-16 p-3 bg-slate-100 rounded-xl text-center font-bold focus:ring-2 focus:ring-orange-400 outline-none">
                     </div>
                 </div>
+
+                <div class="glass-card p-6 rounded-3xl">
+                    <h4 class="font-bold text-lg">Lobe Beach Dinner</h4>
+                    <p class="text-sm text-slate-500 mb-4">Dine under the stars.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xl text-slate-700">25,000 <small class="text-[10px]">CFA</small></span>
+                        <input type="number" min="0" placeholder="0" data-price="25000" oninput="calculateTotal()" 
+                               class="activity-input w-16 p-3 bg-slate-100 rounded-xl text-center font-bold focus:ring-2 focus:ring-orange-400 outline-none">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <section id="booking" class="mt-32 bg-slate-900 text-white p-10 md:p-16 rounded-[3rem] shadow-2xl relative overflow-hidden">
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Let’s Finalize Your Trip</h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">Once you submit, our Kribi Concierge will reach out via WhatsApp to confirm availability and payment.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-green-400"><i class="fab fa-whatsapp text-2xl"></i></div>
+                            <div><p class="text-xs text-slate-400 uppercase">WhatsApp</p><p class="font-bold text-lg text-white">+237 653 827 999</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="space-y-4">
+                    <input type="text" placeholder="Full Name" class="w-full p-5 bg-white/5 border border-white/10 rounded-2xl focus:border-yellow-400 outline-none transition">
+                    <input type="date" class="w-full p-5 bg-white/5 border border-white/10 rounded-2xl focus:border-yellow-400 outline-none transition text-slate-400">
+                    <button type="button" onclick="alert('Booking Request Sent!')" class="w-full bg-yellow-500 text-slate-900 p-5 rounded-2xl font-black text-lg hover:bg-yellow-400 transition transform hover:scale-[1.02]">
+                        CONFIRM MY BOOKING
+                    </button>
+                </form>
+            </div>
+            <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-yellow-500/10 rounded-full"></div>
+        </section>
+    </main>
+
+    <div id="total-bar" class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-200 p-6 transition-all duration-500 translate-y-full z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-tighter">Current Estimate</p>
+                <div class="text-3xl font-black text-slate-900"><span id="grand-total text-black">0</span> <small class="text-sm font-normal text-slate-500">CFA</small></div>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="window.location.href='#booking'" class="hidden md:block text-slate-900 font-bold hover:underline">View Itinerary</button>
+                <a href="#booking" class="bg-slate-900 text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-black transition">Book Now</a>
             </div>
         </div>
     </div>
 
-    <div class="container" style="margin-top: 100px;">
-        <div class="section-header">
-            <h2>Discovery Activities</h2>
-            <hr>
-        </div>
-        <div class="row">
-            <div class="six columns">
-                <div class="card">
-                    <div class="card-content">
-                        <h5>Zorb Ball & Seaport</h5>
-                        <ul class="pricing">
-                            <li>Zorb Ball (Solo) <span>20,000 CFA</span></li>
-                            <li>Zorb Ball (Couple) <span>30,000 CFA</span></li>
-                            <li>Seaport Visit (Couple) <span>20,000 CFA</span></li>
-                            <li>Seaport Visit (8+ people) <span>5,000 CFA/ea</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="six columns">
-                <div class="card">
-                    <div class="card-content">
-                        <h5>Culture & Canoe</h5>
-                        <ul class="pricing">
-                            <li>Pygmies Village (Solo) <span>10,000 CFA</span></li>
-                            <li>Pygmies Village (10+ people) <span>3,500 CFA/ea</span></li>
-                            <li>Canoe (Solo) <span>5,000 CFA</span></li>
-                            <li>Mesume (Couple) <span>10,000 CFA</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            const items = document.querySelectorAll('.activity-input');
+            
+            items.forEach(input => {
+                const price = parseInt(input.getAttribute('data-price'));
+                const quantity = parseInt(input.value) || 0;
+                
+                // Smart Logic for Pygmy Village Group Rate
+                if (input.id === 'pygmy-input' && quantity >= 10) {
+                    total += quantity * 3500; 
+                } else {
+                    total += quantity * price;
+                }
+            });
 
-    <section class="menu-section" style="margin-top: 100px;">
-        <div class="container">
-            <div class="section-header">
-                <h2 style="color: white;">Food & Sip Services</h2>
-                <hr>
-            </div>
-            <div class="row">
-                <div class="four columns">
-                    <div class="menu-card">
-                        <h5>Sip & Paint</h5>
-                        <p>Setup, wine, pizza, and art.</p>
-                        <h4 style="color: var(--accent);">15,000 CFA</h4>
-                    </div>
-                </div>
-                <div class="four columns">
-                    <div class="menu-card">
-                        <h5>Beach Diner</h5>
-                        <p>Dine under the stars at Lobe Falls.</p>
-                        <h4 style="color: var(--accent);">25,000 CFA</h4>
-                    </div>
-                </div>
-                <div class="four columns">
-                    <div class="menu-card">
-                        <h5>Breakfast</h5>
-                        <ul class="pricing" style="color: #999;">
-                            <li>Simple <span>2,000 CFA</span></li>
-                            <li>Complete <span>4,000 CFA</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="booking">
-        <div class="container">
-            <div class="booking-box">
-                <div class="row">
-                    <div class="five columns">
-                        <h2>Reserve Your Experience</h2>
-                        <p>Ready to explore? Fill out the form and our concierge will contact you on WhatsApp to finalize your booking.</p>
-                        <br>
-                        <p><i class="fab fa-whatsapp"></i> +237 653 827 999</p>
-                        <p><i class="fa fa-envelope"></i> info@wonderwaytourkribi.com</p>
-                    </div>
-                    <div class="seven columns">
-                        <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-                            <div class="row">
-                                <div class="six columns">
-                                    <label>Name</label>
-                                    <input type="text" name="name" required>
-                                </div>
-                                <div class="six columns">
-                                    <label>Activity</label>
-                                    <select name="activity">
-                                        <option value="quad">Quad Bike</option>
-                                        <option value="jetski">Jetski</option>
-                                        <option value="culture">Discovery Tour</option>
-                                        <option value="food">Sip & Paint</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <label>Preferred Date</label>
-                            <input type="date" name="date">
-                            <button type="submit" class="btn-gold">Request Booking</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Wonder Way Tour Cameroon. All rights reserved.</p>
-            <p style="font-size: 11px; color: #aaa;">DEVELOPED & SECURED BY FRANK FRU CYBERSECURITY</p>
-        </div>
-    </footer>
-
+            // Update display
+            const totalSpan = document.getElementById('grand-total');
+            totalSpan.innerText = total.toLocaleString();
+            
+            // Show/Hide bar with animation
+            const bar = document.getElementById('total-bar');
+            if (total > 0) {
+                bar.classList.remove('translate-y-full');
+            } else {
+                bar.classList.add('translate-y-full');
+            }
+        }
+    </script>
 </body>
 </html>
