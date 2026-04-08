@@ -12,23 +12,43 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Outfit:wght@200;400;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .hero-font { font-family: 'Outfit', sans-serif; }
-        .package-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid #e2e8f0; border-radius: 40px; background: white; }
-        .package-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); }
+        .package-card { 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 1px solid #e2e8f0; 
+            border-radius: 40px; 
+            background: white; 
+        }
+        .package-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); 
+        }
         .active-tab { background: #fbbf24; color: black; border-color: #fbbf24; }
         .gold-highlight { border: 2px solid #fbbf24; position: relative; }
-        .gold-highlight::after { content: "MOST BOOKED"; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #fbbf24; color: black; font-size: 10px; font-weight: 900; padding: 4px 15px; border-radius: 50px; }
+        .gold-highlight::after { 
+            content: "MOST BOOKED"; 
+            position: absolute; 
+            top: -15px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: #fbbf24; 
+            color: black; 
+            font-size: 10px; 
+            font-weight: 900; 
+            padding: 4px 15px; 
+            border-radius: 50px; 
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 overflow-x-hidden">
 
     <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md px-6 py-4 border-b flex justify-between items-center">
         <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center font-black">W</div>
+            <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center font-black text-white">W</div>
             <span class="font-extrabold text-xl tracking-tighter uppercase hero-font">Wonder Way</span>
         </div>
         <div class="flex bg-slate-100 p-1 rounded-xl">
-            <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-4 py-1 rounded-lg text-xs font-black bg-white shadow-sm">CFA</button>
-            <button onclick="setCurrency('USD', 0.0016)" id="curr-USD" class="px-4 py-1 rounded-lg text-xs font-black">USD</button>
+            <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-4 py-1 rounded-lg text-xs font-black bg-white shadow-sm transition-all">CFA</button>
+            <button onclick="setCurrency('USD', 0.0016)" id="curr-USD" class="px-4 py-1 rounded-lg text-xs font-black transition-all">USD</button>
         </div>
     </nav>
 
@@ -39,9 +59,9 @@
         </p>
 
         <div class="flex flex-wrap justify-center gap-4 mt-8">
-            <button onclick="showGroup('couple')" id="tab-couple" class="group-tab active-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest">COUPLES</button>
-            <button onclick="showGroup('group4')" id="tab-group4" class="group-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest">GROUP OF 4</button>
-            <button onclick="showGroup('group6')" id="tab-group6" class="group-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest">GROUP OF 6</button>
+            <button onclick="showGroup('couple')" id="tab-couple" class="group-tab active-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest uppercase">Couples</button>
+            <button onclick="showGroup('group4')" id="tab-group4" class="group-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest uppercase">Group of 4</button>
+            <button onclick="showGroup('group6')" id="tab-group6" class="group-tab px-10 py-4 rounded-2xl border-2 font-black text-sm transition tracking-widest uppercase">Group of 6</button>
         </div>
     </header>
 
@@ -78,6 +98,7 @@
 
         let currentRate = 1;
         let activeGroup = 'couple';
+        let currencyLabel = 'CFA';
 
         function showGroup(group) {
             activeGroup = group;
@@ -88,29 +109,50 @@
 
         function setCurrency(label, rate) {
             currentRate = rate;
+            currencyLabel = label;
             document.getElementById('curr-CFA').classList.toggle('bg-white', label === 'CFA');
+            document.getElementById('curr-CFA').classList.toggle('shadow-sm', label === 'CFA');
             document.getElementById('curr-USD').classList.toggle('bg-white', label === 'USD');
+            document.getElementById('curr-USD').classList.toggle('shadow-sm', label === 'USD');
             render();
         }
 
         function render() {
             const grid = document.getElementById('package-grid');
-            grid.innerHTML = store[activeGroup].map((pkg, i) => `
+            grid.innerHTML = store[activeGroup].map((pkg, i) => {
+                const formattedPrice = (pkg.price * currentRate).toLocaleString();
+                // Custom WhatsApp message
+                const waMessage = encodeURIComponent(`Hi Wonder Way! I'm interested in the ${pkg.name} (${pkg.tier} Tier) for ${formattedPrice} ${currencyLabel}.`);
+                
+                return `
                 <div class="package-card p-6 flex flex-col ${i === 1 ? 'gold-highlight shadow-xl' : ''}">
-                    <img src="${pkg.img}" class="w-full h-56 object-cover rounded-[30px] mb-6" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Missing'">
+                    <div class="overflow-hidden rounded-[30px] mb-6">
+                         <img src="${pkg.img}" class="w-full h-56 object-cover hover:scale-105 transition-transform duration-500" 
+                              onerror="this.src='https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80'">
+                    </div>
                     <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">${pkg.tier}</span>
                     <h3 class="hero-font text-2xl font-black mb-2">${pkg.name}</h3>
                     <div class="text-3xl font-black mb-8">
-                        ${(pkg.price * currentRate).toLocaleString()} <small class="text-xs uppercase">${currentRate === 1 ? 'CFA' : 'USD'}</small>
+                        ${formattedPrice} <small class="text-xs uppercase opacity-50 font-bold">${currencyLabel}</small>
                     </div>
                     <ul class="space-y-4 mb-10 flex-grow">
-                        ${pkg.items.map(item => `<li class="text-[11px] font-bold flex items-center gap-2"><i class="fas fa-check-circle text-yellow-500"></i> ${item}</li>`).join('')}
+                        ${pkg.items.map(item => `
+                            <li class="text-[11px] font-bold flex items-center gap-2">
+                                <i class="fas fa-check-circle text-yellow-500"></i> ${item}
+                            </li>
+                        `).join('')}
                     </ul>
-                    <a href="https://wa.me/237653827999" class="w-full py-5 bg-slate-900 text-white text-center rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition">Book Trip</a>
+                    <a href="https://wa.me/237653827999?text=${waMessage}" 
+                       target="_blank"
+                       class="w-full py-5 bg-slate-900 text-white text-center rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition-all flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp text-lg"></i> Book Trip
+                    </a>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
+        // Initial render
         render();
     </script>
 </body>
