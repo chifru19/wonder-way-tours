@@ -7,64 +7,108 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --navy: #1a3a5f; --orange: #e67e22; --sand: #fdfaf6; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--sand); margin: 0; }
-        
-        /* Navigation */
-        nav { background: white; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .logo { height: 50px; }
-
-        /* Hero */
-        .hero { 
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/hero-bg.jpg'); /* Ensure hero-bg.jpg exists */
-            background-size: cover; background-position: center; height: 70vh; color: white; 
-            display: flex; align-items: center; justify-content: center; text-align: center;
+        :root { 
+            --navy: #1a2a3a; 
+            --gold: #d4af37; 
+            --accent: #e67e22; 
+            --light: #f4f7f6;
         }
+        
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--light); color: #333; line-height: 1.6; }
+        
+        /* Glass Navigation */
+        nav { 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(10px); 
+            padding: 10px 0; 
+            position: fixed; width: 100%; top: 0; z-index: 1000; 
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo-nav { height: 50px; }
 
-        /* Activity Section */
-        .section-title { text-align: center; margin: 60px 0 40px; font-weight: bold; text-transform: uppercase; color: var(--navy); }
-        .card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; height: 100%; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-5px); }
-        .card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px 12px 0 0; }
-        .card-body { padding: 20px; }
-        .price-list { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9em; }
-        .price-list li { display: flex; justify-content: space-between; border-bottom: 1px dashed #ddd; padding: 5px 0; }
-        .price-list li strong { color: var(--orange); }
+        /* Modern Hero Section */
+        .hero { 
+            height: 90vh; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('images/hero-bg.jpg'); 
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; color: white; text-align: center;
+        }
+        .hero h1 { font-weight: 800; letter-spacing: 2px; font-size: 5rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 30px; }
+
+        /* Section Styling */
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; }
+        .section-header hr { width: 60px; height: 4px; background: var(--accent); margin: 20px auto; border: none; }
+
+        /* Activity Cards */
+        .card { 
+            background: white; border-radius: 15px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.4s; height: 100%;
+            border: 1px solid #eee;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 45px rgba(0,0,0,0.15); }
+        .card-img { width: 100%; height: 220px; object-fit: cover; }
+        .card-content { padding: 25px; }
+        .card-content h5 { margin-bottom: 10px; font-weight: 700; color: var(--navy); }
+
+        /* Pricing Lists */
+        .pricing { list-style: none; padding: 0; margin-top: 15px; }
+        .pricing li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; }
+        .pricing li span { font-weight: bold; color: var(--accent); }
+
+        /* Dark Menu Section */
+        .menu-section { background: #1c1c1c; color: #eee; padding: 80px 0; }
+        .menu-card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
 
         /* Booking Form */
-        .booking-section { background: var(--navy); color: white; padding: 80px 0; margin-top: 80px; }
-        .form-box { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; backdrop-filter: blur(10px); }
-        input, select, textarea { width: 100%; color: #333; }
-        .btn-submit { background: var(--orange); color: white; width: 100%; border: none; padding: 12px; font-weight: bold; cursor: pointer; }
+        #booking { padding: 100px 0; background: white; }
+        .booking-box { background: var(--navy); color: white; padding: 50px; border-radius: 20px; }
+        input, select, textarea { width: 100%; border-radius: 8px; border: none; padding: 12px; }
+        .btn-gold { 
+            background: var(--accent); color: white; border: none; 
+            width: 100%; padding: 15px; font-weight: bold; border-radius: 8px; 
+            text-transform: uppercase; cursor: pointer; transition: 0.3s;
+        }
+        .btn-gold:hover { background: #d35400; }
+
+        footer { padding: 50px 0; background: #f4f7f6; text-align: center; border-top: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="container">
-            <img src="images/WONDER-WAY-NEW.jpg" class="logo" alt="WonderWay">
+        <div class="container nav-container">
+            <img src="images/WONDER-WAY-NEW.jpg" alt="WonderWay" class="logo-nav">
+            <a href="#booking" class="button button-primary">Book Now</a>
         </div>
     </nav>
 
-    <section class="hero">
+    <header class="hero">
         <div class="container">
-            <h1 style="font-size: 4rem;">EXPLORE KRIBI</h1>
-            <p style="font-size: 1.5rem;">Experience God's Own Country with Wonder Way Tour Cameroon</p>
+            <h1>EXPLORE KRIBI</h1>
+            <p>Experience the serenity of Lobe Falls and the rich culture of Cameroon's coast.</p>
+            <a href="#activities" class="button">View Activities</a>
         </div>
-    </section>
+    </header>
 
-    <div class="container">
-        <h2 class="section-title">Lobe Falls Activities</h2>
+    <div class="container" id="activities" style="margin-top: 80px;">
+        <div class="section-header">
+            <h2>Lobe Falls Adventures</h2>
+            <hr>
+        </div>
+        
         <div class="row">
             <div class="four columns">
                 <div class="card">
                     <img src="images/quad.jpg" class="card-img">
-                    <div class="card-body">
+                    <div class="card-content">
                         <h5>Quad Racing</h5>
-                        <ul class="price-list">
-                            <li>1 Turn <strong>5,000 CFA</strong></li>
-                            <li>30 Minutes <strong>45,000 CFA</strong></li>
-                            <li>1 Hour <strong>75,000 CFA</strong></li>
+                        <ul class="pricing">
+                            <li>1 Turn <span>5,000 CFA</span></li>
+                            <li>30 Minutes <span>45,000 CFA</span></li>
+                            <li>1 Hour <span>75,000 CFA</span></li>
                         </ul>
                     </div>
                 </div>
@@ -72,53 +116,25 @@
             <div class="four columns">
                 <div class="card">
                     <img src="images/jetski.jpg" class="card-img">
-                    <div class="card-body">
+                    <div class="card-content">
                         <h5>Jetskiing</h5>
-                        <ul class="price-list">
-                            <li>1 Turn <strong>10,000 CFA</strong></li>
-                            <li>30 Minutes <strong>70,000 CFA</strong></li>
-                            <li>1 Hour <strong>120,000 CFA</strong></li>
+                        <ul class="pricing">
+                            <li>1 Turn <span>10,000 CFA</span></li>
+                            <li>30 Minutes <span>70,000 CFA</span></li>
+                            <li>1 Hour <span>120,000 CFA</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="four columns">
                 <div class="card">
-                    <img src="images/boat-cruise.jpg" class="card-img">
-                    <div class="card-body">
+                    <img src="images/boat.jpg" class="card-img">
+                    <div class="card-content">
                         <h5>Boat Cruise</h5>
-                        <ul class="price-list">
-                            <li>Solo <strong>5,000 CFA</strong></li>
-                            <li>30 Minutes <strong>60,000 CFA</strong></li>
-                            <li>1 Hour <strong>120,000 CFA</strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-title">Discovery & Culture</h2>
-        <div class="row">
-            <div class="six columns">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Zorb Ball Discovery</h5>
-                        <ul class="price-list">
-                            <li>Solo <strong>20,000 CFA</strong></li>
-                            <li>Couple <strong>30,000 CFA</strong></li>
-                            <li>Group (Per Head) <strong>10,000 CFA</strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="six columns">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Pygmies Village Visit</h5>
-                        <ul class="price-list">
-                            <li>Solo <strong>10,000 CFA</strong></li>
-                            <li>Couple <strong>20,000 CFA</strong></li>
-                            <li>3-9 Persons (Each) <strong>5,000 CFA</strong></li>
+                        <ul class="pricing">
+                            <li>Solo <span>5,000 CFA</span></li>
+                            <li>30 Minutes <span>60,000 CFA</span></li>
+                            <li>1 Hour <span>120,000 CFA</span></li>
                         </ul>
                     </div>
                 </div>
@@ -126,28 +142,106 @@
         </div>
     </div>
 
-    <section class="booking-section" id="booking">
-        <div class="container">
-            <div class="row">
-                <div class="six columns">
-                    <h2>Book Your Adventure</h2>
-                    <p>Select your activity and preferred date. Our team will contact you via WhatsApp or Email within 2 hours.</p>
-                    <p><i class="fab fa-whatsapp"></i> +237 653 827 999</p>
-                    <p><i class="fa fa-envelope"></i> info@wonderwaytourkribi.com</p>
+    <div class="container" style="margin-top: 100px;">
+        <div class="section-header">
+            <h2>Discovery Activities</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="six columns">
+                <div class="card">
+                    <div class="card-content">
+                        <h5>Zorb Ball & Seaport</h5>
+                        <ul class="pricing">
+                            <li>Zorb Ball (Solo) <span>20,000 CFA</span></li>
+                            <li>Zorb Ball (Couple) <span>30,000 CFA</span></li>
+                            <li>Seaport Visit (Couple) <span>20,000 CFA</span></li>
+                            <li>Seaport Visit (8+ people) <span>5,000 CFA/ea</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="six columns">
-                    <div class="form-box">
+            </div>
+            <div class="six columns">
+                <div class="card">
+                    <div class="card-content">
+                        <h5>Culture & Canoe</h5>
+                        <ul class="pricing">
+                            <li>Pygmies Village (Solo) <span>10,000 CFA</span></li>
+                            <li>Pygmies Village (10+ people) <span>3,500 CFA/ea</span></li>
+                            <li>Canoe (Solo) <span>5,000 CFA</span></li>
+                            <li>Mesume (Couple) <span>10,000 CFA</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="menu-section" style="margin-top: 100px;">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: white;">Food & Sip Services</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <div class="menu-card">
+                        <h5>Sip & Paint</h5>
+                        <p>Setup, wine, pizza, and art.</p>
+                        <h4 style="color: var(--accent);">15,000 CFA</h4>
+                    </div>
+                </div>
+                <div class="four columns">
+                    <div class="menu-card">
+                        <h5>Beach Diner</h5>
+                        <p>Dine under the stars at Lobe Falls.</p>
+                        <h4 style="color: var(--accent);">25,000 CFA</h4>
+                    </div>
+                </div>
+                <div class="four columns">
+                    <div class="menu-card">
+                        <h5>Breakfast</h5>
+                        <ul class="pricing" style="color: #999;">
+                            <li>Simple <span>2,000 CFA</span></li>
+                            <li>Complete <span>4,000 CFA</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking">
+        <div class="container">
+            <div class="booking-box">
+                <div class="row">
+                    <div class="five columns">
+                        <h2>Reserve Your Experience</h2>
+                        <p>Ready to explore? Fill out the form and our concierge will contact you on WhatsApp to finalize your booking.</p>
+                        <br>
+                        <p><i class="fab fa-whatsapp"></i> +237 653 827 999</p>
+                        <p><i class="fa fa-envelope"></i> info@wonderwaytourkribi.com</p>
+                    </div>
+                    <div class="seven columns">
                         <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-                            <input type="text" name="name" placeholder="Your Full Name" required>
-                            <input type="email" name="email" placeholder="Email Address" required>
-                            <select name="activity">
-                                <option value="quad">Quad Racing</option>
-                                <option value="jetski">Jetskiing</option>
-                                <option value="culture">Pygmies Village</option>
-                                <option value="sip-paint">Sip & Paint</option>
-                            </select>
-                            <input type="date" name="tour-date">
-                            <button type="submit" class="btn-submit">Request Slot</button>
+                            <div class="row">
+                                <div class="six columns">
+                                    <label>Name</label>
+                                    <input type="text" name="name" required>
+                                </div>
+                                <div class="six columns">
+                                    <label>Activity</label>
+                                    <select name="activity">
+                                        <option value="quad">Quad Bike</option>
+                                        <option value="jetski">Jetski</option>
+                                        <option value="culture">Discovery Tour</option>
+                                        <option value="food">Sip & Paint</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label>Preferred Date</label>
+                            <input type="date" name="date">
+                            <button type="submit" class="btn-gold">Request Booking</button>
                         </form>
                     </div>
                 </div>
@@ -155,8 +249,11 @@
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; background: #eee; font-size: 0.8rem;">
-        <p>&copy; 2026 Wonder Way Tour Cameroon. <br> 🛡️ Secure Edge Hosting by Frank Fru Cybersecurity.</p>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Wonder Way Tour Cameroon. All rights reserved.</p>
+            <p style="font-size: 11px; color: #aaa;">DEVELOPED & SECURED BY FRANK FRU CYBERSECURITY</p>
+        </div>
     </footer>
 
 </body>
