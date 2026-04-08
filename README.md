@@ -1,17 +1,18 @@
-# Wonder Way Tour Cameroon 🛡️
+# Wonder Way Tour Cameroon - Official Website 🇨🇲
 
-A high-performance, secured tourism platform for exploring Kribi, Cameroon.
+Welcome to the official repository for the Wonder Way Tour Cameroon web platform. This site is designed to showcase the beauty of Kribi and facilitate online bookings for tours, activities, and dining services.
 
-## 🚀 Security Features (Frank Fru SOC Integration)
-- **Automated Security Scanning:** Integrated with GitHub CodeQL for SAST (Static Application Security Testing).
-- **Edge Protection:** Deployed via Cloudflare Pages with active WAF (Web Application Firewall).
-- **DDoS Mitigation:** Layer 7 protection via global Anycast network.
-- **Zero-Trust Principles:** Identity-aware access for administration.
+## 🏝️ Website Sections
+- **Lobe Falls Activities:** Quad racing, Jetskiing, and Boat Cruises.
+- **Discovery Tours:** Zorb Ball, Seaport visits, and Pygmies Village excursions.
+- **Food Services:** Beachfront dining, Sip & Paint, and Breakfast packages.
+- **Online Booking:** Secure inquiry system for domestic and international tourists.
 
-## 📂 Tech Stack
-- **Frontend:** HTML5, Skeleton CSS (High Performance)
-- **Deployment:** GitHub Actions / Cloudflare Pages
-- **Monitoring:** Cloudflare Edge Analytics
+## ⚙️ Technical Specifications
+This platform is built for high speed and maximum security to protect customer data:
+- **Hosting:** Hosted on a Global Edge Network (Cloudflare) for instant loading in any country.
+- **Security:** Protected by automated vulnerability scanning and a Web Application Firewall (WAF).
+- **Architecture:** Static HTML5/CSS3 for uncompromised performance and reliability.
 
 ---
-*Maintained and Secured by Frank Fru Cybersecurity Operations.*
+*Developed and Secured by Frank Fru Cybersecurity.*
