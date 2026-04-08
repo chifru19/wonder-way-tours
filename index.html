@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonder Way Tour Cameroon | Explore Kribi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --navy: #1a3a5f; --orange: #e67e22; --sand: #fdfaf6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--sand); margin: 0; }
+        
+        /* Navigation */
+        nav { background: white; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo { height: 50px; }
+
+        /* Hero */
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/hero-bg.jpg'); /* Ensure hero-bg.jpg exists */
+            background-size: cover; background-position: center; height: 70vh; color: white; 
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+
+        /* Activity Section */
+        .section-title { text-align: center; margin: 60px 0 40px; font-weight: bold; text-transform: uppercase; color: var(--navy); }
+        .card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; height: 100%; border: 1px solid #eee; }
+        .card:hover { transform: translateY(-5px); }
+        .card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px 12px 0 0; }
+        .card-body { padding: 20px; }
+        .price-list { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9em; }
+        .price-list li { display: flex; justify-content: space-between; border-bottom: 1px dashed #ddd; padding: 5px 0; }
+        .price-list li strong { color: var(--orange); }
+
+        /* Booking Form */
+        .booking-section { background: var(--navy); color: white; padding: 80px 0; margin-top: 80px; }
+        .form-box { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; backdrop-filter: blur(10px); }
+        input, select, textarea { width: 100%; color: #333; }
+        .btn-submit { background: var(--orange); color: white; width: 100%; border: none; padding: 12px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <img src="images/WONDER-WAY-NEW.jpg" class="logo" alt="WonderWay">
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1 style="font-size: 4rem;">EXPLORE KRIBI</h1>
+            <p style="font-size: 1.5rem;">Experience God's Own Country with Wonder Way Tour Cameroon</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Lobe Falls Activities</h2>
+        <div class="row">
+            <div class="four columns">
+                <div class="card">
+                    <img src="images/quad.jpg" class="card-img">
+                    <div class="card-body">
+                        <h5>Quad Racing</h5>
+                        <ul class="price-list">
+                            <li>1 Turn <strong>5,000 CFA</strong></li>
+                            <li>30 Minutes <strong>45,000 CFA</strong></li>
+                            <li>1 Hour <strong>75,000 CFA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="four columns">
+                <div class="card">
+                    <img src="images/jetski.jpg" class="card-img">
+                    <div class="card-body">
+                        <h5>Jetskiing</h5>
+                        <ul class="price-list">
+                            <li>1 Turn <strong>10,000 CFA</strong></li>
+                            <li>30 Minutes <strong>70,000 CFA</strong></li>
+                            <li>1 Hour <strong>120,000 CFA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="four columns">
+                <div class="card">
+                    <img src="images/boat-cruise.jpg" class="card-img">
+                    <div class="card-body">
+                        <h5>Boat Cruise</h5>
+                        <ul class="price-list">
+                            <li>Solo <strong>5,000 CFA</strong></li>
+                            <li>30 Minutes <strong>60,000 CFA</strong></li>
+                            <li>1 Hour <strong>120,000 CFA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Discovery & Culture</h2>
+        <div class="row">
+            <div class="six columns">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Zorb Ball Discovery</h5>
+                        <ul class="price-list">
+                            <li>Solo <strong>20,000 CFA</strong></li>
+                            <li>Couple <strong>30,000 CFA</strong></li>
+                            <li>Group (Per Head) <strong>10,000 CFA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="six columns">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Pygmies Village Visit</h5>
+                        <ul class="price-list">
+                            <li>Solo <strong>10,000 CFA</strong></li>
+                            <li>Couple <strong>20,000 CFA</strong></li>
+                            <li>3-9 Persons (Each) <strong>5,000 CFA</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="booking-section" id="booking">
+        <div class="container">
+            <div class="row">
+                <div class="six columns">
+                    <h2>Book Your Adventure</h2>
+                    <p>Select your activity and preferred date. Our team will contact you via WhatsApp or Email within 2 hours.</p>
+                    <p><i class="fab fa-whatsapp"></i> +237 653 827 999</p>
+                    <p><i class="fa fa-envelope"></i> info@wonderwaytourkribi.com</p>
+                </div>
+                <div class="six columns">
+                    <div class="form-box">
+                        <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+                            <input type="text" name="name" placeholder="Your Full Name" required>
+                            <input type="email" name="email" placeholder="Email Address" required>
+                            <select name="activity">
+                                <option value="quad">Quad Racing</option>
+                                <option value="jetski">Jetskiing</option>
+                                <option value="culture">Pygmies Village</option>
+                                <option value="sip-paint">Sip & Paint</option>
+                            </select>
+                            <input type="date" name="tour-date">
+                            <button type="submit" class="btn-submit">Request Slot</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; background: #eee; font-size: 0.8rem;">
+        <p>&copy; 2026 Wonder Way Tour Cameroon. <br> 🛡️ Secure Edge Hosting by Frank Fru Cybersecurity.</p>
+    </footer>
+
+</body>
+</html>
