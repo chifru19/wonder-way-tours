@@ -3,207 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wonder Way | Kribi - Experience the authentic coast</title>
+    <title>Wonder Way | Kribi Experience & Gallery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Outfit:wght@200;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .hero-font { font-family: 'Outfit', sans-serif; }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .premium-card {
+        .activity-card {
             background: white;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 24px;
+            transition: all 0.3s ease;
             border: 1px solid #f1f5f9;
         }
+        .activity-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05); }
 
-        .premium-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            border-color: #fbbf24;
+        /* Gallery Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        
-        .dark { background-color: #0f172a; color: #f8fafc; }
-        .dark .premium-card { background: #1e293b; border-color: #334155; }
-        
-        /* Ensures images maintain ratio in cards */
-        .card-img { width: 100%; height: 250px; object-fit: cover; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 transition-colors duration-500">
+<body class="bg-slate-50 text-slate-900">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-6 py-4 shadow-sm border-b dark:border-white/10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-yellow-500 rounded-lg flex items-center justify-center font-black">W</div>
-                <span class="font-extrabold text-xl tracking-tighter">WONDER WAY</span>
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="font-extrabold text-xl tracking-tighter text-blue-600">Wonder Way</div>
+            <div class="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
+                <a href="#activities" class="hover:text-blue-600">Activities</a>
+                <a href="#gallery" class="hover:text-blue-600">Gallery</a>
             </div>
             <div class="flex items-center gap-4">
-                <select onchange="updateCurrency(this.value)" class="bg-slate-100 dark:bg-slate-800 text-xs font-bold px-3 py-2 rounded-lg outline-none">
-                    <option value="CFA">CFA</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                </select>
-                <button onclick="document.body.classList.toggle('dark')" class="text-slate-500 hover:text-yellow-500"><i class="fas fa-adjust"></i></button>
+                <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+                    <button onclick="updateCurrency('CFA', 1)" id="btn-CFA" class="curr-btn px-3 py-1 rounded-lg text-xs font-bold bg-white shadow-sm transition">CFA</button>
+                    <button onclick="updateCurrency('USD', 0.0016)" id="btn-USD" class="curr-btn px-3 py-1 rounded-lg text-xs font-bold transition">USD</button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="h-[60vh] flex items-center justify-center text-center relative overflow-hidden bg-slate-900 mt-16">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6501377190421903537_0" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="Kribi Coast">
-        <div class="relative z-10 px-6" data-aos="fade-up">
-            <h1 style="font-family: 'Outfit';" class="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">KRIBI <span class="text-yellow-500">EXPERIENCE.</span></h1>
-            <p class="text-xl text-slate-200 max-w-xl mx-auto font-light leading-relaxed">Experience the unique majesty where the river cascades directly into the Atlantic Ocean.</p>
+    <header class="h-[40vh] bg-slate-900 relative flex items-center justify-center text-center text-white pt-16">
+        <img src="IMG_9397.jpg" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Kribi">
+        <div class="relative z-10 px-6">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Unforgettable Moments</h1>
+            <p class="text-sm uppercase tracking-widest font-bold opacity-80">Authentic Kribi Tours & Events</p>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-24">
+    <main class="max-w-6xl mx-auto px-6 py-20">
         
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-extrabold tracking-tight">Build Your Ideal Coast Day</h2>
-            <p class="text-slate-500 mt-2">Enter quantities and our concatenation engine builds your price in real-time.</p>
-        </div>
+        <section id="activities" class="mb-32">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold mb-4">Choose Your Adventure</h2>
+                <p class="text-slate-500">Plan your trip. Pricing updates automatically.</p>
+            </div>
 
-        <div class="mb-20">
-            <h3 class="flex items-center gap-3 text-lg font-black text-blue-600 uppercase tracking-widest mb-10"><i class="fas fa-bolt"></i> Speed & Waves</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="premium-card rounded-3xl overflow-hidden group" data-aos="fade-up">
-                    <img src="https://images.unsplash.com/photo-1531737212413-667205e1cda7?auto=format&fit=crop&q=80&w=800" class="card-img group-hover:scale-105 transition duration-700" alt="Quad">
-                    <div class="p-6">
-                        <h4 class="font-bold text-lg">Quad Beach Racing (1hr)</h4>
-                        <p class="text-sm text-slate-500 mb-6">Tackle the golden dunes and jungle trails surrounding the falls.</p>
-                        <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
-                            <span class="text-2xl font-black"><span class="price-val" data-base="75000">75,000</span> <small class="curr-label text-xs">CFA</small></span>
-                            <input type="number" min="0" placeholder="0" data-price="75000" oninput="calculate()" class="qty-input w-20 text-right p-3 rounded-lg bg-white dark:bg-slate-800 font-bold outline-none">
+                <div class="activity-card p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 mb-6 overflow-hidden rounded-2xl group">
+                            <img src="IMG_9397.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <button onclick="openGallery(['IMG_9397.jpg', 'IMG_9403.jpg'])" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 text-white font-bold">
+                                <i class="fas fa-images mr-2"></i> View Photos
+                            </button>
                         </div>
+                        <h4 class="font-bold text-xl mb-1">Quad Racing & Jetski</h4>
+                        <p class="text-slate-400 text-sm mb-6">High-speed thrills on the beach and waves.</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-50">
+                        <span class="text-xl font-extrabold text-blue-600"><span class="price-val" data-base="75000">75,000</span> <small class="curr-label">CFA</small></span>
+                        <input type="number" min="0" placeholder="0" data-price="75000" oninput="calculate()" class="qty-input w-20 p-3 bg-slate-50 rounded-2xl text-center font-bold outline-none border border-slate-200 focus:border-blue-500">
                     </div>
                 </div>
 
-                <div class="premium-card rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1544666504-226343355598?auto=format&fit=crop&q=80&w=800" class="card-img group-hover:scale-105 transition duration-700" alt="Jetski">
-                    <div class="p-6">
-                        <h4 class="font-bold text-lg">Jetski Adventure (1hr)</h4>
-                        <p class="text-sm text-slate-500 mb-6">Master the Atlantic waves on a high-powered watercraft.</p>
-                        <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
-                            <span class="text-2xl font-black"><span class="price-val" data-base="120000">120,000</span> <small class="curr-label text-xs">CFA</small></span>
-                            <input type="number" min="0" placeholder="0" data-price="120000" oninput="calculate()" class="qty-input w-20 text-right p-3 rounded-lg bg-white dark:bg-slate-800 font-bold outline-none">
+                <div class="activity-card p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 mb-6 overflow-hidden rounded-2xl group">
+                            <img src="IMG_9401.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <button onclick="openGallery(['IMG_9401.jpg', 'IMG_9398.jpg'])" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 text-white font-bold">
+                                <i class="fas fa-images mr-2"></i> View Photos
+                            </button>
                         </div>
+                        <h4 class="font-bold text-xl mb-1 text-orange-600">Sip, Paint & Dine</h4>
+                        <p class="text-slate-400 text-sm mb-6">The ultimate lifestyle experience by the water.</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-50">
+                        <span class="text-xl font-extrabold"><span class="price-val" data-base="25000">25,000</span> <small class="curr-label">CFA</small></span>
+                        <input type="number" min="0" placeholder="0" data-price="25000" oninput="calculate()" class="qty-input w-20 p-3 bg-slate-50 rounded-2xl text-center font-bold outline-none border border-slate-200 focus:border-blue-500">
+                    </div>
+                </div>
+
+                <div class="activity-card p-6 flex flex-col justify-between border-2 border-green-500">
+                    <div>
+                        <div class="relative h-48 mb-6 overflow-hidden rounded-2xl group">
+                            <img src="IMG_9400.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <button onclick="openGallery(['IMG_9400.jpg', 'IMG_9404.jpg'])" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 text-white font-bold">
+                                <i class="fas fa-images mr-2"></i> View Photos
+                            </button>
+                        </div>
+                        <h4 class="font-bold text-xl mb-1 text-green-700">Cultural Discovery</h4>
+                        <p class="text-slate-400 text-sm mb-6">Authentic interactions and river cruises.</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-50">
+                        <span class="text-xl font-extrabold">Varies</span>
+                        <input type="number" id="pygmy-qty" min="0" placeholder="0" data-price="10000" oninput="calculate()" class="qty-input w-20 p-3 bg-slate-50 rounded-2xl text-center font-bold outline-none border border-slate-200 focus:border-green-500">
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="mb-20">
-            <h3 class="flex items-center gap-3 text-lg font-black text-green-600 uppercase tracking-widest mb-10"><i class="fas fa-om"></i> Discovery & Culture</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="premium-card rounded-3xl overflow-hidden group" data-aos="fade-up">
-                    <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=800" class="card-img group-hover:scale-105 transition duration-700" alt="Canoe">
-                    <div class="p-6">
-                        <h4 class="font-bold text-lg">Cultural Canoe (Solo)</h4>
-                        <p class="text-sm text-slate-500 mb-6">Respectful and guided exchange with the Bagyeli community.</p>
-                        <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
-                            <span class="text-2xl font-black"><span class="price-val" data-base="10000">10,000</span> <small class="curr-label text-xs">CFA</small></span>
-                            <input type="number" id="pygmy-input" min="0" placeholder="0" data-price="10000" oninput="calculate()" class="qty-input w-20 text-right p-3 rounded-lg bg-white dark:bg-slate-800 font-bold outline-none">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mb-20">
-            <h3 class="flex items-center gap-3 text-lg font-black text-orange-600 uppercase tracking-widest mb-10"><i class="fas fa-utensils"></i> Sip & Dine</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="premium-card rounded-3xl overflow-hidden group bg-orange-50 dark:bg-orange-950" data-aos="fade-up">
-                    <img src="https://images.unsplash.com/photo-1544666504-226343355598?auto=format&fit=crop&q=80&w=800" class="card-img group-hover:scale-105 transition duration-700" alt="Art">
-                    <div class="p-6">
-                        <span class="bg-orange-500 text-black text-[10px] px-2 py-1 rounded-full font-bold uppercase mb-2 inline-block">Best Value</span>
-                        <h4 class="font-bold text-lg">Sip & Paint Experience</h4>
-                        <p class="text-sm text-orange-800 dark:text-orange-200 mb-6">Wine, Pizza, & Canvas setup by the coast.</p>
-                        <div class="flex justify-between items-center bg-white/50 dark:bg-black/20 p-4 rounded-xl">
-                            <span class="text-2xl font-black text-orange-700 dark:text-orange-300"><span class="price-val" data-base="15000">15,000</span> <small class="curr-label text-xs">CFA</small></span>
-                            <input type="number" min="0" placeholder="0" data-price="15000" oninput="calculate()" class="qty-input w-20 text-right p-3 rounded-lg bg-white dark:bg-slate-800 font-bold outline-none">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="premium-card rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1515362778563-6a8d0e44bc0b?auto=format&fit=crop&q=80&w=800" class="card-img group-hover:scale-105 transition duration-700" alt="Diner">
-                    <div class="p-6">
-                        <h4 class="font-bold text-lg">Dinner Under Stars</h4>
-                        <p class="text-sm text-slate-500 mb-6">Premium fine dining where the river meets the Atlantic.</p>
-                        <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
-                            <span class="text-2xl font-black"><span class="price-val" data-base="25000">25,000</span> <small class="curr-label text-xs">CFA</small></span>
-                            <input type="number" min="0" placeholder="0" data-price="25000" oninput="calculate()" class="qty-input w-20 text-right p-3 rounded-lg bg-white dark:bg-slate-800 font-bold outline-none">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <section id="booking" class="bg-slate-900 text-white p-12 md:p-20 rounded-[3rem] shadow-2xl relative overflow-hidden" data-aos="fade-up">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
-                <div>
-                    <h2 class="text-5xl font-extrabold mb-6 tracking-tight">Finalize Your<br>Itinerary.</h2>
-                    <p class="text-slate-400 text-lg mb-10 leading-relaxed">Once you submit, our Kribi Concierge will reach out via WhatsApp to confirm availability and logistics.</p>
-                    <div class="flex items-center gap-4 text-xl font-bold text-white">
-                        <i class="fab fa-whatsapp text-3xl text-green-500"></i>
-                        <span>+237 653 827 999</span>
-                    </div>
-                </div>
-                <form class="space-y-5">
-                    <input type="text" placeholder="Full Name" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 outline-none focus:border-yellow-400 transition">
-                    <input type="date" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 outline-none focus:border-yellow-400 transition text-slate-400">
-                    <button type="button" onclick="alert('Inquiry Sent!')" class="w-full bg-yellow-500 text-black p-5 rounded-2xl font-black text-xl hover:bg-yellow-400 transition transform hover:scale-[1.02]">CONFIRM BOOKING</button>
-                </form>
-            </div>
-            <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-yellow-500/10 rounded-full"></div>
         </section>
 
+        <section id="gallery" class="py-20">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h3 class="text-3xl font-extrabold">Wonder Way Gallery</h3>
+                    <p class="text-slate-500">Real photos from recent events and tours.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="IMG_9396.jpg" class="w-full h-64 object-cover rounded-3xl hover:opacity-90 cursor-pointer transition">
+                <img src="IMG_9397.jpg" class="w-full h-64 object-cover rounded-3xl hover:opacity-90 cursor-pointer transition">
+                <img src="IMG_9398.jpg" class="w-full h-64 object-cover rounded-3xl hover:opacity-90 cursor-pointer transition col-span-2">
+                <img src="IMG_9400.jpg" class="w-full h-64 object-cover rounded-3xl hover:opacity-90 cursor-pointer transition col-span-2">
+                <img src="IMG_9401.jpg" class="w-full h-64 object-cover rounded-3xl hover:opacity-90 cursor-pointer transition">
+                <img src="IMG_9403.jpg" class="w-full h-64 object-cover rounded-3xl hover:opacity-90 cursor-pointer transition">
+            </div>
+        </section>
     </main>
 
-    <div id="price-bar" class="fixed bottom-0 left-0 right-0 glass border-t border-white/10 p-6 transition-all duration-700 translate-y-full z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-                <span class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Estimated Itinerary Cost</span>
-                <div class="text-3xl font-black text-slate-900 dark:text-white"><span id="total-display">0</span> <small class="text-sm font-normal text-slate-500 curr-label">CFA</small></div>
-            </div>
-            <a href="#booking" class="bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-10 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition">Checkout</a>
+    <div id="galleryModal" class="modal" onclick="this.style.display='none'">
+        <div class="max-w-4xl w-full flex flex-wrap gap-4 justify-center" onclick="event.stopPropagation()">
+            <div id="modalContent" class="flex flex-wrap gap-4 justify-center"></div>
+            <button class="absolute top-10 right-10 text-white text-4xl" onclick="closeModal()">&times;</button>
         </div>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <div id="price-bar" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-6 translate-y-full transition-transform duration-300 z-[100]">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div>
+                <p class="text-[10px] text-slate-400 uppercase font-bold">Estimated Total</p>
+                <div class="text-xl font-bold"><span id="total-val">0</span> <span class="curr-label">CFA</span></div>
+            </div>
+            <button class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold">BOOK NOW</button>
+        </div>
+    </div>
+
     <script>
-        AOS.init({ duration: 1000, once: true });
-
-        let currentRate = 1;
-        let currentLabel = 'CFA';
-
-        function updateCurrency(val) {
-            currentRate = (val === 'USD') ? 0.0016 : (val === 'EUR' ? 0.0015 : 1);
-            currentLabel = val;
+        // Gallery Logic
+        function openGallery(images) {
+            const modal = document.getElementById('galleryModal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = '';
             
-            // Update labels
-            document.querySelectorAll('.curr-label').forEach(el => el.innerText = val);
-            
-            // Update prices
-            document.querySelectorAll('.price-val').forEach(el => {
-                const base = parseInt(el.getAttribute('data-base'));
-                el.innerText = (base * currentRate).toLocaleString();
+            images.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = "max-w-full max-h-[70vh] rounded-2xl shadow-2xl";
+                content.appendChild(img);
             });
             
-            calculate(); // Refactor total
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('galleryModal').style.display = 'none';
+        }
+
+        // Currency & Calculator Logic (Stayed the same as your preferred version)
+        let rate = 1;
+        function updateCurrency(newL, newR) {
+            rate = newR;
+            document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('bg-white', 'shadow-sm'));
+            document.getElementById('btn-' + newL).classList.add('bg-white', 'shadow-sm');
+            document.querySelectorAll('.curr-label').forEach(el => el.innerText = newL);
+            document.querySelectorAll('.price-val').forEach(el => {
+                const b = parseInt(el.getAttribute('data-base'));
+                el.innerText = (b * rate).toLocaleString();
+            });
+            calculate();
         }
 
         function calculate() {
@@ -211,12 +195,10 @@
             document.querySelectorAll('.qty-input').forEach(input => {
                 const qty = parseInt(input.value) || 0;
                 let price = parseInt(input.getAttribute('data-price'));
-                if (input.id === 'pygmy-input' && qty >= 10) price = 3500;
+                if (input.id === 'pygmy-qty' && qty >= 10) price = 3500;
                 total += qty * price;
             });
-
-            document.getElementById('total-display').innerText = (total * currentRate).toLocaleString();
-            
+            document.getElementById('total-val').innerText = (total * rate).toLocaleString();
             const bar = document.getElementById('price-bar');
             if (total > 0) bar.classList.remove('translate-y-full');
             else bar.classList.add('translate-y-full');
