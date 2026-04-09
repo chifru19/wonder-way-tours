@@ -49,8 +49,8 @@
 
     <footer class="relative min-h-[600px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
         <div class="absolute inset-0 z-0">
-            <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-50">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+            <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-75">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
         </div>
         <div class="relative z-10 max-w-2xl mx-auto">
             <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
@@ -90,9 +90,9 @@
                 { tier: "Platinum", name: "Paradise Circle", price: "530,000 CFA", img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
             ],
             events: [
-                { tier: "Custom", name: "Beach Wedding", price: "Inquire", img: "event_escape/wedding.jpg", features: ["Full Planning", "Floral Decor", "Seaside Reception"] },
-                { tier: "Custom", name: "Company Retreat", price: "Inquire", img: "event_escape/corporate.jpg", features: ["Lodging", "Meeting Space", "Team Activities"] },
-                { tier: "Custom", name: "Beach Party", price: "Inquire", img: "event_escape/party.jpg", features: ["DJ & Lights", "Bonfire", "Open Bar Access"] }
+                { tier: "Custom", name: "Beachside Wedding", price: "Inquire", img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service", "Boat Arrival Options"] },
+                { tier: "Corporate", name: "Company Retreat", price: "Inquire", img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering", "Lodging Included"] },
+                { tier: "Custom", name: "Private Party", price: "Inquire", img: "images/dinner-setup.jpg", features: ["DJ & Sound System", "Beach Bonfire", "Finger Foods", "Event Photography"] }
             ]
         };
 
@@ -106,7 +106,7 @@
             grid.innerHTML = data.map(item => `
                 <div class="package-card">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Not+Found'">
+                        <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=WonderWay+Tour'">
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
