@@ -11,13 +11,17 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
+        
+        /* LOGO CLARITY FIX */
         .circle-logo { 
-            border-radius: 50%; 
-            object-fit: contain; 
-            filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+            width: 44px;
+            height: auto;
+            object-fit: contain;
+            filter: brightness(0) invert(1) contrast(1.2);
         }
-        .activity-card { transition: all 0.2s; border: 2px solid transparent; }
-        .activity-card:hover { transform: translateY(-3px); }
+
+        .activity-card { transition: all 0.2s; border: 2px solid transparent; cursor: pointer; }
+        .activity-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
         .activity-card.selected { border-color: #fbbf24; background-color: #fffbeb; }
     </style>
 </head>
@@ -25,9 +29,16 @@
 
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a] px-6 py-4 flex justify-between items-center text-white border-b border-slate-800">
         <div class="flex items-center gap-3">
-            <img src="images/logo.png" class="w-10 h-10 circle-logo" alt="WonderWay">
+            <img src="images/logo.png" class="circle-logo" alt="WonderWay">
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3">WonderWay</span>
         </div>
+
+        <div class="hidden md:flex items-center gap-6">
+            <a href="https://tiktok.com/@wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-xl transition-all"><i class="fab fa-tiktok"></i></a>
+            <a href="https://instagram.com/wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-xl transition-all"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-xl transition-all"><i class="fab fa-facebook"></i></a>
+        </div>
+
         <div class="flex bg-slate-800 rounded-lg p-1">
             <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-4 py-1 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm">CFA</button>
             <button onclick="setCurrency('USD', 0.0016)" id="curr-USD" class="px-4 py-1 rounded-md text-xs font-bold text-white">USD</button>
@@ -53,64 +64,56 @@
     <main class="max-w-7xl mx-auto px-6 py-12">
         <div id="activities-builder" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div class="lg:col-span-2">
-                <h2 class="text-2xl font-black mb-6 flex items-center gap-2 text-slate-900">Custom Adventure Builder</h2>
-                
-                <div class="flex gap-4 mb-8 overflow-x-auto pb-2">
-                    <button class="bg-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap">All Activities</button>
-                    <button class="bg-white border px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap">Lobe Falls</button>
-                    <button class="bg-white border px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap">Discovery</button>
-                </div>
-
+                <h2 class="text-2xl font-black mb-8 text-slate-900">Custom Adventure Builder</h2>
                 <div id="activities-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     </div>
             </div>
             
             <div class="lg:col-span-1">
                 <div class="sticky top-28 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-                    <h3 class="hero-font text-xl font-black mb-4 uppercase">Your Pack</h3>
-                    <div id="selected-items" class="space-y-4 mb-8 min-h-[120px] text-sm text-slate-500 italic">
-                        Select items to begin building...
+                    <h3 class="hero-font text-xl font-black mb-4 uppercase">Your Summary</h3>
+                    <div id="selected-items" class="space-y-4 mb-8 min-h-[150px] text-sm text-slate-500 italic">
+                        Select activities to begin...
                     </div>
                     <div class="border-t pt-6">
                         <div class="flex justify-between items-center mb-6">
                             <span class="font-bold text-slate-400 uppercase text-xs">Total</span>
                             <span id="total-price" class="text-4xl font-black text-slate-900 tracking-tighter">0 CFA</span>
                         </div>
-                        <button class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-200">Book Custom Trip</button>
+                        <button class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest shadow-lg">Book Now</button>
                     </div>
                 </div>
             </div>
         </div>
-
         <div id="package-grid" class="hidden grid grid-cols-1 md:grid-cols-3 gap-10"></div>
     </main>
 
     <footer class="bg-[#0f172a] py-20 px-6 text-center text-white border-t border-slate-800">
         <div class="max-w-4xl mx-auto">
-            <img src="images/sip-paint.jpg" class="w-full max-w-sm mx-auto rounded-2xl shadow-2xl border border-slate-700 mb-12" alt="Trust Image">
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="https://tiktok.com/@wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-3xl transition-all"><i class="fab fa-tiktok"></i></a>
+                <a href="https://instagram.com/wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-3xl transition-all"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-3xl transition-all"><i class="fab fa-facebook"></i></a>
+            </div>
+
             <img src="images/logo.png" class="w-16 h-16 mx-auto mb-6 circle-logo" alt="WonderWay">
-            <p class="text-slate-500 text-[10px] uppercase tracking-widest">&copy; 2026 WonderWay Tours. Kribi, Cameroon.</p>
+            <p class="text-slate-500 text-[10px] uppercase tracking-widest font-semibold">&copy; 2026 WonderWay Tours. Kribi, Cameroon.</p>
         </div>
     </footer>
 
     <script>
-        // Activity Data with Multi-Tier Pricing
         const activitiesData = [
-            { id: 1, name: "Quad/ATV", basePrice: 5000, category: "Lobe Falls", details: "Per Turn", img: "images/jetski-action.jpg" },
-            { id: 2, name: "Jet-Ski", basePrice: 10000, category: "Lobe Falls", details: "Per Turn", img: "images/jet-ski-fun.jpg" },
-            { id: 3, name: "Boat Cruise (Solo)", basePrice: 5000, category: "Lobe Falls", details: "River Experience", img: "images/group-boat.jpg" },
-            { id: 4, name: "Pygmies Village", basePrice: 10000, category: "Lobe Falls", details: "Cultural Visit", img: "images/beach-portrait.jpg" },
-            { id: 5, name: "Zorb Ball", basePrice: 20000, category: "Discovery", details: "Beach Fun", img: "images/dinner-setup.jpg" },
-            { id: 6, name: "Seaport Visit", basePrice: 20000, category: "Discovery", details: "Couple Entry", img: "images/beach-portrait.jpg" },
-            { id: 7, name: "Canoe Ride", basePrice: 5000, category: "Discovery", details: "Traditional Boat", img: "images/group-boat.jpg" },
-            { id: 8, name: "Museum Visit", basePrice: 7000, category: "Discovery", details: "Guided Tour", img: "images/beach-portrait.jpg" },
-            { id: 9, name: "Sip & Paint", basePrice: 15000, category: "Discovery", details: "Per Person", img: "images/sip-paint.jpg" },
-            { id: 10, name: "Private Dinner", basePrice: 25000, category: "Activities", details: "Oceanfront View", img: "images/dinner-setup.jpg" }
+            { id: 1, name: "Quad/ATV", price: 5000, cat: "Lobe Falls", info: "Per Turn", img: "images/quad.jpg" },
+            { id: 2, name: "Jet-Ski", price: 10000, cat: "Lobe Falls", info: "Per Turn", img: "images/jetski-action.jpg" },
+            { id: 3, name: "Boat Cruise", price: 5000, cat: "Lobe Falls", info: "River Tour", img: "images/group-boat.jpg" },
+            { id: 4, name: "Pygmies Village", price: 10000, cat: "Lobe Falls", info: "Cultural Entry", img: "images/beach-portrait.jpg" },
+            { id: 9, name: "Sip & Paint", price: 15000, cat: "Discovery", info: "Per Person", img: "images/sip-paint.jpg" },
+            { id: 10, name: "Oceanfront Dinner", price: 25000, cat: "Activities", info: "Private Table", img: "images/dinner-setup.jpg" }
         ];
 
-        let selectedActivities = [];
-        let currentRate = 1;
-        let currencyLabel = 'CFA';
+        let selected = [];
+        let rate = 1;
+        let currency = 'CFA';
 
         function showSection(section) {
             const builder = document.getElementById('activities-builder');
@@ -124,57 +127,50 @@
             } else {
                 builder.classList.add('hidden');
                 grid.classList.remove('hidden');
-                grid.innerHTML = `<div class="col-span-full py-32 text-center text-slate-400 font-bold uppercase tracking-widest">Displaying ${section} Collection...</div>`;
+                grid.innerHTML = `<div class="col-span-full py-32 text-center text-slate-400 font-bold uppercase tracking-widest">Loading Collection...</div>`;
             }
         }
 
-        function toggleActivity(id) {
-            const index = selectedActivities.indexOf(id);
-            if (index > -1) selectedActivities.splice(index, 1);
-            else selectedActivities.push(id);
+        function toggle(id) {
+            const idx = selected.indexOf(id);
+            if (idx > -1) selected.splice(idx, 1);
+            else selected.push(id);
             render();
         }
 
         function render() {
             const list = document.getElementById('activities-list');
-            list.innerHTML = activitiesData.map(act => `
-                <div onclick="toggleActivity(${act.id})" class="activity-card p-5 rounded-3xl bg-white border border-slate-100 cursor-pointer shadow-sm ${selectedActivities.includes(act.id) ? 'selected' : ''}">
+            list.innerHTML = activitiesData.map(a => `
+                <div onclick="toggle(${a.id})" class="activity-card p-4 rounded-3xl bg-white border border-slate-100 shadow-sm ${selected.includes(a.id) ? 'selected' : ''}">
                     <div class="flex items-center gap-4">
-                        <img src="${act.img}" class="w-20 h-20 rounded-2xl object-cover shadow-sm">
+                        <img src="${a.img}" class="w-16 h-16 rounded-2xl object-cover shadow-sm">
                         <div class="flex-grow">
-                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-tighter">${act.category}</span>
-                            <h4 class="font-black text-slate-900 text-lg">${act.name}</h4>
-                            <p class="text-[11px] text-slate-500 mb-1">${act.details}</p>
-                            <span class="text-yellow-600 font-black">${(act.basePrice * currentRate).toLocaleString()} ${currencyLabel}</span>
+                            <h4 class="font-black text-slate-900">${a.name}</h4>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold">${a.info}</p>
+                            <span class="text-yellow-600 font-black text-sm">${(a.price * rate).toLocaleString()} ${currency}</span>
                         </div>
-                        <i class="fas ${selectedActivities.includes(act.id) ? 'fa-minus-circle text-red-400' : 'fa-plus-circle text-yellow-500'} text-xl"></i>
+                        <i class="fas ${selected.includes(a.id) ? 'fa-check-circle text-yellow-500' : 'fa-plus text-slate-200'}"></i>
                     </div>
                 </div>
             `).join('');
 
-            const selectedDiv = document.getElementById('selected-items');
-            const picked = activitiesData.filter(a => selectedActivities.includes(a.id));
-            
-            if(picked.length === 0) {
-                selectedDiv.innerHTML = "Select activities to see pricing...";
-            } else {
-                selectedDiv.innerHTML = picked.map(a => `
-                    <div class="flex justify-between items-center text-slate-800">
-                        <span class="font-bold uppercase text-[11px] tracking-tight">${a.name}</span>
-                        <span class="font-black">${(a.basePrice * currentRate).toLocaleString()}</span>
-                    </div>
-                `).join('');
-            }
+            const receipt = document.getElementById('selected-items');
+            const items = activitiesData.filter(a => selected.includes(a.id));
+            receipt.innerHTML = items.length === 0 ? "Select activities to begin..." : items.map(a => `
+                <div class="flex justify-between items-center text-slate-800">
+                    <span class="font-bold uppercase text-[10px]">${a.name}</span>
+                    <span class="font-black">${(a.price * rate).toLocaleString()}</span>
+                </div>
+            `).join('');
 
-            const total = picked.reduce((sum, a) => sum + a.basePrice, 0);
-            document.getElementById('total-price').innerText = `${(total * currentRate).toLocaleString()} ${currencyLabel}`;
+            const total = items.reduce((s, a) => s + a.price, 0);
+            document.getElementById('total-price').innerText = `${(total * rate).toLocaleString()} ${currency}`;
         }
 
-        function setCurrency(label, rate) {
-            currentRate = rate;
-            currencyLabel = label;
-            document.getElementById('curr-CFA').className = label === 'CFA' ? 'px-4 py-1 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm' : 'px-4 py-1 rounded-md text-xs font-bold text-white';
-            document.getElementById('curr-USD').className = label === 'USD' ? 'px-4 py-1 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm' : 'px-4 py-1 rounded-md text-xs font-bold text-white';
+        function setCurrency(l, r) {
+            rate = r; currency = l;
+            document.getElementById('curr-CFA').className = l === 'CFA' ? 'px-4 py-1 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm' : 'px-4 py-1 rounded-md text-xs font-bold text-white';
+            document.getElementById('curr-USD').className = l === 'USD' ? 'px-4 py-1 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm' : 'px-4 py-1 rounded-md text-xs font-bold text-white';
             render();
         }
 
