@@ -3,148 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WonderWay | Kribi Experience Builder</title>
+    <title>WonderWay | Kribi Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Outfit:wght@200;400;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; }
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
-        .experience-card { transition: all 0.2s; border: 2px solid transparent; cursor: pointer; }
-        .experience-card:hover { transform: translateY(-3px); }
-        .experience-card.selected { border-color: #fbbf24; background-color: #fffbeb; }
+        .package-card { transition: all 0.3s ease; border: 1px solid #1e293b; height: 100%; }
+        .package-card:hover { transform: translateY(-5px); border-color: #fbbf24; }
     </style>
 </head>
-<body class="overflow-x-hidden pt-28">
+<body class="pt-24">
 
-    <nav class="fixed top-0 w-full z-50 bg-[#0f172a] px-6 py-4 flex justify-between items-center text-white border-b border-slate-800">
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
-                <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover">
+                <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
             </div>
-            <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3">WonderWay</span>
+            <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
-
         <div class="flex items-center gap-6">
             <a href="#" class="hover:text-yellow-500"><i class="fab fa-tiktok"></i></a>
             <a href="#" class="hover:text-yellow-500"><i class="fab fa-instagram"></i></a>
             <a href="#" class="hover:text-yellow-500"><i class="fab fa-facebook"></i></a>
         </div>
-
-        <div class="flex bg-slate-800 rounded-lg p-1">
-            <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-4 py-1 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm">CFA</button>
-            <button onclick="setCurrency('USD', 0.0016)" id="curr-USD" class="px-4 py-1 rounded-md text-xs font-bold text-white">USD</button>
-        </div>
     </nav>
 
-    <header class="relative pb-16 px-6 text-center bg-[#0f172a] text-white">
-        <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-10 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
+    <header class="pt-20 pb-12 px-6 text-center">
+        <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
+        <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic">"Experience the coast like a local. To keep luxury affordable, private transport is not included in our curated packages."</p>
         
         <div class="flex flex-wrap justify-center gap-2">
-            <button onclick="showCategory('activities')" id="tab-activities" class="cat-tab active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest">Activities</button>
-            <button onclick="showCategory('couples')" id="tab-couples" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Couples</button>
-            <button onclick="showCategory('group4')" id="tab-group4" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Group of 4</button>
-            <button onclick="showCategory('group6')" id="tab-group6" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Group of 6</button>
-            <button onclick="showCategory('escapes')" id="tab-escapes" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Event Escapes</button>
+            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Activities</button>
+            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 4</button>
+            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 6</button>
+            <button onclick="switchCategory('escapes')" id="tab-escapes" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Event Escapes</button>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <div class="lg:col-span-2">
-                <h2 class="text-2xl font-black mb-8 text-slate-900 uppercase">Choose Your Experiences</h2>
-                <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    </div>
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
             </div>
-            
-            <div class="lg:col-span-1">
-                <div class="sticky top-28 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-                    <h3 class="hero-font text-xl font-black mb-4 uppercase text-slate-900">Your Summary</h3>
-                    <div id="summary-list" class="space-y-4 mb-8 min-h-[120px] text-sm text-slate-500 italic">Select activities...</div>
-                    <div class="border-t pt-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="font-bold text-slate-400 uppercase text-xs">Total</span>
-                            <span id="total-price" class="text-4xl font-black text-slate-900">0 CFA</span>
-                        </div>
-                        <button class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest shadow-lg">Book Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
-    <footer class="bg-[#0f172a] py-20 text-center text-white border-t border-slate-800">
-        <div class="mb-10">
-            <img src="images/sip and paint.jpg" class="mx-auto rounded-3xl shadow-2xl max-w-sm border-4 border-slate-700">
+    <footer class="bg-black py-20 px-6 text-center border-t border-slate-900">
+        <div class="mb-12 flex justify-center">
+            <img src="images/sip and paint.jpg" class="rounded-3xl shadow-2xl max-w-sm border-4 border-slate-800" alt="Kribi Vibe">
         </div>
-        <p class="text-slate-500 text-[10px] uppercase tracking-widest font-semibold">&copy; 2026 WonderWay Tours</p>
+        <h3 class="hero-font text-2xl font-black uppercase mb-4">Wander with Us</h3>
+        <p class="text-slate-500 text-sm mb-8">Follow our journey and stay updated with the latest Kribi escapes.</p>
+        <a href="#" class="inline-block px-8 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest mb-10">Explore our Linktree</a>
+        <p class="text-slate-600 text-[10px] uppercase tracking-widest">&copy; 2026 WonderWay Tours. All Rights Reserved.</p>
         <p class="text-yellow-500 text-[9px] uppercase tracking-[0.4em] font-black mt-2">Engineered by Frank Fru</p>
     </footer>
 
     <script>
         const categories = {
-            activities: [
-                { id: 1, name: "Quad/ATV", price: 5000, info: "Per Turn", img: "images/Quad.jpg" },
-                { id: 2, name: "Canoe Exploration", price: 3000, info: "Lobe River", img: "images/canoe.jpg" },
-                { id: 3, name: "Pigmy Village", price: 10000, info: "Cultural Entry", img: "images/pigmi village.jpg" },
-                { id: 4, name: "Sip & Paint", price: 15000, info: "Per Person", img: "images/sip and paint.jpg" },
-                { id: 5, name: "Oceanfront Dinner", price: 12000, info: "Private Table", img: "images/dinner.jpg" },
-                { id: 6, name: "Seaport Visit", price: 2000, info: "Guided Tour", img: "images/seaport visit.jpg" }
-            ],
             couples: [
-                { id: 7, name: "Royal Romance", price: 150000, info: "Full Package", img: "images/royal romance.jpg" },
-                { id: 8, name: "Paradis Escape", price: 85000, info: "Day Trip", img: "images/couple paradis escape.jpg" }
+                {
+                    tier: "Silver",
+                    name: "Mini Love",
+                    price: "90,000 CFA",
+                    img: "images/couple paradis escape.jpg",
+                    features: ["2 Days Lodging", "Jet ski", "Quad", "Museum visit", "Lobe Falls", "Pygmies Visit", "2 Beaches", "Mini Boat", "Mobile Pictures"]
+                },
+                {
+                    tier: "Gold",
+                    name: "Paradise Escape",
+                    price: "250,000 CFA",
+                    img: "images/sip and paint.jpg",
+                    features: ["Everything in Silver", "Sip & Paint", "Romantic Dinner", "Camp fire"]
+                },
+                {
+                    tier: "Premium",
+                    name: "Royal Romance",
+                    price: "350,000 CFA",
+                    img: "images/royal romance.jpg",
+                    features: ["Everything in Gold", "Boat Cruise w/ Wine", "Seaport visit", "Beach Games"]
+                }
+            ],
+            activities: [
+                { tier: "Single", name: "Quad Biking", price: "5,000 CFA", img: "images/Quad.jpg", features: ["Beach Ride", "Safety Gear", "Guide"] },
+                { tier: "Single", name: "Canoe Tour", price: "3,000 CFA", img: "images/canoe.jpg", features: ["River Exploration", "Lobe Falls View"] }
             ]
         };
 
-        let selected = [];
-        let view = 'activities';
-        let rate = 1;
-        let currency = 'CFA';
-
-        function showCategory(c) {
-            view = c;
-            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active-tab', 'text-slate-900'));
-            document.getElementById('tab-'+c).classList.add('active-tab');
-            render();
-        }
-
-        function toggle(id) {
-            const idx = selected.indexOf(id);
-            if(idx > -1) selected.splice(idx, 1);
-            else selected.push(id);
-            render();
-        }
-
-        function render() {
-            const grid = document.getElementById('experience-grid');
-            const items = categories[view] || [];
-            grid.innerHTML = items.map(i => `
-                <div onclick="toggle(${i.id})" class="experience-card p-4 rounded-3xl bg-white border border-slate-100 shadow-sm ${selected.includes(i.id) ? 'selected' : ''}">
-                    <div class="flex items-center gap-4">
-                        <img src="${i.img}" class="w-16 h-16 rounded-2xl object-cover shadow-sm">
-                        <div class="flex-grow">
-                            <h4 class="font-black text-slate-900 text-sm">${i.name}</h4>
-                            <p class="text-[9px] text-slate-400 font-bold uppercase">${i.info}</p>
-                            <span class="text-yellow-600 font-black text-sm">${(i.price * rate).toLocaleString()} ${currency}</span>
-                        </div>
-                        <i class="fas ${selected.includes(i.id) ? 'fa-check-circle text-yellow-500' : 'fa-plus text-slate-200'}"></i>
+        function switchCategory(cat) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+            document.getElementById('tab-' + cat).classList.add('active-tab');
+            
+            const grid = document.getElementById('package-grid');
+            const data = categories[cat] || [];
+            
+            grid.innerHTML = data.map(item => `
+                <div class="package-card bg-slate-900 rounded-3xl overflow-hidden flex flex-col">
+                    <img src="${item.img}" class="w-full h-48 object-cover">
+                    <div class="p-8 flex flex-col flex-grow">
+                        <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
+                        <h4 class="text-2xl font-black mb-1 uppercase hero-font">${item.name}</h4>
+                        <p class="text-xl font-bold mb-6 text-slate-300">${item.price}</p>
+                        <ul class="space-y-3 mb-8 flex-grow">
+                            ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
+                        </ul>
+                        <button class="w-full py-4 bg-white text-black font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-500 transition">Book This Trip</button>
                     </div>
                 </div>
             `).join('');
-
-            const summary = document.getElementById('summary-list');
-            const allItems = Object.values(categories).flat();
-            const picked = allItems.filter(i => selected.includes(i.id));
-            summary.innerHTML = picked.length ? picked.map(i => `<div class="flex justify-between uppercase text-[10px]"><span>${i.name}</span><b>${(i.price * rate).toLocaleString()}</b></div>`).join('') : "Select activities...";
-            
-            const total = picked.reduce((s, i) => s + i.price, 0);
-            document.getElementById('total-price').innerText = `${(total * rate).toLocaleString()} ${currency}`;
         }
 
-        function setCurrency(c, r) { rate = r; currency = c; render(); }
-        render();
+        // Initialize with Couples view as requested
+        switchCategory('couples');
     </script>
 </body>
 </html>
