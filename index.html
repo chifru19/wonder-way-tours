@@ -11,45 +11,57 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
-        .activity-card { transition: all 0.2s; border: 2px solid transparent; cursor: pointer; }
-        .activity-card.selected { border-color: #fbbf24; background-color: #fffbeb; }
+        .experience-card { transition: all 0.2s; border: 2px solid transparent; cursor: pointer; }
+        .experience-card:hover { transform: translateY(-3px); }
+        .experience-card.selected { border-color: #fbbf24; background-color: #fffbeb; }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden pt-28">
 
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a] px-6 py-4 flex justify-between items-center text-white border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
-                <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
+                <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover">
             </div>
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3">WonderWay</span>
         </div>
+
+        <div class="flex items-center gap-6">
+            <a href="#" class="hover:text-yellow-500"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="hover:text-yellow-500"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-yellow-500"><i class="fab fa-facebook"></i></a>
+        </div>
+
         <div class="flex bg-slate-800 rounded-lg p-1">
             <button onclick="setCurrency('CFA', 1)" id="curr-CFA" class="px-4 py-1 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm">CFA</button>
             <button onclick="setCurrency('USD', 0.0016)" id="curr-USD" class="px-4 py-1 rounded-md text-xs font-bold text-white">USD</button>
         </div>
     </nav>
 
-    <header class="relative pt-40 pb-16 px-6 text-center bg-[#0f172a] text-white">
-        <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-8 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
+    <header class="relative pb-16 px-6 text-center bg-[#0f172a] text-white">
+        <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-10 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
+        
         <div class="flex flex-wrap justify-center gap-2">
-            <button onclick="showSection('adventure')" id="tab-adventure" class="group-tab active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Adventure</button>
-            <button onclick="showSection('culture')" id="tab-culture" class="group-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Culture</button>
-            <button onclick="showSection('dining')" id="tab-dining" class="group-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Dining</button>
-            <button onclick="showSection('premium')" id="tab-premium" class="group-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Premium</button>
+            <button onclick="showCategory('activities')" id="tab-activities" class="cat-tab active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest">Activities</button>
+            <button onclick="showCategory('couples')" id="tab-couples" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Couples</button>
+            <button onclick="showCategory('group4')" id="tab-group4" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Group of 4</button>
+            <button onclick="showCategory('group6')" id="tab-group6" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Group of 6</button>
+            <button onclick="showCategory('escapes')" id="tab-escapes" class="cat-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest text-white">Event Escapes</button>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div class="lg:col-span-2">
-                <h2 id="cat-title" class="text-2xl font-black mb-8 text-slate-900 uppercase tracking-tight">Active Category</h2>
-                <div id="activities-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <h2 class="text-2xl font-black mb-8 text-slate-900 uppercase">Choose Your Experiences</h2>
+                <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    </div>
             </div>
+            
             <div class="lg:col-span-1">
                 <div class="sticky top-28 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-                    <h3 class="hero-font text-xl font-black mb-4 uppercase">Your Summary</h3>
-                    <div id="selected-items" class="space-y-4 mb-8 min-h-[150px] text-sm text-slate-500 italic">Select items to begin...</div>
+                    <h3 class="hero-font text-xl font-black mb-4 uppercase text-slate-900">Your Summary</h3>
+                    <div id="summary-list" class="space-y-4 mb-8 min-h-[120px] text-sm text-slate-500 italic">Select activities...</div>
                     <div class="border-t pt-6">
                         <div class="flex justify-between items-center mb-6">
                             <span class="font-bold text-slate-400 uppercase text-xs">Total</span>
@@ -62,82 +74,77 @@
         </div>
     </main>
 
-    <footer class="bg-[#0f172a] py-20 px-6 text-center text-white border-t border-slate-800">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-12 flex justify-center">
-                <img src="images/sip and paint.jpg" class="rounded-3xl shadow-2xl max-w-sm border-4 border-slate-700" alt="Sip & Paint">
-            </div>
-            <p class="text-slate-500 text-[10px] uppercase tracking-widest font-semibold mb-2">&copy; 2026 WonderWay Tours</p>
-            <p class="text-yellow-500 text-[9px] uppercase tracking-[0.4em] font-black">Engineered by Frank Fru</p>
+    <footer class="bg-[#0f172a] py-20 text-center text-white border-t border-slate-800">
+        <div class="mb-10">
+            <img src="images/sip and paint.jpg" class="mx-auto rounded-3xl shadow-2xl max-w-sm border-4 border-slate-700">
         </div>
+        <p class="text-slate-500 text-[10px] uppercase tracking-widest font-semibold">&copy; 2026 WonderWay Tours</p>
+        <p class="text-yellow-500 text-[9px] uppercase tracking-[0.4em] font-black mt-2">Engineered by Frank Fru</p>
     </footer>
 
     <script>
         const categories = {
-            adventure: [
-                { id: 1, name: "Quad Adventure", price: 5000, img: "images/Quad.jpg" },
-                { id: 2, name: "Canoe Exploration", price: 3000, img: "images/canoe.jpg" }
+            activities: [
+                { id: 1, name: "Quad/ATV", price: 5000, info: "Per Turn", img: "images/Quad.jpg" },
+                { id: 2, name: "Canoe Exploration", price: 3000, info: "Lobe River", img: "images/canoe.jpg" },
+                { id: 3, name: "Pigmy Village", price: 10000, info: "Cultural Entry", img: "images/pigmi village.jpg" },
+                { id: 4, name: "Sip & Paint", price: 15000, info: "Per Person", img: "images/sip and paint.jpg" },
+                { id: 5, name: "Oceanfront Dinner", price: 12000, info: "Private Table", img: "images/dinner.jpg" },
+                { id: 6, name: "Seaport Visit", price: 2000, info: "Guided Tour", img: "images/seaport visit.jpg" }
             ],
-            culture: [
-                { id: 3, name: "Pigmy Village", price: 10000, img: "images/pigmi village.jpg" },
-                { id: 4, name: "Museum Visit", price: 5000, img: "images/museum.jpg" },
-                { id: 5, name: "Seaport Tour", price: 2000, img: "images/seaport visit.jpg" }
-            ],
-            dining: [
-                { id: 6, name: "Oceanfront Dinner", price: 15000, img: "images/dinner.jpg" },
-                { id: 7, name: "Sip & Paint", price: 15000, img: "images/sip and paint.jpg" }
-            ],
-            premium: [
-                { id: 8, name: "Royal Romance", price: 150000, img: "images/royal romance.jpg" },
-                { id: 9, name: "Paradis Escape", price: 85000, img: "images/couple paradis escape.jpg" }
+            couples: [
+                { id: 7, name: "Royal Romance", price: 150000, info: "Full Package", img: "images/royal romance.jpg" },
+                { id: 8, name: "Paradis Escape", price: 85000, info: "Day Trip", img: "images/couple paradis escape.jpg" }
             ]
         };
 
         let selected = [];
+        let view = 'activities';
         let rate = 1;
         let currency = 'CFA';
-        let currentCat = 'adventure';
 
-        function showSection(cat) {
-            currentCat = cat;
-            document.querySelectorAll('.group-tab').forEach(t => t.classList.remove('active-tab'));
-            document.getElementById('tab-'+cat).classList.add('active-tab');
-            document.getElementById('cat-title').innerText = cat;
+        function showCategory(c) {
+            view = c;
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active-tab', 'text-slate-900'));
+            document.getElementById('tab-'+c).classList.add('active-tab');
             render();
         }
 
         function toggle(id) {
             const idx = selected.indexOf(id);
-            if (idx > -1) selected.splice(idx, 1);
+            if(idx > -1) selected.splice(idx, 1);
             else selected.push(id);
             render();
         }
 
         function render() {
-            const list = document.getElementById('activities-list');
-            const items = categories[currentCat];
-            list.innerHTML = items.map(a => `
-                <div onclick="toggle(${a.id})" class="activity-card p-4 rounded-3xl bg-white border border-slate-100 shadow-sm ${selected.includes(a.id) ? 'selected' : ''}">
+            const grid = document.getElementById('experience-grid');
+            const items = categories[view] || [];
+            grid.innerHTML = items.map(i => `
+                <div onclick="toggle(${i.id})" class="experience-card p-4 rounded-3xl bg-white border border-slate-100 shadow-sm ${selected.includes(i.id) ? 'selected' : ''}">
                     <div class="flex items-center gap-4">
-                        <img src="${a.img}" class="w-16 h-16 rounded-2xl object-cover">
-                        <div class="flex-grow text-left">
-                            <h4 class="font-black text-slate-900">${a.name}</h4>
-                            <span class="text-yellow-600 font-black text-sm">${(a.price * rate).toLocaleString()} ${currency}</span>
+                        <img src="${i.img}" class="w-16 h-16 rounded-2xl object-cover shadow-sm">
+                        <div class="flex-grow">
+                            <h4 class="font-black text-slate-900 text-sm">${i.name}</h4>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase">${i.info}</p>
+                            <span class="text-yellow-600 font-black text-sm">${(i.price * rate).toLocaleString()} ${currency}</span>
                         </div>
+                        <i class="fas ${selected.includes(i.id) ? 'fa-check-circle text-yellow-500' : 'fa-plus text-slate-200'}"></i>
                     </div>
                 </div>
             `).join('');
 
-            const receipt = document.getElementById('selected-items');
+            const summary = document.getElementById('summary-list');
             const allItems = Object.values(categories).flat();
-            const picked = allItems.filter(a => selected.includes(a.id));
-            receipt.innerHTML = picked.length === 0 ? "Select items..." : picked.map(a => `<div class="flex justify-between uppercase text-[10px]"><span>${a.name}</span><span class="font-black">${(a.price * rate).toLocaleString()}</span></div>`).join('');
-            const total = picked.reduce((s, a) => s + a.price, 0);
+            const picked = allItems.filter(i => selected.includes(i.id));
+            summary.innerHTML = picked.length ? picked.map(i => `<div class="flex justify-between uppercase text-[10px]"><span>${i.name}</span><b>${(i.price * rate).toLocaleString()}</b></div>`).join('') : "Select activities...";
+            
+            const total = picked.reduce((s, i) => s + i.price, 0);
             document.getElementById('total-price').innerText = `${(total * rate).toLocaleString()} ${currency}`;
         }
 
-        function setCurrency(l, r) { rate = r; currency = l; render(); }
-        showSection('adventure');
+        function setCurrency(c, r) { rate = r; currency = c; render(); }
+        render();
     </script>
 </body>
 </html>
