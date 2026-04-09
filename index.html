@@ -20,7 +20,7 @@
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
-                <img src="images/logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/50?text=Logo'">
+                <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/50?text=Logo'">
             </div>
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
@@ -41,6 +41,7 @@
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Couples</button>
             <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 4</button>
             <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 6</button>
+            <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Event Escape</button>
         </div>
     </header>
 
@@ -50,7 +51,7 @@
 
     <footer class="relative py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
         <div class="absolute inset-0 z-0">
-            <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-30">
+            <img src="images/footer.jpg" alt="WonderWay Founder" class="w-full h-full object-cover object-top opacity-30">
             <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px]"></div>
         </div>
         
@@ -97,6 +98,11 @@
                 { tier: "Silver", name: "Friends & Waves", price: "270,000 CFA", img: "images/group-action.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Pygmies & 2 Beaches", "Mini Boat", "Mobile Content & Pics"] },
                 { tier: "Gold", name: "Golden Crew Getaway", price: "440,000 CFA", img: "images/sip and paint.jpg", features: ["Includes Silver", "Sip & Paints", "Dinner", "Camp fire"] },
                 { tier: "Platinum", name: "Paradise Circle", price: "530,000 CFA", img: "images/royal romance.jpg", features: ["Includes Gold", "Boat Cruise w/ Wine", "Seaport Visit", "Beach Games"] }
+            ],
+            events: [
+                { tier: "Custom", name: "Birthday Bash", price: "Contact Us", img: "images/birthday.jpg", features: ["Beach Decoration", "Cake & Music", "Catering Service", "Photo & Video"] },
+                { tier: "Group", name: "Corporate Retreat", price: "Contact Us", img: "images/corporate.jpg", features: ["Team Building", "Workshop Setup", "Lodging & Meals", "Group Activities"] },
+                { tier: "Custom", name: "Beach Wedding", price: "Contact Us", img: "images/wedding.jpg", features: ["Full Event Planning", "Reception Decor", "Boat Entry", "Live Band"] }
             ]
         };
 
