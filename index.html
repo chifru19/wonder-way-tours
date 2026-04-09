@@ -24,10 +24,11 @@
             </div>
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
+        
         <div class="flex items-center gap-6">
-            <a href="#" class="hover:text-yellow-500"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="hover:text-yellow-500"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="hover:text-yellow-500"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@wonderway_tour_cameroon?_r=1&_t=ZS-95NXgDdlpzh" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/wanderway_tour_cameroon?igsh=MTBibGNhaWJrZnd2Yg%3D%3D&utm_source=qr" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1BF6J9sik8/?mibextid=wwXIfr" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-facebook"></i></a>
         </div>
     </nav>
 
@@ -45,8 +46,7 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12">
-        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            </div>
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
     </main>
 
     <footer class="bg-black py-20 px-6 text-center border-t border-slate-900">
@@ -55,7 +55,9 @@
         </div>
         <h3 class="hero-font text-2xl font-black uppercase mb-4">Wander with Us</h3>
         <p class="text-slate-500 text-sm mb-8">Follow our journey and stay updated with the latest Kribi escapes.</p>
-        <a href="#" class="inline-block px-8 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest mb-10">Explore our Linktree</a>
+        
+        <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" class="inline-block px-8 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest mb-10 hover:bg-yellow-400 transition-all">Explore our Linktree</a>
+        
         <p class="text-slate-600 text-[10px] uppercase tracking-widest">&copy; 2026 WonderWay Tours. All Rights Reserved.</p>
         <p class="text-yellow-500 text-[9px] uppercase tracking-[0.4em] font-black mt-2">Engineered by Frank Fru</p>
     </footer>
@@ -93,7 +95,8 @@
 
         function switchCategory(cat) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
-            document.getElementById('tab-' + cat).classList.add('active-tab');
+            const tab = document.getElementById('tab-' + cat);
+            if(tab) tab.classList.add('active-tab');
             
             const grid = document.getElementById('package-grid');
             const data = categories[cat] || [];
@@ -114,7 +117,6 @@
             `).join('');
         }
 
-        // Initialize with Couples view as requested
         switchCategory('couples');
     </script>
 </body>
