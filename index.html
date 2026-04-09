@@ -11,8 +11,43 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; }
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
-        .package-card { transition: all 0.3s ease; border: 1px solid #1e293b; height: 100%; display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: #1e293b60; }
+        
+        .package-card { 
+            transition: all 0.3s ease; 
+            border: 1px solid #1e293b; 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            background: #1e293b60; 
+        }
         .package-card:hover { transform: translateY(-5px); border-color: #fbbf24; }
+
+        /* FIXED FOOTER STYLING */
+        .trust-footer {
+            position: relative;
+            padding: 8rem 1.5rem;
+            text-align: center;
+            margin-top: 5rem;
+            background-color: #0f172a;
+            overflow: hidden;
+        }
+        .footer-image-layer {
+            position: absolute;
+            inset: 0;
+            background-image: url('images/footer.jpg');
+            background-size: cover;
+            background-position: center top;
+            opacity: 0.2; /* Adjust brightness of the founder's image here */
+            z-index: 0;
+        }
+        .footer-content {
+            position: relative;
+            z-index: 10;
+            max-width: 42rem;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body class="pt-24">
@@ -20,7 +55,7 @@
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
-                <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover">
+                <img src="images/logo.png" alt="Logo" class="w-full h-full object-cover">
             </div>
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
@@ -48,13 +83,10 @@
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
     </main>
 
-    <footer class="relative py-32 px-6 overflow-hidden text-center mt-20">
-        <div class="absolute inset-0 z-0">
-            <img src="images/footer.jpg" alt="WonderWay Founder" class="w-full h-full object-cover object-top">
-            <div class="absolute inset-0 bg-slate-900/85 backdrop-blur-[2px]"></div>
-        </div>
+    <footer class="trust-footer">
+        <div class="footer-image-layer"></div>
         
-        <div class="relative z-10 max-w-2xl mx-auto">
+        <div class="footer-content">
             <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
             <p class="text-yellow-500 font-bold text-xs uppercase tracking-[0.3em] mb-8">Personalized Service & Trust</p>
             
