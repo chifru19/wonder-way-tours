@@ -20,28 +20,27 @@
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
-                <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
+                <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/50?text=WW'">
             </div>
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
         
         <div class="flex items-center gap-6">
-            <a href="https://www.tiktok.com/@wonderway_tour_cameroon?_r=1&_t=ZS-95NXgDdlpzh" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.instagram.com/wanderway_tour_cameroon?igsh=MTBibGNhaWJrZnd2Yg%3D%3D&utm_source=qr" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1BF6J9sik8/?mibextid=wwXIfr" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1BF6J9sik8/" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-facebook"></i></a>
         </div>
     </nav>
 
     <header class="pt-20 pb-12 px-6 text-center">
         <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
-        <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic">"Experience the coast like a local. To keep luxury affordable, private transport is not included in our curated packages."</p>
+        <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic">"Experience the coast like a local."</p>
         
         <div class="flex flex-wrap justify-center gap-2">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Couples</button>
             <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 4</button>
             <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 6</button>
-            <button onclick="switchCategory('escapes')" id="tab-escapes" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Event Escapes</button>
         </div>
     </header>
 
@@ -49,44 +48,27 @@
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
     </main>
 
-    <section class="max-w-7xl mx-auto px-6 pb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-slate-800 pt-12">
-            <div>
-                <h3 class="hero-font text-2xl font-black uppercase text-yellow-500 mb-6">Available Extras</h3>
-                <ul class="grid grid-cols-2 gap-4 text-sm text-slate-400">
-                    <li><i class="fas fa-plus text-yellow-500 mr-2"></i> Room Decoration</li>
-                    <li><i class="fas fa-plus text-yellow-500 mr-2"></i> Fresh Bouquets</li>
-                    <li><i class="fas fa-plus text-yellow-500 mr-2"></i> Birthday Surprises</li>
-                    <li><i class="fas fa-plus text-yellow-500 mr-2"></i> Custom Cakes</li>
-                    <li><i class="fas fa-plus text-yellow-500 mr-2"></i> Prof. Photographers</li>
-                    <li><i class="fas fa-plus text-yellow-500 mr-2"></i> Golf Sessions</li>
-                    <li><i class="fas fa-plus text-yellow-500 mr-2"></i> Visit Campo</li>
-                </ul>
-            </div>
-            <div class="bg-slate-900/50 p-8 rounded-3xl border border-yellow-500/20">
-                <h3 class="hero-font text-xl font-black uppercase mb-4">Important Note</h3>
-                <p class="text-slate-400 text-sm italic leading-relaxed">
-                    "Because most clients have the possibility of going to Kribi with private cars and some prefer bikes as means of transportation which makes their stay more affordable, we do not include transportation in our packages."
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="relative py-24 px-6 overflow-hidden text-center border-t border-slate-900">
+    <footer class="relative py-32 px-6 overflow-hidden text-center">
         <div class="absolute inset-0 z-0">
-            <img src="images/footer.jpg" alt="Footer Background" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-[#0f172a]/85 backdrop-blur-[2px]"></div>
+            <img src="images/footer.jpg" alt="WonderWay Founder" class="w-full h-full object-cover object-top">
+            <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-[2px]"></div>
         </div>
-        <div class="relative z-10">
-            <h3 class="hero-font text-3xl font-black uppercase mb-4 tracking-tighter">Wander with Us</h3>
-            <p class="text-slate-300 text-sm mb-8 max-w-md mx-auto">Follow our journey and stay updated with the latest Kribi escapes.</p>
+        
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Personalized Service</h3>
+            <p class="text-yellow-500 font-bold text-xs uppercase tracking-[0.3em] mb-8">Direct from the Founder</p>
+            
+            <p class="text-slate-200 text-sm mb-10 italic leading-relaxed">
+                "We don't include transport in our packages so you can choose the most affordable way to reach Kribi—be it your private car or a local bike—making luxury accessible to everyone."
+            </p>
+            
             <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" 
-               class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest mb-12 hover:bg-yellow-400 transition-all shadow-xl shadow-yellow-500/20">
-               Explore our Linktree
+               class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all">
+               Book with Confidence
             </a>
-            <div class="pt-8 border-t border-slate-700/50">
-                <p class="text-slate-400 text-[10px] uppercase tracking-widest">&copy; 2026 WonderWay Tours. All Rights Reserved.</p>
-                <p class="text-yellow-500 text-[9px] uppercase tracking-[0.4em] font-black mt-2">Engineered by Frank Fru</p>
+            
+            <div class="mt-16 pt-8 border-t border-white/10">
+                <p class="text-white/40 text-[10px] uppercase tracking-widest">&copy; 2026 WonderWay Tours. Engineered by Frank Fru.</p>
             </div>
         </div>
     </footer>
@@ -96,40 +78,28 @@
             activities: [
                 { tier: "Single", name: "Quad Biking", price: "5,000 CFA", img: "images/Quad.jpg", features: ["Beach Ride", "Safety Gear"] },
                 { tier: "Single", name: "Museum Visit", price: "2,000 CFA", img: "images/museum.jpg", features: ["History Tour", "Guided"] },
-                { tier: "Single", name: "Sip & Paint", price: "15,000 CFA", img: "images/sip and paint.jpg", features: ["Creative Meal", "All Materials"] },
-                { tier: "Single", name: "Seaport Visit", price: "2,000 CFA", img: "images/seaport visit.jpg", features: ["Deep Sea Port Tour"] },
-                { tier: "Single", name: "Pygmies Visit", price: "10,000 CFA", img: "images/pigmi village.jpg", features: ["Cultural Entry"] },
-                { tier: "Single", name: "Canoe Tour", price: "3,000 CFA", img: "images/canoe.jpg", features: ["River Exploration"] },
-                { tier: "Single", name: "Oceanfront Dinner", price: "25,000 CFA", img: "images/dinner.jpg", features: ["Private Table"] }
+                { tier: "Single", name: "Sip & Paint", price: "15,000 CFA", img: "images/sip and paint.jpg", features: ["Creative Meal", "All Materials"] }
             ],
             couples: [
-                { tier: "Silver", name: "Mini Love Adventure", price: "90,000 CFA", img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Pygmies & 2 Beaches", "Mini Boat", "Mobile Content & Pics"] },
-                { tier: "Gold", name: "Paradise Escape", price: "250,000 CFA", img: "images/sip and paint.jpg", features: ["Includes Mini Love", "Sip & Paints", "Romantic Dinner", "Camp fire"] },
-                { tier: "Premium", name: "Royal Romance", price: "350,000 CFA", img: "images/royal romance.jpg", features: ["Includes Paradise Escape", "Boat Cruise w/ Wine", "Visit to Seaport", "Beach Games"] }
+                { tier: "Silver", name: "Mini Love Adventure", price: "90,000 CFA", img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Pygmies & 2 Beaches"] },
+                { tier: "Gold", name: "Paradise Escape", price: "250,000 CFA", img: "images/sip and paint.jpg", features: ["Sip & Paints", "Romantic Dinner", "Camp fire"] }
             ],
             group4: [
-                { tier: "Silver", name: "Crew Chill (Explorer)", price: "230,000 CFA", img: "images/group-boat.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Pygmies & 2 Beaches", "Mini Boat", "Mobile Content & Pics"] },
-                { tier: "Gold", name: "Vibes & Memories", price: "350,000 CFA", img: "images/dinner.jpg", features: ["Includes Explorer", "Sip & Paints", "Group Dinner", "Camp fire"] },
-                { tier: "Premium", name: "VIP Vibes Getaway", price: "420,000 CFA", img: "images/seaport.jpg", features: ["Includes Experience", "Boat Cruise w/ Wine", "Seaport Visit", "Games by the Beach"] }
+                { tier: "Silver", name: "Crew Chill", price: "230,000 CFA", img: "images/group-boat.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe"] }
             ],
             group6: [
-                { tier: "Silver", name: "Friends & Waves", price: "270,000 CFA", img: "images/group-boat.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Pygmies & 2 Beaches", "Mini Boat", "Mobile Content & Pics"] },
-                { tier: "Gold", name: "Golden Crew Getaway", price: "440,000 CFA", img: "images/sip and paint.jpg", features: ["Includes Silver Crew", "Sip & Paints", "Group Dinner", "Camp fire"] },
-                { tier: "Platinum", name: "Paradise Circle", price: "530,000 CFA", img: "images/royal romance.jpg", features: ["Includes Gold Crew", "Boat Cruise w/ Wine", "Seaport Visit", "Beach Games"] }
+                { tier: "Silver", name: "Friends & Waves", price: "270,000 CFA", img: "images/group-boat.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Mobile Content"] }
             ]
         };
 
         function switchCategory(cat) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
-            const tab = document.getElementById('tab-' + cat);
-            if(tab) tab.classList.add('active-tab');
-
+            document.getElementById('tab-' + cat).classList.add('active-tab');
             const grid = document.getElementById('package-grid');
             const data = categories[cat] || [];
-            
             grid.innerHTML = data.map(item => `
                 <div class="package-card bg-slate-900 rounded-3xl overflow-hidden flex flex-col">
-                    <img src="${item.img}" class="w-full h-48 object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Not+Found'">
+                    <img src="${item.img}" class="w-full h-48 object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Missing'">
                     <div class="p-8 flex flex-col flex-grow">
                         <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
                         <h4 class="text-2xl font-black mb-1 uppercase hero-font">${item.name}</h4>
@@ -142,7 +112,6 @@
                 </div>
             `).join('');
         }
-
         switchCategory('activities');
     </script>
 </body>
