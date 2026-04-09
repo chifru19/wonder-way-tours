@@ -65,8 +65,7 @@
         <div id="activities-builder" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div class="lg:col-span-2">
                 <h2 class="text-2xl font-black mb-8 text-slate-900">Custom Adventure Builder</h2>
-                <div id="activities-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    </div>
+                <div id="activities-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
             
             <div class="lg:col-span-1">
@@ -90,6 +89,13 @@
 
     <footer class="bg-[#0f172a] py-20 px-6 text-center text-white border-t border-slate-800">
         <div class="max-w-4xl mx-auto">
+            
+            <div class="mb-12 flex justify-center">
+                <img src="images/dinner.jpg" class="rounded-3xl shadow-2xl max-w-sm border-4 border-slate-700" alt="Trust Image">
+            </div>
+
+            <h2 class="hero-font text-2xl font-black uppercase mb-6">Wander With Us</h2>
+            
             <div class="flex justify-center gap-8 mb-12">
                 <a href="https://tiktok.com/@wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-3xl transition-all"><i class="fab fa-tiktok"></i></a>
                 <a href="https://instagram.com/wonderwaytours" target="_blank" class="text-white hover:text-yellow-500 text-3xl transition-all"><i class="fab fa-instagram"></i></a>
@@ -97,7 +103,7 @@
             </div>
 
             <img src="images/logo.png" class="w-16 h-16 mx-auto mb-6 circle-logo" alt="WonderWay">
-            <p class="text-slate-500 text-[10px] uppercase tracking-widest font-semibold">&copy; 2026 WonderWay Tours. Kribi, Cameroon.</p>
+            <p class="text-slate-500 text-[10px] uppercase tracking-widest font-semibold">&copy; 2026 WonderWay Tours</p>
         </div>
     </footer>
 
@@ -127,7 +133,7 @@
             } else {
                 builder.classList.add('hidden');
                 grid.classList.remove('hidden');
-                grid.innerHTML = `<div class="col-span-full py-32 text-center text-slate-400 font-bold uppercase tracking-widest">Loading Collection...</div>`;
+                grid.innerHTML = `<div class="col-span-full py-32 text-center text-slate-400 font-bold uppercase tracking-widest">Loading...</div>`;
             }
         }
 
