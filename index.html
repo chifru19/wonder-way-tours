@@ -8,62 +8,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Outfit:wght@200;400;800&display=swap');
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #0f172a; 
-            color: white; 
-            scroll-behavior: smooth;
-        }
-        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; }
         .hero-font { font-family: 'Outfit', sans-serif; }
-        
-        .active-tab { 
-            background: #fbbf24 !important; 
-            color: black !important; 
-            border-color: #fbbf24 !important; 
-        }
-
-        .package-card { 
-            transition: all 0.3s ease; 
-            border: 1px solid #1e293b; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            border-radius: 24px; 
-            overflow: hidden; 
-            background: #1e293b60; 
-        }
-        .package-card:hover { 
-            transform: translateY(-5px); 
-            border-color: #fbbf24; 
-            box-shadow: 0 10px 30px -15px rgba(251, 191, 36, 0.3);
-        }
-
-        /* FIXED FOOTER STYLING */
-        .trust-footer {
-            position: relative;
-            padding: 8rem 1.5rem;
-            text-align: center;
-            margin-top: 5rem;
-            background-color: #0f172a;
-            overflow: hidden;
-        }
-        .footer-image-layer {
-            position: absolute;
-            inset: 0;
-            background-image: url('images/footer.jpg');
-            background-size: cover;
-            background-position: center top;
-            opacity: 0.25;
-            z-index: 0;
-        }
-        .footer-content {
-            position: relative;
-            z-index: 10;
-            max-width: 42rem;
-            margin: 0 auto;
-        }
+        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
+        .package-card { transition: all 0.3s ease; border: 1px solid #1e293b; height: 100%; display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: #1e293b60; }
+        .package-card:hover { transform: translateY(-5px); border-color: #fbbf24; }
     </style>
 </head>
 <body class="pt-24">
@@ -71,21 +20,21 @@
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
-                <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/100?text=WW'">
+                <img src="images/logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/50?text=Logo'">
             </div>
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
         
-        <div class="flex items-center gap-6 text-xl">
-            <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1BF6J9sik8/" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-facebook"></i></a>
+        <div class="flex items-center gap-6">
+            <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-tiktok text-xl"></i></a>
+            <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="https://www.facebook.com/share/1BF6J9sik8/" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-facebook text-xl"></i></a>
         </div>
     </nav>
 
     <header class="pt-20 pb-12 px-6 text-center">
         <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
-        <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic">"Luxury experiences curated for the bold traveler."</p>
+        <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic">"Experience the coast like a local."</p>
         
         <div class="flex flex-wrap justify-center gap-2">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Activities</button>
@@ -96,14 +45,16 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12">
-        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            </div>
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
     </main>
 
-    <footer class="trust-footer">
-        <div class="footer-image-layer"></div>
+    <footer class="relative py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
+        <div class="absolute inset-0 z-0">
+            <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-30">
+            <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px]"></div>
+        </div>
         
-        <div class="footer-content">
+        <div class="relative z-10 max-w-2xl mx-auto">
             <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
             <p class="text-yellow-500 font-bold text-xs uppercase tracking-[0.3em] mb-8">Personalized Service & Trust</p>
             
@@ -112,14 +63,12 @@
             </p>
             
             <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" 
-               class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
+               class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-lg shadow-yellow-500/20">
                Book Your Escape
             </a>
             
             <div class="mt-16 pt-8 border-t border-white/10">
-                <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">
-                    &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
-                </p>
+                <p class="text-white/40 text-[10px] uppercase tracking-widest">&copy; 2026 WonderWay Tours. Engineered by Frank Fru.</p>
             </div>
         </div>
     </footer>
@@ -127,42 +76,38 @@
     <script>
         const categories = {
             activities: [
-                { tier: "Single", name: "Jet Ski Adventure", price: "10,000 CFA", img: "images/jetski.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included"] },
-                { tier: "Single", name: "Horse Riding", price: "2,000 CFA", img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions"] },
-                { tier: "Single", name: "Quad Biking", price: "5,000 CFA", img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear"] },
-                { tier: "Single", name: "Sip & Paint", price: "15,000 CFA", img: "images/sip and paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies"] },
-                { tier: "Single", name: "Museum Visit", price: "2,000 CFA", img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide"] }
+                { tier: "Single", name: "Jet Ski", price: "10,000 CFA", img: "images/jetski.jpg", features: ["15 Minutes", "Safety Gear", "Instructor"] },
+                { tier: "Single", name: "Horse Riding", price: "2,000 CFA", img: "images/horse-riding.jpg", features: ["Beach Ride", "Safety Gear", "Per Turn"] },
+                { tier: "Single", name: "Quad Biking", price: "5,000 CFA", img: "images/Quad.jpg", features: ["Beach Ride", "Safety Gear"] },
+                { tier: "Single", name: "Museum Visit", price: "2,000 CFA", img: "images/museum.jpg", features: ["History Tour", "Guided"] },
+                { tier: "Single", name: "Sip & Paint", price: "15,000 CFA", img: "images/sip and paint.jpg", features: ["Creative Meal", "All Materials"] },
+                { tier: "Single", name: "Canoe Tour", price: "3,000 CFA", img: "images/canoe.jpg", features: ["River Exploration"] }
             ],
             couples: [
-                { tier: "Silver", name: "Mini Love Adventure", price: "90,000 CFA", img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Mobile Content & Pics"] },
-                { tier: "Gold", name: "Paradise Escape", price: "250,000 CFA", img: "images/sip and paint.jpg", features: ["Includes Silver", "Romantic Dinner", "Private Beach Fire"] },
-                { tier: "Premium", name: "Royal Romance", price: "350,000 CFA", img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
+                { tier: "Silver", name: "Mini Love Adventure", price: "90,000 CFA", img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Pygmies & 2 Beaches", "Mini Boat", "Mobile Content & Pics"] },
+                { tier: "Gold", name: "Paradise Escape", price: "250,000 CFA", img: "images/sip and paint.jpg", features: ["Includes Silver", "Sip & Paints", "Romantic Dinner", "Camp fire"] },
+                { tier: "Premium", name: "Royal Romance", price: "350,000 CFA", img: "images/royal romance.jpg", features: ["Includes Gold", "Boat Cruise w/ Wine", "Seaport Visit", "Couple Games"] }
             ],
             group4: [
-                { tier: "Silver", name: "Crew Chill", price: "230,000 CFA", img: "images/group-action.jpg", features: ["Group Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
-                { tier: "Gold", name: "Vibes & Memories", price: "350,000 CFA", img: "images/dinner.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint"] },
-                { tier: "Premium", name: "VIP Elite", price: "420,000 CFA", img: "images/seaport.jpg", features: ["Includes Gold", "Luxury Boat Cruise", "Premium Entry"] }
+                { tier: "Silver", name: "Crew Chill (Explorer)", price: "230,000 CFA", img: "images/group-action.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Pygmies & 2 Beaches", "Mini Boat", "Mobile Content & Pics"] },
+                { tier: "Gold", name: "Vibes & Memories", price: "350,000 CFA", img: "images/dinner.jpg", features: ["Includes Explorer", "Sip & Paints", "Dinner", "Camp fire"] },
+                { tier: "Premium", name: "VIP Vibes (Elite)", price: "420,000 CFA", img: "images/seaport.jpg", features: ["Includes Experience", "Boat Cruise w/ Wine", "Seaport Visit", "Beach Games"] }
             ],
             group6: [
-                { tier: "Silver", name: "Friends & Waves", price: "270,000 CFA", img: "images/group-action.jpg", features: ["Group Villa", "Water Sports", "Guide Included"] },
-                { tier: "Gold", name: "Golden Getaway", price: "440,000 CFA", img: "images/sip and paint.jpg", features: ["Includes Silver", "Full Catering", "Bonfire Night"] },
-                { tier: "Platinum", name: "Paradise Circle", price: "530,000 CFA", img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
+                { tier: "Silver", name: "Friends & Waves", price: "270,000 CFA", img: "images/group-action.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Pygmies & 2 Beaches", "Mini Boat", "Mobile Content & Pics"] },
+                { tier: "Gold", name: "Golden Crew Getaway", price: "440,000 CFA", img: "images/sip and paint.jpg", features: ["Includes Silver", "Sip & Paints", "Dinner", "Camp fire"] },
+                { tier: "Platinum", name: "Paradise Circle", price: "530,000 CFA", img: "images/royal romance.jpg", features: ["Includes Gold", "Boat Cruise w/ Wine", "Seaport Visit", "Beach Games"] }
             ]
         };
 
         function switchCategory(cat) {
-            // Update UI Tabs
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
-            const activeBtn = document.getElementById('tab-' + cat);
-            if(activeBtn) activeBtn.classList.add('active-tab');
-            
-            // Render Cards
+            document.getElementById('tab-' + cat).classList.add('active-tab');
             const grid = document.getElementById('package-grid');
             const data = categories[cat] || [];
-            
             grid.innerHTML = data.map(item => `
                 <div class="package-card">
-                    <img src="${item.img}" class="w-full h-48 object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Coming+Soon'">
+                    <img src="${item.img}" class="w-full h-48 object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Missing'">
                     <div class="p-8 flex flex-col flex-grow">
                         <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
                         <h4 class="text-2xl font-black mb-1 uppercase hero-font leading-tight">${item.name}</h4>
@@ -170,13 +115,11 @@
                         <ul class="space-y-3 mb-8 flex-grow">
                             ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
                         </ul>
-                        <button class="w-full py-4 bg-white text-black font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-400 transition">Inquire Now</button>
+                        <button class="w-full py-4 bg-white text-black font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-400 transition">Book Now</button>
                     </div>
                 </div>
             `).join('');
         }
-
-        // Initialize view
         switchCategory('activities');
     </script>
 </body>
