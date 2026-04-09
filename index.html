@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +98,9 @@
 
         function switchCategory(cat) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
-            document.getElementById('tab-' + cat).classList.add('active-tab');
+            const activeTab = document.getElementById('tab-' + cat);
+            if(activeTab) activeTab.classList.add('active-tab');
+            
             const grid = document.getElementById('package-grid');
             const data = categories[cat] || [];
             grid.innerHTML = data.map(item => `
@@ -119,7 +120,8 @@
                 </div>
             `).join('');
         }
-        switchCategory('activities');
+        
+        window.onload = () => switchCategory('activities');
     </script>
 </body>
 </html>
