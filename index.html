@@ -49,52 +49,21 @@
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
     </main>
 
-    <footer class="bg-black py-20 px-6 text-center border-t border-slate-900">
-        <div class="mb-12 flex justify-center">
-            <img src="images/sip and paint.jpg" class="rounded-3xl shadow-2xl max-w-sm border-4 border-slate-800" alt="Kribi Vibe">
-        </div>
-        <h3 class="hero-font text-2xl font-black uppercase mb-4">Wander with Us</h3>
-        <p class="text-slate-500 text-sm mb-8">Follow our journey and stay updated with the latest Kribi escapes.</p>
-        
-        <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" class="inline-block px-8 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest mb-10 hover:bg-yellow-400 transition-all">Explore our Linktree</a>
-        
-        <p class="text-slate-600 text-[10px] uppercase tracking-widest">&copy; 2026 WonderWay Tours. All Rights Reserved.</p>
-        <p class="text-yellow-500 text-[9px] uppercase tracking-[0.4em] font-black mt-2">Engineered by Frank Fru</p>
-    </footer>
-
     <script>
         const categories = {
             activities: [
                 { tier: "Single", name: "Quad Biking", price: "5,000 CFA", img: "images/Quad.jpg", features: ["Beach Ride", "Safety Gear"] },
-                { tier: "Single", name: "Canoe Tour", price: "3,000 CFA", img: "images/canoe.jpg", features: ["River Exploration", "Guided"] },
-                { tier: "Single", name: "Pygmies Visit", price: "10,000 CFA", img: "images/pigmi village.jpg", features: ["Cultural Entry", "Community Tour"] },
-                { tier: "Single", name: "Sip & Paint", price: "15,000 CFA", img: "images/sip and paint.jpg", features: ["Creative Meal", "All Materials"] },
-                { tier: "Single", name: "Oceanfront Dinner", price: "25,000 CFA", img: "images/dinner.jpg", features: ["Private Table", "3-Course Meal"] },
                 { tier: "Single", name: "Museum Visit", price: "2,000 CFA", img: "images/museum.jpg", features: ["History Tour", "Guided"] },
-                { tier: "Single", name: "Seaport Visit", price: "2,000 CFA", img: "images/seaport visit.jpg", features: ["Industrial Tour", "Deep Sea Port"] }
+                { tier: "Single", name: "Sip & Paint", price: "15,000 CFA", img: "images/sip and paint.jpg", features: ["Creative Meal", "All Materials"] },
+                { tier: "Single", name: "Seaport Visit", price: "2,000 CFA", img: "images/seaport visit.jpg", features: ["Deep Sea Port Tour"] },
+                { tier: "Single", name: "Pygmies Visit", price: "10,000 CFA", img: "images/pigmi village.jpg", features: ["Cultural Entry"] },
+                { tier: "Single", name: "Canoe Tour", price: "3,000 CFA", img: "images/canoe.jpg", features: ["River Exploration"] },
+                { tier: "Single", name: "Oceanfront Dinner", price: "25,000 CFA", img: "images/dinner.jpg", features: ["Private Table"] }
             ],
             couples: [
-                {
-                    tier: "Silver",
-                    name: "Mini Love",
-                    price: "90,000 CFA",
-                    img: "images/couple paradis escape.jpg",
-                    features: ["2 Days Lodging", "Jet ski", "Quad", "Museum visit", "Lobe Falls", "Pygmies Visit", "2 Beaches", "Mini Boat", "Mobile Pictures"]
-                },
-                {
-                    tier: "Gold",
-                    name: "Paradise Escape",
-                    price: "250,000 CFA",
-                    img: "images/sip and paint.jpg",
-                    features: ["Everything in Silver", "Sip & Paint", "Romantic Dinner", "Camp fire"]
-                },
-                {
-                    tier: "Premium",
-                    name: "Royal Romance",
-                    price: "350,000 CFA",
-                    img: "images/royal romance.jpg",
-                    features: ["Everything in Gold", "Boat Cruise w/ Wine", "Seaport visit", "Beach Games"]
-                }
+                { tier: "Silver", name: "Mini Love", price: "90,000 CFA", img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski", "Quad", "Museum visit", "Lobe Falls", "Pygmies Visit", "2 Beaches", "Mini Boat", "Mobile Pictures"] },
+                { tier: "Gold", name: "Paradise Escape", price: "250,000 CFA", img: "images/sip and paint.jpg", features: ["Everything in Silver", "Sip & Paint", "Romantic Dinner", "Camp fire"] },
+                { tier: "Premium", name: "Royal Romance", price: "350,000 CFA", img: "images/royal romance.jpg", features: ["Everything in Gold", "Boat Cruise w/ Wine", "Seaport visit", "Beach Games"] }
             ]
         };
 
@@ -102,13 +71,11 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
             const tab = document.getElementById('tab-' + cat);
             if(tab) tab.classList.add('active-tab');
-            
             const grid = document.getElementById('package-grid');
             const data = categories[cat] || [];
-            
             grid.innerHTML = data.map(item => `
                 <div class="package-card bg-slate-900 rounded-3xl overflow-hidden flex flex-col">
-                    <img src="${item.img}" class="w-full h-48 object-cover">
+                    <img src="${item.img}" class="w-full h-48 object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Not+Found'">
                     <div class="p-8 flex flex-col flex-grow">
                         <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
                         <h4 class="text-2xl font-black mb-1 uppercase hero-font">${item.name}</h4>
@@ -121,7 +88,6 @@
                 </div>
             `).join('');
         }
-
         switchCategory('activities');
     </script>
 </body>
