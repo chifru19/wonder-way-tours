@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
     <footer class="relative min-h-[600px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
         <div class="absolute inset-0 z-0">
             <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-50">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
         </div>
         <div class="relative z-10 max-w-2xl mx-auto">
             <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
@@ -103,7 +104,9 @@
             const data = categories[cat] || [];
             grid.innerHTML = data.map(item => `
                 <div class="package-card">
-                    <img src="${item.img}" class="w-full h-48 object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Coming+Soon'">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Image+Not+Found'">
+                    </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
                         <h4 class="text-2xl font-black mb-1 uppercase hero-font leading-tight">${item.name}</h4>
