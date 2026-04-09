@@ -8,11 +8,38 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Outfit:wght@200;400;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0f172a; 
+            color: white; 
+            scroll-behavior: smooth; 
+        }
+        
         .hero-font { font-family: 'Outfit', sans-serif; }
-        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
-        .package-card { transition: all 0.3s ease; border: 1px solid #1e293b; height: 100%; display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: #1e293b60; }
-        .package-card:hover { transform: translateY(-5px); border-color: #fbbf24; }
+        
+        .active-tab { 
+            background: #fbbf24 !important; 
+            color: black !important; 
+            border-color: #fbbf24 !important; 
+        }
+        
+        .package-card { 
+            transition: all 0.3s ease; 
+            border: 1px solid #1e293b; 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            background: #1e293b60; 
+        }
+        
+        .package-card:hover { 
+            transform: translateY(-5px); 
+            border-color: #fbbf24; 
+            box-shadow: 0 10px 30px -15px rgba(251, 191, 36, 0.3);
+        }
     </style>
 </head>
 <body class="pt-24">
@@ -20,20 +47,21 @@
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
-                <img src="images/logo.png" alt="Logo" class="w-full h-full object-cover">
+                <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover">
             </div>
             <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
         <div class="flex items-center gap-6">
-            <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-tiktok text-xl"></i></a>
-            <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-instagram text-xl"></i></a>
-            <a href="https://www.facebook.com/share/1BF6J9sik8/" target="_blank" class="hover:text-yellow-500 transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+            <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1BF6J9sik8/" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-facebook"></i></a>
         </div>
     </nav>
 
     <header class="pt-20 pb-12 px-6 text-center">
         <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
         <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic">"Luxury experiences curated for the bold traveler."</p>
+        
         <div class="flex flex-wrap justify-center gap-2">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Couples</button>
@@ -49,18 +77,27 @@
 
     <footer class="relative min-h-[600px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
         <div class="absolute inset-0 z-0">
-            <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-75">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+            <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-80">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
         </div>
+        
         <div class="relative z-10 max-w-2xl mx-auto">
             <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
             <p class="text-yellow-500 font-bold text-xs uppercase tracking-[0.3em] mb-8">Personalized Service & Trust</p>
+            
             <p class="text-slate-200 text-sm mb-10 italic leading-relaxed">
                 "Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."
             </p>
-            <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-lg">Book Your Escape</a>
+            
+            <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" 
+               class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
+               Book Your Escape
+            </a>
+            
             <div class="mt-16 pt-8 border-t border-white/10">
-                <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">&copy; 2026 WonderWay Tours. Engineered by Frank Fru.</p>
+                <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">
+                    &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
+                </p>
             </div>
         </div>
     </footer>
@@ -103,6 +140,7 @@
             
             const grid = document.getElementById('package-grid');
             const data = categories[cat] || [];
+            
             grid.innerHTML = data.map(item => `
                 <div class="package-card">
                     <div class="relative h-48 overflow-hidden">
@@ -110,10 +148,10 @@
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
-                        <h4 class="text-2xl font-black mb-1 uppercase hero-font leading-tight">${item.name}</h4>
+                        <h4 class="text-2xl font-black mb-1 uppercase hero-font leading-tight tracking-tighter">${item.name}</h4>
                         <p class="text-xl font-bold mb-6 text-slate-300">${item.price}</p>
                         <ul class="space-y-3 mb-8 flex-grow">
-                            ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
+                            ${item.features.map(f => '<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ' + f + '</li>').join('')}
                         </ul>
                         <button class="w-full py-4 bg-white text-black font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-400 transition">Inquire Now</button>
                     </div>
