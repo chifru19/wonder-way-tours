@@ -41,12 +41,19 @@
             box-shadow: 0 10px 30px -15px rgba(251, 191, 36, 0.3);
         }
 
-        /* Currency Dropdown Styling */
         select {
             background-image: none;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
+        }
+
+        /* Giscus Custom Styling for Dark Theme */
+        .giscus {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 24px;
+            border: 1px solid #334155;
         }
     </style>
 </head>
@@ -92,6 +99,28 @@
 
     <main class="max-w-7xl mx-auto px-6 py-12">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+
+        <section id="feedback" class="mt-32">
+            <div class="text-center mb-12">
+                <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Reviews</span></h2>
+                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">Sign in with GitHub to share your experience</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <script src="https://giscus.app/client.js"
+                        data-repo="chifru19/wonder-way-tours"
+                        data-repo-id="R_kgDONLqMvg"
+                        data-category="Announcements"
+                        data-category-id="DIC_kwDONLqMvs4CkIsR"
+                        data-mapping="pathname"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-theme="dark"
+                        data-lang="en"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+            </div>
+        </section>
     </main>
 
     <footer class="relative min-h-[600px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
@@ -110,7 +139,14 @@
                class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
                Book Your Escape
             </a>
-            <div class="mt-16 pt-8 border-t border-white/10">
+            
+            <div class="mt-12 flex justify-center gap-6">
+                <a href="https://frankfru.com" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">Portfolio</a>
+                <a href="https://github.com/chifru19" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">GitHub</a>
+                <a href="https://www.linkedin.com/in/frank-fru-454593252/" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">LinkedIn</a>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-white/10">
                 <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">
                     &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
                 </p>
@@ -119,15 +155,13 @@
     </footer>
 
     <script>
-        // State management
         let currentCurrency = 'XAF';
         let currentCategory = 'activities';
 
-        // Exchange rates (Static for reliability)
         const rates = {
             XAF: 1,
-            EUR: 0.0015, // 1 CFA = ~0.0015 Euro
-            USD: 0.0016  // 1 CFA = ~0.0016 Dollar
+            EUR: 0.0015,
+            USD: 0.0016
         };
 
         const categories = {
@@ -162,9 +196,7 @@
 
         function formatPrice(val) {
             if (typeof val !== 'number') return val;
-            
             const converted = val * rates[currentCurrency];
-            
             if (currentCurrency === 'XAF') {
                 return new Intl.NumberFormat('fr-CM').format(val) + ' CFA';
             } else if (currentCurrency === 'EUR') {
