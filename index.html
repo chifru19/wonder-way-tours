@@ -61,6 +61,7 @@
             appearance: none;
         }
 
+        /* Giscus Custom Styling */
         .giscus {
             background-color: #1e293b;
             padding: 2rem;
@@ -135,14 +136,14 @@
         </section>
     </main>
 
-    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a] border-t-2 border-yellow-500 p-6 z-[60] transform translate-y-full transition-transform duration-300">
+    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a] border-t-2 border-yellow-500 p-6 z-[60] transform translate-y-full transition-transform duration-300 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-left">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">0 Services Selected</p>
                 <h3 id="cart-total" class="text-2xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
             <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-2xl">
-                Pay & Book via WhatsApp
+                Book & Pay via WhatsApp
             </button>
         </div>
     </div>
@@ -159,20 +160,24 @@
             <p class="text-slate-200 text-sm mb-10 italic leading-relaxed">
                 "Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."
             </p>
-            <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" 
-               class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
-               Book Your Escape
-            </a>
+            
+            <div class="flex flex-col gap-4 items-center">
+                <a href="mailto:contact@wonderwaytourcameroon.com" class="text-white font-bold hover:text-yellow-500 transition tracking-widest text-xs uppercase">contact@wonderwaytourcameroon.com</a>
+                <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" 
+                   class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
+                   Book Your Escape
+                </a>
+            </div>
             
             <div class="mt-12 flex justify-center gap-6">
-                <a href="https://frankfru.com" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">Portfolio</a>
-                <a href="https://github.com/chifru19" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">GitHub</a>
-                <a href="https://www.linkedin.com/in/frank-fru-454593252/" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">LinkedIn</a>
+                <a href="https://frankfru.com" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">Portfolio</a>
+                <a href="https://github.com/chifru19" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">GitHub</a>
+                <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">LinkedIn</a>
             </div>
 
             <div class="mt-8 pt-8 border-t border-white/10">
                 <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">
-                    &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
+                    &copy; 2026 WonderWay Tours. Engineered & Secured by Frank Fru.
                 </p>
             </div>
         </div>
@@ -255,7 +260,8 @@
         function processPayment() {
             const itemsList = cart.map(i => `• ${i.name} (${formatPrice(i.price)})`).join('%0A');
             const total = cart.reduce((sum, item) => sum + (typeof item.price === 'number' ? item.price : 0), 0);
-            const text = `Hello WonderWay Tours!%0AI would like to book the following Kribi experiences:%0A%0A${itemsList}%0A%0ATotal Est: ${formatPrice(total)}%0ACurrency: ${currentCurrency}`;
+            const text = `Hello WonderWay Tours!%0AI am booking the following Kribi collection:%0A%0A${itemsList}%0A%0ATotal Est: ${formatPrice(total)}%0ACurrency: ${currentCurrency}`;
+            // Corrected phone number for Sullivan
             window.open(`https://wa.me/237683416434?text=${text}`, '_blank');
         }
 
@@ -281,7 +287,7 @@
                         <ul class="space-y-3 mb-8 flex-grow">
                             ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
                         </ul>
-                        <button onclick="toggleCart('${item.id}', '${item.name}', ${typeof item.price === 'number' ? item.price : item.price})" 
+                        <button onclick="toggleCart('${item.id}', '${item.name}', ${typeof item.price === 'number' ? item.price : 0})" 
                             class="w-full py-4 ${isSelected ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-400 transition">
                             ${isSelected ? 'Selected ✓' : 'Inquire Now'}
                         </button>
