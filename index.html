@@ -60,13 +60,6 @@
             -moz-appearance: none;
             appearance: none;
         }
-
-        .giscus {
-            background-color: #1e293b;
-            padding: 2rem;
-            border-radius: 24px;
-            border: 1px solid #334155;
-        }
     </style>
 </head>
 <body class="pt-24">
@@ -112,25 +105,32 @@
     <main class="max-w-7xl mx-auto px-6 py-12 mb-24">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
 
-        <section id="feedback" class="mt-32">
+        <section id="feedback" class="mt-32 border-t border-slate-800 pt-20">
             <div class="text-center mb-12">
-                <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Reviews</span></h2>
-                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">Sign in with GitHub to share your experience</p>
+                <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
+                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">No login required. Tell us about your trip!</p>
             </div>
-            <div class="max-w-4xl mx-auto">
-                <script src="https://giscus.app/client.js"
-                        data-repo="chifru19/wonder-way-tours"
-                        data-repo-id="R_kgDONLqMvg"
-                        data-category="General"
-                        data-category-id="DIC_kwDONLqMvs4CkIsS"
-                        data-mapping="pathname"
-                        data-strict="0"
-                        data-reactions-enabled="1"
-                        data-theme="dark"
-                        data-lang="en"
-                        crossorigin="anonymous"
-                        async>
-                </script>
+            
+            <div class="max-w-4xl mx-auto text-center bg-slate-800/50 p-12 rounded-[32px] border border-slate-700">
+                <i class="fas fa-comment-dots text-yellow-500 text-5xl mb-6"></i>
+                <h3 class="text-2xl font-bold mb-4">Loved your experience?</h3>
+                <p class="text-slate-400 mb-8 leading-relaxed">We value real stories from our guests. Click below to send your feedback directly to our founder via WhatsApp. We might feature your story on this page!</p>
+                <a href="https://wa.me/237683416434?text=Hello WonderWay! I want to leave a review about my trip:" 
+                   target="_blank"
+                   class="inline-block px-12 py-5 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
+                   Submit A Review
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
+                    "The Jet Ski adventure was the highlight of our Kribi trip. Booking was so easy via WhatsApp!"
+                    <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Marc A., Douala</p>
+                </div>
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
+                    "Royal Romance package was incredible. Everything was perfectly timed."
+                    <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Sarah L., Yaoundé</p>
+                </div>
             </div>
         </section>
     </main>
@@ -141,7 +141,7 @@
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">0 Services Selected</p>
                 <h3 id="cart-total" class="text-2xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all">
+            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-2xl">
                 Book & Pay via WhatsApp
             </button>
         </div>
@@ -210,14 +210,13 @@
                 { id: "g6_3", tier: "Platinum", name: "Paradise Circle", price: 530000, img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
             ],
             events: [
-                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: "Inquire", img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
-                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: "Inquire", img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] },
-                { id: "ev3", tier: "Custom", name: "Private Party", price: "Inquire", img: "images/dinner-setup.jpg", features: ["DJ & Sound System", "Beach Bonfire", "Finger Foods"] }
+                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
+                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] }
             ]
         };
 
         function formatPrice(val) {
-            if (typeof val !== 'number') return val;
+            if (val === 0) return "Inquire";
             const converted = val * rates[currentCurrency];
             if (currentCurrency === 'XAF') return new Intl.NumberFormat('fr-CM').format(val) + ' CFA';
             return (currentCurrency === 'EUR' ? '€' : '$') + converted.toFixed(2);
@@ -226,7 +225,7 @@
         function toggleCart(id, name, price) {
             const index = cart.findIndex(item => item.id === id);
             if (index > -1) cart.splice(index, 1);
-            else cart.push({ id, name, price: Number(price) || 0 });
+            else cart.push({ id, name, price: Number(price) });
             updateCartUI();
             switchCategory(currentCategory);
         }
@@ -273,7 +272,7 @@
                         <ul class="space-y-3 mb-8 flex-grow">
                             ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
                         </ul>
-                        <button onclick="toggleCart('${item.id}', '${item.name}', ${item.price === 'Inquire' ? 0 : item.price})" 
+                        <button onclick="toggleCart('${item.id}', '${item.name}', ${item.price})" 
                             class="w-full py-4 ${isSelected ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
                             ${isSelected ? 'Selected ✓' : 'Add to Trip'}
                         </button>
