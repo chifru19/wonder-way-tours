@@ -49,6 +49,11 @@
             box-shadow: 0 10px 30px -15px rgba(251, 191, 36, 0.3);
         }
 
+        .selected-card {
+            border-color: #fbbf24 !important;
+            background: #fbbf2410 !important;
+        }
+
         select {
             background-image: none;
             -webkit-appearance: none;
@@ -56,7 +61,6 @@
             appearance: none;
         }
 
-        /* Giscus Custom Styling for Dark Theme */
         .giscus {
             background-color: #1e293b;
             padding: 2rem;
@@ -105,7 +109,7 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
+    <main class="max-w-7xl mx-auto px-6 py-12 mb-24">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
 
         <section id="feedback" class="mt-32">
@@ -130,6 +134,18 @@
             </div>
         </section>
     </main>
+
+    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a] border-t-2 border-yellow-500 p-6 z-[60] transform translate-y-full transition-transform duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-left">
+                <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">0 Services Selected</p>
+                <h3 id="cart-total" class="text-2xl font-black hero-font uppercase">Total: 0 CFA</h3>
+            </div>
+            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-2xl">
+                Pay & Book via WhatsApp
+            </button>
+        </div>
+    </div>
 
     <footer class="relative min-h-[600px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
         <div class="absolute inset-0 z-0">
@@ -165,85 +181,113 @@
     <script>
         let currentCurrency = 'XAF';
         let currentCategory = 'activities';
+        let cart = [];
 
-        const rates = {
-            XAF: 1,
-            EUR: 0.0015,
-            USD: 0.0016
-        };
+        const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         const categories = {
             activities: [
-                { tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included"] },
-                { tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions"] },
-                { tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear"] },
-                { tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies"] },
-                { tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide"] }
+                { id: "act1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included"] },
+                { id: "act2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions"] },
+                { id: "act3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear"] },
+                { id: "act4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies"] },
+                { id: "act5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide"] }
             ],
             couples: [
-                { tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Content Creation"] },
-                { tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Dinner", "Private Beach Fire"] },
-                { tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
+                { id: "cpl1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Content Creation"] },
+                { id: "cpl2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Dinner", "Private Beach Fire"] },
+                { id: "cpl3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
             ],
             group4: [
-                { tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
-                { tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint"] },
-                { tier: "Premium", name: "VIP Elite", price: 420000, img: "images/seaport visit.jpg", features: ["Includes Gold", "Luxury Boat Cruise", "Premium Entry"] }
+                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
+                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint"] },
+                { id: "g4_3", tier: "Premium", name: "VIP Elite", price: 420000, img: "images/seaport visit.jpg", features: ["Includes Gold", "Luxury Boat Cruise", "Premium Entry"] }
             ],
             group6: [
-                { tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Group Villa", "Water Sports", "Guide Included"] },
-                { tier: "Gold", name: "Golden Getaway", price: 440000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Full Catering", "Bonfire Night"] },
-                { tier: "Platinum", name: "Paradise Circle", price: 530000, img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
+                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Group Villa", "Water Sports", "Guide Included"] },
+                { id: "g6_2", tier: "Gold", name: "Golden Getaway", price: 440000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Full Catering", "Bonfire Night"] },
+                { id: "g6_3", tier: "Platinum", name: "Paradise Circle", price: 530000, img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
             ],
             events: [
-                { tier: "Custom", name: "Beachside Wedding", price: "Inquire", img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service", "Boat Arrival Options"] },
-                { tier: "Corporate", name: "Company Retreat", price: "Inquire", img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering", "Lodging Included"] },
-                { tier: "Custom", name: "Private Party", price: "Inquire", img: "images/dinner-setup.jpg", features: ["DJ & Sound System", "Beach Bonfire", "Finger Foods", "Event Photography"] }
+                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: "Inquire", img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
+                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: "Inquire", img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] },
+                { id: "ev3", tier: "Custom", name: "Private Party", price: "Inquire", img: "images/dinner-setup.jpg", features: ["DJ & Sound System", "Beach Bonfire", "Finger Foods"] }
             ]
         };
 
         function formatPrice(val) {
             if (typeof val !== 'number') return val;
             const converted = val * rates[currentCurrency];
-            if (currentCurrency === 'XAF') {
-                return new Intl.NumberFormat('fr-CM').format(val) + ' CFA';
-            } else if (currentCurrency === 'EUR') {
-                return '€' + converted.toFixed(2);
-            } else {
-                return '$' + converted.toFixed(2);
-            }
+            if (currentCurrency === 'XAF') return new Intl.NumberFormat('fr-CM').format(val) + ' CFA';
+            return (currentCurrency === 'EUR' ? '€' : '$') + converted.toFixed(2);
         }
 
         function updateCurrency() {
             currentCurrency = document.getElementById('currency-select').value;
             switchCategory(currentCategory);
+            updateCartUI();
+        }
+
+        function toggleCart(id, name, price) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) cart.splice(index, 1);
+            else cart.push({ id, name, price });
+            
+            updateCartUI();
+            switchCategory(currentCategory);
+        }
+
+        function updateCartUI() {
+            const bar = document.getElementById('checkout-bar');
+            const totalDisplay = document.getElementById('cart-total');
+            const countDisplay = document.getElementById('cart-count');
+            
+            if (cart.length > 0) {
+                const total = cart.reduce((sum, item) => sum + (typeof item.price === 'number' ? item.price : 0), 0);
+                totalDisplay.innerText = `Total: ${formatPrice(total)}`;
+                countDisplay.innerText = `${cart.length} Services Selected`;
+                bar.classList.remove('translate-y-full');
+            } else {
+                bar.classList.add('translate-y-full');
+            }
+        }
+
+        function processPayment() {
+            const itemsList = cart.map(i => `• ${i.name} (${formatPrice(i.price)})`).join('%0A');
+            const total = cart.reduce((sum, item) => sum + (typeof item.price === 'number' ? item.price : 0), 0);
+            const text = `Hello WonderWay Tours!%0AI would like to book the following Kribi experiences:%0A%0A${itemsList}%0A%0ATotal Est: ${formatPrice(total)}%0ACurrency: ${currentCurrency}`;
+            window.open(`https://wa.me/237683416434?text=${text}`, '_blank');
         }
 
         function switchCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
-            const activeTab = document.getElementById('tab-' + cat);
-            if(activeTab) activeTab.classList.add('active-tab');
+            document.getElementById('tab-' + cat)?.classList.add('active-tab');
             
             const grid = document.getElementById('package-grid');
             const data = categories[cat] || [];
             
-            grid.innerHTML = data.map(item => `
-                <div class="package-card">
+            grid.innerHTML = data.map(item => {
+                const isSelected = cart.some(c => c.id === item.id);
+                return `
+                <div class="package-card ${isSelected ? 'selected-card' : ''}">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=WonderWay+Tour'">
+                        <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=WonderWay'">
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">${item.tier}</span>
                         <h4 class="text-2xl font-black mb-1 uppercase hero-font leading-tight tracking-tighter">${item.name}</h4>
                         <p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p>
                         <ul class="space-y-3 mb-8 flex-grow">
-                            ${item.features.map(f => '<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ' + f + '</li>').join('')}
+                            ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
                         </ul>
-                        <button class="w-full py-4 bg-white text-black font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-400 transition">Inquire Now</button>
+                        <button onclick="toggleCart('${item.id}', '${item.name}', ${typeof item.price === 'number' ? item.price : item.price})" 
+                            class="w-full py-4 ${isSelected ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-400 transition">
+                            ${isSelected ? 'Selected ✓' : 'Inquire Now'}
+                        </button>
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
         }
         
         window.onload = () => switchCategory('activities');
