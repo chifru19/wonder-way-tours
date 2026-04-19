@@ -150,7 +150,10 @@
         let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
-        // DYNAMIC GOOGLE SHEETS CONNECTOR
+        /**
+         * Dynamic review fetching system from Google Sheets CSV.
+         * Fetches data, splits rows, and injects HTML into the DOM.
+         */
         async function loadReviews() {
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv"; 
             try {
@@ -171,27 +174,27 @@
 
         const categories = {
             activities: [
-                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included", "Fuel Included"] },
-                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions", "Friendly Horses"] },
-                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear", "Basic Training", "Safety Helmet"] },
-                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies", "Guided Painting"] },
-                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide", "Entry Fees"] }
+                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed Experience", "Safety Professional Instructor", "High-Quality Life Jacket Included", "Full Fuel Service Included"] },
+                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Scenic Sunset Beach Ride", "Expert Guided Nature Tour", "Unlimited Photo Sessions", "Friendly Trained Horses"] },
+                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Thrilling Beach Trail Ride", "Professional All-Terrain Gear", "Mandatory Basic Training", "Safety Certified Helmet"] },
+                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Creative Session", "One Complimentary Premium Drink", "Full Art Supplies Provided", "Professional Guided Painting"] },
+                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Deep Cultural Heritage Tour", "Bilingual English/French Guide", "All Site Entry Fees Covered", "Historical Context Briefing"] }
             ],
             couples: [
-                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad Sessions", "Museum & Falls Tour"] },
-                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Beach Dinner", "Private Beach Fire"] },
-                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
+                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Luxury Villa Lodging", "Jet ski & Quad Activity Bundle", "Museum & Waterfall Guided Tour", "Professional Content Creation"] },
+                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes All Silver Items", "Romantic Private Beach Dinner", "Evening Private Beach Fire", "Premium Champagne Service"] },
+                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes All Gold Items", "Exclusive Private Boat Cruise", "Industrial Seaport Guided Visit", "24/7 Concierge Support"] }
             ],
             group4: [
-                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Villa Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
-                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint Session"] }
+                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Villa Luxury Lodging", "Water Sports Activity Bundle", "Scenic Waterfall Photo Tour", "Beach Volleyball Setup"] },
+                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes All Silver Items", "Full Group Beach BBQ Dinner", "Private Sip & Paint Session", "Custom Music Experience"] }
             ],
             group6: [
-                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive Villa", "Water Sports Package", "Guide Included"] }
+                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive Beachfront Villa", "Full Water Sports Activity Pack", "Bilingual Group Guide", "Morning Wellness Session"] }
             ],
             events: [
-                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
-                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] }
+                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Full Themed Floral Decoration", "Custom Wedding Cake & Music", "Premium Catering Service", "Private Event Security"] },
+                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building Exercises", "Dedicated Workshop Space", "Executive Group Catering", "Audio/Visual Equipment Setup"] }
             ]
         };
 
@@ -253,6 +256,10 @@
             }).join('');
         }
 
+        /**
+         * Initialize Application Suite.
+         * Loads live reviews and default category.
+         */
         window.onload = () => { loadReviews(); switchCategory('activities'); };
     </script>
 </body>
