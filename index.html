@@ -61,6 +61,17 @@
             -moz-appearance: none; 
             appearance: none; 
         }
+
+        /* Review Card Animations */
+        .review-card {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 
@@ -107,20 +118,14 @@
         <section id="feedback" class="mt-32 border-t border-slate-800 pt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Real experiences from our community</p>
+                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Verified experiences from our Kribi community</p>
             </div>
             
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-                <p class="text-center text-slate-500 col-span-full py-10">Synchronizing database...</p>
+                <p class="text-center text-slate-500 col-span-full py-10">Synchronizing database entries...</p>
             </div>
 
-            <div class="max-w-4xl mx-auto text-center bg-slate-800/50 p-12 rounded-[32px] border border-slate-700">
-                <i class="fas fa-comment-dots text-yellow-500 text-5xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-4">Loved your trip?</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">Message us on WhatsApp to have your story featured here!</p>
-                <a href="https://wa.me/237653827999?text=Hello WonderWay! I want to leave a review about my trip:" target="_blank" class="inline-block px-12 py-5 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Submit A Review via WhatsApp</a>
-            </div>
-        </section>
+            </section>
     </main>
 
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a] border-t-2 border-yellow-500 p-6 z-[60] transform translate-y-full transition-all duration-300 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
@@ -167,7 +172,7 @@
                     const loc = parts[1]?.replace(/"/g, '').trim();
                     const review = parts[2]?.replace(/"/g, '').trim();
                     if(!name || !review) return '';
-                    return `<div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">"${review}"<p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase tracking-tighter">— ${name}, ${loc}</p></div>`;
+                    return `<div class="review-card bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">"${review}"<p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase tracking-tighter">— ${name}, ${loc}</p></div>`;
                 }).join('');
             } catch (e) { console.error("Sync Failure", e); }
         }
@@ -206,7 +211,7 @@
 
         function toggleCart(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
-            if (idx > -1) cart.splice(index, 1);
+            if (idx > -1) cart.splice(idx, 1);
             else cart.push({ id, name, price: Number(price) });
             updateCartUI();
             switchCategory(currentCategory);
@@ -223,7 +228,7 @@
 
         function updateCurrency() {
             currentCurrency = document.getElementById('currency-select').value;
-            switchCategory(currentCategory);
+            switchCategory(currentCurrency);
             updateCartUI();
         }
 
