@@ -108,27 +108,27 @@
         <section id="feedback" class="mt-32 border-t border-slate-800 pt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">No login required. Tell us about your trip!</p>
+                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">Share your experience via WhatsApp!</p>
             </div>
             
             <div class="max-w-4xl mx-auto text-center bg-slate-800/50 p-12 rounded-[32px] border border-slate-700">
                 <i class="fas fa-comment-dots text-yellow-500 text-5xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-4">Loved your experience?</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">We value real stories from our guests. Click below to send your feedback directly to our founder via WhatsApp. We might feature your story on this page!</p>
-                <a href="https://wa.me/237683416434?text=Hello WonderWay! I want to leave a review about my trip:" 
+                <h3 class="text-2xl font-bold mb-4">Loved your trip?</h3>
+                <p class="text-slate-400 mb-8 leading-relaxed">Tell us about your WonderWay experience directly on WhatsApp. We feature our favorite guest stories right here!</p>
+                <a href="https://wa.me/237653827999?text=Hello WonderWay! I want to leave a review about my trip:" 
                    target="_blank"
                    class="inline-block px-12 py-5 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
-                   Submit A Review
+                   Submit A Review via WhatsApp
                 </a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
                 <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
-                    "The Jet Ski adventure was the highlight of our Kribi trip. Booking was so easy via WhatsApp!"
+                    "The Jet Ski adventure was incredible. Booking was so simple!"
                     <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Marc A., Douala</p>
                 </div>
                 <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
-                    "Royal Romance package was incredible. Everything was perfectly timed."
+                    "Best hospitality in Kribi. Highly recommend the Couples package."
                     <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Sarah L., Yaoundé</p>
                 </div>
             </div>
@@ -138,10 +138,10 @@
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a] border-t-2 border-yellow-500 p-6 z-[60] transform translate-y-full transition-all duration-300 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-left">
-                <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">0 Services Selected</p>
+                <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">0 Selected</p>
                 <h3 id="cart-total" class="text-2xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-2xl">
+            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all">
                 Book & Pay via WhatsApp
             </button>
         </div>
@@ -173,7 +173,7 @@
             </div>
             <div class="mt-8 pt-8 border-t border-white/10">
                 <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">
-                    &copy; 2026 WonderWay Tours. Engineered & Secured by Frank Fru.
+                    &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
                 </p>
             </div>
         </div>
@@ -188,30 +188,25 @@
 
         const categories = {
             activities: [
-                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included"] },
-                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions"] },
+                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor"] },
+                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour"] },
                 { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear"] },
-                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies"] },
+                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Art Supplies"] },
                 { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide"] }
             ],
             couples: [
-                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Content Creation"] },
-                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Dinner", "Private Beach Fire"] },
-                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
+                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad"] },
+                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Romantic Dinner", "Private Beach Fire"] },
+                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Private Boat Cruise", "Seaport Visit"] }
             ],
             group4: [
-                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
-                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint"] },
-                { id: "g4_3", tier: "Premium", name: "VIP Elite", price: 420000, img: "images/seaport visit.jpg", features: ["Includes Gold", "Luxury Boat Cruise", "Premium Entry"] }
+                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Lodging", "Waterfall Tour"] }
             ],
             group6: [
-                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Group Villa", "Water Sports", "Guide Included"] },
-                { id: "g6_2", tier: "Gold", name: "Golden Getaway", price: 440000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Full Catering", "Bonfire Night"] },
-                { id: "g6_3", tier: "Platinum", name: "Paradise Circle", price: 530000, img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
+                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Group Villa", "Water Sports"] }
             ],
             events: [
-                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
-                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] }
+                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Catering Service"] }
             ]
         };
 
@@ -235,7 +230,7 @@
             if (cart.length > 0) {
                 const total = cart.reduce((sum, item) => sum + item.price, 0);
                 document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
-                document.getElementById('cart-count').innerText = `${cart.length} Services Selected`;
+                document.getElementById('cart-count').innerText = `${cart.length} Selected`;
                 bar.classList.remove('translate-y-full');
             } else {
                 bar.classList.add('translate-y-full');
@@ -252,7 +247,7 @@
             const items = cart.map(i => `• ${i.name}`).join('%0A');
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             const text = `Hello WonderWay Tours!%0AI want to book:%0A${items}%0A%0ATotal Est: ${formatPrice(total)}`;
-            window.open(`https://wa.me/237683416434?text=${text}`, '_blank');
+            window.open(`https://wa.me/237653827999?text=${text}`, '_blank');
         }
 
         function switchCategory(cat) {
@@ -283,4 +278,4 @@
         window.onload = () => switchCategory('activities');
     </script>
 </body>
-</html>
+</html> 
