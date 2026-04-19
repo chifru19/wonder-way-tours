@@ -117,11 +117,11 @@
         <section id="feedback" class="mt-32 border-t border-slate-800 pt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Verified experiences from our Kribi community</p>
+                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Verified experiences from our community</p>
             </div>
             
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-                <p class="text-center text-slate-500 col-span-full py-10">Synchronizing database entries...</p>
+                <p class="text-center text-slate-500 col-span-full py-10 italic">Connecting to live guest stories...</p>
             </div>
         </section>
     </main>
@@ -171,6 +171,7 @@
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         async function loadReviews() {
+            // SPREADSHEET INTEGRATION: Verified CSV Endpoint
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv"; 
             try {
                 const response = await fetch(sheetURL);
@@ -273,6 +274,7 @@
             }).join('');
         }
 
+        // INITIALIZE ALL SYSTEMS
         window.onload = () => { loadReviews(); switchCategory('activities'); };
     </script>
 </body>
