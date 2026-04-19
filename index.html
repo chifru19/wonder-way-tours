@@ -76,7 +76,7 @@
 
 <body class="pt-24">
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-4 py-4 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
-        <div class="flex items-center gap-3 mb-2 md:mb-0">
+        <div class="flex items-center gap-3 mb-4 md:mb-0">
             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
                 <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover">
             </div>
@@ -100,14 +100,14 @@
 
     <header class="pt-20 pb-12 px-6 text-center">
         <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter">The Kribi <span class="text-yellow-500">Collection</span></h1>
-        <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic">"Luxury experiences curated for the bold traveler."</p>
+        <p class="max-w-2xl mx-auto text-slate-400 text-sm mb-10 italic uppercase tracking-widest">"Bespoke Travel Engineering"</p>
         
         <div class="flex flex-wrap justify-center gap-2">
-            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Activities</button>
-            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Couples</button>
-            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 4</button>
-            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 6</button>
-            <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Event Escape</button>
+            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase transition">Activities</button>
+            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase transition">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase transition">Group of 4</button>
+            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase transition">Group of 6</button>
+            <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase transition">Event Escape</button>
         </div>
     </header>
 
@@ -117,18 +117,17 @@
         <section id="feedback" class="mt-32 border-t border-slate-800 pt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Verified experiences from our community</p>
+                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Real-time stories from our community database</p>
             </div>
             
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-                <p class="text-center text-slate-500 col-span-full py-10">Synchronizing database entries...</p>
+                <p class="text-center text-slate-500 col-span-full py-10 italic">Connecting to live spreadsheet database...</p>
             </div>
-
+            
             <div class="max-w-4xl mx-auto text-center bg-slate-800/50 p-12 rounded-[32px] border border-slate-700 mt-12">
                 <i class="fas fa-star text-yellow-500 text-5xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-4">Share Your Trip</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed italic">"The reviews above are pulled live from our booking database. Message Sullivan on WhatsApp to be featured!"</p>
-                <a href="https://wa.me/237653827999?text=Hello Sullivan! I want to leave a review about my WonderWay trip:" target="_blank" class="inline-block px-12 py-5 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Submit Review via WhatsApp</a>
+                <h3 class="text-2xl font-bold mb-4">Your Experience Counts</h3>
+                <p class="text-slate-400 mb-8 leading-relaxed italic uppercase text-[10px] tracking-widest">Feedback logging is handled directly by Sullivan. Message us to see your review live!</p>
             </div>
         </section>
     </main>
@@ -152,7 +151,7 @@
         <div class="relative z-10 max-w-2xl mx-auto">
             <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
             <p class="text-yellow-500 font-bold text-xs uppercase tracking-[0.3em] mb-8">Personalized Service & Trust</p>
-            <p class="text-slate-200 text-sm mb-10 italic leading-relaxed">"Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."</p>
+            <p class="text-slate-200 text-sm mb-10 italic leading-relaxed leading-7">"Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."</p>
             
             <div class="flex flex-col gap-4 items-center">
                 <a href="mailto:contact@wonderwaytourcameroon.com" class="text-white font-bold hover:text-yellow-500 transition tracking-widest text-xs uppercase border-b border-white/10 pb-2">contact@wonderwaytourcameroon.com</a>
@@ -160,26 +159,23 @@
             </div>
             
             <div class="mt-20 pt-10 border-t border-white/10">
-                <p class="text-yellow-500 font-black text-[10px] uppercase tracking-[0.3em] mb-4">Admin & Infrastructure Engineering</p>
-                <div class="flex flex-wrap justify-center gap-6">
+                <div class="flex flex-wrap justify-center gap-6 mb-8">
                     <a href="https://frankfru.com" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition">Portfolio</a>
                     <a href="https://github.com/chifru19" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition">GitHub</a>
                     <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition">LinkedIn</a>
                 </div>
-                <p class="mt-6 text-white/20 text-[9px] uppercase tracking-widest font-bold">&copy; 2026 WonderWay Tours. Engineered by Frank Fru.</p>
+                <p class="text-white/20 text-[9px] uppercase tracking-widest font-bold">© 2026 WonderWay Tours. Engineered by Frank Fru.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        let currentCurrency = 'XAF';
-        let currentCategory = 'activities';
-        let cart = [];
+        let currentCurrency = 'XAF'; let currentCategory = 'activities'; let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         /**
-         * Dynamic review fetching system from Google Sheets CSV.
-         * Hardened with retry logic to ensure data appearance.
+         * Dynamic Review Fetcher
+         * Pulls CSV data directly from published Google Sheet
          */
         async function loadReviews() {
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv"; 
@@ -188,8 +184,6 @@
                 const csvData = await response.text();
                 const lines = csvData.split('\n').slice(1); 
                 const container = document.getElementById('dynamic-reviews');
-                if (!container || lines.length === 0) return;
-                
                 container.innerHTML = lines.map(line => {
                     const parts = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     const name = parts[0]?.replace(/"/g, '').trim();
@@ -198,35 +192,31 @@
                     if(!name || !review) return '';
                     return `<div class="review-card bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">"${review}"<p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase tracking-tighter">— ${name}, ${loc}</p></div>`;
                 }).join('');
-            } catch (e) { 
-                console.error("Sync Failure", e); 
-                document.getElementById('dynamic-reviews').innerHTML = '<p class="text-center text-slate-600 col-span-full">Loading live stories...</p>';
-            }
+            } catch (e) { console.error("Database connection failed", e); }
         }
 
         const categories = {
             activities: [
-                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed Experience", "Safety Professional Instructor", "High-Quality Life Jacket Included", "Full Fuel Service Included"] },
-                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Scenic Sunset Beach Ride", "Expert Guided Nature Tour", "Unlimited Photo Sessions", "Friendly Trained Horses"] },
-                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Thrilling Beach Trail Ride", "Professional All-Terrain Gear", "Mandatory Basic Training", "Safety Certified Helmet"] },
-                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Creative Session", "One Complimentary Premium Drink", "Full Art Supplies Provided", "Professional Guided Painting"] },
-                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Deep Cultural Heritage Tour", "Bilingual English/French Guide", "All Site Entry Fees Covered", "Historical Context Briefing"] }
+                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket", "Full Fuel Service"] },
+                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions", "Friendly Horses"] },
+                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear", "Basic Training", "Certified Helmet"] },
+                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Art Supplies", "Premium Drink", "Guided Lesson"] },
+                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "Bilingual Guide", "Entry Fees", "History Briefing"] }
             ],
             couples: [
-                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Luxury Villa Lodging", "Jet ski & Quad Activity Bundle", "Museum & Waterfall Guided Tour", "Professional Content Creation"] },
-                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes All Silver Items", "Romantic Private Beach Dinner", "Evening Private Beach Fire", "Premium Champagne Service"] },
-                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes All Gold Items", "Exclusive Private Boat Cruise", "Industrial Seaport Guided Visit", "24/7 Concierge Support"] }
+                { id: "c1", tier: "Silver", name: "Mini Love", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Activity Bundle", "Guided Tours", "Content Creation"] },
+                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Villa Lodging", "Private Beach Dinner", "Bonfire Night", "Premium Champagne"] },
+                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Villa Stay", "Private Boat Cruise", "Seaport Visit", "24/7 Concierge"] }
             ],
             group4: [
-                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Villa Luxury Lodging", "Water Sports Activity Bundle", "Scenic Waterfall Photo Tour", "Beach Volleyball Setup"] },
-                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes All Silver Items", "Full Group Beach BBQ Dinner", "Private Sip & Paint Session", "Custom Music Experience"] }
+                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Villa Lodging", "Activity Bundle", "Waterfall Tour", "Beach BBQ"] },
+                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Gold Villa Stay", "Full BBQ Setup", "Private Sip & Paint", "Live Music Session"] }
             ],
             group6: [
-                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive Beachfront Villa", "Full Water Sports Activity Pack", "Bilingual Group Guide", "Morning Wellness Session"] }
+                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive Villa", "Water Sports Pack", "Group Guide", "Morning Wellness"] }
             ],
             events: [
-                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Full Themed Floral Decoration", "Custom Wedding Cake & Music", "Premium Catering Service", "Private Event Security"] },
-                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building Exercises", "Dedicated Workshop Space", "Executive Group Catering", "Audio/Visual Equipment Setup"] }
+                { id: "ev1", tier: "Custom", name: "Beach Wedding", price: 0, img: "images/group-action.jpg", features: ["Full Decoration", "Wedding Cake", "Catering Service", "Private Security"] }
             ]
         };
 
@@ -240,8 +230,7 @@
             const idx = cart.findIndex(i => i.id === id);
             if (idx > -1) cart.splice(idx, 1);
             else cart.push({ id, name, price: Number(price) });
-            updateCartUI();
-            switchCategory(currentCategory);
+            updateCartUI(); switchCategory(currentCategory);
         }
 
         function updateCartUI() {
@@ -255,8 +244,7 @@
 
         function updateCurrency() {
             currentCurrency = document.getElementById('currency-select').value;
-            switchCategory(currentCategory);
-            updateCartUI();
+            switchCategory(currentCategory); updateCartUI();
         }
 
         function processPayment() {
@@ -272,23 +260,10 @@
             const grid = document.getElementById('package-grid');
             grid.innerHTML = (categories[cat] || []).map(item => {
                 const sel = cart.some(c => c.id === item.id);
-                return `
-                <div class="package-card ${sel ? 'selected-card' : ''}">
-                    <div class="relative h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
-                    <div class="p-8 flex flex-col flex-grow">
-                        <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">${item.tier}</span>
-                        <h4 class="text-2xl font-black mb-1 hero-font">${item.name}</h4>
-                        <p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p>
-                        <ul class="space-y-3 mb-8 flex-grow">
-                            ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
-                        </ul>
-                        <button onclick="toggleCart('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 ${sel ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">${sel ? 'Selected ✓' : 'Add to Trip'}</button>
-                    </div>
-                </div>`;
+                return `<div class="package-card ${sel ? 'selected-card' : ''}"><div class="relative h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div><div class="p-8 flex flex-col flex-grow"><span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">${item.tier}</span><h4 class="text-2xl font-black mb-1 hero-font">${item.name}</h4><p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p><ul class="space-y-3 mb-8 flex-grow">${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}</ul><button onclick="toggleCart('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 ${sel ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">${sel ? 'Selected ✓' : 'Add to Trip'}</button></div></div>`;
             }).join('');
         }
 
-        // Initialize Application Suite
         window.onload = () => { loadReviews(); switchCategory('activities'); };
     </script>
 </body>
