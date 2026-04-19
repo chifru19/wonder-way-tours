@@ -73,13 +73,11 @@
         </div>
         
         <div class="flex items-center gap-4">
-            <div class="relative group">
-                <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 border border-slate-700 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg px-3 py-2 outline-none cursor-pointer hover:border-yellow-500 transition-colors">
-                    <option value="XAF">CFA Franc</option>
-                    <option value="EUR">Euro (€)</option>
-                    <option value="USD">Dollar ($)</option>
-                </select>
-            </div>
+            <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 border border-slate-700 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg px-3 py-2 outline-none cursor-pointer hover:border-yellow-500 transition-colors">
+                <option value="XAF">CFA Franc</option>
+                <option value="EUR">Euro (€)</option>
+                <option value="USD">Dollar ($)</option>
+            </select>
 
             <div class="flex items-center gap-6 border-l border-slate-800 pl-6">
                 <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-tiktok"></i></a>
@@ -108,7 +106,7 @@
         <section id="feedback" class="mt-32 border-t border-slate-800 pt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">No login required. Share your experience via WhatsApp!</p>
+                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">No login required. Share your experience!</p>
             </div>
             
             <div class="max-w-4xl mx-auto text-center bg-slate-800/50 p-12 rounded-[32px] border border-slate-700">
@@ -121,17 +119,6 @@
                    Submit A Review via WhatsApp
                 </a>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
-                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
-                    "The Jet Ski adventure was incredible. Booking was so simple!"
-                    <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Marc A., Douala</p>
-                </div>
-                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
-                    "Best hospitality in Kribi. Highly recommend the Couples package."
-                    <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Sarah L., Yaoundé</p>
-                </div>
-            </div>
         </section>
     </main>
 
@@ -141,13 +128,13 @@
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">0 Selected</p>
                 <h3 id="cart-total" class="text-2xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all">
+            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-2xl">
                 Book & Pay via WhatsApp
             </button>
         </div>
     </div>
 
-    <footer class="relative min-h-[600px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
+    <footer class="relative min-h-[800px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
         <div class="absolute inset-0 z-0">
             <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-80">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
@@ -166,13 +153,15 @@
                    Book Your Escape
                 </a>
             </div>
-            <div class="mt-12 flex justify-center gap-6">
-                <a href="https://frankfru.com" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">Portfolio</a>
-                <a href="https://github.com/chifru19" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">GitHub</a>
-                <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-yellow-500 transition">LinkedIn</a>
-            </div>
-            <div class="mt-8 pt-8 border-t border-white/10">
-                <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">
+
+            <div class="mt-20 pt-10 border-t border-white/10">
+                <p class="text-yellow-500 font-black text-[10px] uppercase tracking-[0.3em] mb-4">Technical Admin & Infrastructure</p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="https://frankfru.com" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition"><i class="fas fa-globe mr-2"></i>Portfolio</a>
+                    <a href="https://github.com/chifru19" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition"><i class="fab fa-github mr-2"></i>GitHub</a>
+                    <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
+                </div>
+                <p class="mt-6 text-white/20 text-[9px] uppercase tracking-widest font-bold">
                     &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
                 </p>
             </div>
@@ -188,31 +177,27 @@
 
         const categories = {
             activities: [
-                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included"] },
-                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions"] },
-                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear"] },
-                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies"] },
-                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide"] }
+                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included", "Fuel Included"] },
+                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions", "Friendly Horses"] },
+                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear", "Basic Training", "Safety Helmet"] },
+                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies", "Guided Painting"] },
+                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide", "Entry Fees", "Photography Allowed"] }
             ],
             couples: [
-                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Content Creation"] },
-                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Dinner", "Private Beach Fire"] },
-                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
+                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad Sessions", "Museum & Falls Tour", "Content Creation Support"] },
+                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Beach Dinner", "Private Beach Fire", "Premium Villa Stay"] },
+                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit", "Champagne Service"] }
             ],
             group4: [
-                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
-                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint"] },
-                { id: "g4_3", tier: "Premium", name: "VIP Elite", price: 420000, img: "images/seaport visit.jpg", features: ["Includes Gold", "Luxury Boat Cruise", "Premium Entry"] }
+                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Villa Lodging", "Jet Ski Sessions", "Waterfall Tour", "Beach Bonfire"] },
+                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Beach Dinner", "Sip & Paint Session", "Local Guide"] }
             ],
             group6: [
-                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Group Villa", "Water Sports", "Guide Included"] },
-                { id: "g6_2", tier: "Gold", name: "Golden Getaway", price: 440000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Full Catering", "Bonfire Night"] },
-                { id: "g6_3", tier: "Platinum", name: "Paradise Circle", price: 530000, img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
+                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive Villa", "Water Sports Package", "Guide Included", "Welcome Drinks"] }
             ],
             events: [
-                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
-                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] },
-                { id: "ev3", tier: "Custom", name: "Private Party", price: 0, img: "images/dinner-setup.jpg", features: ["DJ & Sound System", "Beach Bonfire", "Finger Foods"] }
+                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service", "Private Area"] },
+                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering", "AV Setup"] }
             ]
         };
 
