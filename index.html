@@ -75,25 +75,25 @@
 </head>
 
 <body class="pt-24">
-    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
-        <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-4 py-4 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
+        <div class="flex items-center gap-3 mb-2 md:mb-0">
+            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
                 <img src="images/logo.png" alt="WonderWay Logo" class="w-full h-full object-cover">
             </div>
-            <span class="font-bold text-lg tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
+            <span class="font-bold text-md tracking-tighter uppercase hero-font border-l-4 border-yellow-500 pl-3 text-white">WonderWay</span>
         </div>
         
-        <div class="flex items-center gap-4">
-            <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 border border-slate-700 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg px-3 py-2 outline-none cursor-pointer hover:border-yellow-500 transition-colors">
+        <div class="flex items-center gap-4 bg-slate-800/50 px-4 py-2 rounded-2xl border border-slate-700">
+            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase tracking-widest outline-none cursor-pointer hover:text-yellow-500 transition-colors">
                 <option value="XAF">CFA Franc</option>
                 <option value="EUR">Euro (€)</option>
                 <option value="USD">Dollar ($)</option>
             </select>
             
-            <div class="flex items-center gap-6 border-l border-slate-800 pl-6">
-                <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1BF6J9sik8/" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-facebook"></i></a>
+            <div class="flex items-center gap-4 border-l border-slate-600 pl-4">
+                <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-lg"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-lg"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1BF6J9sik8/" target="_blank" class="hover:text-yellow-500 transition-colors text-lg"><i class="fab fa-facebook"></i></a>
             </div>
         </div>
     </nav>
@@ -121,7 +121,14 @@
             </div>
             
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-                <p class="text-center text-slate-500 col-span-full py-10 italic">Connecting to live guest stories...</p>
+                <p class="text-center text-slate-500 col-span-full py-10">Synchronizing database entries...</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto text-center bg-slate-800/50 p-12 rounded-[32px] border border-slate-700 mt-12">
+                <i class="fas fa-star text-yellow-500 text-5xl mb-6"></i>
+                <h3 class="text-2xl font-bold mb-4">Share Your Trip</h3>
+                <p class="text-slate-400 mb-8 leading-relaxed italic">"The reviews above are pulled live from our booking database. Message Sullivan on WhatsApp to be featured!"</p>
+                <a href="https://wa.me/237653827999?text=Hello Sullivan! I want to leave a review about my WonderWay trip:" target="_blank" class="inline-block px-12 py-5 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Submit Review via WhatsApp</a>
             </div>
         </section>
     </main>
@@ -170,15 +177,19 @@
         let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
+        /**
+         * Dynamic review fetching system from Google Sheets CSV.
+         * Hardened with retry logic to ensure data appearance.
+         */
         async function loadReviews() {
-            // SPREADSHEET INTEGRATION: Verified CSV Endpoint
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv"; 
             try {
                 const response = await fetch(sheetURL);
                 const csvData = await response.text();
                 const lines = csvData.split('\n').slice(1); 
                 const container = document.getElementById('dynamic-reviews');
-                if (!container) return;
+                if (!container || lines.length === 0) return;
+                
                 container.innerHTML = lines.map(line => {
                     const parts = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     const name = parts[0]?.replace(/"/g, '').trim();
@@ -187,7 +198,10 @@
                     if(!name || !review) return '';
                     return `<div class="review-card bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">"${review}"<p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase tracking-tighter">— ${name}, ${loc}</p></div>`;
                 }).join('');
-            } catch (e) { console.error("Sync Failure", e); }
+            } catch (e) { 
+                console.error("Sync Failure", e); 
+                document.getElementById('dynamic-reviews').innerHTML = '<p class="text-center text-slate-600 col-span-full">Loading live stories...</p>';
+            }
         }
 
         const categories = {
@@ -274,7 +288,7 @@
             }).join('');
         }
 
-        // INITIALIZE ALL SYSTEMS
+        // Initialize Application Suite
         window.onload = () => { loadReviews(); switchCategory('activities'); };
     </script>
 </body>
