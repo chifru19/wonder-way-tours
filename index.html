@@ -14,6 +14,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Outfit:wght@200;400;800&display=swap');
         
@@ -46,24 +47,24 @@
         .package-card:hover { 
             transform: translateY(-5px); 
             border-color: #fbbf24; 
-            box-shadow: 0 10px 30px -15px rgba(251, 191, 36, 0.3);
+            box-shadow: 0 10px 30px -15px rgba(251, 191, 36, 0.3); 
         }
-
-        .selected-card {
-            border-color: #fbbf24 !important;
-            background: #fbbf2415 !important;
+        
+        .selected-card { 
+            border-color: #fbbf24 !important; 
+            background: #fbbf2415 !important; 
         }
-
-        select {
-            background-image: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+        
+        select { 
+            background-image: none; 
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            appearance: none; 
         }
     </style>
 </head>
-<body class="pt-24">
 
+<body class="pt-24">
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center">
@@ -78,7 +79,7 @@
                 <option value="EUR">Euro (€)</option>
                 <option value="USD">Dollar ($)</option>
             </select>
-
+            
             <div class="flex items-center gap-6 border-l border-slate-800 pl-6">
                 <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-tiktok"></i></a>
                 <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="hover:text-yellow-500 transition-colors text-xl"><i class="fab fa-instagram"></i></a>
@@ -102,31 +103,27 @@
 
     <main class="max-w-7xl mx-auto px-6 py-12 mb-24">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
-
+        
         <section id="feedback" class="mt-32 border-t border-slate-800 pt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">Share your experience via WhatsApp!</p>
+                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">No login required. Share your experience!</p>
             </div>
             
             <div class="max-w-4xl mx-auto text-center bg-slate-800/50 p-12 rounded-[32px] border border-slate-700">
                 <i class="fas fa-comment-dots text-yellow-500 text-5xl mb-6"></i>
                 <h3 class="text-2xl font-bold mb-4">Loved your trip?</h3>
                 <p class="text-slate-400 mb-8 leading-relaxed">Tell us about your WonderWay experience directly on WhatsApp. We feature our favorite guest stories right here!</p>
-                <a href="https://wa.me/237653827999?text=Hello WonderWay! I want to leave a review about my trip:" 
-                   target="_blank"
-                   class="inline-block px-12 py-5 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
-                   Submit A Review via WhatsApp
-                </a>
+                <a href="https://wa.me/237653827999?text=Hello WonderWay! I want to leave a review about my trip:" target="_blank" class="inline-block px-12 py-5 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Submit A Review via WhatsApp</a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
                 <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
-                    "The Jet Ski adventure was incredible. Booking was so simple!"
+                    "The Jet Ski adventure was incredible. High speed, safety gear, and great instructors. Booking was so simple!"
                     <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Marc A., Douala</p>
                 </div>
                 <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 italic text-slate-300">
-                    "Best hospitality in Kribi. Highly recommend the Couples package."
+                    "Best hospitality in Kribi. The Couples Paradise Escape was magical. Highly recommend the sunset bonfire."
                     <p class="mt-4 text-yellow-500 font-bold not-italic text-xs uppercase">— Sarah L., Yaoundé</p>
                 </div>
             </div>
@@ -139,9 +136,7 @@
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">0 Selected</p>
                 <h3 id="cart-total" class="text-2xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all">
-                Book & Pay via WhatsApp
-            </button>
+            <button onclick="processPayment()" class="px-12 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-2xl">Book & Pay via WhatsApp</button>
         </div>
     </div>
 
@@ -154,17 +149,13 @@
         <div class="relative z-10 max-w-2xl mx-auto">
             <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
             <p class="text-yellow-500 font-bold text-xs uppercase tracking-[0.3em] mb-8">Personalized Service & Trust</p>
-            <p class="text-slate-200 text-sm mb-10 italic leading-relaxed">
-                "Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."
-            </p>
+            <p class="text-slate-200 text-sm mb-10 italic leading-relaxed">"Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."</p>
+            
             <div class="flex flex-col gap-4 items-center">
                 <a href="mailto:contact@wonderwaytourcameroon.com" class="text-white font-bold hover:text-yellow-500 transition tracking-widest text-xs uppercase">contact@wonderwaytourcameroon.com</a>
-                <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" 
-                   class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
-                   Book Your Escape
-                </a>
+                <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Book Your Escape</a>
             </div>
-
+            
             <div class="mt-20 pt-10 border-t border-white/10">
                 <p class="text-yellow-500 font-black text-[10px] uppercase tracking-[0.3em] mb-4">Admin & Infrastructure Engineering</p>
                 <div class="flex flex-wrap justify-center gap-6">
@@ -172,9 +163,7 @@
                     <a href="https://github.com/chifru19" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition"><i class="fab fa-github mr-2"></i>GitHub</a>
                     <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
                 </div>
-                <p class="mt-6 text-white/20 text-[9px] uppercase tracking-widest font-bold">
-                    &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
-                </p>
+                <p class="mt-6 text-white/20 text-[9px] uppercase tracking-widest font-bold">&copy; 2026 WonderWay Tours. Engineered by Frank Fru.</p>
             </div>
         </div>
     </footer>
@@ -183,32 +172,33 @@
         let currentCurrency = 'XAF';
         let currentCategory = 'activities';
         let cart = [];
-
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         const categories = {
             activities: [
                 { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included", "Fuel Included"] },
                 { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions", "Friendly Horses"] },
-                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear", "Safety Helmet", "Guided Path"] },
-                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies", "Take Home Canvas"] },
-                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide", "Entry Fees"] }
+                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear", "Basic Training", "Safety Helmet"] },
+                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies", "Guided Painting"] },
+                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide", "Entry Fees", "Museum Entry"] }
             ],
             couples: [
-                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad Sessions", "Museum & Falls Tour"] },
-                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Beach Dinner", "Private Beach Fire"] },
-                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
+                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad Sessions", "Museum & Falls Tour", "Content Creation Support"] },
+                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Beach Dinner", "Private Beach Fire", "Premium Villa Stay"] },
+                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit", "Champagne Service"] }
             ],
             group4: [
-                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Villa Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
-                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint Session"] }
+                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Group Villa Lodging", "Jet Ski Sessions", "Waterfall Tour", "Beach Bonfire"] },
+                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Beach Dinner", "Sip & Paint Session", "Local Guide"] },
+                { id: "g4_3", tier: "Premium", name: "Vip Elite", price: 420000, img: "images/seaport visit.jpg", features: ["Includes Gold", "Private Boat Ride", "Seaport Entry", "VIP Drinks"] }
             ],
             group6: [
-                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive Villa", "Water Sports Package", "Guide Included"] }
+                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive Villa", "Water Sports Package", "Guide Included", "Welcome Drinks"] },
+                { id: "g6_2", tier: "Gold", name: "Golden Getaway", price: 440000, img: "images/sip-paint.jpg", features: ["Includes Silver", "Full Catering", "Bonfire Night", "Custom Music"] }
             ],
             events: [
-                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
-                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] }
+                { id: "ev1", tier: "Custom", name: "Beachside Wedding", price: 0, img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service", "Private Area"] },
+                { id: "ev2", tier: "Corporate", name: "Company Retreat", price: 0, img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering", "AV Setup"] }
             ]
         };
 
@@ -249,7 +239,6 @@
             const items = cart.map(i => `• ${i.name}`).join('%0A');
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             const text = `Hello WonderWay Tours!%0AI want to book:%0A${items}%0A%0ATotal Est: ${formatPrice(total)}`;
-            // FINAL FIXED FORMAT: strictly wa.me/237653827999
             window.open(`https://wa.me/237653827999?text=${text}`, '_blank');
         }
 
@@ -270,14 +259,12 @@
                         <ul class="space-y-3 mb-8 flex-grow">
                             ${item.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
                         </ul>
-                        <button onclick="toggleCart('${item.id}', '${item.name}', ${item.price})" 
-                            class="w-full py-4 ${isSelected ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
-                            ${isSelected ? 'Selected ✓' : 'Add to Trip'}
-                        </button>
+                        <button onclick="toggleCart('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 ${isSelected ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">${isSelected ? 'Selected ✓' : 'Add to Trip'}</button>
                     </div>
                 </div>`;
             }).join('');
         }
+
         window.onload = () => switchCategory('activities');
     </script>
 </body>
