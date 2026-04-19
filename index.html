@@ -238,7 +238,7 @@
         function processPayment() {
             const items = cart.map(i => `• ${i.name}`).join('%0A');
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const text = `Hello WonderWay Tours!%0AI want to book:%0A${items}%0A%0ATotal Est: ${formatPrice(total)}`;
+            const text = `Hello WonderWay Tours!%0AI want to book the following packets:%0A${items}%0A%0ATotal Estimated Price: ${formatPrice(total)}%0APlease confirm my reservation.`;
             window.open(`https://wa.me/237653827999?text=${text}`, '_blank');
         }
 
