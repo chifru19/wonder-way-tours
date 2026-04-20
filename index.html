@@ -116,7 +116,7 @@
         <section id="feedback" class="mt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Real-time stories from our community database</p>
+                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Live Sync from the Community Database</p>
             </div>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
                 <p class="text-center text-slate-500 col-span-full py-10 italic">Synchronizing live reviews...</p>
@@ -167,11 +167,11 @@
         document.getElementById('reviewForm').addEventListener('submit', e => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.disabled = true; btn.innerText = "Publishing to Database...";
+            btn.disabled = true; btn.innerText = "Publishing Story...";
             
             fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
                 .then(r => {
-                    alert("Thank you! Your review is now live.");
+                    alert("Thank you! Your story is now live.");
                     e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review";
                     loadReviews(); 
                 }).catch(err => console.error(err));
@@ -179,20 +179,21 @@
 
         async function loadReviews() {
             try {
-                // cachebuster forces fresh data
+                // cachebuster '&cb=' forces a fresh fetch from Google
                 const response = await fetch(sheetURL + '&cb=' + new Date().getTime());
                 const csvData = await response.text();
-                const lines = csvData.split('\n').slice(1); 
+                const lines = csvData.split('\n').filter(l => l.trim() !== "").slice(1); 
                 const container = document.getElementById('dynamic-reviews');
                 
                 container.innerHTML = lines.map(line => {
                     const parts = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     
-                    // SKIP TIMESTAMP (p[0]) -> Start from B (p[1])
+                    // SKIP TIMESTAMP (parts[0]) -> Start from B (parts[1])
                     const name = parts[1]?.replace(/"/g, '').trim();
                     const loc = parts[2]?.replace(/"/g, '').trim();
                     const review = parts[3]?.replace(/"/g, '').trim();
-                    const stars = parseInt(parts[4]) || 5; 
+                    const starVal = parseInt(parts[4]);
+                    const stars = isNaN(starVal) ? 5 : starVal;
 
                     if(!name || !review) return '';
 
@@ -210,8 +211,8 @@
 
         const categories = {
             activities: [
-                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed Session", "Professional Safety Instructor", "Safety Life Jacket Included", "Fuel and Equipment Service"] },
-                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride", "Guided Nature Tour", "Unlimited Photos", "Trained Horses"] },
+                { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed Session", "Professional Instructor", "Safety Gear Included", "Fuel Service"] },
+                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride", "Guided Nature Tour", "Photo Sessions", "Trained Horses"] },
                 { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear", "Basic Training", "Safety Helmet"] },
                 { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Creative Session", "Complimentary Drink", "Supplies Provided", "Guided Painting"] },
                 { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage Tour", "Bilingual Guide", "Entry Fees Covered", "Historical Briefing"] }
