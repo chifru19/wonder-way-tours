@@ -37,7 +37,7 @@
         .review-card { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Star Selection Glow Effect */
+        /* Star Selection Glow */
         .star-rating label:hover,
         .star-rating label:hover ~ label,
         .star-rating input:checked ~ label {
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="flex items-center gap-4 bg-slate-800/50 p-4 rounded-xl border border-slate-700">
-                        <span class="text-[10px] uppercase font-black text-slate-400 tracking-widest">Your Rating:</span>
+                        <span class="text-[10px] uppercase font-black text-slate-400 tracking-widest">Rating:</span>
                         <div class="star-rating flex flex-row-reverse">
                             <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer text-2xl text-slate-600 transition px-1">★</label>
                             <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer text-2xl text-slate-600 transition px-1">★</label>
@@ -117,7 +117,7 @@
         <section id="feedback" class="mt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Real-time stories from our community database</p>
+                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Live Feed from the WonderWay Database</p>
             </div>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
                 <p class="text-center text-slate-500 col-span-full py-10 italic">Synchronizing live reviews...</p>
@@ -128,7 +128,7 @@
     <footer class="relative min-h-[850px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
         <div class="absolute inset-0 z-0">
             <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-80">
-            <div class="absolute inset-0 bg-gradient-t from-slate-900 via-slate-900/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
         </div>
         <div class="relative z-10 max-w-2xl mx-auto">
             <h3 class="hero-font text-4xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
@@ -169,11 +169,11 @@
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
             btn.disabled = true; 
-            btn.innerText = "Syncing with Database...";
+            btn.innerText = "Publishing Review...";
             
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(r => {
-                    alert("Submission successful! Your review and stars are now part of our Guest Stories.");
+                    alert("Thank you! Your star rating and story are now live on WonderWay.");
                     form.reset(); 
                     btn.disabled = false; 
                     btn.innerText = "Post Live Review";
@@ -193,6 +193,11 @@
                 const lines = csvData.split('\n').slice(1); 
                 const container = document.getElementById('dynamic-reviews');
                 
+                if (lines.length === 0 || lines[0].trim() === "") {
+                    container.innerHTML = '<p class="text-center text-slate-500 col-span-full">Be the first to share your story!</p>';
+                    return;
+                }
+
                 container.innerHTML = lines.map(line => {
                     const parts = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     const name = parts[0]?.replace(/"/g, '').trim();
@@ -216,10 +221,12 @@
                         </div>
                     </div>`;
                 }).join('');
-            } catch (e) { console.error("Database Connection Failed", e); }
+            } catch (e) { 
+                console.error("Database Sync Failed", e); 
+                document.getElementById('dynamic-reviews').innerHTML = '<p class="text-center text-red-500 col-span-full italic">Currently updating database. Refresh in a moment.</p>';
+            }
         }
 
-        // Package and Category logic remains unchanged
         const categories = {
             activities: [
                 { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed Session", "Professional Safety Instructor", "Safety Life Jacket Included", "Fuel and Equipment Service"] },
