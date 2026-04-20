@@ -37,7 +37,6 @@
         .review-card { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Star Rating Interactivity */
         .star-rating label:hover,
         .star-rating label:hover ~ label,
         .star-rating input:checked ~ label {
@@ -117,7 +116,7 @@
         <section id="feedback" class="mt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Live Sync from Google Database</p>
+                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Real-time stories from our community database</p>
             </div>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
                 <p class="text-center text-slate-500 col-span-full py-10 italic">Synchronizing live reviews...</p>
@@ -165,37 +164,35 @@
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwpQ9FZiLRbL695i1Eni-r69KSyCONRsdygRrqKDybZOZCkEXbKd_2S1RRZGaYU7vrC/exec'; 
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv";
 
-        // FORM SUBMISSION logic
         document.getElementById('reviewForm').addEventListener('submit', e => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.disabled = true; btn.innerText = "Syncing with Database...";
+            btn.disabled = true; btn.innerText = "Publishing to Database...";
             
             fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
                 .then(r => {
-                    alert("Thank you! Your story is now live.");
+                    alert("Thank you! Your review is now live.");
                     e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review";
                     loadReviews(); 
                 }).catch(err => console.error(err));
         });
 
-        // FETCH REVIEWS (Skips Timestamp Column)
         async function loadReviews() {
             try {
-                // Cache buster forces latest spreadsheet data
+                // cachebuster forces fresh data
                 const response = await fetch(sheetURL + '&cb=' + new Date().getTime());
                 const csvData = await response.text();
                 const lines = csvData.split('\n').slice(1); 
                 const container = document.getElementById('dynamic-reviews');
                 
                 container.innerHTML = lines.map(line => {
-                    const p = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    const parts = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     
-                    // Skips Index 0 (Timestamp)
-                    const name = p[1]?.replace(/"/g, '').trim();
-                    const loc = p[2]?.replace(/"/g, '').trim();
-                    const review = p[3]?.replace(/"/g, '').trim();
-                    const stars = parseInt(p[4]) || 5; 
+                    // SKIP TIMESTAMP (p[0]) -> Start from B (p[1])
+                    const name = parts[1]?.replace(/"/g, '').trim();
+                    const loc = parts[2]?.replace(/"/g, '').trim();
+                    const review = parts[3]?.replace(/"/g, '').trim();
+                    const stars = parseInt(parts[4]) || 5; 
 
                     if(!name || !review) return '';
 
@@ -205,31 +202,31 @@
                     return `<div class="review-card bg-slate-900 p-8 rounded-2xl border border-slate-800 text-slate-300">
                         <div class="text-yellow-500 mb-2 text-lg">${starHTML}</div>
                         <p class="italic text-sm">"${review}"</p>
-                        <p class="mt-4 text-yellow-500 font-bold text-[10px] uppercase tracking-widest">— ${name}, ${loc}</p>
+                        <p class="mt-4 text-yellow-500 font-bold not-italic text-[10px] uppercase tracking-widest">— ${name}, ${loc}</p>
                     </div>`;
                 }).join('');
-            } catch (e) { console.error("Database Failed", e); }
+            } catch (e) { console.error("Database Sync Failed", e); }
         }
 
         const categories = {
             activities: [
                 { id: "a1", tier: "Single", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed Session", "Professional Safety Instructor", "Safety Life Jacket Included", "Fuel and Equipment Service"] },
-                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Romantic Beach Sunset Ride", "Expert Guided Nature Tour", "Unlimited Photo Sessions", "Friendly Trained Horses"] },
-                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Thrilling Beach Trail Ride", "Professional All-Terrain Gear", "Mandatory Basic Training", "Safety Certified Helmet"] },
-                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Creative Art Session", "One Complimentary Premium Drink", "All Art Supplies Provided", "Professional Guided Painting"] },
-                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Deep Cultural Heritage Tour", "Bilingual English/French Guide", "All Site Entry Fees Covered", "Historical Context Briefing"] }
+                { id: "a2", tier: "Single", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride", "Guided Nature Tour", "Unlimited Photos", "Trained Horses"] },
+                { id: "a3", tier: "Single", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear", "Basic Training", "Safety Helmet"] },
+                { id: "a4", tier: "Single", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Creative Session", "Complimentary Drink", "Supplies Provided", "Guided Painting"] },
+                { id: "a5", tier: "Single", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage Tour", "Bilingual Guide", "Entry Fees Covered", "Historical Briefing"] }
             ],
             couples: [
-                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Luxury Villa Lodging", "Water Sports Activity Bundle", "Museum & Waterfall Guided Tour", "Professional Content Creation"] },
-                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Gold Standard Villa Lodging", "Romantic Private Beach Dinner", "Private Evening Beach Bonfire", "Premium Champagne Service"] },
-                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Executive Premium Villa Stay", "Exclusive Private Boat Cruise", "Industrial Seaport Guided Visit", "24/7 Dedicated Guest Concierge"] }
+                { id: "c1", tier: "Silver", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa Lodging", "Water Sports Bundle", "Museum/Waterfall Tour", "Content Creation"] },
+                { id: "c2", tier: "Gold", name: "Paradise Escape", price: 250000, img: "images/sip-paint.jpg", features: ["Premium Villa Stay", "Private Beach Dinner", "Beach Bonfire", "Champagne Service"] },
+                { id: "c3", tier: "Premium", name: "Royal Romance", price: 350000, img: "images/royal romance.jpg", features: ["Executive Villa Stay", "Private Boat Cruise", "Seaport Guided Visit", "24/7 Concierge"] }
             ],
             group4: [
-                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Large Group Villa Lodging", "Water Sports Activity Bundle", "Scenic Waterfall Photo Tour", "Group Beach BBQ Setup"] },
-                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Premium Group Villa Lodging", "Full Group Beach BBQ Dinner", "Private Group Sip & Paint", "Live Background Music Session"] }
+                { id: "g4_1", tier: "Silver", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Large Villa Lodging", "Water Sports Activity Pack", "Waterfall Photo Tour", "Group Beach BBQ"] },
+                { id: "g4_2", tier: "Gold", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Premium Group Villa", "Full BBQ Dinner", "Private Sip & Paint", "Live Background Music"] }
             ],
             group6: [
-                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive 6-Person Beach Villa", "Full Water Sports Activity Pack", "Professional Bilingual Group Guide", "Morning Group Wellness Session"] }
+                { id: "g6_1", tier: "Silver", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Executive 6-Person Villa", "Full Activity Pack", "Bilingual Guide", "Wellness Session"] }
             ]
         };
 
