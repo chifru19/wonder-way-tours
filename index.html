@@ -37,7 +37,7 @@
         .review-card { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Star Selection Glow */
+        /* Star Rating Interactivity */
         .star-rating label:hover,
         .star-rating label:hover ~ label,
         .star-rating input:checked ~ label {
@@ -96,7 +96,7 @@
                         <input type="text" name="Name" placeholder="Full Name" class="w-full p-4 rounded-xl transition" required>
                         <input type="text" name="Location" placeholder="Your City" class="w-full p-4 rounded-xl transition" required>
                     </div>
-
+                    
                     <div class="flex items-center gap-4 bg-slate-800/50 p-4 rounded-xl border border-slate-700">
                         <span class="text-[10px] uppercase font-black text-slate-400 tracking-widest">Rating:</span>
                         <div class="star-rating flex flex-row-reverse">
@@ -117,7 +117,7 @@
         <section id="feedback" class="mt-20">
             <div class="text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter">Guest <span class="text-yellow-500">Stories</span></h2>
-                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Live Feed from the WonderWay Database</p>
+                <p class="text-slate-400 text-xs uppercase mt-2 italic tracking-widest">Live Sync from Google Database</p>
             </div>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
                 <p class="text-center text-slate-500 col-span-full py-10 italic">Synchronizing live reviews...</p>
@@ -163,68 +163,52 @@
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwpQ9FZiLRbL695i1Eni-r69KSyCONRsdygRrqKDybZOZCkEXbKd_2S1RRZGaYU7vrC/exec'; 
-        const form = document.getElementById('reviewForm');
-        
-        form.addEventListener('submit', e => {
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv";
+
+        // FORM SUBMISSION logic
+        document.getElementById('reviewForm').addEventListener('submit', e => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.disabled = true; 
-            btn.innerText = "Publishing Review...";
+            btn.disabled = true; btn.innerText = "Syncing with Database...";
             
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
                 .then(r => {
-                    alert("Thank you! Your star rating and story are now live on WonderWay.");
-                    form.reset(); 
-                    btn.disabled = false; 
-                    btn.innerText = "Post Live Review";
+                    alert("Thank you! Your story is now live.");
+                    e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review";
                     loadReviews(); 
-                }).catch(err => {
-                    console.error('Submission Error:', err.message);
-                    btn.disabled = false;
-                    btn.innerText = "Try Again";
-                });
+                }).catch(err => console.error(err));
         });
 
+        // FETCH REVIEWS (Skips Timestamp Column)
         async function loadReviews() {
-            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv"; 
             try {
-                const response = await fetch(sheetURL);
+                // Cache buster forces latest spreadsheet data
+                const response = await fetch(sheetURL + '&cb=' + new Date().getTime());
                 const csvData = await response.text();
                 const lines = csvData.split('\n').slice(1); 
                 const container = document.getElementById('dynamic-reviews');
                 
-                if (lines.length === 0 || lines[0].trim() === "") {
-                    container.innerHTML = '<p class="text-center text-slate-500 col-span-full">Be the first to share your story!</p>';
-                    return;
-                }
-
                 container.innerHTML = lines.map(line => {
-                    const parts = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    const name = parts[0]?.replace(/"/g, '').trim();
-                    const loc = parts[1]?.replace(/"/g, '').trim();
-                    const review = parts[2]?.replace(/"/g, '').trim();
-                    const stars = parseInt(parts[3]) || 5; 
+                    const p = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    
+                    // Skips Index 0 (Timestamp)
+                    const name = p[1]?.replace(/"/g, '').trim();
+                    const loc = p[2]?.replace(/"/g, '').trim();
+                    const review = p[3]?.replace(/"/g, '').trim();
+                    const stars = parseInt(p[4]) || 5; 
 
                     if(!name || !review) return '';
 
                     let starHTML = '';
-                    for(let i=0; i<5; i++) {
-                        starHTML += i < stars ? '★' : '☆';
-                    }
+                    for(let i=0; i<5; i++) starHTML += i < stars ? '★' : '☆';
 
                     return `<div class="review-card bg-slate-900 p-8 rounded-2xl border border-slate-800 text-slate-300">
-                        <div class="text-yellow-500 mb-3 text-lg font-black">${starHTML}</div>
-                        <p class="italic text-sm leading-relaxed mb-4">"${review}"</p>
-                        <div class="border-t border-slate-800 pt-3">
-                            <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">— ${name}</span>
-                            <span class="text-slate-500 text-[9px] uppercase tracking-widest ml-1">| ${loc}</span>
-                        </div>
+                        <div class="text-yellow-500 mb-2 text-lg">${starHTML}</div>
+                        <p class="italic text-sm">"${review}"</p>
+                        <p class="mt-4 text-yellow-500 font-bold text-[10px] uppercase tracking-widest">— ${name}, ${loc}</p>
                     </div>`;
                 }).join('');
-            } catch (e) { 
-                console.error("Database Sync Failed", e); 
-                document.getElementById('dynamic-reviews').innerHTML = '<p class="text-center text-red-500 col-span-full italic">Currently updating database. Refresh in a moment.</p>';
-            }
+            } catch (e) { console.error("Database Failed", e); }
         }
 
         const categories = {
@@ -250,7 +234,6 @@
         };
 
         function formatPrice(v) {
-            if (v === 0) return "Inquire";
             const conv = v * rates[currentCurrency];
             return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
         }
@@ -291,7 +274,20 @@
             const grid = document.getElementById('package-grid');
             grid.innerHTML = (categories[cat] || []).map(i => {
                 const s = cart.some(c => c.id === i.id);
-                return `<div class="package-card ${s ? 'selected-card' : ''}"><div class="relative h-48 overflow-hidden"><img src="${i.img}" class="w-full h-full object-cover"></div><div class="p-8 flex flex-col flex-grow"><span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">${i.tier}</span><h4 class="text-2xl font-black mb-1 hero-font">${i.name}</h4><p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(i.price)}</p><ul class="space-y-3 mb-8 flex-grow">${i.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}</ul><button onclick="toggleCart('${i.id}', '${i.name}', ${i.price})" class="w-full py-4 ${s ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">${s ? 'Selected ✓' : 'Add to Trip'}</button></div></div>`;
+                return `<div class="package-card ${s ? 'selected-card' : ''}">
+                    <div class="relative h-48 overflow-hidden"><img src="${i.img}" class="w-full h-full object-cover"></div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <span class="text-yellow-500 font-black text-[10px] uppercase tracking-widest">${i.tier}</span>
+                        <h4 class="text-2xl font-black mb-1 hero-font">${i.name}</h4>
+                        <p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(i.price)}</p>
+                        <ul class="space-y-3 mb-8 flex-grow">
+                            ${i.features.map(f => `<li class="text-xs text-slate-400 flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> ${f}</li>`).join('')}
+                        </ul>
+                        <button onclick="toggleCart('${i.id}', '${i.name}', ${i.price})" class="w-full py-4 ${s ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
+                            ${s ? 'Selected ✓' : 'Add to Trip'}
+                        </button>
+                    </div>
+                </div>`;
             }).join('');
         }
         
