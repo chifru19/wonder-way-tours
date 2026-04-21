@@ -22,100 +22,60 @@
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
         
-        .package-card { 
+        /* High-End Card Styling */
+        .package-card, .service-row { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            border-radius: 24px; 
-            overflow: hidden; 
             background: rgba(30, 41, 59, 0.4); 
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
         
-        .package-card:hover { 
-            transform: translateY(-8px); 
-            border-color: #fbbf24; 
-            box-shadow: 0 20px 40px -15px rgba(251, 191, 36, 0.2); 
-        }
+        .package-card { border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        .selected-card { 
-            border-color: #fbbf24 !important; 
-            background: rgba(251, 191, 36, 0.1) !important; 
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
-        }
+        .service-row { border-radius: 20px; cursor: pointer; margin-bottom: 12px; }
+        .service-row:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.05); }
         
-        input, textarea { 
-            background: #1e293b !important; 
-            border: 1px solid #334155 !important; 
-            color: white !important; 
-            transition: all 0.3s ease;
-        }
+        .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.1) !important; }
         
-        input:focus, textarea:focus { 
-            border-color: #fbbf24 !important; 
-            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
-            outline: none; 
-        }
+        /* Interactive Form Elements */
+        input, textarea { background: #1e293b !important; border: 1px solid #334155 !important; color: white !important; transition: all 0.3s ease; }
+        input:focus, textarea:focus { border-color: #fbbf24 !important; outline: none; box-shadow: 0 0 15px rgba(251, 191, 36, 0.1); }
         
-        .review-card { 
-            animation: fadeIn 0.8s ease-out forwards; 
-            opacity: 0; 
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-        }
-        
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(20px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        /* Animations */
+        .review-card { animation: fadeIn 0.8s ease-out forwards; opacity: 0; background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         .star-rating label { transition: color 0.2s ease; color: #334155; }
-        .star-rating label:hover,
-        .star-rating label:hover ~ label,
-        .star-rating input:checked ~ label {
-            color: #fbbf24 !important;
-        }
+        .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #fbbf24 !important; }
         
-        #checkout-bar { 
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-        }
-
-        .nav-link { position: relative; }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #fbbf24;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; }
+        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 10px; }
     </style>
 </head>
 
 <body class="pt-24">
-    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-lg px-6 py-5 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-4 mb-4 md:mb-0">
-            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white shadow-lg">
+            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
                 <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col text-left">
                 <span class="font-black text-xl tracking-tighter uppercase hero-font text-white leading-none">WonderWay</span>
-                <span class="text-[8px] uppercase tracking-[0.3em] text-yellow-500 font-bold">Kribi Collection</span>
+                <span class="text-[8px] uppercase tracking-[0.4em] text-yellow-500 font-black">Luxury Collection</span>
             </div>
         </div>
         
         <div class="flex items-center gap-8">
-            <div class="hidden lg:flex items-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                <a href="#package-grid" class="nav-link hover:text-white transition">Experiences</a>
-                <a href="#review-submission" class="nav-link hover:text-white transition">Reviews</a>
-                <a href="#feedback" class="nav-link hover:text-white transition">Stories</a>
+            <div class="hidden lg:flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <a href="#booking-engine" class="hover:text-white transition">Service Manifest</a>
+                <a href="#review-submission" class="hover:text-white transition">Reviews</a>
+                <a href="#feedback" class="hover:text-white transition">Stories</a>
             </div>
-            <div class="flex items-center gap-4 bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700">
-                <i class="fas fa-globe text-yellow-500 text-xs"></i>
+            <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 flex items-center gap-3">
+                <i class="fas fa-coins text-yellow-500 text-xs"></i>
                 <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
                     <option value="XAF">CFA Franc (XAF)</option>
                     <option value="EUR">Euro (€)</option>
@@ -125,278 +85,207 @@
         </div>
     </nav>
 
-    <header class="pt-24 pb-16 px-6 text-center relative overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-yellow-500/5 blur-[120px] rounded-full"></div>
+    <header class="pt-24 pb-12 px-6 text-center">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">
-            Discover <span class="text-yellow-500">Kribi</span>
+            The Kribi <span class="text-yellow-500">Menu</span>
         </h1>
-        <p class="max-w-xl mx-auto text-slate-400 text-sm md:text-base mb-12 italic uppercase tracking-[0.2em] leading-relaxed">
-            "Tailor-made luxury adventures in the heart of Cameroon's coast"
+        <p class="max-w-2xl mx-auto text-slate-400 text-sm md:text-base mb-12 italic uppercase tracking-[0.2em] leading-relaxed">
+            "Design your dream coastal escape. Select individual services or full packages to build your personalized itinerary."
         </p>
-        
-        <div class="flex flex-wrap justify-center gap-3">
-            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Individual Activities</button>
-            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Couple Getaways</button>
-            <button onclick="switchCategory('groups')" id="tab-groups" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Group Expeditions</button>
-        </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-12 mb-32">
-        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            </div>
+    <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
         
-        <section id="review-submission" class="mt-40 pt-20 border-t border-slate-800/50">
-            <div class="max-w-2xl mx-auto relative">
-                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-yellow-500 text-black px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl">Community Voice</div>
-                <div class="bg-slate-900/50 backdrop-blur-xl p-10 md:p-16 rounded-[40px] border border-slate-800 shadow-2xl">
-                    <h2 class="hero-font text-4xl font-black uppercase mb-8 text-center leading-none">Leave Your <span class="text-yellow-500 text-glow">Mark</span></h2>
-                    <form id="reviewForm" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-[10px] uppercase font-black text-slate-500 tracking-widest ml-2">Explorer Name</label>
-                                <input type="text" name="Name" placeholder="e.g. Frank Fru" class="w-full p-5 rounded-2xl" required>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-[10px] uppercase font-black text-slate-500 tracking-widest ml-2">Origin City</label>
-                                <input type="text" name="Location" placeholder="e.g. Douala, CM" class="w-full p-5 rounded-2xl" required>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-800">
-                            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                                <span class="text-[10px] uppercase font-black text-slate-400 tracking-widest">Experience Rating</span>
-                                <div class="star-rating flex flex-row-reverse gap-2">
-                                    <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer text-3xl transition-all">★</label>
-                                    <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer text-3xl transition-all">★</label>
-                                    <input type="radio" name="Stars" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer text-3xl transition-all">★</label>
-                                    <input type="radio" name="Stars" id="star-2" value="2" class="hidden"><label for="star-2" class="cursor-pointer text-3xl transition-all">★</label>
-                                    <input type="radio" name="Stars" id="star-1" value="1" class="hidden"><label for="star-1" class="cursor-pointer text-3xl transition-all">★</label>
-                                </div>
-                            </div>
-                        </div>
+        <div class="flex flex-col items-center mb-12 text-center">
+            <span class="text-yellow-500 font-black text-[10px] uppercase tracking-[0.4em] mb-2">Featured Experiences</span>
+            <h2 class="hero-font text-3xl font-black uppercase">Top <span class="text-slate-500">Picks</span></h2>
+        </div>
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-32">
+            </div>
 
+        <section id="booking-engine" class="mt-32">
+            <div class="flex flex-col items-center text-center mb-12">
+                <h2 class="hero-font text-4xl font-black uppercase tracking-tighter text-white">Service <span class="text-yellow-500">Manifest</span></h2>
+                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Click rows to add services directly to your trip</p>
+            </div>
+            <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-4 md:p-10">
+                <div id="service-list" class="space-y-4">
+                    </div>
+            </div>
+        </section>
+
+        <section id="review-submission" class="mt-40 pt-20 border-t border-slate-800/50">
+            <div class="max-w-2xl mx-auto bg-slate-900/80 p-10 md:p-16 rounded-[40px] border border-slate-800 shadow-2xl relative">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-yellow-500 text-black px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest">Guest Voice</div>
+                <h2 class="hero-font text-4xl font-black uppercase mb-8 text-center leading-none">Share Your <span class="text-yellow-500">Adventure</span></h2>
+                <form id="reviewForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
-                            <label class="text-[10px] uppercase font-black text-slate-500 tracking-widest ml-2">Your Story</label>
-                            <textarea name="Review" placeholder="Describe the waterfalls, the beach, or the hospitality..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
+                            <label class="text-[9px] uppercase font-black text-slate-500 tracking-widest ml-2">Guest Identity</label>
+                            <input type="text" name="Name" placeholder="Full Name" class="w-full p-5 rounded-2xl" required>
                         </div>
-                        
-                        <button type="submit" id="submitBtn" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-[0.2em] hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-yellow-500/10">Publish to Live Database</button>
-                    </form>
-                </div>
+                        <div class="space-y-2">
+                            <label class="text-[9px] uppercase font-black text-slate-500 tracking-widest ml-2">Home Base</label>
+                            <input type="text" name="Location" placeholder="City, Country" class="w-full p-5 rounded-2xl" required>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <span class="text-[10px] uppercase font-black text-slate-400">How was the hospitality?</span>
+                        <div class="star-rating flex flex-row-reverse">
+                            <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Stars" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Stars" id="star-2" value="2" class="hidden"><label for="star-2" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Stars" id="star-1" value="1" class="hidden"><label for="star-1" class="cursor-pointer text-3xl px-1">★</label>
+                        </div>
+                    </div>
+                    <textarea name="Review" placeholder="Describe the waves, the food, and the vibes..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
+                    <button type="submit" id="submitBtn" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-lg shadow-yellow-500/10">Publish to Live Database</button>
+                </form>
             </div>
         </section>
 
         <section id="feedback" class="mt-40">
-            <div class="flex flex-col items-center text-center mb-16">
-                <span class="text-yellow-500 font-black text-[10px] uppercase tracking-[0.4em] mb-4">The Wall of Fame</span>
+            <div class="text-center mb-16">
                 <h2 class="hero-font text-5xl font-black uppercase tracking-tighter">Guest <span class="text-slate-500">Stories</span></h2>
-                <div class="w-20 h-1 bg-yellow-500 mt-6 rounded-full"></div>
+                <div class="w-20 h-1 bg-yellow-500 mx-auto mt-6 rounded-full"></div>
             </div>
-            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="col-span-full flex flex-col items-center py-20 opacity-50">
-                    <i class="fas fa-circle-notch fa-spin text-3xl text-yellow-500 mb-4"></i>
-                    <p class="text-xs uppercase font-black tracking-widest">Establishing secure connection...</p>
-                </div>
+            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="col-span-full text-center py-20 opacity-50 italic">Establishing live data sync...</div>
             </div>
         </section>
     </main>
 
-    <div id="checkout-bar" class="fixed bottom-0 left-0 w-full bg-[#0f172a]/95 backdrop-blur-xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-6">
-                <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20">
-                    <i class="fas fa-suitcase-rolling text-yellow-500 text-xl"></i>
-                </div>
                 <div class="text-left">
-                    <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">0 Items in Itinerary</p>
-                    <h3 id="cart-total" class="text-3xl font-black hero-font uppercase leading-none">Total: 0 CFA</h3>
+                    <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-1">0 Selected</p>
+                    <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
                 </div>
             </div>
             <div class="flex gap-4 w-full md:w-auto">
-                <button onclick="clearItinerary()" class="px-6 py-4 border border-slate-700 text-slate-400 font-bold rounded-2xl uppercase text-[10px] hover:bg-slate-800 transition">Clear</button>
-                <button onclick="processWhatsApp()" class="flex-grow md:flex-grow-0 px-12 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white hover:scale-105 transition-all flex items-center justify-center gap-3">
-                    <i class="fab fa-whatsapp text-lg"></i>
-                    Confirm via WhatsApp
-                </button>
+                <button onclick="clearCart()" class="px-8 py-5 border border-slate-700 text-slate-400 font-bold rounded-2xl uppercase text-[10px] hover:bg-slate-800 transition">Reset</button>
+                <button onclick="processWhatsApp()" class="flex-grow md:flex-grow-0 px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white hover:scale-105 transition-all">Send to WhatsApp</button>
             </div>
         </div>
     </div>
 
     <footer class="bg-slate-900 pt-32 pb-16 px-6 border-t border-slate-800 text-center relative overflow-hidden">
         <div class="max-w-4xl mx-auto relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-left">
-                <div class="space-y-4">
-                    <h4 class="font-black uppercase text-xs tracking-widest text-yellow-500">Contact Info</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed italic">Direct bookings via WhatsApp are prioritized for faster logistics and custom scheduling.</p>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="font-black uppercase text-xs tracking-widest text-yellow-500">The Mission</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed italic">Bringing affordable luxury to Kribi while supporting local boatmen and guides directly.</p>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="font-black uppercase text-xs tracking-widest text-yellow-500">Developer</h4>
-                    <div class="flex flex-col gap-2">
-                        <a href="https://frankfru.com" target="_blank" class="text-white text-xs hover:text-yellow-500 transition">Frank Fru Portfolio</a>
-                        <a href="https://github.com/chifru19" target="_blank" class="text-white text-xs hover:text-yellow-500 transition">GitHub Profile</a>
-                        <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white text-xs hover:text-yellow-500 transition">LinkedIn Network</a>
-                    </div>
-                </div>
+            <div class="flex gap-10 justify-center mb-20">
+                <a href="https://frankfru.com" target="_blank" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-[0.3em]">Portfolio</a>
+                <a href="https://github.com/chifru19" target="_blank" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-[0.3em]">GitHub</a>
+                <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-slate-500 hover:text-white transition uppercase text-[10px] font-black tracking-[0.3em]">LinkedIn</a>
             </div>
-            
-            <div class="pt-16 border-t border-slate-800 flex flex-col items-center">
-                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center mb-6">
-                    <i class="fas fa-anchor text-slate-500 text-sm"></i>
-                </div>
-                <p class="text-slate-600 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon</p>
-            </div>
+            <p class="text-slate-600 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours. Developed by Frank Fru.</p>
         </div>
     </footer>
 
     <script>
-        /** * APPLICATION CORE STATE
-         **/
+        /** STATE MANAGEMENT **/
         let currentCurrency = 'XAF';
-        let currentCategory = 'activities';
         let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
-        /** * DATABASE CONFIGURATION 
-         **/
+        /** SERVICE DATA REPOSITORY **/
+        const services = [
+            { id: "a1", cat: "Activity", name: "High-Speed Jet Ski", price: 10000, img: "images/jetski-action.jpg", features: ["15 Minutes", "Safety Guard"] },
+            { id: "a2", cat: "Activity", name: "Coastal Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Route", "Guided Trip"] },
+            { id: "a3", cat: "Activity", name: "Beach Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Trail Ride", "Helmet Included"] },
+            { id: "a4", cat: "Activity", name: "Beach Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Art Materials", "1 Drink"] },
+            { id: "a5", cat: "Activity", name: "Museum Entry", price: 2000, img: "images/museum.jpg", features: ["Cultural Heritage", "Bilingual Guide"] },
+            { id: "c1", cat: "Package", name: "Silver Couple Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["Villa Stay", "Activity Pack"] },
+            { id: "c2", cat: "Package", name: "Paradise Gold Stay", price: 250000, img: "images/sip-paint.jpg", features: ["Executive Villa", "Dinner"] },
+            { id: "c3", cat: "Package", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg", features: ["VIP Suite", "Boat Cruise"] },
+            { id: "g1", cat: "Package", name: "Crew Chill (Group 4)", price: 230000, img: "images/group-action.jpg", features: ["Large Villa", "Beach BBQ"] },
+            { id: "g2", cat: "Package", name: "Vibe Odyssey (Group 6)", price: 270000, img: "images/group-action.jpg", features: ["Luxury Stay", "Full Group Access"] }
+        ];
+
+        /** DATABASE CONNECTIONS **/
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwpQ9FZiLRbL695i1Eni-r69KSyCONRsdygRrqKDybZOZCkEXbKd_2S1RRZGaYU7vrC/exec';
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
 
-        /**
-         * SERVICE REPOSITORY 
-         **/
-        const services = {
-            activities: [
-                { id: "a1", name: "Jet Ski Session", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High Speed", "Safety Instructor", "Premium Equipment"] },
-                { id: "a2", name: "Beach Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Sunset Shore Route", "Guided Nature Walk", "Photography Included"] },
-                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Beach Forest Trail", "Safety Helmet", "All-Terrain Vehicle"] },
-                { id: "a4", name: "Sip & Paint Kribi", price: 15000, img: "images/sip-paint.jpg", features: ["Art Materials", "1 Premium Drink", "Beachside Studio"] },
-                { id: "a5", name: "Lobe Museum Tour", price: 2000, img: "images/museum.jpg", features: ["Cultural History", "Bilingual Guide", "Heritage Sites"] }
-            ],
-            couples: [
-                { id: "c1", name: "Silver Romantic", price: 90000, img: "images/couple paradis escape.jpg", features: ["Luxury Villa Lodging", "Water Sports Entry", "Private Photo Shoot"] },
-                { id: "c2", name: "Paradise Gold", price: 250000, img: "images/sip-paint.jpg", features: ["Executive Beach Villa", "Candlelight Shore Dinner", "Night Bonfire"] },
-                { id: "c3", tier: "VIP", name: "Royal Kribi Escape", price: 350000, img: "images/royal romance.jpg", features: ["Luxury Ocean Suite", "Private Boat Cruise", "Personal Concierge"] }
-            ],
-            groups: [
-                { id: "g1", name: "Group of 4 Explorer", price: 230000, img: "images/group-action.jpg", features: ["Large Shared Villa", "Group BBQ Setup", "Waterfall Group Trip"] },
-                { id: "g2", name: "Group of 6 Vibe", price: 270000, img: "images/group-action.jpg", features: ["Premium Group Stay", "Bilingual Support", "All-Day Beach Access"] }
-            ]
-        };
-
-        /**
-         * REVIEW HANDLER: SUBMISSION
-         **/
         document.getElementById('reviewForm').addEventListener('submit', e => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.disabled = true; 
-            btn.innerText = "Syncing with Cloud Database...";
-            
+            btn.disabled = true; btn.innerText = "Syncing with Cloud...";
             fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
-                .then(r => {
-                    alert("Story Published! Your review is now live in Guest Stories.");
-                    e.target.reset(); 
-                    btn.disabled = false; 
-                    btn.innerText = "Publish to Live Database";
-                    loadReviews(); 
-                }).catch(err => {
-                    console.error('Database Error:', err.message);
-                    btn.disabled = false;
-                    btn.innerText = "Try Again";
-                });
+                .then(() => { alert("Story Published!"); e.target.reset(); btn.disabled = false; btn.innerText = "Publish to Live Database"; loadReviews(); })
+                .catch(err => console.error(err));
         });
 
-        /**
-         * REVIEW HANDLER: FETCHING (TIMESTAMP SAFE)
-         **/
         async function loadReviews() {
             try {
-                // Fetch with cache-buster timestamp
                 const response = await fetch(sheetURL + '&cb=' + new Date().getTime());
-                const csvData = await response.text();
-                const lines = csvData.split('\n').filter(l => l.trim() !== "").slice(1);
+                const data = await response.text();
+                const rows = data.split('\n').filter(r => r.trim() !== "");
+                
+                // HEADER DISCOVERY (The logic that fixes the review issue)
+                const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                const nameIdx = headers.indexOf('Name');
+                const locIdx = headers.indexOf('Location');
+                const revIdx = headers.indexOf('Review');
+                const starIdx = headers.indexOf('Stars');
+                
+                const lines = rows.slice(1);
                 const container = document.getElementById('dynamic-reviews');
                 
-                if(lines.length === 0) {
-                    container.innerHTML = '<p class="col-span-full text-center text-slate-500 italic py-10">No stories synced yet. Start the movement.</p>';
-                    return;
-                }
-
                 container.innerHTML = lines.map(line => {
                     const p = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    // p[0] is Timestamp, we map p[1] to p[4]
-                    const name = p[1]?.replace(/"/g, '').trim();
-                    const loc = p[2]?.replace(/"/g, '').trim();
-                    const rev = p[3]?.replace(/"/g, '').trim();
-                    const starVal = parseInt(p[4]) || 5;
+                    const name = p[nameIdx]?.replace(/"/g, '').trim();
+                    const loc = p[locIdx]?.replace(/"/g, '').trim();
+                    const rev = p[revIdx]?.replace(/"/g, '').trim();
+                    const starVal = parseInt(p[starIdx]) || 5;
 
                     if(!name || !rev) return '';
                     let stars = ''; for(let i=0; i<5; i++) stars += i < starVal ? '★' : '☆';
 
                     return `
-                        <div class="review-card p-10 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                        <div class="review-card p-10 flex flex-col justify-between">
                             <div>
                                 <div class="text-yellow-500 mb-4 text-xl font-black">${stars}</div>
-                                <p class="italic text-slate-300 leading-relaxed text-sm">"${rev}"</p>
+                                <p class="italic text-sm text-slate-300 leading-relaxed mb-6">"${rev}"</p>
                             </div>
-                            <div class="mt-8 pt-6 border-t border-slate-800/50 flex items-center gap-4">
-                                <div class="w-8 h-8 rounded-full bg-yellow-500/10 flex items-center justify-center text-yellow-500 text-[10px] font-black">
-                                    ${name.charAt(0)}
-                                </div>
-                                <div>
-                                    <p class="text-white font-black text-[10px] uppercase tracking-widest">${name}</p>
-                                    <p class="text-slate-500 text-[9px] uppercase font-bold tracking-tighter">${loc}</p>
-                                </div>
-                            </div>
+                            <p class="text-white font-black text-[10px] uppercase tracking-widest">— ${name}, ${loc}</p>
                         </div>`;
                 }).join('');
-            } catch (e) { 
-                console.error("Database connection lost"); 
-                document.getElementById('dynamic-reviews').innerHTML = '<p class="text-center text-red-400 py-10 text-xs font-black uppercase">Database offline. Refresh Page.</p>';
-            }
+            } catch (e) { console.error("Database connection lost"); }
         }
 
-        /**
-         * UI CONTROLLERS 
-         **/
-        function switchCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
-            document.getElementById('tab-' + cat).classList.add('active-tab');
-            renderServices();
-        }
-
-        function renderServices() {
+        /** RENDERING CONTROLLERS **/
+        function renderUI() {
+            // Visual Grid (Top 3)
             const grid = document.getElementById('package-grid');
-            const data = services[currentCategory];
-            grid.innerHTML = data.map(item => {
-                const isSelected = cart.some(c => c.id === item.id);
+            grid.innerHTML = services.slice(0, 3).map(item => {
+                const isS = cart.some(c => c.id === item.id);
                 return `
-                    <div class="package-card ${isSelected ? 'selected-card' : ''}">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                            <div class="absolute top-4 right-4 bg-[#0f172a]/80 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-black uppercase text-yellow-500 border border-yellow-500/30">
-                                Verified Service
-                            </div>
+                    <div class="package-card ${isS ? 'selected-item' : ''}">
+                        <div class="h-56 relative overflow-hidden">
+                            <img src="${item.img}" class="w-full h-full object-cover">
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
-                            <h4 class="text-2xl font-black mb-1 hero-font uppercase tracking-tight">${item.name}</h4>
-                            <p class="text-2xl font-black mb-6 text-yellow-500">${formatPrice(item.price)}</p>
-                            <ul class="space-y-3 mb-10 flex-grow">
-                                ${item.features.map(f => `
-                                    <li class="text-[11px] text-slate-400 flex items-center gap-3">
-                                        <i class="fas fa-check-circle text-yellow-500/50"></i> ${f}
-                                    </li>
-                                `).join('')}
-                            </ul>
-                            <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-5 ${isSelected ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20' : 'bg-white text-black hover:bg-yellow-500'} font-black rounded-2xl uppercase text-[10px] tracking-[0.2em] transition-all">
-                                ${isSelected ? 'Service in Itinerary ✓' : 'Add to Adventure'}
+                            <span class="text-yellow-500 font-black text-[9px] uppercase tracking-widest mb-2">${item.cat}</span>
+                            <h4 class="text-2xl font-black mb-1 hero-font uppercase">${item.name}</h4>
+                            <p class="text-xl font-bold mb-8 text-slate-300">${formatPrice(item.price)}</p>
+                            <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
+                                ${isS ? 'Service in Trip ✓' : 'Add to Trip'}
                             </button>
                         </div>
+                    </div>`;
+            }).join('');
+
+            // List Manifest (Full List)
+            const list = document.getElementById('service-list');
+            list.innerHTML = services.map(item => {
+                const isS = cart.some(c => c.id === item.id);
+                return `
+                    <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 rounded-2xl border ${isS ? 'selected-item' : 'border-slate-800'} transition group">
+                        <div class="flex items-center gap-6">
+                            <div class="w-2 h-2 rounded-full ${isS ? 'bg-yellow-500' : 'bg-slate-700'}"></div>
+                            <span class="text-sm font-black uppercase tracking-[0.2em] ${isS ? 'text-white' : 'text-slate-400'} group-hover:text-white transition">${item.name}</span>
+                        </div>
+                        <span class="text-xs font-bold ${isS ? 'text-yellow-500' : 'text-slate-500'}">${formatPrice(item.price)}</span>
                     </div>`;
             }).join('');
         }
@@ -406,13 +295,13 @@
             if (idx > -1) cart.splice(idx, 1);
             else cart.push({ id, name, price });
             updateCartUI();
-            renderServices();
+            renderUI();
         }
 
-        function clearItinerary() {
+        function clearCart() {
             cart = [];
             updateCartUI();
-            renderServices();
+            renderUI();
         }
 
         function updateCartUI() {
@@ -420,35 +309,28 @@
             const total = cart.reduce((sum, i) => sum + i.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Services Selected`;
-            
             if (cart.length > 0) bar.classList.remove('translate-y-full');
             else bar.classList.add('translate-y-full');
         }
 
         function formatPrice(v) {
             const conv = v * rates[currentCurrency];
-            const sym = currentCurrency === 'EUR' ? '€' : (currentCurrency === 'USD' ? '$' : ' CFA');
-            return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + sym : sym + conv.toFixed(2);
+            return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
         }
 
         function updateCurrency() {
             currentCurrency = document.getElementById('currency-select').value;
-            renderServices();
+            renderUI();
             updateCartUI();
         }
 
         function processWhatsApp() {
-            const items = cart.map(i => `• ${i.name} (${formatPrice(i.price)})`).join('%0A');
+            const items = cart.map(i => `• ${i.name}`).join('%0A');
             const total = document.getElementById('cart-total').innerText;
-            const message = `*WonderWay Trip Request*%0A--------------------------%0A${items}%0A--------------------------%0A*Estimated Total: ${total}*%0A%0APlease confirm availability for these dates!`;
-            window.open(`https://wa.me/237653827999?text=${message}`, '_blank');
+            window.open(`https://wa.me/237653827999?text=Booking Request:%0A${items}%0A%0A*Total: ${total}*`, '_blank');
         }
 
-        // Initialize App
-        window.onload = () => { 
-            loadReviews(); 
-            renderServices(); 
-        };
+        window.onload = () => { loadReviews(); renderUI(); };
     </script>
 </body>
 </html>
