@@ -14,7 +14,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
         
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; margin: 0; }
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
         
@@ -25,10 +25,11 @@
             background: rgba(30, 41, 59, 0.4); 
             backdrop-filter: blur(12px);
         }
-        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; }
-
-        /* Form */
+        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
+        
+        /* Form Styling */
         input, textarea { background: #1e293b !important; border: 1px solid #334155 !important; color: white !important; }
+        input:focus, textarea:focus { border-color: #fbbf24 !important; outline: none; }
         .star-rating label { transition: color 0.2s ease; color: #334155; }
         .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #fbbf24 !important; }
 
@@ -41,9 +42,10 @@
             display: flex; 
             flex-direction: column; 
             justify-content: space-between;
+            padding: 40px;
         }
 
-        /* 📸 Immersive Footer with Face Focus */
+        /* 📸 Immersive Footer */
         .immersive-footer { 
             position: relative; 
             min-height: 80vh; 
@@ -59,7 +61,7 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            object-position: center 15%; /* Keeps face visible */
+            object-position: center 15%; /* Face visibility focus */
             opacity: 0.45; 
             z-index: 0; 
         }
@@ -74,19 +76,22 @@
 </head>
 
 <body class="pt-24">
-    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex justify-between items-center border-b border-slate-800">
-        <div class="flex items-center gap-4">
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
+        <div class="flex items-center gap-4 mb-4 md:mb-0">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
                 <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
             </div>
-            <div class="flex flex-col">
-                <span class="font-black text-xl hero-font text-white uppercase">WonderWay</span>
+            <div class="flex flex-col text-left">
+                <span class="font-black text-xl tracking-tighter uppercase hero-font text-white leading-none">WonderWay</span>
                 <span class="text-[8px] uppercase tracking-[0.4em] text-yellow-500 font-black">Official Collection</span>
             </div>
         </div>
-        <div class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
-            <a href="#package-grid" class="hover:text-white transition">Experiences</a>
-            <a href="#review-submission" class="hover:text-white transition">Guest Stories</a>
+        
+        <div class="flex items-center gap-8">
+            <div class="hidden lg:flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <a href="#package-grid" class="hover:text-white transition">Experiences</a>
+                <a href="#review-submission" class="hover:text-white transition">Stories</a>
+            </div>
         </div>
     </nav>
 
@@ -96,7 +101,6 @@
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Couples</button>
             <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Groups (4)</button>
-            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Groups (6)</button>
         </div>
     </header>
 
@@ -112,7 +116,7 @@
                         <input type="text" name="Location" placeholder="Home City" class="w-full p-5 rounded-2xl" required>
                     </div>
                     <div class="flex flex-col md:flex-row justify-between items-center bg-slate-800/30 p-6 rounded-2xl border border-slate-800">
-                        <span class="text-[10px] uppercase font-black text-slate-400">Your Rating:</span>
+                        <span class="text-[10px] uppercase font-black text-slate-400">Rate your trip:</span>
                         <div class="star-rating flex flex-row-reverse">
                             <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer text-3xl px-1">★</label>
                             <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer text-3xl px-1">★</label>
@@ -134,34 +138,35 @@
     </main>
 
     <footer class="immersive-footer">
-        <img src="images/footer.jpg" alt="Frank Fru" class="footer-bg-image">
+        <img src="images/footer.jpg" alt="Founder" class="footer-bg-image">
         <div class="footer-overlay"></div>
         <div class="footer-content text-center px-6">
-            <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 italic">"Luxury is affordable."</h3>
+            <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 italic text-white">"Luxury is affordable."</h3>
             <div class="flex flex-col md:flex-row gap-8 justify-center items-center pt-12 border-t border-white/10">
-                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
-                <a href="https://github.com/chifru19" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">GitHub</a>
-                <a href="https://linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">LinkedIn</a>
+                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Portfolio</a>
+                <a href="https://github.com/chifru19" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">GitHub</a>
+                <a href="https://linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">LinkedIn</a>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours. Engineering by Frank Fru.</p>
         </div>
     </footer>
 
-    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full transition-transform">
+    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full transition-all duration-500">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-left">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase">0 Selected</p>
                 <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all">Confirm WhatsApp</button>
+            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all">Confirm via WhatsApp</button>
         </div>
     </div>
 
     <script>
+        /** DATABASE & STATE **/
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
-        let cart = []; let currentCategory = 'activities'; let currentCurrency = 'XAF';
+        let currentCategory = 'activities'; let cart = [];
 
-        /** 🛠️ SYNCED REVIEW LOGIC (Col A: Name, B: Location, C: Review, D: Stars) **/
+        /** 🛠️ LIVE SYNC LOGIC (Col A: Name, B: Location, C: Review, D: Stars) **/
         async function loadReviews() {
             try {
                 const response = await fetch(sheetURL + '&cache=' + Date.now());
@@ -175,43 +180,36 @@
                         const name = cols[0].replace(/"/g, '').trim();
                         const loc = cols[1].replace(/"/g, '').trim();
                         const review = cols[2].replace(/"/g, '').trim();
-                        const stars = parseInt(cols[3]) || 5;
+                        const starVal = parseInt(cols[3]) || 5;
 
                         if(name && review) {
-                            let sHtml = ''; for(let i=0; i<5; i++) sHtml += i < stars ? '★' : '☆';
+                            let sHtml = ''; for(let i=0; i<5; i++) sHtml += i < starVal ? '★' : '☆';
                             html += `
-                                <div class="review-card p-10">
+                                <div class="review-card">
                                     <div>
                                         <div class="text-yellow-500 mb-4 text-xl font-black">${sHtml}</div>
                                         <p class="italic text-sm text-slate-300">"${review}"</p>
                                     </div>
-                                    <p class="text-white font-black text-[10px] mt-4 uppercase tracking-widest">— ${name}, ${loc}</p>
+                                    <p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${loc}</p>
                                 </div>`;
                         }
                     }
                 });
-                document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center opacity-50 col-span-3">No stories yet.</p>';
+                document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">No secure records found.</p>';
             } catch (e) { console.error("Sync Error"); }
         }
 
-        /** DATA & UI Logic (Keeping your package data) **/
         const servicesData = {
             activities: [
-                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins Session", "Safety Instructor"] },
-                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride", "Guided Tour"] },
-                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Coastal Trail", "Safety Gear"] },
-                { id: "a4", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["Creative Art", "1 Drink Included"] },
-                { id: "a5", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Historical Tour", "Entry Included"] }
+                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg" },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" },
+                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" }
             ],
             couples: [
-                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa", "Waterfall Visit"] },
-                { id: "c2", name: "Paradise Gold Stay", price: 250000, img: "images/sip-paint.jpg", features: ["Private Beach Dinner", "Bonfire Night"] }
+                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg" }
             ],
             group4: [
-                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Spacious Villa", "Beach BBQ Setup"] }
-            ],
-            group6: [
-                { id: "g6_1", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Exclusive 6-Pax Stay", "All Activities Access"] }
+                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg" }
             ]
         };
 
@@ -220,15 +218,13 @@
             grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
                 const isS = cart.some(c => c.id === item.id);
                 return `
-                    <div class="package-card p-4 rounded-[32px]">
-                        <div class="h-56 rounded-2xl overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
-                        <div class="p-6">
-                            <h4 class="text-xl font-black hero-font uppercase mb-2">${item.name}</h4>
-                            <p class="text-yellow-500 font-bold mb-4">${new Intl.NumberFormat('fr-CM').format(item.price)} CFA</p>
-                            <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
-                                ${isS ? 'Added ✓' : 'Add to Trip'}
-                            </button>
-                        </div>
+                    <div class="package-card p-6">
+                        <div class="h-56 rounded-2xl overflow-hidden mb-6"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                        <h4 class="text-xl font-black hero-font uppercase mb-1">${item.name}</h4>
+                        <p class="text-yellow-500 font-bold mb-6">${new Intl.NumberFormat('fr-CM').format(item.price)} CFA</p>
+                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
+                            ${isS ? 'Added ✓' : 'Add to Trip'}
+                        </button>
                     </div>`;
             }).join('');
         }
@@ -236,11 +232,14 @@
         function toggleService(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
+            updateCart(); renderUI();
+        }
+
+        function updateCart() {
             const total = cart.reduce((s, i) => s + i.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${new Intl.NumberFormat('fr-CM').format(total)} CFA`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
             document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
-            renderUI();
         }
 
         function switchCategory(cat) { 
