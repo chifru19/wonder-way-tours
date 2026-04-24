@@ -206,7 +206,7 @@
         // YOUR VERIFIED DEPLOYMENT URL (FROM SCREENSHOT)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzTy60L4Xvq5zd_Ra5i3WbM7iKMzfBQBXSj5KKKyPo85JQH9LBKIfGdie3eHNuzs62/exec'; 
         // YOUR PUBLISHED CSV LINK (FORM RESPONSES 1 TAB)
-        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
+        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?gid=65154260&single=true&output=csv';
 
         const servicesData = {
             activities: [
@@ -242,8 +242,8 @@
                         const name = cols[1]?.replace(/"/g, '').trim(); 
                         const review = cols[2]?.replace(/"/g, '').trim(); 
                         const city = cols[3]?.replace(/"/g, '').trim(); 
-                        const starVal = parseInt(cols[4]) || 5; 
-                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${city}</p></div>`;
+                        const stars = parseInt(cols[4]) || 5; 
+                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(stars)}${'☆'.repeat(5-stars)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${city}</p></div>`;
                     }
                 });
                 document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">Syncing database stories...</p>';
@@ -277,6 +277,7 @@
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
             document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
         }
+
         function formatPrice(v) { return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + (v * rates[currentCurrency]).toFixed(2); }
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
         function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
@@ -290,6 +291,7 @@
                 setTimeout(loadReviews, 2000); 
             } catch (err) { btn.disabled = false; btn.innerText = "Post Live Review"; }
         });
+
         window.onload = () => { loadReviews(); renderUI(); };
     </script>
 </body>
