@@ -17,18 +17,19 @@
         .service-row { border-radius: 20px; cursor: pointer; margin-bottom: 12px; border: 1px solid #1e293b; }
         .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
         input, textarea { background: #1e293b !important; border: 1px solid #334155 !important; color: white !important; }
+        
         .star-rating { display: flex; flex-direction: row-reverse; gap: 5px; justify-content: flex-end; }
         .star-rating input { display: none; }
         .star-rating label { cursor: pointer; font-size: 30px; color: #334155; transition: color 0.2s; }
         .star-rating label:before { content: '★'; }
         .star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { color: #fbbf24 !important; }
         
-        /* HIDDEN MANIFEST FOLDER LOGIC */
         #booking-engine { transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); max-height: 0; opacity: 0; overflow: hidden; pointer-events: none; }
         #booking-engine.manifest-visible { max-height: 5000px; opacity: 1; pointer-events: auto; margin-top: 5rem; margin-bottom: 5rem; }
 
         .review-card { animation: fadeIn 0.8s ease-out forwards; background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
         .immersive-footer { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; background-color: #0f172a; overflow: hidden; }
         .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
         .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.6) 60%, transparent 100%); }
@@ -46,7 +47,7 @@
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center">
-        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
+        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none text-white">Kribi <span class="text-yellow-500">Luxury</span></h1>
         <div class="flex flex-wrap justify-center gap-3">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase transition-all">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase transition-all">Couples</button>
@@ -59,9 +60,7 @@
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-32"></div>
 
         <section id="booking-engine">
-            <div class="flex flex-col items-center text-center mb-12">
-                <h2 class="hero-font text-4xl font-black uppercase text-white">Full Service <span class="text-yellow-500">Manifest</span></h2>
-            </div>
+            <div class="flex flex-col items-center text-center mb-12"><h2 class="hero-font text-4xl font-black uppercase text-white">Full Service <span class="text-yellow-500">Manifest</span></h2></div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10"><div id="service-list" class="space-y-4"></div></div>
         </section>
 
@@ -101,7 +100,7 @@
     <footer class="immersive-footer"><img src="images/footer.jpg" class="footer-bg-image"><div class="footer-overlay"></div><div class="relative z-10 text-center px-6">
         <h3 class="hero-font text-5xl md:text-7xl font-black uppercase mb-12 italic text-white leading-tight">"Luxury is affordable."</h3>
         <div class="bg-black/40 backdrop-blur-md p-10 rounded-[40px] border border-white/10 inline-block">
-            <p class="text-yellow-500 text-[10px] font-black uppercase mb-4 tracking-[0.4em]">Frank Fru</p>
+            <p class="text-yellow-500 text-[10px] font-black uppercase mb-2 tracking-[0.4em]">Frank Fru</p>
             <div class="flex flex-col gap-1 items-center">
                 <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[12px] font-black tracking-widest transition-all underline underline-offset-4 decoration-yellow-500/30">My Portfolio</a>
                 <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest opacity-70">frankfru.com</a>
@@ -112,7 +111,7 @@
 
     <script>
         let cur = 'XAF', cat = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
-        // YOUR VERIFIED URLS
+        // Deployment and Sheet URLs from your screenshots
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzTy60L4Xvq5zd_Ra5i3WbM7iKMzfBQBXSj5KKKyPo85JQH9LBKIfGdie3eHNuzs62/exec'; 
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?gid=65154260&single=true&output=csv';
 
@@ -123,7 +122,6 @@
             group6: [{ id: "g6_1", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["6-Pax Villa Stay"] }]
         };
 
-        // SYNC: Pulling from YOUR WonderWay response sheet [Column B=Name, C=Review, D=City, E=Stars]
         async function loadReviews() {
             try {
                 const response = await fetch(sheetURL + '&v=' + Date.now()); const txt = await response.text();
