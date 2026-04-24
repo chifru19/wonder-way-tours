@@ -53,7 +53,6 @@
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* MANIFEST HIDE LOGIC */
         #booking-engine {
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             max-height: 0;
@@ -109,7 +108,7 @@
             </div>
         </div>
         <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 flex items-center gap-3">
-            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase rounded-2xl px-4 py-2 outline-none cursor-pointer">
+            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
                 <option value="XAF">CFA Franc (XAF)</option>
                 <option value="EUR">Euro (€)</option>
                 <option value="USD">Dollar ($)</option>
@@ -146,18 +145,18 @@
                 <h2 class="hero-font text-4xl font-black uppercase mb-8 text-white">Guest <span class="text-yellow-500">Voice</span></h2>
                 <form id="reviewForm" class="space-y-6 text-left">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" name="Full Name." placeholder="Guest Name" class="w-full p-5 rounded-2xl" required>
-                        <input type="text" name="Column 3" placeholder="Home City" class="w-full p-5 rounded-2xl" required>
+                        <input type="text" name="Name" placeholder="Name" class="w-full p-5 rounded-2xl" required>
+                        <input type="text" name="City" placeholder="City" class="w-full p-5 rounded-2xl" required>
                     </div>
                     <div class="flex justify-between items-center bg-slate-800/30 p-6 rounded-2xl border border-slate-800">
                         <span class="text-[10px] uppercase font-black text-slate-400">Rating:</span>
                         <div class="star-rating flex flex-row-reverse text-3xl">
-                            <input type="radio" name="Rating" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer px-1">★</label>
-                            <input type="radio" name="Rating" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer px-1">★</label>
-                            <input type="radio" name="Rating" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer px-1">★</label>
+                            <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer px-1">★</label>
+                            <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer px-1">★</label>
+                            <input type="radio" name="Stars" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer px-1">★</label>
                         </div>
                     </div>
-                    <textarea name="Your Review\" placeholder="Describe your experience with WonderWay..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
+                    <textarea name="Review" placeholder="Describe your experience with WonderWay..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
                     <button type="submit" id="submitBtn" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-lg">Post Live Review</button>
                 </form>
             </div>
@@ -204,7 +203,9 @@
     <script>
         let currentCurrency = 'XAF', currentCategory = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
         
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxoi3AsHZJUHGS8n_oAmBZtvq0HmKfOR6SjtCFR_3o183RlrWbneUKUSGeQdeVOR8B6/exec'; 
+        // YOUR VERIFIED DEPLOYMENT URL (FROM SCREENSHOT)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzTy60L4Xvq5zd_Ra5i3WbM7iKMzfBQBXSj5KKKyPo85JQH9LBKIfGdie3eHNuzs62/exec'; 
+        // YOUR PUBLISHED CSV LINK (FORM RESPONSES 1 TAB)
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
 
         const servicesData = {
@@ -237,15 +238,15 @@
                 let html = '';
                 rows.slice(1).reverse().forEach(line => {
                     const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    if(cols.length >= 4) {
+                    if(cols.length >= 5) {
                         const name = cols[1]?.replace(/"/g, '').trim(); 
-                        const location = cols[3]?.replace(/"/g, '').trim(); 
                         const review = cols[2]?.replace(/"/g, '').trim(); 
+                        const city = cols[3]?.replace(/"/g, '').trim(); 
                         const starVal = parseInt(cols[4]) || 5; 
-                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
+                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${city}</p></div>`;
                     }
                 });
-                document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">Connecting stories...</p>';
+                document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">Syncing database stories...</p>';
             } catch (e) { console.error("Database sync failed"); }
         }
 
@@ -256,7 +257,7 @@
             }).join('');
             document.getElementById('service-list').innerHTML = Object.values(servicesData).flat().map(item => {
                 const isS = cart.some(c => c.id === item.id);
-                return `<div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}"><div class="flex items-center gap-6"><div class="w-2 h-2 rounded-full ${isS ? 'bg-yellow-500' : 'bg-slate-700'}"></div><span class="text-sm font-black uppercase tracking-[0.2em] ${isS ? 'text-white' : 'text-slate-400'} transition">${item.name}</span></div><span class="text-xs font-bold text-yellow-500">${formatPrice(item.price)}</span></div>`;
+                return `<div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}"><div class="flex items-center gap-6"><div class="w-2 h-2 rounded-full ${isS ? 'bg-yellow-500' : 'bg-slate-700'}"></div><span class="text-sm font-black uppercase tracking-[0.2em] ${isS ? 'text-white' : 'text-slate-400'} transition">${item.name}</span></div><span class="text-xs font-bold ${isS ? 'text-yellow-500' : 'text-slate-500'}">${formatPrice(item.price)}</span></div>`;
             }).join('');
         }
 
