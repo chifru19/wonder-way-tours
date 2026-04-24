@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WonderWay | Kribi Collection</title>
     
-    <link rel="icon" href="images/logo.png">
+    <link rel="icon" href="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -27,7 +27,6 @@
             border-color: #fbbf24 !important; 
         }
         
-        /* CARD STYLING */
         .package-card { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -44,7 +43,6 @@
             box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
         }
         
-        /* MANIFEST FOLDER LOGIC */
         #booking-engine {
             display: none;
             opacity: 0;
@@ -58,17 +56,38 @@
             transform: translateY(0) !important;
         }
 
-        /* STAR RATING */
-        .star-rating label { transition: color 0.2s ease; color: #334155; }
-        .star-rating label:hover, 
-        .star-rating label:hover ~ label, 
-        .star-rating input:checked ~ label { color: #fbbf24 !important; }
-
         .review-card { 
             background: linear-gradient(145deg, #1e293b, #0f172a); 
             border-radius: 24px; 
             border: 1px solid #334155; 
             padding: 40px; 
+        }
+
+        /* RESTORED: FOUNDER FOOTER SYSTEM */
+        .immersive-footer { 
+            position: relative; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+            background-color: #0f172a;
+        }
+        
+        .footer-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            opacity: 0.7;
+        }
+        
+        .footer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
         }
         
         #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
@@ -115,30 +134,6 @@
             </div>
         </section>
 
-        <section id="review-submission" class="mt-40 pt-20 border-t border-slate-800/50">
-            <div class="max-w-2xl mx-auto bg-slate-900/80 p-10 rounded-[40px] border border-slate-800 text-center">
-                <h2 class="hero-font text-4xl font-black uppercase mb-8">Guest <span class="text-yellow-500">Voice</span></h2>
-                <form id="reviewForm" class="space-y-6 text-left">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" name="Name" placeholder="Guest Name" class="bg-slate-800 p-5 rounded-2xl w-full border border-slate-700 text-white" required>
-                        <input type="text" name="Location" placeholder="Home City" class="bg-slate-800 p-5 rounded-2xl w-full border border-slate-700 text-white" required>
-                    </div>
-                    <div class="flex flex-col md:flex-row justify-between items-center bg-slate-800/30 p-6 rounded-2xl border border-slate-700">
-                        <span class="text-[10px] uppercase font-black text-slate-400">Rate the hospitality:</span>
-                        <div class="star-rating flex flex-row-reverse">
-                            <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer text-3xl px-1">★</label>
-                            <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer text-3xl px-1">★</label>
-                            <input type="radio" name="Stars" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer text-3xl px-1">★</label>
-                            <input type="radio" name="Stars" id="star-2" value="2" class="hidden"><label for="star-2" class="cursor-pointer text-3xl px-1">★</label>
-                            <input type="radio" name="Stars" id="star-1" value="1" class="hidden"><label for="star-1" class="cursor-pointer text-3xl px-1">★</label>
-                        </div>
-                    </div>
-                    <textarea name="Review" placeholder="Describe your experience..." rows="4" class="bg-slate-800 w-full p-6 rounded-3xl border border-slate-700 text-white" required></textarea>
-                    <button type="submit" id="submitBtn" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Post Live Review</button>
-                </form>
-            </div>
-        </section>
-
         <section id="feedback" class="mt-40">
             <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest <span class="text-slate-500">Stories</span></h2>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -157,12 +152,28 @@
         </div>
     </div>
 
+    <footer class="immersive-footer">
+        <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/footer.jpg" alt="Founder" class="footer-bg-image">
+        <div class="footer-overlay"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
+            <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
+            <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
+                <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4 block">Engineering by Frank Fru</span>
+                <div class="flex gap-10 justify-center">
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
+                    <a href="https://github.com/chifru19" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">GitHub</a>
+                    <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">LinkedIn</a>
+                </div>
+            </div>
+            <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
+        </div>
+    </footer>
+
     <script>
         let currentCurrency = 'XAF'; 
         let currentCategory = 'activities'; 
         let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbqB7Q57L8qbT3H2PwZ4RuFnA8wGuiCHvUcGzz8xaxCHTHEAuOtsUZVOCdEslFq92W9N/exec';
 
         const servicesData = {
             activities: [
@@ -216,7 +227,7 @@
 
             const list = document.getElementById('service-list');
             list.innerHTML = cart.map(item => `
-                <div class="flex justify-between border-b border-white/10 py-4">
+                <div class="flex justify-between border-b border-white/10 py-6">
                     <span class="text-sm font-black uppercase text-white">${item.name}</span>
                     <span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span>
                 </div>`).join('');
@@ -254,14 +265,6 @@
             msg += `-------------------------\n*TOTAL: ${formatPrice(total)}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
-
-        document.getElementById('reviewForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = "POSTING...";
-            fetch(scriptURL, { method: 'POST', body: new FormData(this) })
-            .then(() => { alert("Story Published!"); this.reset(); fetchReviews(); btn.innerText = "Post Live Review"; });
-        });
 
         window.onload = () => { renderUI(); fetchReviews(); };
     </script>
