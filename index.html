@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WonderWay | Kribi Collection</title>
     
-    <meta name="description" content="Premium Kribi travel experiences. Curated tours and luxury escapes in Cameroon.">
-    <meta property="og:title" content="WonderWay | The Kribi Collection">
-    <meta property="og:description" content="Book your authentic coastal adventure.">
-    <meta property="og:url" content="https://wonderwaytourcameroon.com">
-    <meta property="og:type" content="website">
     <link rel="icon" href="images/logo.png">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -33,6 +27,7 @@
             border-color: #fbbf24 !important; 
         }
         
+        /* CARD STYLING */
         .package-card, .service-row { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -47,42 +42,31 @@
         .service-row:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
         .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
         
-        /* HIDDEN MANIFEST SYSTEM */
+        /* HIDDEN MANIFEST FOLDER SYSTEM */
         #manifest-folder {
-            max-height: 0;
-            overflow: hidden;
+            display: none;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(20px);
+            transition: all 0.6s ease;
         }
 
-        .folder-open {
-            max-height: 2000px;
-            opacity: 1;
-            margin-top: 40px;
+        .folder-visible {
+            display: block !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         .review-card { 
             animation: fadeIn 0.8s ease-out forwards; 
-            opacity: 0; 
             background: linear-gradient(145deg, #1e293b, #0f172a); 
             border-radius: 24px; 
             border: 1px solid #334155; 
             padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
         }
         
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(30px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 10px; }
-
+        /* FOOTER SYSTEM WITH IMAGES */
         .immersive-footer { 
             position: relative; 
             min-height: 100vh; 
@@ -113,7 +97,7 @@
 
 <body class="pt-24">
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
-        <div class="flex items-center gap-4 mb-4 md:mb-0">
+        <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
                 <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
             </div>
@@ -124,33 +108,29 @@
         </div>
         
         <div class="flex items-center gap-8">
-            <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 flex items-center gap-3">
-                <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
-                    <option value="XAF">CFA Franc (XAF)</option>
-                    <option value="EUR">Euro (€)</option>
-                    <option value="USD">Dollar ($)</option>
-                </select>
-            </div>
+            <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 text-white text-[10px] font-bold uppercase p-2 rounded-xl outline-none cursor-pointer">
+                <option value="XAF">CFA Franc (XAF)</option>
+                <option value="EUR">Euro (€)</option>
+                <option value="USD">Dollar ($)</option>
+            </select>
         </div>
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center relative overflow-hidden">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none relative z-10">Kribi <span class="text-yellow-500">Luxury</span></h1>
-        <p class="max-w-2xl mx-auto text-slate-400 text-sm md:text-base italic uppercase tracking-[0.2em] mb-10 relative z-10">"Select from our featured collection below to reveal the full service manifest."</p>
         <div class="flex flex-wrap justify-center gap-3 relative z-10">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Couples</button>
-            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Groups (4)</button>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10"></div>
 
-        <section id="manifest-folder">
+        <section id="manifest-folder" class="mt-32">
             <div class="flex flex-col items-center text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter text-white">Full Service <span class="text-yellow-500">Manifest</span></h2>
-                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Personalize your journey from our price list</p>
+                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Prices for additional individual selections</p>
             </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-6 md:p-10">
                 <div id="service-list" class="space-y-4"></div>
@@ -164,15 +144,12 @@
     </main>
 
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="text-left">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
-                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
+                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase text-white">Total: 0 CFA</h3>
             </div>
-            <div class="flex gap-4">
-                <button onclick="clearCart()" class="px-8 py-5 border border-slate-700 text-slate-400 font-bold rounded-2xl uppercase text-[10px]">Reset</button>
-                <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">WhatsApp</button>
-            </div>
+            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">WhatsApp Confirm</button>
         </div>
     </div>
 
@@ -184,8 +161,8 @@
             <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
                 <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4">Engineering by Frank Fru</span>
                 <div class="flex gap-10">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Website</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Portfolio</a>
                 </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
@@ -200,21 +177,16 @@
 
         const servicesData = {
             activities: [
-                { id: "a1", name: "Jet Ski", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins"] },
-                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset"] }
+                { id: "a1", name: "Jet Ski", price: 10000, img: "images/jetski-action.jpg" },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" }
             ],
             couples: [
-                { id: "c1", name: "Mini Love", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa"] }
-            ],
-            group4: [
-                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Spacious Villa"] }
+                { id: "c1", name: "Mini Love", price: 90000, img: "images/couple paradis escape.jpg" }
             ]
         };
 
         function fetchReviews() {
-            google.script.run.withSuccessHandler(function(html) {
-                document.getElementById('dynamic-reviews').innerHTML = html;
-            }).loadReviews();
+            google.script.run.withSuccessHandler(h => { document.getElementById('dynamic-reviews').innerHTML = h; }).loadReviews();
         }
 
         function renderUI() {
@@ -239,9 +211,9 @@
             list.innerHTML = allItems.map(item => {
                 const isS = cart.some(c => c.id === item.id);
                 return `
-                <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}">
-                    <span class="text-sm font-black uppercase tracking-widest transition">${item.name}</span>
-                    <span class="text-xs font-bold text-yellow-500">${formatPrice(item.price)}</span>
+                <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex justify-between p-6 ${isS ? 'selected-item' : ''}">
+                    <span class="text-sm font-black uppercase tracking-widest text-white">${item.name}</span>
+                    <span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span>
                 </div>`;
             }).join('');
         }
@@ -255,26 +227,25 @@
 
         function updateCartUI() {
             const bar = document.getElementById('checkout-bar');
-            const manifest = document.getElementById('manifest-folder');
+            const folder = document.getElementById('manifest-folder');
             const total = cart.reduce((sum, i) => sum + i.price, 0);
-            
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
 
             if (cart.length > 0) {
                 bar.classList.remove('translate-y-full');
-                manifest.classList.add('folder-open');
+                folder.classList.add('folder-visible');
             } else {
                 bar.classList.add('translate-y-full');
-                manifest.classList.remove('folder-open');
+                folder.classList.remove('folder-visible');
             }
         }
 
-        function clearCart() { cart = []; updateCartUI(); renderUI(); }
         function formatPrice(v) { 
             const conv = v * rates[currentCurrency]; 
             return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
         }
+
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
         function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
 
