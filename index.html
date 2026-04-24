@@ -109,7 +109,7 @@
             </div>
         </div>
         <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 flex items-center gap-3">
-            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
+            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase rounded-2xl px-4 py-2 outline-none cursor-pointer">
                 <option value="XAF">CFA Franc (XAF)</option>
                 <option value="EUR">Euro (€)</option>
                 <option value="USD">Dollar ($)</option>
@@ -204,29 +204,28 @@
     <script>
         let currentCurrency = 'XAF', currentCategory = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
         
-        // SCRIPT POINTS TO WONDERWAY DEPLOYMENT
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxoi3AsHZJUHGS8n_oAmBZtvq0HmKfOR6SjtCFR_3o183RlrWbneUKUSGeQdeVOR8B6/exec'; 
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
 
         const servicesData = {
             activities: [
-                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins Session", "Instructor"] },
-                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride"] },
-                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Coastal Trail"] },
-                { id: "a4", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Art", "1 Drink"] },
-                { id: "a5", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Heritage Tour"] }
+                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins Session", "Safety Instructor", "Life Jacket"] },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride", "Guided Nature Tour"] },
+                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Coastal Trail Ride", "Safety Helmet"] },
+                { id: "a4", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Creative Art", "1 Drink Included"] },
+                { id: "a5", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Bilingual Heritage Tour", "Entry Included"] }
             ],
             couples: [
-                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa"] },
-                { id: "c2", name: "Paradise Gold Stay", price: 250000, img: "images/sip-paint.jpg", features: ["Beach Dinner"] },
-                { id: "c3", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg", features: ["Boat Cruise"] }
+                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa Lodging", "Water Sports Bundle"] },
+                { id: "c2", name: "Paradise Gold Stay", price: 250000, img: "images/sip-paint.jpg", features: ["Premium Villa Access", "Private Beach Dinner"] },
+                { id: "c3", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg", features: ["Executive Luxury Suite", "Private Boat Cruise"] }
             ],
             group4: [
-                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Villa Stay", "BBQ"] },
-                { id: "g4_2", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Private Paint"] }
+                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Spacious Villa Lodging", "Full BBQ Setup"] },
+                { id: "g4_2", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Premium Group Villa Access", "Private Sip & Paint"] }
             ],
             group6: [
-                { id: "g6_1", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["6-Pax Villa"] }
+                { id: "g6_1", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Exclusive 6-Pax Villa Stay"] }
             ]
         };
 
@@ -243,10 +242,10 @@
                         const location = cols[3]?.replace(/"/g, '').trim(); 
                         const review = cols[2]?.replace(/"/g, '').trim(); 
                         const starVal = parseInt(cols[4]) || 5; 
-                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
+                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
                     }
                 });
-                document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">Syncing database stories...</p>';
+                document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">Connecting stories...</p>';
             } catch (e) { console.error("Database sync failed"); }
         }
 
