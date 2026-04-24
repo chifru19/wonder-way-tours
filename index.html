@@ -5,20 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WonderWay | Kribi Collection</title>
     
-    <meta name="description" content="Premium Kribi travel experiences. Curated tours and luxury escapes in Cameroon.">
-    <meta property="og:title" content="WonderWay | The Kribi Collection">
-    <meta property="og:description" content="Book your authentic coastal adventure.">
-    <meta property="og:url" content="https://wonderwaytourcameroon.com">
-    <meta property="og:type" content="website">
-    <link rel="icon" href="images/logo.png">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
         
-        /* GLOBAL STYLES */
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #0f172a; 
@@ -34,7 +26,7 @@
             border-color: #fbbf24 !important; 
         }
         
-        /* CARD & ELEMENT STYLING */
+        /* CARD STYLING */
         .package-card, .service-row { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -42,127 +34,100 @@
             backdrop-filter: blur(12px);
         }
         
-        .package-card { 
-            border-radius: 32px; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            height: 100%; 
-        }
+        .package-card { border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        .package-card:hover { 
-            transform: translateY(-12px); 
-            border-color: #fbbf24; 
-            box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
-        }
-        
-        .service-row { 
-            border-radius: 20px; 
-            cursor: pointer; 
-            margin-bottom: 12px; 
-            border: 1px solid #1e293b; 
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
+        .service-row { border-radius: 20px; cursor: pointer; margin-bottom: 12px; padding: 20px; display: flex; justify-content: space-between; }
         .service-row:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
         .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
         
-        /* REVIEWS ANIMATION */
+        /* HIDDEN FOLDER (MANIFEST) */
+        #manifest-folder {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .folder-open {
+            display: block !important;
+            max-height: 2000px !important;
+            margin-top: 50px;
+        }
+
         .review-card { 
-            animation: fadeIn 0.8s ease-out forwards; 
-            opacity: 0; 
             background: linear-gradient(145deg, #1e293b, #0f172a); 
             border-radius: 24px; 
             border: 1px solid #334155; 
             padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-        }
-        
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(30px); } 
-            to { opacity: 1; transform: translateY(0); } 
         }
 
-        #checkout-bar { 
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-            box-shadow: 0 -20px 40px rgba(0,0,0,0.4); 
-        }
-        
+        /* FOOTER SYSTEM */
         .immersive-footer { 
             position: relative; 
-            padding: 100px 0;
+            min-height: 80vh; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            overflow: hidden;
             background-color: #0f172a;
         }
-
-        /* HIDDEN MANIFEST SECTION */
-        #manifest-section {
-            display: none; /* Hidden by default */
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        
+        .footer-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
         }
-
-        .manifest-container {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid #1e293b;
-            border-radius: 32px;
-            padding: 40px;
-            margin-top: 40px;
+        
+        .footer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 100%);
         }
     </style>
 </head>
 
 <body class="pt-24">
-    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-4">
-            <div class="flex flex-col text-left">
-                <span class="font-black text-xl tracking-tighter uppercase hero-font text-white leading-none">WonderWay</span>
-                <span class="text-[8px] uppercase tracking-[0.4em] text-yellow-500 font-black">Official Collection</span>
+            <img src="images/logo.png" alt="WonderWay" class="w-10 h-10 rounded-full border border-yellow-500">
+            <div class="flex flex-col">
+                <span class="font-black text-xl hero-font text-white uppercase leading-none">WonderWay</span>
+                <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Kribi Collection</span>
             </div>
         </div>
-        <div class="flex items-center gap-8">
-            <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 text-white text-[10px] font-bold uppercase p-2 rounded-xl outline-none cursor-pointer">
-                <option value="XAF">CFA Franc (XAF)</option>
-                <option value="EUR">Euro (€)</option>
-                <option value="USD">Dollar ($)</option>
-            </select>
-        </div>
+        <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 text-white text-[10px] font-bold uppercase p-2 rounded-xl outline-none">
+            <option value="XAF">CFA (XAF)</option>
+            <option value="EUR">Euro (€)</option>
+            <option value="USD">Dollar ($)</option>
+        </select>
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center">
-        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
+        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter">Kribi <span class="text-yellow-500">Luxury</span></h1>
         <div class="flex flex-wrap justify-center gap-3">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Couples</button>
-            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Groups (4)</button>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
-        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-32"></div>
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10"></div>
 
-        <section id="manifest-section" class="mt-20">
-            <div class="text-center mb-10">
-                <h2 class="hero-font text-4xl font-black uppercase text-yellow-500">Full Service Manifest</h2>
-                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">Additional services for your custom journey</p>
+        <section id="manifest-folder">
+            <div class="text-center mb-8 mt-20">
+                <h2 class="hero-font text-4xl font-black uppercase text-yellow-500">Service Manifest</h2>
+                <p class="text-slate-400 text-[10px] uppercase tracking-widest mt-2">Personalize your journey</p>
             </div>
-            <div class="manifest-container">
-                <div id="service-list" class="space-y-4">
-                    </div>
+            <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-6 md:p-10">
+                <div id="service-list" class="space-y-4"></div>
             </div>
         </section>
 
         <section id="feedback" class="mt-40">
-            <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest <span class="text-slate-500">Stories</span></h2>
+            <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest Stories</h2>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
     </main>
@@ -173,21 +138,22 @@
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
                 <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <div class="flex gap-4">
-                <button onclick="clearCart()" class="px-8 py-5 border border-slate-700 text-slate-400 font-bold rounded-2xl uppercase text-[10px]">Reset</button>
-                <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">WhatsApp</button>
-            </div>
+            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
         </div>
     </div>
 
-    <footer class="immersive-footer border-t border-slate-800">
+    <footer class="immersive-footer">
+        <img src="images/footer.jpg" alt="Founder" class="footer-bg-image">
+        <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4 block">Engineering by Frank Fru</span>
-            <div class="flex gap-10 justify-center">
-                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
-                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
+            <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
+            <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
+                <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4">Engineering by Frank Fru</span>
+                <div class="flex gap-10">
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Website</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Portfolio</a>
+                </div>
             </div>
-            <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
         </div>
     </footer>
 
@@ -199,14 +165,11 @@
 
         const servicesData = {
             activities: [
-                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&q=80&w=800", features: ["15 Mins Session", "Instructor"] },
-                { id: "a2", name: "Horse Riding", price: 2000, img: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&q=80&w=800", features: ["Beach Sunset Ride", "Guided"] }
+                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins Session", "Instructor"] },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset", "Guided"] }
             ],
             couples: [
-                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800", features: ["2 Days Villa", "Water Sports"] }
-            ],
-            group4: [
-                { id: "g4_1", name: "Crew Chill", price: 230000, img: "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=800", features: ["Spacious Villa", "Full BBQ"] }
+                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa", "Water Bundle"] }
             ]
         };
 
@@ -233,7 +196,6 @@
                 </div>`;
             }).join('');
 
-            // Render Manifest List (Price List)
             const list = document.getElementById('service-list');
             const allItems = Object.values(servicesData).flat();
             list.innerHTML = allItems.map(item => {
@@ -255,7 +217,7 @@
 
         function updateCartUI() {
             const bar = document.getElementById('checkout-bar');
-            const manifest = document.getElementById('manifest-section');
+            const folder = document.getElementById('manifest-folder');
             const total = cart.reduce((sum, i) => sum + i.price, 0);
             
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
@@ -263,20 +225,18 @@
 
             if (cart.length > 0) {
                 bar.classList.remove('translate-y-full');
-                manifest.style.display = 'block';
-                setTimeout(() => manifest.style.opacity = '1', 10);
+                folder.classList.add('folder-open');
             } else {
                 bar.classList.add('translate-y-full');
-                manifest.style.opacity = '0';
-                setTimeout(() => manifest.style.display = 'none', 500);
+                folder.classList.remove('folder-open');
             }
         }
 
-        function clearCart() { cart = []; updateCartUI(); renderUI(); }
         function formatPrice(v) { 
             const conv = v * rates[currentCurrency]; 
             return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
         }
+
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
         function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
 
