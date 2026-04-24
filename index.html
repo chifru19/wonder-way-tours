@@ -17,19 +17,18 @@
         .service-row { border-radius: 20px; cursor: pointer; margin-bottom: 12px; border: 1px solid #1e293b; }
         .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
         input, textarea { background: #1e293b !important; border: 1px solid #334155 !important; color: white !important; }
-        
         .star-rating { display: flex; flex-direction: row-reverse; gap: 5px; justify-content: flex-end; }
         .star-rating input { display: none; }
         .star-rating label { cursor: pointer; font-size: 30px; color: #334155; transition: color 0.2s; }
         .star-rating label:before { content: '★'; }
         .star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { color: #fbbf24 !important; }
         
+        /* HIDDEN MANIFEST FOLDER LOGIC */
         #booking-engine { transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); max-height: 0; opacity: 0; overflow: hidden; pointer-events: none; }
         #booking-engine.manifest-visible { max-height: 5000px; opacity: 1; pointer-events: auto; margin-top: 5rem; margin-bottom: 5rem; }
 
         .review-card { animation: fadeIn 0.8s ease-out forwards; background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
         .immersive-footer { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; background-color: #0f172a; overflow: hidden; }
         .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
         .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.6) 60%, transparent 100%); }
@@ -60,13 +59,15 @@
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-32"></div>
 
         <section id="booking-engine">
-            <div class="flex flex-col items-center text-center mb-12"><h2 class="hero-font text-4xl font-black uppercase text-white">Full Service <span class="text-yellow-500">Manifest</span></h2></div>
+            <div class="flex flex-col items-center text-center mb-12">
+                <h2 class="hero-font text-4xl font-black uppercase text-white">Full Service <span class="text-yellow-500">Manifest</span></h2>
+            </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10"><div id="service-list" class="space-y-4"></div></div>
         </section>
 
         <section id="review-submission" class="mt-40 pt-20 border-t border-slate-800/50">
             <div class="max-w-2xl mx-auto bg-slate-900/80 p-10 md:p-16 rounded-[40px] border border-slate-800 shadow-2xl text-center">
-                <h2 class="hero-font text-4xl font-black uppercase mb-8">Guest <span class="text-yellow-500">Voice</span></h2>
+                <h2 class="hero-font text-4xl font-black uppercase mb-8 text-white">Guest <span class="text-yellow-500">Voice</span></h2>
                 <form id="reviewForm" class="space-y-6 text-left">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <input type="text" name="Name" placeholder="Your Name" class="w-full p-5 rounded-2xl" required>
@@ -100,7 +101,7 @@
     <footer class="immersive-footer"><img src="images/footer.jpg" class="footer-bg-image"><div class="footer-overlay"></div><div class="relative z-10 text-center px-6">
         <h3 class="hero-font text-5xl md:text-7xl font-black uppercase mb-12 italic text-white leading-tight">"Luxury is affordable."</h3>
         <div class="bg-black/40 backdrop-blur-md p-10 rounded-[40px] border border-white/10 inline-block">
-            <p class="text-yellow-500 text-[10px] font-black uppercase mb-2 tracking-[0.4em]">Frank Fru</p>
+            <p class="text-yellow-500 text-[10px] font-black uppercase mb-4 tracking-[0.4em]">Frank Fru</p>
             <div class="flex flex-col gap-1 items-center">
                 <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[12px] font-black tracking-widest transition-all underline underline-offset-4 decoration-yellow-500/30">My Portfolio</a>
                 <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest opacity-70">frankfru.com</a>
@@ -111,7 +112,7 @@
 
     <script>
         let cur = 'XAF', cat = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
-        // Deployment and Sheet URLs from your screenshots
+        // THE UPDATED URLS
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzTy60L4Xvq5zd_Ra5i3WbM7iKMzfBQBXSj5KKKyPo85JQH9LBKIfGdie3eHNuzs62/exec'; 
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?gid=65154260&single=true&output=csv';
 
@@ -124,20 +125,24 @@
 
         async function loadReviews() {
             try {
-                const response = await fetch(sheetURL + '&v=' + Date.now()); const txt = await response.text();
+                // Fetch CSV data with cache buster
+                const response = await fetch(sheetURL + '&v=' + Date.now()); 
+                const txt = await response.text();
                 const rows = txt.split('\n').filter(r => r.trim() !== "");
-                let html = ''; rows.slice(1).reverse().forEach(line => {
+                let html = ''; 
+                
+                rows.slice(1).reverse().forEach(line => {
                     const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if(cols.length >= 5) {
-                        const name = cols[1].replace(/"/g, '').trim(), 
-                              review = cols[2].replace(/"/g, '').trim(), 
-                              city = cols[3].replace(/"/g, '').trim(), 
-                              stars = parseInt(cols[4]) || 5;
+                        const name = cols[1].replace(/"/g, '').trim(); 
+                        const review = cols[2].replace(/"/g, '').trim(); 
+                        const city = cols[3].replace(/"/g, '').trim(); 
+                        const stars = parseInt(cols[4]) || 5;
                         html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(stars)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${city}</p></div>`;
                     }
                 });
-                document.getElementById('dynamic-reviews').innerHTML = html || '<p>Connecting stories...</p>';
-            } catch (e) { console.error(e); }
+                document.getElementById('dynamic-reviews').innerHTML = html || '<p>Stories coming soon...</p>';
+            } catch (e) { console.error("Database connection error"); }
         }
 
         function renderUI() {
@@ -155,6 +160,7 @@
             const idx = cart.findIndex(i => i.id === id);
             if (idx > -1) { cart.splice(idx, 1); } else { 
                 cart.push({ id, name, price }); 
+                // Reveal the Manifest Folder automatically
                 document.getElementById('booking-engine').classList.add('manifest-visible');
             }
             updateCartUI(); renderUI();
@@ -176,9 +182,13 @@
         document.getElementById('reviewForm').addEventListener('submit', async e => {
             e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = "POSTING...";
             try {
+                // Post to App Script
                 await fetch(scriptURL, { method: 'POST', body: new FormData(e.target), mode: 'no-cors' });
-                alert("Story Published!"); e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review";
-                loadReviews();
+                alert("Story Published!"); 
+                e.target.reset(); 
+                btn.disabled = false; btn.innerText = "Post Live Review";
+                // Delay 2 seconds for Google to sync, then reload the stories
+                setTimeout(loadReviews, 2000); 
             } catch (err) { btn.disabled = false; }
         });
 
