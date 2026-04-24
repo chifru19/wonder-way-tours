@@ -61,20 +61,14 @@
             cursor: pointer; 
             margin-bottom: 12px; 
             border: 1px solid #1e293b; 
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .service-row:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
         .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
-        
-        /* FORM CONTROLS */
-        input, textarea { 
-            background: #1e293b !important; 
-            border: 1px solid #334155 !important; 
-            color: white !important; 
-            transition: all 0.3s ease; 
-        }
-        
-        input:focus, textarea:focus { border-color: #fbbf24 !important; outline: none; }
         
         /* REVIEWS ANIMATION */
         .review-card { 
@@ -100,9 +94,6 @@
             box-shadow: 0 -20px 40px rgba(0,0,0,0.4); 
         }
         
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 10px; }
-
         .immersive-footer { 
             position: relative; 
             padding: 100px 0;
@@ -112,14 +103,20 @@
             overflow: hidden;
             background-color: #0f172a;
         }
-        
-        .footer-bg-image {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.3;
+
+        /* HIDDEN MANIFEST SECTION */
+        #manifest-section {
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .manifest-container {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #1e293b;
+            border-radius: 32px;
+            padding: 40px;
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -132,15 +129,12 @@
                 <span class="text-[8px] uppercase tracking-[0.4em] text-yellow-500 font-black">Official Collection</span>
             </div>
         </div>
-        
         <div class="flex items-center gap-8">
-            <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 flex items-center gap-3">
-                <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
-                    <option value="XAF">CFA Franc (XAF)</option>
-                    <option value="EUR">Euro (€)</option>
-                    <option value="USD">Dollar ($)</option>
-                </select>
-            </div>
+            <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 text-white text-[10px] font-bold uppercase p-2 rounded-xl outline-none cursor-pointer">
+                <option value="XAF">CFA Franc (XAF)</option>
+                <option value="EUR">Euro (€)</option>
+                <option value="USD">Dollar ($)</option>
+            </select>
         </div>
     </nav>
 
@@ -156,10 +150,20 @@
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-32"></div>
 
+        <section id="manifest-section" class="mt-20">
+            <div class="text-center mb-10">
+                <h2 class="hero-font text-4xl font-black uppercase text-yellow-500">Full Service Manifest</h2>
+                <p class="text-slate-400 text-xs uppercase tracking-widest mt-2">Additional services for your custom journey</p>
+            </div>
+            <div class="manifest-container">
+                <div id="service-list" class="space-y-4">
+                    </div>
+            </div>
+        </section>
+
         <section id="feedback" class="mt-40">
             <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest <span class="text-slate-500">Stories</span></h2>
-            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                </div>
+            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
     </main>
 
@@ -178,14 +182,10 @@
 
     <footer class="immersive-footer border-t border-slate-800">
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <h3 class="hero-font text-4xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
-            
-            <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
-                <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4">Engineering by Frank Fru</span>
-                <div class="flex gap-10">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
-                </div>
+            <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4 block">Engineering by Frank Fru</span>
+            <div class="flex gap-10 justify-center">
+                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
+                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
         </div>
@@ -197,7 +197,6 @@
         let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
-        // Services Data
         const servicesData = {
             activities: [
                 { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&q=80&w=800", features: ["15 Mins Session", "Instructor"] },
@@ -233,6 +232,18 @@
                     </div>
                 </div>`;
             }).join('');
+
+            // Render Manifest List (Price List)
+            const list = document.getElementById('service-list');
+            const allItems = Object.values(servicesData).flat();
+            list.innerHTML = allItems.map(item => {
+                const isS = cart.some(c => c.id === item.id);
+                return `
+                <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row ${isS ? 'selected-item' : ''}">
+                    <span class="text-sm font-bold uppercase tracking-widest">${item.name}</span>
+                    <span class="text-yellow-500 font-black">${formatPrice(item.price)}</span>
+                </div>`;
+            }).join('');
         }
 
         function toggleService(id, name, price) {
@@ -244,17 +255,28 @@
 
         function updateCartUI() {
             const bar = document.getElementById('checkout-bar');
+            const manifest = document.getElementById('manifest-section');
             const total = cart.reduce((sum, i) => sum + i.price, 0);
+            
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
-            cart.length > 0 ? bar.classList.remove('translate-y-full') : bar.classList.add('translate-y-full');
+
+            if (cart.length > 0) {
+                bar.classList.remove('translate-y-full');
+                manifest.style.display = 'block';
+                setTimeout(() => manifest.style.opacity = '1', 10);
+            } else {
+                bar.classList.add('translate-y-full');
+                manifest.style.opacity = '0';
+                setTimeout(() => manifest.style.display = 'none', 500);
+            }
         }
 
+        function clearCart() { cart = []; updateCartUI(); renderUI(); }
         function formatPrice(v) { 
             const conv = v * rates[currentCurrency]; 
             return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
         }
-
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
         function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
 
