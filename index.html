@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WonderWay | Kribi Collection</title>
     
+    <meta name="description" content="Premium Kribi travel experiences. Curated tours and luxury escapes in Cameroon.">
+    <meta property="og:title" content="WonderWay | The Kribi Collection">
+    <meta property="og:description" content="Book your authentic coastal adventure.">
+    <meta property="og:url" content="https://wonderwaytourcameroon.com">
+    <meta property="og:type" content="website">
     <link rel="icon" href="images/logo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -27,7 +33,6 @@
             border-color: #fbbf24 !important; 
         }
         
-        /* CARD STYLING */
         .package-card, .service-row { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -38,11 +43,7 @@
         .package-card { border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        .service-row { border-radius: 20px; cursor: pointer; margin-bottom: 12px; border: 1px solid #1e293b; }
-        .service-row:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
-        .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
-        
-        /* HIDDEN MANIFEST FOLDER SYSTEM */
+        /* HIDDEN MANIFEST SYSTEM */
         #booking-engine {
             display: none;
             opacity: 0;
@@ -56,16 +57,23 @@
             transform: translateY(0) !important;
         }
 
+        .service-row { border-radius: 20px; cursor: pointer; margin-bottom: 12px; border: 1px solid #1e293b; }
+        .service-row:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+        .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
+        
         .review-card { 
+            animation: fadeIn 0.8s ease-out forwards; 
             background: linear-gradient(145deg, #1e293b, #0f172a); 
             border-radius: 24px; 
             border: 1px solid #334155; 
             padding: 40px;
         }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
-        
-        /* FOOTER SYSTEM */
+
+        /* FOUNDER FOOTER SYSTEM (RESTORING ORIGINAL IMAGES) */
         .immersive-footer { 
             position: relative; 
             min-height: 100vh; 
@@ -120,6 +128,7 @@
         <div class="flex flex-wrap justify-center gap-3 relative z-10">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Groups (4)</button>
         </div>
     </header>
 
@@ -129,7 +138,7 @@
         <section id="booking-engine" class="mt-32">
             <div class="flex flex-col items-center text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter text-white">Full Service <span class="text-yellow-500">Manifest</span></h2>
-                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Additional selection manifest</p>
+                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Personalize your journey from our price list</p>
             </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-6 md:p-10">
                 <div id="service-list" class="space-y-4"></div>
@@ -155,9 +164,11 @@
     <footer class="immersive-footer">
         <img src="images/footer.jpg" alt="Founder" class="footer-bg-image">
         <div class="footer-overlay"></div>
-        
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
+            <p class="text-slate-200 text-base md:text-lg max-w-2xl mx-auto mb-16 leading-relaxed italic opacity-90">
+                "Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."
+            </p>
             <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
                 <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4">Engineering by Frank Fru</span>
                 <div class="flex gap-10">
@@ -177,11 +188,16 @@
 
         const servicesData = {
             activities: [
-                { id: "a1", name: "Jet Ski", price: 10000, img: "images/jetski-action.jpg" },
-                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" }
+                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins Session", "Safety Instructor"] },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride", "Guided Nature Tour"] },
+                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Coastal Trail Ride", "Safety Helmet"] },
+                { id: "a4", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Session", "1 Drink Included"] }
             ],
             couples: [
-                { id: "c1", name: "Mini Love", price: 90000, img: "images/couple paradis escape.jpg" }
+                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa Lodging", "Water Sports Bundle"] }
+            ],
+            group4: [
+                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Spacious Villa", "BBQ Setup"] }
             ]
         };
 
@@ -195,8 +211,8 @@
                 const isS = cart.some(c => c.id === item.id);
                 return `
                 <div class="package-card ${isS ? 'selected-item' : ''}">
-                    <div class="h-56"><img src="${item.img}" class="w-full h-full object-cover"></div>
-                    <div class="p-8 text-left">
+                    <div class="h-56 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                    <div class="p-8">
                         <h4 class="text-2xl font-black uppercase mb-1">${item.name}</h4>
                         <p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p>
                         <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
@@ -211,9 +227,9 @@
             list.innerHTML = allItems.map(item => {
                 const isS = cart.some(c => c.id === item.id);
                 return `
-                <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex justify-between p-6 ${isS ? 'selected-item' : ''}">
-                    <span class="text-sm font-black uppercase text-white">${item.name}</span>
-                    <span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span>
+                <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}">
+                    <span class="text-sm font-black uppercase tracking-widest text-white">${item.name}</span>
+                    <span class="text-xs font-bold text-yellow-500">${formatPrice(item.price)}</span>
                 </div>`;
             }).join('');
         }
@@ -227,17 +243,17 @@
 
         function updateCartUI() {
             const bar = document.getElementById('checkout-bar');
-            const folder = document.getElementById('booking-engine');
+            const manifest = document.getElementById('booking-engine');
             const total = cart.reduce((sum, i) => sum + i.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
 
             if (cart.length > 0) {
                 bar.classList.remove('translate-y-full');
-                folder.classList.add('folder-visible');
+                manifest.classList.add('folder-visible');
             } else {
                 bar.classList.add('translate-y-full');
-                folder.classList.remove('folder-visible');
+                manifest.classList.remove('folder-visible');
             }
         }
 
