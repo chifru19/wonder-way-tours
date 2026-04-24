@@ -4,101 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WonderWay | Kribi Collection</title>
-    
-    <link rel="icon" href="images/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #0f172a; 
-            color: white; 
-            scroll-behavior: smooth; 
-        }
-        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
         .hero-font { font-family: 'Outfit', sans-serif; }
+        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
+        .package-card { transition: all 0.4s ease; border: 1px solid #1e293b; background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px); border-radius: 32px; overflow: hidden; height: 100%; display: flex; flex-direction: column; }
+        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        .active-tab { 
-            background: #fbbf24 !important; 
-            color: black !important; 
-            border-color: #fbbf24 !important; 
-        }
-        
-        /* CARD STYLING */
-        .package-card { 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border: 1px solid #1e293b; 
-            background: rgba(30, 41, 59, 0.4); 
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .package-card:hover { 
-            transform: translateY(-12px); 
-            border-color: #fbbf24; 
-            box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
-        }
-        
-        /* HIDDEN MANIFEST FOLDER LOGIC */
-        #booking-engine {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
+        /* MANIFEST FOLDER LOGIC */
+        #booking-engine { display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+        .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
-        .folder-visible {
-            display: block !important;
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-
-        .service-row { 
-            border-radius: 20px; 
-            cursor: pointer; 
-            margin-bottom: 12px; 
-            padding: 20px; 
-            display: flex; 
-            justify-content: space-between;
-            border: 1px solid #1e293b;
-        }
-        
-        .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
-
-        /* FOOTER SYSTEM */
-        .immersive-footer { 
-            position: relative; 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
-            background-color: #0f172a;
-        }
-        
-        .footer-bg-image {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-        }
-        
-        .footer-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
-        }
-        
-        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
+        .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
+        .immersive-footer { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; }
+        .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
     </style>
 </head>
 
@@ -106,27 +29,19 @@
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
-                <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
+                <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png" class="w-full h-full object-cover">
             </div>
-            <div class="flex flex-col text-left">
-                <span class="font-black text-xl hero-font text-white uppercase leading-none">WonderWay</span>
-                <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Official Collection</span>
-            </div>
+            <span class="font-black text-xl hero-font text-white uppercase tracking-tighter">WonderWay</span>
         </div>
-        <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 text-white text-[10px] font-bold uppercase p-2 rounded-xl outline-none cursor-pointer">
-            <option value="XAF">CFA Franc (XAF)</option>
-            <option value="EUR">Euro (€)</option>
-            <option value="USD">Dollar ($)</option>
-        </select>
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
         <div class="flex flex-wrap justify-center gap-3">
-            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Activities</button>
-            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Couples</button>
-            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Groups (4)</button>
-            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Groups (6)</button>
+            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Activities</button>
+            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (4)</button>
+            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (6)</button>
         </div>
     </header>
 
@@ -136,49 +51,44 @@
         <section id="booking-engine" class="mt-32">
             <div class="flex flex-col items-center text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase text-white">Service <span class="text-yellow-500">Manifest</span></h2>
-                <p class="text-slate-500 text-[10px] uppercase font-black tracking-widest mt-2">Prices for your selected journey items</p>
             </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10 max-w-4xl mx-auto">
-                <div id="service-list" class="space-y-4 text-left"></div>
+                <div id="service-list" class="space-y-4 text-left mb-10"></div>
+                <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <h3 id="cart-total-display" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
+                    <button onclick="sendWhatsApp()" class="px-12 py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl hover:bg-white transition-all">
+                        <i class="fab fa-whatsapp mr-2"></i> Confirm Selection
+                    </button>
+                </div>
             </div>
         </section>
 
         <section id="feedback" class="mt-40">
             <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest <span class="text-slate-500">Stories</span></h2>
-            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p class="text-center col-span-full opacity-50">Connecting stories...</p>
+            </div>
         </section>
     </main>
 
-    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-left">
-                <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
-                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
-            </div>
-            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
-        </div>
-    </div>
-
     <footer class="immersive-footer">
-        <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/footer.jpg" alt="Founder" class="footer-bg-image">
+        <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/footer.jpg" class="footer-bg-image">
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
-            <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
+            <div class="pt-12 border-t border-white/10">
                 <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4 block">Engineering by Frank Fru</span>
                 <div class="flex gap-10 justify-center">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Website</a>
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Portfolio</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        let currentCurrency = 'XAF'; 
         let currentCategory = 'activities'; 
         let cart = [];
-        const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         const servicesData = {
             activities: [
@@ -207,7 +117,7 @@
 
         function fetchReviews() {
             google.script.run.withSuccessHandler(h => {
-                document.getElementById('dynamic-reviews').innerHTML = h || '<p class="text-center col-span-full opacity-50 uppercase text-[10px]">Connecting stories...</p>';
+                document.getElementById('dynamic-reviews').innerHTML = h;
             }).loadReviews();
         }
 
@@ -218,10 +128,12 @@
                 return `
                 <div class="package-card ${isS ? 'selected-item' : ''}">
                     <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
-                    <div class="p-6 text-left">
-                        <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
-                        <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
-                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
+                    <div class="p-6 text-left flex-grow flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
+                            <p class="text-md font-bold mb-4 text-yellow-500">${item.price.toLocaleString()} CFA</p>
+                        </div>
+                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest">
                             ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
                         </button>
                     </div>
@@ -230,47 +142,29 @@
 
             const list = document.getElementById('service-list');
             list.innerHTML = cart.map(item => `
-                <div class="service-row">
+                <div class="flex justify-between border-b border-white/10 py-4">
                     <span class="text-sm font-black uppercase text-white">${item.name}</span>
-                    <span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span>
+                    <span class="text-yellow-500 font-bold">${item.price.toLocaleString()} CFA</span>
                 </div>`).join('');
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-total-display').innerText = `Total: ${total.toLocaleString()} CFA`;
         }
 
         function toggleService(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
             const manifest = document.getElementById('booking-engine');
-            const bar = document.getElementById('checkout-bar');
-            
-            if(cart.length > 0) {
-                manifest.classList.add('folder-visible');
-                bar.classList.remove('translate-y-full');
-            } else {
-                manifest.classList.remove('folder-visible');
-                bar.classList.add('translate-y-full');
-            }
-            
-            updateCartUI();
+            cart.length > 0 ? manifest.classList.add('folder-visible') : manifest.classList.remove('folder-visible');
             renderUI();
         }
 
-        function updateCartUI() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
-            document.getElementById('cart-count').innerText = `${cart.length} Selected`;
-        }
-
-        function formatPrice(v) { 
-            const conv = v * rates[currentCurrency]; 
-            return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
-        }
-
-        function processWhatsApp() {
+        function sendWhatsApp() {
             if (cart.length === 0) return;
             let msg = "WONDERWAY BOOKING REQUEST:\n-------------------------\n";
-            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - ${formatPrice(item.price)}\n`; });
+            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - ${item.price.toLocaleString()} CFA\n`; });
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            msg += `-------------------------\n*TOTAL: ${formatPrice(total)}*`;
+            msg += `-------------------------\nTOTAL: ${total.toLocaleString()} CFA\n-------------------------`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
