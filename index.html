@@ -12,20 +12,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
         
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #0f172a; 
-            color: white; 
-            scroll-behavior: smooth; 
-        }
-        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
         .hero-font { font-family: 'Outfit', sans-serif; }
-        
-        .active-tab { 
-            background: #fbbf24 !important; 
-            color: black !important; 
-            border-color: #fbbf24 !important; 
-        }
+        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
         
         .package-card { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
@@ -37,33 +26,14 @@
             height: 100%;
         }
         
-        .package-card:hover { 
-            transform: translateY(-12px); 
-            border-color: #fbbf24; 
-            box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
-        }
+        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        #booking-engine {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
+        #booking-engine { display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+        .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
-        .folder-visible {
-            display: block !important;
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
+        .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
 
-        .review-card { 
-            background: linear-gradient(145deg, #1e293b, #0f172a); 
-            border-radius: 24px; 
-            border: 1px solid #334155; 
-            padding: 40px; 
-        }
-
-        /* RESTORED: FOUNDER FOOTER SYSTEM */
+        /* IMMERSIVE FOOTER SYSTEM */
         .immersive-footer { 
             position: relative; 
             min-height: 100vh; 
@@ -105,20 +75,15 @@
                 <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Official Collection</span>
             </div>
         </div>
-        <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 text-white text-[10px] font-bold uppercase p-2 rounded-xl outline-none cursor-pointer">
-            <option value="XAF">CFA Franc (XAF)</option>
-            <option value="EUR">Euro (€)</option>
-            <option value="USD">Dollar ($)</option>
-        </select>
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
         <div class="flex flex-wrap justify-center gap-3">
-            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Activities</button>
-            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Couples</button>
-            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Groups (4)</button>
-            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest transition-all">Groups (6)</button>
+            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Activities</button>
+            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (4)</button>
+            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (6)</button>
         </div>
     </header>
 
@@ -170,7 +135,6 @@
     </footer>
 
     <script>
-        let currentCurrency = 'XAF'; 
         let currentCategory = 'activities'; 
         let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
@@ -216,9 +180,9 @@
                     <div class="p-6 text-left flex-grow flex flex-col justify-between">
                         <div>
                             <h4 class="text-lg font-black uppercase mb-1">${item.name}</h4>
-                            <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
+                            <p class="text-md font-bold mb-4 text-yellow-500">${item.price.toLocaleString()} CFA</p>
                         </div>
-                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest">
+                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
                             ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
                         </button>
                     </div>
@@ -229,7 +193,7 @@
             list.innerHTML = cart.map(item => `
                 <div class="flex justify-between border-b border-white/10 py-6">
                     <span class="text-sm font-black uppercase text-white">${item.name}</span>
-                    <span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span>
+                    <span class="text-yellow-500 font-bold">${item.price.toLocaleString()} CFA</span>
                 </div>`).join('');
         }
 
@@ -245,24 +209,16 @@
 
         function updateCartUI() {
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
+            document.getElementById('cart-total').innerText = `Total: ${total.toLocaleString()} CFA`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
         }
-
-        function formatPrice(v) { 
-            const conv = v * rates[currentCurrency]; 
-            return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
-        }
-
-        function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
-        function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
 
         function processWhatsApp() {
             if (cart.length === 0) return;
             let msg = "WONDERWAY BOOKING REQUEST:\n-------------------------\n";
-            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - ${formatPrice(item.price)}\n`; });
+            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - ${item.price.toLocaleString()} CFA\n`; });
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            msg += `-------------------------\n*TOTAL: ${formatPrice(total)}*`;
+            msg += `-------------------------\n*TOTAL: ${total.toLocaleString()} CFA*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
