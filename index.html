@@ -18,9 +18,20 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
         
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0f172a; 
+            color: white; 
+            scroll-behavior: smooth; 
+        }
+        
         .hero-font { font-family: 'Outfit', sans-serif; }
-        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
+        
+        .active-tab { 
+            background: #fbbf24 !important; 
+            color: black !important; 
+            border-color: #fbbf24 !important; 
+        }
         
         .package-card, .service-row { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
@@ -29,31 +40,71 @@
             backdrop-filter: blur(12px);
         }
         
-        .package-card { border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
-        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
-        
-        .service-row { border-radius: 20px; cursor: pointer; margin-bottom: 12px; border: 1px solid #1e293b; }
-        .service-row:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
-        .selected-item { border-color: #fbbf24 !important; background: rgba(251, 191, 36, 0.15) !important; }
-        
-        input, textarea { background: #1e293b !important; border: 1px solid #334155 !important; color: white !important; transition: all 0.3s ease; }
-        input:focus, textarea:focus { border-color: #fbbf24 !important; outline: none; box-shadow: 0 0 15px rgba(251, 191, 36, 0.1); }
-        
-        .review-card { 
-            animation: fadeIn 0.8s ease-out forwards; opacity: 0; 
-            background: linear-gradient(145deg, #1e293b, #0f172a); 
-            border-radius: 24px; border: 1px solid #334155; padding: 40px;
-            display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+        .package-card { 
+            border-radius: 32px; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            height: 100%; 
         }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .package-card:hover { 
+            transform: translateY(-12px); 
+            border-color: #fbbf24; 
+            box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
+        }
+        
+        .service-row { 
+            border-radius: 20px; 
+            cursor: pointer; 
+            margin-bottom: 12px; 
+            border: 1px solid #1e293b; 
+        }
+        
+        .service-row:hover { 
+            border-color: #fbbf24; 
+            background: rgba(251, 191, 36, 0.1); 
+        }
+        
+        .selected-item { 
+            border-color: #fbbf24 !important; 
+            background: rgba(251, 191, 36, 0.15) !important; 
+        }
+        
+        input, textarea { 
+            background: #1e293b !important; 
+            border: 1px solid #334155 !important; 
+            color: white !important; 
+        }
+        
+        .review-card { 
+            animation: fadeIn 0.8s ease-out forwards; 
+            opacity: 0; 
+            background: linear-gradient(145deg, #1e293b, #0f172a); 
+            border-radius: 24px; 
+            border: 1px solid #334155; 
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
         .star-rating label { transition: color 0.2s ease; color: #334155; }
-        .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #fbbf24 !important; }
+        .star-rating label:hover, 
+        .star-rating label:hover ~ label, 
+        .star-rating input:checked ~ label { 
+            color: #fbbf24 !important; 
+        }
         
-        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
-        
-        /* THE HIDE LOGIC CSS */
+        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+
+        /* MANIFEST HIDE LOGIC */
         #booking-engine {
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             max-height: 0;
@@ -63,15 +114,36 @@
         }
 
         #booking-engine.manifest-visible {
-            max-height: 2000px;
+            max-height: 3000px;
             opacity: 1;
             pointer-events: auto;
             margin-top: 5rem;
+            margin-bottom: 5rem;
         }
 
-        .immersive-footer { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; }
-        .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.7; }
-        .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
+        .immersive-footer { 
+            position: relative; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background-color: #0f172a;
+        }
+        
+        .footer-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+        
+        .footer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0f172a 10%, rgba(15, 23, 42, 0.6) 50%, transparent 100%);
+        }
     </style>
 </head>
 
@@ -120,14 +192,13 @@
         <section id="booking-engine">
             <div class="flex flex-col items-center text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter text-white">Full Service <span class="text-yellow-500">Manifest</span></h2>
-                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Build your custom journey by selecting services from our price list</p>
+                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Build your custom journey from our price list</p>
             </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-6 md:p-10">
                 <div id="service-list" class="space-y-4"></div>
             </div>
         </section>
-
-        <section id="review-submission" class="mt-40 pt-20 border-t border-slate-800/50">
+        <section id="review-submission" class="mt-40 pt-20 border-t border-slate-800/50 text-center">
             <div class="max-w-2xl mx-auto bg-slate-900/80 p-10 md:p-16 rounded-[40px] border border-slate-800 shadow-2xl relative text-center">
                 <h2 class="hero-font text-4xl font-black uppercase mb-8 text-white">Guest <span class="text-yellow-500">Voice</span></h2>
                 <form id="reviewForm" class="space-y-6 text-left">
@@ -163,9 +234,9 @@
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
                 <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <div class="flex gap-4 w-full md:w-auto">
+            <div class="flex gap-4">
                 <button onclick="clearCart()" class="px-8 py-5 border border-slate-700 text-slate-400 font-bold rounded-2xl uppercase text-[10px]">Reset</button>
-                <button onclick="processWhatsApp()" class="flex-grow md:flex-grow-0 px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white hover:scale-105 transition-all shadow-xl">Confirm via WhatsApp</button>
+                <button onclick="processWhatsApp()" class="flex-grow md:flex-grow-0 px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
             </div>
         </div>
     </div>
@@ -176,22 +247,23 @@
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
             <p class="text-slate-200 text-base md:text-lg max-w-2xl mx-auto mb-16 leading-relaxed italic opacity-90">"Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."</p>
-            <div class="flex flex-col md:flex-row gap-8 justify-center items-center pt-12 border-t border-white/10 w-full">
-                <div class="flex gap-10">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
-                    <a href="https://github.com/chifru19" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">GitHub</a>
-                    <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">LinkedIn</a>
+            
+            <div class="flex flex-col gap-8 pt-12 border-t border-white/10 w-full">
+                <div class="flex flex-col items-center">
+                    <p class="text-yellow-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Site Engineering by Frank Fru</p>
+                    <div class="flex gap-10">
+                        <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
+                        <a href="https://github.com/chifru19" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">GitHub</a>
+                        <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">LinkedIn</a>
+                    </div>
                 </div>
             </div>
-            <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon. Engineering by Frank Fru.</p>
+            <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
         </div>
     </footer>
 
     <script>
-        let currentCurrency = 'XAF'; 
-        let currentCategory = 'activities'; 
-        let cart = [];
-        const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
+        let currentCurrency = 'XAF', currentCategory = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         const servicesData = {
             activities: [
@@ -220,30 +292,24 @@
 
         async function loadReviews() {
             try {
-                const response = await fetch(sheetURL + '&cache=' + Date.now());
+                const response = await fetch(sheetURL + '&v=' + Date.now());
                 const data = await response.text();
                 const rows = data.split('\n').filter(r => r.trim() !== "");
-                const container = document.getElementById('dynamic-reviews');
                 let html = '';
-
                 rows.slice(1).reverse().forEach(line => {
                     const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if(cols.length >= 4) {
-                        const name = cols[0].replace(/"/g, '').trim();
-                        const location = cols[1].replace(/"/g, '').trim();
-                        const review = cols[2].replace(/"/g, '').trim();
-                        const starVal = parseInt(cols[3]) || 5;
-                        let starsHtml = '★'.repeat(starVal) + '☆'.repeat(5-starVal);
-                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl font-black">${starsHtml}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
+                        const name = cols[0].replace(/"/g, '').trim(), location = cols[1].replace(/"/g, '').trim(), review = cols[2].replace(/"/g, '').trim(), starVal = parseInt(cols[3]) || 5;
+                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl font-black">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
                     }
                 });
-                container.innerHTML = html || '<p class="text-center col-span-3 opacity-50">Connecting stories...</p>';
+                document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">Connecting stories...</p>';
             } catch (e) { console.error("Database sync failed"); }
         }
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
-            grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
+            grid.innerHTML = servicesData[currentCategory].map(item => {
                 const isS = cart.some(c => c.id === item.id);
                 return `<div class="package-card ${isS ? 'selected-item' : ''}"><div class="h-56 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"></div><div class="p-8 flex flex-col flex-grow text-left"><h4 class="text-2xl font-black mb-1 hero-font uppercase tracking-tight">${item.name}</h4><p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p><ul class="space-y-2 mb-8 flex-grow">${item.features.map(f => `<li class="text-[11px] text-slate-400 flex items-center gap-2">✓ ${f}</li>`).join('')}</ul><button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 mt-auto ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">${isS ? 'Added ✓' : 'Add to Trip'}</button></div></div>`;
             }).join('');
@@ -251,7 +317,7 @@
             const list = document.getElementById('service-list');
             list.innerHTML = Object.values(servicesData).flat().map(item => {
                 const isS = cart.some(c => c.id === item.id);
-                return `<div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}"><div class="flex items-center gap-6"><div class="w-2 h-2 rounded-full ${isS ? 'bg-yellow-500 shadow-[0_0_10px_#fbbf24]' : 'bg-slate-700'}"></div><span class="text-sm font-black uppercase tracking-[0.2em] ${isS ? 'text-white' : 'text-slate-400'} transition">${item.name}</span></div><span class="text-xs font-bold ${isS ? 'text-yellow-500' : 'text-slate-500'}">${formatPrice(item.price)}</span></div>`;
+                return `<div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}"><div class="flex items-center gap-6"><div class="w-2 h-2 rounded-full ${isS ? 'bg-yellow-500' : 'bg-slate-700'}"></div><span class="text-sm font-black uppercase tracking-[0.2em] ${isS ? 'text-white' : 'text-slate-400'} transition">${item.name}</span></div><span class="text-xs font-bold ${isS ? 'text-yellow-500' : 'text-slate-500'}">${formatPrice(item.price)}</span></div>`;
             }).join('');
         }
 
@@ -260,7 +326,6 @@
             if (idx > -1) { cart.splice(idx, 1); } 
             else { 
                 cart.push({ id, name, price }); 
-                // Show Manifest when an item is added
                 document.getElementById('booking-engine').classList.add('manifest-visible');
             }
             updateCartUI(); renderUI();
@@ -269,11 +334,10 @@
         function clearCart() { cart = []; updateCartUI(); renderUI(); }
 
         function updateCartUI() {
-            const bar = document.getElementById('checkout-bar');
             const total = cart.reduce((sum, i) => sum + i.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
-            document.getElementById('cart-count').innerText = `${cart.length} Services Selected`;
-            bar.classList.toggle('translate-y-full', cart.length === 0);
+            document.getElementById('cart-count').innerText = `${cart.length} Selected`;
+            document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
         }
 
         function formatPrice(v) { 
@@ -282,25 +346,17 @@
         }
 
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
-        function switchCategory(cat) { 
-            currentCategory = cat; 
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); 
-            document.getElementById('tab-' + cat).classList.add('active-tab'); 
-            renderUI(); 
-        }
+        function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
 
         function processWhatsApp() {
-            let itinerary = "WonderWay Booking Request:\n" + cart.map((i, idx) => `${idx + 1}. ${i.name} (${formatPrice(i.price)})`).join("\n") + "\nTotal: " + document.getElementById('cart-total').innerText;
+            let itinerary = "WonderWay Booking:\n" + cart.map((i, idx) => `${idx + 1}. ${i.name} (${formatPrice(i.price)})`).join("\n") + "\nTotal: " + document.getElementById('cart-total').innerText;
             window.open("https://wa.me/237653827999?text=" + encodeURIComponent(itinerary), '_blank');
         }
 
         document.getElementById('reviewForm').addEventListener('submit', e => {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true; btn.innerText = "POSTING...";
+            e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = "POSTING...";
             fetch(scriptURL, { method: 'POST', body: new FormData(e.target), mode: 'no-cors' })
-            .then(() => { alert("Story Published!"); e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review"; setTimeout(loadReviews, 2000); })
-            .catch(() => { btn.disabled = false; btn.innerText = "Post Live Review"; });
+            .then(() => { alert("Story Published!"); e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review"; setTimeout(loadReviews, 2000); });
         });
 
         window.onload = () => { loadReviews(); renderUI(); };
