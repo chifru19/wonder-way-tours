@@ -18,6 +18,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
         
+        /* GLOBAL STYLES */
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #0f172a; 
@@ -25,7 +26,9 @@
             scroll-behavior: smooth; 
         }
         
-        .hero-font { font-family: 'Outfit', sans-serif; }
+        .hero-font { 
+            font-family: 'Outfit', sans-serif; 
+        }
         
         .active-tab { 
             background: #fbbf24 !important; 
@@ -33,6 +36,7 @@
             border-color: #fbbf24 !important; 
         }
         
+        /* CARD & ELEMENT STYLING */
         .package-card, .service-row { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -61,25 +65,31 @@
             border: 1px solid #1e293b; 
         }
         
+        .service-row:hover { 
+            border-color: #fbbf24; 
+            background: rgba(251, 191, 36, 0.1); 
+        }
+        
         .selected-item { 
             border-color: #fbbf24 !important; 
             background: rgba(251, 191, 36, 0.15) !important; 
         }
         
+        /* FORM CONTROLS */
         input, textarea { 
             background: #1e293b !important; 
             border: 1px solid #334155 !important; 
             color: white !important; 
+            transition: all 0.3s ease; 
         }
-
-        /* STAR RATING SYSTEM */
-        .star-rating { display: flex; flex-direction: row-reverse; gap: 5px; justify-content: flex-end; }
-        .star-rating input { display: none; }
-        .star-rating label { cursor: pointer; font-size: 30px; color: #334155; transition: color 0.2s; }
-        .star-rating label:before { content: '★'; }
-        .star-rating input:checked ~ label { color: #fbbf24; }
-        .star-rating label:hover, .star-rating label:hover ~ label { color: #fbbf24; }
         
+        input:focus, textarea:focus { 
+            border-color: #fbbf24 !important; 
+            outline: none; 
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.1); 
+        }
+        
+        /* REVIEWS ANIMATION */
         .review-card { 
             animation: fadeIn 0.8s ease-out forwards; 
             opacity: 0; 
@@ -98,9 +108,28 @@
             to { opacity: 1; transform: translateY(0); } 
         }
 
-        #booking-engine { transition: all 0.8s ease; max-height: 0; opacity: 0; overflow: hidden; pointer-events: none; }
-        #booking-engine.manifest-visible { max-height: 4000px; opacity: 1; pointer-events: auto; margin-top: 5rem; margin-bottom: 5rem; }
+        /* STAR RATING */
+        .star-rating label { 
+            transition: color 0.2s ease; 
+            color: #334155; 
+        }
+        
+        .star-rating label:hover, 
+        .star-rating label:hover ~ label, 
+        .star-rating input:checked ~ label { 
+            color: #fbbf24 !important; 
+        }
+        
+        /* UTILITIES */
+        #checkout-bar { 
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.4); 
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 10px; }
 
+        /* FOUNDER FOOTER SYSTEM */
         .immersive-footer { 
             position: relative; 
             min-height: 100vh; 
@@ -141,19 +170,26 @@
             </div>
         </div>
         
-        <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 flex items-center gap-3">
-            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
-                <option value="XAF">CFA Franc (XAF)</option>
-                <option value="EUR">Euro (€)</option>
-                <option value="USD">Dollar ($)</option>
-            </select>
+        <div class="flex items-center gap-8">
+            <div class="hidden lg:flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <a href="#package-grid" class="hover:text-white transition">Experiences</a>
+                <a href="#booking-engine" class="hover:text-white transition">Price List</a>
+                <a href="#review-submission" class="hover:text-white transition">Stories</a>
+            </div>
+            <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 flex items-center gap-3">
+                <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
+                    <option value="XAF">CFA Franc (XAF)</option>
+                    <option value="EUR">Euro (€)</option>
+                    <option value="USD">Dollar ($)</option>
+                </select>
+            </div>
         </div>
     </nav>
 
-    <header class="pt-24 pb-12 px-6 text-center">
-        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
+    <header class="pt-24 pb-12 px-6 text-center relative overflow-hidden">
+        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none relative z-10">Kribi <span class="text-yellow-500">Luxury</span></h1>
         <p class="max-w-2xl mx-auto text-slate-400 text-sm md:text-base italic uppercase tracking-[0.2em] leading-relaxed mb-10">"Select from our featured collection or browse the full service manifest below."</p>
-        <div class="flex flex-wrap justify-center gap-3">
+        <div class="flex flex-wrap justify-center gap-3 relative z-10">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Couples</button>
             <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Groups (4)</button>
@@ -162,15 +198,17 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
-        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-32"></div>
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-32">
+            </div>
 
-        <section id="booking-engine">
+        <section id="booking-engine" class="mt-32">
             <div class="flex flex-col items-center text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase tracking-tighter text-white">Full Service <span class="text-yellow-500">Manifest</span></h2>
-                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Build your custom journey</p>
+                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Build your custom journey by selecting services from our price list</p>
             </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-6 md:p-10">
-                <div id="service-list" class="space-y-4"></div>
+                <div id="service-list" class="space-y-4">
+                    </div>
             </div>
         </section>
 
@@ -179,40 +217,41 @@
                 <h2 class="hero-font text-4xl font-black uppercase mb-8 text-white">Guest <span class="text-yellow-500">Voice</span></h2>
                 <form id="reviewForm" class="space-y-6 text-left">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" name="Name" placeholder="Name" class="w-full p-5 rounded-2xl" required>
-                        <input type="text" name="City" placeholder="City" class="w-full p-5 rounded-2xl" required>
+                        <input type="text" name="Full Name." placeholder="Guest Name" class="w-full p-5 rounded-2xl" required>
+                        <input type="text" name="Column 3" placeholder="Home City" class="w-full p-5 rounded-2xl" required>
                     </div>
-                    <div class="flex justify-between items-center bg-slate-800/30 p-6 rounded-2xl border border-slate-800">
+                    <div class="flex flex-col md:flex-row justify-between items-center bg-slate-800/30 p-6 rounded-2xl border border-slate-800">
                         <span class="text-[10px] uppercase font-black text-slate-400">Rating:</span>
-                        <div class="star-rating">
-                            <input type="radio" name="Stars" id="star-5" value="5" required><label for="star-5"></label>
-                            <input type="radio" name="Stars" id="star-4" value="4"><label for="star-4"></label>
-                            <input type="radio" name="Stars" id="star-3" value="3"><label for="star-3"></label>
-                            <input type="radio" name="Stars" id="star-2" value="2"><label for="star-2"></label>
-                            <input type="radio" name="Stars" id="star-1" value="1"><label for="star-1"></label>
+                        <div class="star-rating flex flex-row-reverse">
+                            <input type="radio" name="Rating" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Rating" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Rating" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Rating" id="star-2" value="2" class="hidden"><label for="star-2" class="cursor-pointer text-3xl px-1">★</label>
+                            <input type="radio" name="Rating" id="star-1" value="1" class="hidden"><label for="star-1" class="cursor-pointer text-3xl px-1">★</label>
                         </div>
                     </div>
-                    <textarea name="Review" placeholder="Describe your experience with WonderWay..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
+                    <textarea name="Your Review\" placeholder="Describe your experience with WonderWay..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
                     <button type="submit" id="submitBtn" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-lg">Post Live Review</button>
                 </form>
             </div>
         </section>
 
-        <section class="mt-40">
+        <section id="feedback" class="mt-40">
             <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest <span class="text-slate-500">Stories</span></h2>
-            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
         </section>
     </main>
 
-    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full transition-transform">
+    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-left">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
                 <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <div class="flex gap-4">
+            <div class="flex gap-4 w-full md:w-auto">
                 <button onclick="clearCart()" class="px-8 py-5 border border-slate-700 text-slate-400 font-bold rounded-2xl uppercase text-[10px]">Reset</button>
-                <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs shadow-xl">Confirm via WhatsApp</button>
+                <button onclick="processWhatsApp()" class="flex-grow md:flex-grow-0 px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white hover:scale-105 transition-all shadow-xl">Confirm via WhatsApp</button>
             </div>
         </div>
     </div>
@@ -220,77 +259,176 @@
     <footer class="immersive-footer">
         <img src="images/footer.jpg" alt="Founder" class="footer-bg-image">
         <div class="footer-overlay"></div>
+        
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <h3 class="hero-font text-5xl md:text-7xl font-black uppercase mb-12 italic text-white leading-tight">"Luxury is affordable."</h3>
+            <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
             <p class="text-slate-200 text-base md:text-lg max-w-2xl mx-auto mb-16 leading-relaxed italic opacity-90">
                 "Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone."
             </p>
             
-            <div class="bg-black/40 backdrop-blur-md p-10 rounded-[40px] border border-white/10 inline-block">
-                <p class="text-yellow-500 text-[10px] font-black uppercase tracking-[0.4em] mb-6">Engineering & Administration by Frank Fru</p>
-                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[12px] font-black tracking-widest transition-all">My Portfolio & Website (frankfru.com)</a>
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-center pt-12 border-t border-white/10 w-full">
+                <div class="flex gap-10">
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">My Website (frankfru.com)</a>
+                </div>
             </div>
-            <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
+            <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon. Engineering by Frank Fru.</p>
         </div>
     </footer>
 
     <script>
-        let currentCurrency = 'XAF', currentCategory = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
-        
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzTy60L4Xvq5zd_Ra5i3WbM7iKMzfBQBXSj5KKKyPo85JQH9LBKIfGdie3eHNuzs62/exec'; 
-        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?gid=65154260&single=true&output=csv';
+        /** * APP STATE & UTILS 
+         **/
+        let currentCurrency = 'XAF'; 
+        let currentCategory = 'activities'; 
+        let cart = [];
+        const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
+        /** * SERVICE DATABASE 
+         **/
         const servicesData = {
-            activities: [{ id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins Session", "Instructor"] }, { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride"] }, { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Coastal Trail"] }, { id: "a4", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Art", "1 Drink"] }, { id: "a5", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Heritage Tour"] }],
-            couples: [{ id: "c1", name: "Mini Love", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa"] }, { id: "c2", name: "Paradise Gold", price: 250000, img: "images/sip-paint.jpg", features: ["Private Beach Dinner"] }, { id: "c3", name: "Royal VIP", price: 350000, img: "images/royal romance.jpg", features: ["Boat Cruise"] }],
-            group4: [{ id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Villa Stay", "BBQ"] }, { id: "g4_2", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Private Sip & Paint"] }],
-            group6: [{ id: "g6_1", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["6-Pax Villa"] }]
+            activities: [
+                { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins High-Speed Session", "Safety Instructor", "Life Jacket"] },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg", features: ["Beach Sunset Ride", "Guided Nature Tour", "Photo Sessions"] },
+                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg", features: ["Coastal Trail Ride", "Safety Helmet", "All-Terrain Gear"] },
+                { id: "a4", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg", features: ["2-Hour Creative Art Session", "1 Drink Included", "All Art Supplies"] },
+                { id: "a5", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Bilingual Heritage Tour", "Historical Briefing", "Entry Included"] }
+            ],
+            couples: [
+                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa Lodging", "Water Sports Bundle", "Waterfall Guided Visit"] },
+                { id: "c2", name: "Paradise Gold Stay", price: 250000, img: "images/sip-paint.jpg", features: ["Premium Villa Access", "Private Beach Dinner", "Beach Bonfire Night"] },
+                { id: "c3", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg", features: ["Executive Luxury Suite", "Private Boat Cruise", "24/7 Personal Concierge"] }
+            ],
+            group4: [
+                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Spacious Villa Lodging", "Full Water Sports Activity Pack", "Beach BBQ Setup"] },
+                { id: "g4_2", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Premium Group Villa Access", "Full Group BBQ Dinner", "Private Group Sip & Paint"] }
+            ],
+            group6: [
+                { id: "g6_1", name: "Friends & Waves", price: 270000, img: "images/group-action.jpg", features: ["Exclusive 6-Pax Villa Stay", "All Activities Access", "Bilingual Support Guide"] }
+            ]
         };
 
+        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzTy60L4Xvq5zd_Ra5i3WbM7iKMzfBQBXSj5KKKyPo85JQH9LBKIfGdie3eHNuzs62/exec';
+
+        /** * DATABASE SYNC
+         **/
         async function loadReviews() {
             try {
-                const response = await fetch(sheetURL + '&v=' + Date.now()); const data = await response.text();
+                const response = await fetch(sheetURL + '&cache=' + Date.now());
+                const data = await response.text();
                 const rows = data.split('\n').filter(r => r.trim() !== "");
-                let html = ''; rows.slice(1).reverse().forEach(line => {
+                const container = document.getElementById('dynamic-reviews');
+                let html = '';
+
+                rows.slice(1).reverse().forEach(line => {
                     const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if(cols.length >= 5) {
-                        const name = cols[1]?.replace(/"/g, '').trim(), review = cols[2]?.replace(/"/g, '').trim(), city = cols[3]?.replace(/"/g, '').trim(), stars = parseInt(cols[4]) || 5;
-                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(stars)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${city}</p></div>`;
+                        const name = cols[1].replace(/"/g, '').trim();
+                        const location = cols[2].replace(/"/g, '').trim();
+                        const review = cols[3].replace(/"/g, '').trim();
+                        const starVal = parseInt(cols[4]) || 5;
+
+                        let starsHtml = '';
+                        for(let i=0; i<5; i++) { starsHtml += i < starVal ? '★' : '☆'; }
+
+                        html += `
+                        <div class="review-card">
+                            <div>
+                                <div class="text-yellow-500 mb-4 text-xl font-black">${starsHtml}</div>
+                                <p class="italic text-sm text-slate-300">"${review}"</p>
+                            </div>
+                            <p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p>
+                        </div>`;
                     }
                 });
-                document.getElementById('dynamic-reviews').innerHTML = html || '<p>Stories coming soon...</p>';
-            } catch (e) { console.error(e); }
+                container.innerHTML = html || '<p class="text-center col-span-3 opacity-50">Connecting stories...</p>';
+            } catch (e) { console.error("Database sync failed"); }
         }
 
+        /** * UI RENDERERS
+         **/
         function renderUI() {
-            document.getElementById('package-grid').innerHTML = servicesData[currentCategory].map(item => {
+            const grid = document.getElementById('package-grid');
+            grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
                 const isS = cart.some(c => c.id === item.id);
-                return `<div class="package-card ${isS ? 'selected-item' : ''}"><img src="${item.img}" class="w-full h-56 object-cover"><div class="p-8 flex flex-col flex-grow text-left"><h4 class="text-2xl font-black mb-1 hero-font uppercase">${item.name}</h4><p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p><ul class="space-y-2 mb-8 flex-grow">${item.features.map(f => `<li class="text-[11px] text-slate-400">✓ ${f}</li>`).join('')}</ul><button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 mt-auto ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">${isS ? 'Added ✓' : 'Add'}</button></div></div>`;
+                return `
+                <div class="package-card ${isS ? 'selected-item' : ''}">
+                    <div class="h-56 overflow-hidden">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow text-left">
+                        <h4 class="text-2xl font-black mb-1 hero-font uppercase tracking-tight">${item.name}</h4>
+                        <p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p>
+                        <ul class="space-y-2 mb-8 flex-grow">
+                            ${item.features.map(f => `<li class="text-[11px] text-slate-400 flex items-center gap-2">✓ ${f}</li>`).join('')}
+                        </ul>
+                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 mt-auto ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
+                            ${isS ? 'Added ✓' : 'Add to Trip'}
+                        </button>
+                    </div>
+                </div>`;
             }).join('');
-            document.getElementById('service-list').innerHTML = Object.values(servicesData).flat().map(item => {
+
+            const list = document.getElementById('service-list');
+            const allItems = Object.values(servicesData).flat();
+            list.innerHTML = allItems.map(item => {
                 const isS = cart.some(c => c.id === item.id);
-                return `<div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}"><span class="text-sm font-black uppercase text-white">${item.name}</span><span class="text-xs font-bold text-yellow-500">${formatPrice(item.price)}</span></div>`;
+                return `
+                <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex items-center justify-between p-6 ${isS ? 'selected-item' : ''}">
+                    <div class="flex items-center gap-6">
+                        <div class="w-2 h-2 rounded-full ${isS ? 'bg-yellow-500 shadow-[0_0_10px_#fbbf24]' : 'bg-slate-700'}"></div>
+                        <span class="text-sm font-black uppercase tracking-[0.2em] ${isS ? 'text-white' : 'text-slate-400'} transition">${item.name}</span>
+                    </div>
+                    <span class="text-xs font-bold ${isS ? 'text-yellow-500' : 'text-slate-500'}">${formatPrice(item.price)}</span>
+                </div>`;
             }).join('');
         }
 
-        function toggleService(id, n, p) {
-            const idx = cart.findIndex(i => i.id === id); idx > -1 ? cart.splice(idx, 1) : (cart.push({ id, n, p }), document.getElementById('booking-engine').classList.add('manifest-visible'));
-            updateCartUI(); renderUI();
+        /** * LOGIC HANDLERS 
+         **/
+        function toggleService(id, name, price) {
+            const idx = cart.findIndex(i => i.id === id);
+            if (idx > -1) { cart.splice(idx, 1); } else { cart.push({ id, name, price }); }
+            updateCartUI(); 
+            renderUI();
         }
+
+        function clearCart() { cart = []; updateCartUI(); renderUI(); }
 
         function updateCartUI() {
-            const total = cart.reduce((sum, i) => sum + i.p, 0); document.getElementById('cart-total').innerText = formatPrice(total);
-            document.getElementById('cart-count').innerText = `${cart.length} Selected`; document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
+            const bar = document.getElementById('checkout-bar');
+            const total = cart.reduce((sum, i) => sum + i.price, 0);
+            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
+            document.getElementById('cart-count').innerText = `${cart.length} Services Selected`;
+            if (cart.length > 0) { bar.classList.remove('translate-y-full'); } else { bar.classList.add('translate-y-full'); }
         }
 
-        function formatPrice(v) { return currentCurrency === 'XAF' ? new Intl.NumberFormat().format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + (v * rates[currentCurrency]).toFixed(2); }
+        function formatPrice(v) { 
+            const conv = v * rates[currentCurrency]; 
+            if (currentCurrency === 'XAF') { return new Intl.NumberFormat('fr-CM').format(v) + ' CFA'; }
+            else { return (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2); }
+        }
+
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
         function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
-        function processWhatsApp() { window.open("https://wa.me/237653827999?text=" + encodeURIComponent("WonderWay Booking Request:\n" + cart.map(i => i.n).join("\n") + "\nTotal: " + document.getElementById('cart-total').innerText), '_blank'); }
 
-        document.getElementById('reviewForm').addEventListener('submit', async e => {
-            e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = "...";
-            try { await fetch(scriptURL, { method: 'POST', body: new FormData(e.target), mode: 'no-cors' }); alert("Story Published!"); e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review"; setTimeout(loadReviews, 2000); } catch (err) { btn.disabled = false; }
+        function processWhatsApp() {
+            if (cart.length === 0) return;
+            let itinerary = "WonderWay Booking Request:\n";
+            cart.forEach((item, index) => { itinerary += `${index + 1}. ${item.name} (${formatPrice(item.price)})\n`; });
+            itinerary += `\n*Grand Total: ${document.getElementById('cart-total').innerText}*`;
+            window.open("https://wa.me/237653827999?text=" + encodeURIComponent(itinerary), '_blank');
+        }
+
+        document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true; btn.innerText = "POSTING...";
+            try {
+                await fetch(scriptURL, { method: 'POST', body: new FormData(e.target), mode: 'no-cors' });
+                alert("Story Published!"); e.target.reset(); btn.disabled = false; btn.innerText = "POST LIVE REVIEW";
+                loadReviews();
+            } catch (err) { btn.disabled = false; btn.innerText = "POST LIVE REVIEW"; }
         });
 
         window.onload = () => { loadReviews(); renderUI(); };
