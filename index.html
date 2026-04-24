@@ -176,7 +176,7 @@
                     <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
                     <div class="p-6 text-left flex-grow flex flex-col justify-between">
                         <div>
-                            <h4 class="text-lg font-black uppercase mb-1">${item.name}</h4>
+                            <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
                             <p class="text-md font-bold mb-4 text-yellow-500">${item.price.toLocaleString()} CFA</p>
                         </div>
                         <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
