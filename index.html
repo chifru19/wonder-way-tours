@@ -125,10 +125,6 @@
             <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
                 <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-2 block">Engineering by Frank Fru</span>
                 <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">frankfru.com</a>
-                <div class="flex gap-8 mt-6">
-                     <a href="https://github.com/chifru19" target="_blank" class="text-white/50 hover:text-white transition"><i class="fab fa-github"></i></a>
-                     <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white/50 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
-                </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
         </div>
@@ -164,9 +160,11 @@
         };
 
         function fetchReviews() {
-            google.script.run.withSuccessHandler(function(h) {
-                if(h) { document.getElementById('dynamic-reviews').innerHTML = h; }
-            }).loadReviews();
+            if (typeof google !== 'undefined') {
+                google.script.run.withSuccessHandler(function(h) {
+                    if(h) { document.getElementById('dynamic-reviews').innerHTML = h; }
+                }).loadReviews();
+            }
         }
 
         function renderUI() {
@@ -178,7 +176,7 @@
                     <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
                     <div class="p-6 text-left flex-grow flex flex-col justify-between">
                         <div>
-                            <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
+                            <h4 class="text-lg font-black uppercase mb-1">${item.name}</h4>
                             <p class="text-md font-bold mb-4 text-yellow-500">${item.price.toLocaleString()} CFA</p>
                         </div>
                         <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
