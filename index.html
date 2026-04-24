@@ -33,7 +33,7 @@
 
         .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
 
-        /* FOOTER SYSTEM */
+        /* FOOTER IMAGE SYSTEM */
         .immersive-footer { 
             position: relative; 
             min-height: 100vh; 
@@ -123,11 +123,11 @@
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-6xl font-black uppercase mb-6 text-white italic">"Luxury is affordable."</h3>
             <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
-                <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4 block">Engineering by Frank Fru</span>
-                <div class="flex gap-10 justify-center">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
-                    <a href="https://github.com/chifru19" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">GitHub</a>
-                    <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">LinkedIn</a>
+                <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-2 block">Engineering by Frank Fru</span>
+                <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">frankfru.com</a>
+                <div class="flex gap-8 mt-6">
+                     <a href="https://github.com/chifru19" target="_blank" class="text-white/50 hover:text-white transition"><i class="fab fa-github"></i></a>
+                     <a href="https://www.linkedin.com/in/frank-fru-454593252/" target="_blank" class="text-white/50 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
@@ -163,12 +163,9 @@
             ]
         };
 
-        // This is the specific function that pulls the reviews from Code.gs
         function fetchReviews() {
-            google.script.run.withSuccessHandler(function(html) {
-                if(html) {
-                    document.getElementById('dynamic-reviews').innerHTML = html;
-                }
+            google.script.run.withSuccessHandler(function(h) {
+                if(h) { document.getElementById('dynamic-reviews').innerHTML = h; }
             }).loadReviews();
         }
 
@@ -181,7 +178,7 @@
                     <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
                     <div class="p-6 text-left flex-grow flex flex-col justify-between">
                         <div>
-                            <h4 class="text-lg font-black uppercase mb-1">${item.name}</h4>
+                            <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
                             <p class="text-md font-bold mb-4 text-yellow-500">${item.price.toLocaleString()} CFA</p>
                         </div>
                         <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
@@ -231,8 +228,10 @@
             renderUI(); 
         }
 
-        // fetchReviews is called here on load
-        window.onload = () => { renderUI(); fetchReviews(); };
+        window.onload = () => {
+            renderUI();
+            fetchReviews();
+        };
     </script>
 </body>
 </html>
