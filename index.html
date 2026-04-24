@@ -13,7 +13,6 @@
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
         
-        /* CARD STYLING */
         .package-card { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -24,20 +23,13 @@
         }
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
 
-        /* THE "HIDDEN FOLDER" MANIFEST LOGIC */
-        #booking-engine { 
-            display: none; 
-            opacity: 0; 
-            transform: translateY(30px); 
-            transition: all 0.6s ease; 
-        }
-        .folder-visible { 
-            display: block !important; 
-            opacity: 1 !important; 
-            transform: translateY(0) !important; 
-        }
+        /* MANIFEST FOLDER LOGIC */
+        #booking-engine { display: none; opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
         .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
+        
+        input, textarea { background: #1e293b !important; border: 1px solid #334155 !important; color: white !important; }
 
         .immersive-footer { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; }
         .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
@@ -51,7 +43,7 @@
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
                 <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png" class="w-full h-full object-cover">
             </div>
-            <span class="font-black text-xl hero-font text-white uppercase tracking-tighter">WonderWay</span>
+            <span class="font-black text-xl hero-font text-white uppercase tracking-tighter leading-none">WonderWay</span>
         </div>
     </nav>
 
@@ -60,6 +52,8 @@
         <div class="flex flex-wrap justify-center gap-3">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest">Groups (4)</button>
+            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest">Groups (6)</button>
         </div>
     </header>
 
@@ -71,13 +65,12 @@
                 <h2 class="hero-font text-4xl font-black uppercase text-white">Service <span class="text-yellow-500">Manifest</span></h2>
                 <p class="text-slate-500 text-[10px] uppercase font-black tracking-widest mt-2">Personalize your journey</p>
             </div>
-            <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10 max-w-4xl mx-auto">
+            <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10 max-w-4xl mx-auto text-center">
                 <div id="service-list" class="space-y-4 text-left mb-10"></div>
-                
                 <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
                     <h3 id="cart-total-display" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
-                    <button onclick="sendWhatsApp()" class="px-12 py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">
-                        <i class="fab fa-whatsapp mr-2"></i> Confirm Selection
+                    <button onclick="sendWhatsApp()" class="px-12 py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest shadow-xl">
+                        <i class="fab fa-whatsapp mr-2"></i> Confirm via WhatsApp
                     </button>
                 </div>
             </div>
@@ -99,8 +92,8 @@
             <div class="pt-12 border-t border-white/10">
                 <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4 block">Engineering by Frank Fru</span>
                 <div class="flex gap-10 justify-center">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Website</a>
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Portfolio</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
                 </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
@@ -124,12 +117,18 @@
             ],
             couples: [
                 { id: "c1", name: "Mini Love", price: 90000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/couple%20paradis%20escape.jpg" }
+            ],
+            group4: [
+                { id: "g4_1", name: "Crew Chill (4)", price: 230000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/group-action.jpg" }
+            ],
+            group6: [
+                { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/group-action.jpg" }
             ]
         };
 
         function fetchReviews() {
             google.script.run.withSuccessHandler(h => {
-                document.getElementById('dynamic-reviews').innerHTML = h || '<p class="text-center col-span-full opacity-50">No stories shared yet.</p>';
+                document.getElementById('dynamic-reviews').innerHTML = h || '<p class="text-center col-span-full opacity-50">No stories yet.</p>';
             }).loadReviews();
         }
 
@@ -164,21 +163,17 @@
         function toggleService(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
-            
             const manifest = document.getElementById('booking-engine');
             cart.length > 0 ? manifest.classList.add('folder-visible') : manifest.classList.remove('folder-visible');
-            
             renderUI();
         }
 
         function sendWhatsApp() {
             if (cart.length === 0) return;
-            let msg = "WONDERWAY BOOKING REQUEST:\n-------------------------\n";
-            cart.forEach((item, i) => {
-                msg += `${i+1}. ${item.name} - ${item.price.toLocaleString()} CFA\n`;
-            });
+            let msg = "WONDERWAY BOOKING:\n-------------------------\n";
+            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - ${item.price.toLocaleString()} CFA\n`; });
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            msg += `-------------------------\nTOTAL: ${total.toLocaleString()} CFA\n-------------------------`;
+            msg += `-------------------------\nTOTAL: ${total.toLocaleString()} CFA`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
