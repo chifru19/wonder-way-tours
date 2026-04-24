@@ -25,7 +25,6 @@
         .package-card { border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        /* HIDDEN MANIFEST SYSTEM */
         #booking-engine {
             display: none;
             opacity: 0;
@@ -33,13 +32,7 @@
             transition: all 0.6s ease;
         }
 
-        .folder-visible {
-            display: block !important;
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-
-        .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
+        .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
         .immersive-footer { 
             position: relative; 
@@ -57,7 +50,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 15%;
             opacity: 0.7;
         }
         
@@ -70,21 +62,16 @@
 </head>
 
 <body class="pt-24">
-    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex flex-col md:flex-row justify-between items-center border-b border-slate-800">
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
                 <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
             </div>
             <div class="flex flex-col text-left">
-                <span class="font-black text-xl tracking-tighter uppercase hero-font text-white leading-none">WonderWay</span>
-                <span class="text-[8px] uppercase tracking-[0.4em] text-yellow-500 font-black">Official Collection</span>
+                <span class="font-black text-xl hero-font text-white leading-none">WonderWay</span>
+                <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Official Collection</span>
             </div>
         </div>
-        <select id="currency-select" onchange="updateCurrency()" class="bg-slate-800 text-white text-[10px] font-bold uppercase p-2 rounded-xl outline-none cursor-pointer">
-            <option value="XAF">CFA Franc (XAF)</option>
-            <option value="EUR">Euro (€)</option>
-            <option value="USD">Dollar ($)</option>
-        </select>
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center">
@@ -100,17 +87,11 @@
 
         <section id="booking-engine" class="mt-32">
             <div class="flex flex-col items-center text-center mb-12">
-                <h2 class="hero-font text-4xl font-black uppercase tracking-tighter text-white">Full Service <span class="text-yellow-500">Manifest</span></h2>
-                <p class="text-slate-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Prices for additional individual selections</p>
+                <h2 class="hero-font text-4xl font-black uppercase text-white">Service <span class="text-yellow-500">Manifest</span></h2>
             </div>
-            <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-6 md:p-10">
+            <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10">
                 <div id="service-list" class="space-y-4"></div>
             </div>
-        </section>
-
-        <section id="feedback" class="mt-40">
-            <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest <span class="text-slate-500">Stories</span></h2>
-            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
     </main>
 
@@ -122,21 +103,18 @@
             <div class="flex flex-col items-center pt-12 border-t border-white/10 w-full">
                 <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4">Engineering by Frank Fru</span>
                 <div class="flex gap-10">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Website</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Portfolio</a>
                 </div>
             </div>
-            <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
         </div>
     </footer>
 
     <script>
-        let currentCurrency = 'XAF'; 
         let currentCategory = 'activities'; 
         let cart = [];
-        const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
-        // UPDATED WITH WEB LINKS FOR IMAGES
+        // These links point to YOUR images on GitHub so Google can see them
         const servicesData = {
             activities: [
                 { id: "a1", name: "Jet Ski", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/jetski-action.jpg" },
@@ -149,10 +127,6 @@
             ]
         };
 
-        function fetchReviews() {
-            google.script.run.withSuccessHandler(h => { document.getElementById('dynamic-reviews').innerHTML = h; }).loadReviews();
-        }
-
         function renderUI() {
             const grid = document.getElementById('package-grid');
             grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
@@ -162,22 +136,11 @@
                     <div class="h-56 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
                     <div class="p-8">
                         <h4 class="text-2xl font-black uppercase mb-1">${item.name}</h4>
-                        <p class="text-xl font-bold mb-6 text-slate-300">${formatPrice(item.price)}</p>
+                        <p class="text-xl font-bold mb-6 text-slate-300">${item.price} CFA</p>
                         <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-4 ${isS ? 'bg-yellow-500 text-black' : 'bg-white text-black'} font-black rounded-xl uppercase text-[10px]">
                             ${isS ? 'Added ✓' : 'Add to Trip'}
                         </button>
                     </div>
-                </div>`;
-            }).join('');
-
-            const list = document.getElementById('service-list');
-            const allItems = Object.values(servicesData).flat();
-            list.innerHTML = allItems.map(item => {
-                const isS = cart.some(c => c.id === item.id);
-                return `
-                <div onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="service-row flex justify-between p-6 ${isS ? 'selected-item' : ''}">
-                    <span class="text-sm font-black uppercase text-white">${item.name}</span>
-                    <span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span>
                 </div>`;
             }).join('');
         }
@@ -185,29 +148,19 @@
         function toggleService(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
-            updateCartUI(); 
+            const folder = document.getElementById('booking-engine');
+            cart.length > 0 ? folder.classList.add('folder-visible') : folder.classList.remove('folder-visible');
             renderUI();
         }
 
-        function updateCartUI() {
-            const bar = document.getElementById('checkout-bar');
-            const folder = document.getElementById('booking-engine');
-            if (cart.length > 0) {
-                folder.classList.add('folder-visible');
-            } else {
-                folder.classList.remove('folder-visible');
-            }
+        function switchCategory(cat) { 
+            currentCategory = cat; 
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); 
+            document.getElementById('tab-' + cat).classList.add('active-tab'); 
+            renderUI(); 
         }
 
-        function formatPrice(v) { 
-            const conv = v * rates[currentCurrency]; 
-            return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
-        }
-
-        function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
-        function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
-
-        window.onload = () => { renderUI(); fetchReviews(); };
+        window.onload = renderUI;
     </script>
 </body>
 </html>
