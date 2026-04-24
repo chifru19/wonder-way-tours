@@ -85,7 +85,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 40%; /* Ensures face is visible as requested */
+            object-position: center 40%; 
             opacity: 0.6;
         }
         
@@ -146,18 +146,18 @@
                 <h2 class="hero-font text-4xl font-black uppercase mb-8 text-white">Guest <span class="text-yellow-500">Voice</span></h2>
                 <form id="reviewForm" class="space-y-6 text-left">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" name="Name" placeholder="Guest Name" class="w-full p-5 rounded-2xl" required>
-                        <input type="text" name="Location" placeholder="Home City" class="w-full p-5 rounded-2xl" required>
+                        <input type="text" name="Full Name." placeholder="Guest Name" class="w-full p-5 rounded-2xl" required>
+                        <input type="text" name="Column 3" placeholder="Home City" class="w-full p-5 rounded-2xl" required>
                     </div>
                     <div class="flex justify-between items-center bg-slate-800/30 p-6 rounded-2xl border border-slate-800">
                         <span class="text-[10px] uppercase font-black text-slate-400">Rating:</span>
                         <div class="star-rating flex flex-row-reverse text-3xl">
-                            <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer px-1">★</label>
-                            <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer px-1">★</label>
-                            <input type="radio" name="Stars" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer px-1">★</label>
+                            <input type="radio" name="Rating" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer px-1">★</label>
+                            <input type="radio" name="Rating" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer px-1">★</label>
+                            <input type="radio" name="Rating" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer px-1">★</label>
                         </div>
                     </div>
-                    <textarea name="Review" placeholder="Describe your experience with WonderWay..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
+                    <textarea name="Your Review\" placeholder="Describe your experience..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
                     <button type="submit" id="submitBtn" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-lg">Post Live Review</button>
                 </form>
             </div>
@@ -169,7 +169,7 @@
         </section>
     </main>
 
-    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
+    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full transition-transform">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-left">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
@@ -204,7 +204,6 @@
     <script>
         let currentCurrency = 'XAF', currentCategory = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
         
-        // PLUGGED IN FROM YOUR SCREENSHOT
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxoi3AsHZJUHGS8n_oAmBZtvq0HmKfOR6SjtCFR_3o183RlrWbneUKUSGeQdeVOR8B6/exec'; 
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
 
@@ -222,7 +221,7 @@
                 { id: "c3", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg", features: ["Executive Luxury Suite", "Private Boat Cruise"] }
             ],
             group4: [
-                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Spacious Villa", "Full BBQ Setup"] },
+                { id: "g4_1", name: "Crew Chill", price: 230000, img: "images/group-action.jpg", features: ["Spacious Villa Lodging", "Full BBQ Setup"] },
                 { id: "g4_2", name: "Vibes & Memories", price: 350000, img: "images/dinner-setup.jpg", features: ["Premium Group Villa", "Private Sip & Paint"] }
             ],
             group6: [
@@ -239,7 +238,10 @@
                 rows.slice(1).reverse().forEach(line => {
                     const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if(cols.length >= 4) {
-                        const name = cols[0].replace(/"/g, '').trim(), location = cols[1].replace(/"/g, '').trim(), review = cols[2].replace(/"/g, '').trim(), starVal = parseInt(cols[3]) || 5;
+                        const name = cols[1]?.replace(/"/g, '').trim(); 
+                        const location = cols[3]?.replace(/"/g, '').trim(); 
+                        const review = cols[2]?.replace(/"/g, '').trim(); 
+                        const starVal = parseInt(cols[4]) || 5; 
                         html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
                     }
                 });
@@ -260,8 +262,7 @@
 
         function toggleService(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
-            if (idx > -1) { cart.splice(idx, 1); } 
-            else { 
+            if (idx > -1) { cart.splice(idx, 1); } else { 
                 cart.push({ id, name, price }); 
                 document.getElementById('booking-engine').classList.add('manifest-visible');
             }
@@ -278,12 +279,15 @@
         function formatPrice(v) { return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + (v * rates[currentCurrency]).toFixed(2); }
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
         function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
-        function processWhatsApp() { window.open("https://wa.me/237653827999?text=" + encodeURIComponent("WonderWay Booking:\n" + cart.map((i, idx) => `${idx + 1}. ${i.name} (${formatPrice(i.price)})`).join("\n") + "\nTotal: " + document.getElementById('cart-total').innerText), '_blank'); }
+        function processWhatsApp() { window.open("https://wa.me/237653827999?text=" + encodeURIComponent("WonderWay Booking Request:\n" + cart.map((i, idx) => `${idx + 1}. ${i.name} (${formatPrice(i.price)})`).join("\n") + "\nTotal: " + document.getElementById('cart-total').innerText), '_blank'); }
 
-        document.getElementById('reviewForm').addEventListener('submit', e => {
-            e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = "POSTING...";
-            fetch(scriptURL, { method: 'POST', body: new FormData(e.target), mode: 'no-cors' })
-            .then(() => { alert("Story Published!"); e.target.reset(); btn.disabled = false; btn.innerText = "Post Live Review"; setTimeout(loadReviews, 2000); });
+        document.getElementById('reviewForm').addEventListener('submit', async e => {
+            e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = "POSTING STORY...";
+            try {
+                await fetch(scriptURL, { method: 'POST', body: new FormData(e.target), mode: 'no-cors' });
+                alert("Published to Response Sheet!"); e.target.reset(); btn.disabled = false; btn.innerText = "POST LIVE REVIEW";
+                setTimeout(loadReviews, 2000); 
+            } catch (err) { btn.disabled = false; btn.innerText = "POST LIVE REVIEW"; }
         });
         window.onload = () => { loadReviews(); renderUI(); };
     </script>
