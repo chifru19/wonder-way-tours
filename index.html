@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <base target="_top">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WonderWay | Kribi Collection</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
+        
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
-        .package-card { transition: all 0.4s ease; border: 1px solid #1e293b; background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px); border-radius: 32px; overflow: hidden; height: 100%; display: flex; flex-direction: column; }
+        
+        /* CARD STYLING */
+        .package-card { 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 1px solid #1e293b; 
+            background: rgba(30, 41, 59, 0.4); 
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        /* MANIFEST FOLDER LOGIC */
+        /* HIDDEN MANIFEST FOLDER LOGIC */
         #booking-engine { display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
         .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
+        .service-row { border-radius: 20px; margin-bottom: 12px; padding: 20px; display: flex; justify-content: space-between; border: 1px solid #1e293b; background: rgba(255,255,255,0.05); }
+        
         .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
+
+        /* FOOTER SYSTEM */
         .immersive-footer { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; }
         .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
         .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
@@ -31,7 +52,10 @@
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
                 <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png" class="w-full h-full object-cover">
             </div>
-            <span class="font-black text-xl hero-font text-white uppercase tracking-tighter">WonderWay</span>
+            <div class="flex flex-col text-left">
+                <span class="font-black text-xl hero-font text-white uppercase leading-none">WonderWay</span>
+                <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Official Collection</span>
+            </div>
         </div>
     </nav>
 
@@ -51,6 +75,7 @@
         <section id="booking-engine" class="mt-32">
             <div class="flex flex-col items-center text-center mb-12">
                 <h2 class="hero-font text-4xl font-black uppercase text-white">Service <span class="text-yellow-500">Manifest</span></h2>
+                <p class="text-slate-500 text-[10px] uppercase font-black tracking-widest mt-2">Personalize your journey</p>
             </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10 max-w-4xl mx-auto">
                 <div id="service-list" class="space-y-4 text-left mb-10"></div>
@@ -66,7 +91,7 @@
         <section id="feedback" class="mt-40">
             <h2 class="hero-font text-5xl font-black uppercase text-center mb-16">Guest <span class="text-slate-500">Stories</span></h2>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-center col-span-full opacity-50">Connecting stories...</p>
+                <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest">Connecting stories...</p>
             </div>
         </section>
     </main>
@@ -79,8 +104,8 @@
             <div class="pt-12 border-t border-white/10">
                 <span class="text-white font-black uppercase text-xs tracking-[0.3em] mb-4 block">Engineering by Frank Fru</span>
                 <div class="flex gap-10 justify-center">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Website</a>
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest transition">Portfolio</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Website</a>
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 uppercase text-[10px] font-black tracking-widest">Portfolio</a>
                 </div>
             </div>
         </div>
@@ -117,7 +142,7 @@
 
         function fetchReviews() {
             google.script.run.withSuccessHandler(h => {
-                document.getElementById('dynamic-reviews').innerHTML = h;
+                if(h) document.getElementById('dynamic-reviews').innerHTML = h;
             }).loadReviews();
         }
 
@@ -130,7 +155,7 @@
                     <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
                     <div class="p-6 text-left flex-grow flex flex-col justify-between">
                         <div>
-                            <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
+                            <h4 class="text-lg font-black uppercase mb-1">${item.name}</h4>
                             <p class="text-md font-bold mb-4 text-yellow-500">${item.price.toLocaleString()} CFA</p>
                         </div>
                         <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest">
@@ -142,7 +167,7 @@
 
             const list = document.getElementById('service-list');
             list.innerHTML = cart.map(item => `
-                <div class="flex justify-between border-b border-white/10 py-4">
+                <div class="service-row">
                     <span class="text-sm font-black uppercase text-white">${item.name}</span>
                     <span class="text-yellow-500 font-bold">${item.price.toLocaleString()} CFA</span>
                 </div>`).join('');
