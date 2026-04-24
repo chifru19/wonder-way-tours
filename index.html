@@ -85,7 +85,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 50%;
+            object-position: center 40%; /* Ensures face is visible as requested */
             opacity: 0.6;
         }
         
@@ -119,6 +119,7 @@
 
     <header class="pt-24 pb-12 px-6 text-center">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
+        <p class="max-w-2xl mx-auto text-slate-400 text-sm md:text-base italic uppercase tracking-[0.2em] leading-relaxed mb-10">"Select from our featured collection or browse the full service manifest below."</p>
         <div class="flex flex-wrap justify-center gap-3">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-8 py-4 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Couples</button>
@@ -154,11 +155,9 @@
                             <input type="radio" name="Stars" id="star-5" value="5" class="hidden" required><label for="star-5" class="cursor-pointer px-1">★</label>
                             <input type="radio" name="Stars" id="star-4" value="4" class="hidden"><label for="star-4" class="cursor-pointer px-1">★</label>
                             <input type="radio" name="Stars" id="star-3" value="3" class="hidden"><label for="star-3" class="cursor-pointer px-1">★</label>
-                            <input type="radio" name="Stars" id="star-2" value="2" class="hidden"><label for="star-2" class="cursor-pointer px-1">★</label>
-                            <input type="radio" name="Stars" id="star-1" value="1" class="hidden"><label for="star-1" class="cursor-pointer px-1">★</label>
                         </div>
                     </div>
-                    <textarea name="Review" placeholder="Describe your experience..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
+                    <textarea name="Review" placeholder="Describe your experience with WonderWay..." rows="5" class="w-full p-6 rounded-3xl" required></textarea>
                     <button type="submit" id="submitBtn" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-lg">Post Live Review</button>
                 </form>
             </div>
@@ -204,6 +203,11 @@
 
     <script>
         let currentCurrency = 'XAF', currentCategory = 'activities', cart = [], rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
+        
+        // PLUGGED IN FROM YOUR SCREENSHOT
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxoi3AsHZJUHGS8n_oAmBZtvq0HmKfOR6SjtCFR_3o183RlrWbneUKUSGeQdeVOR8B6/exec'; 
+        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
+
         const servicesData = {
             activities: [
                 { id: "a1", name: "Jet Ski Adventure", price: 10000, img: "images/jetski-action.jpg", features: ["15 Mins Session", "Safety Instructor", "Life Jacket"] },
@@ -213,7 +217,7 @@
                 { id: "a5", name: "Museum Visit", price: 2000, img: "images/museum.jpg", features: ["Bilingual Heritage Tour", "Entry Included"] }
             ],
             couples: [
-                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa", "Water Sports Bundle"] },
+                { id: "c1", name: "Mini Love Adventure", price: 90000, img: "images/couple paradis escape.jpg", features: ["2 Days Villa Lodging", "Water Sports Bundle"] },
                 { id: "c2", name: "Paradise Gold Stay", price: 250000, img: "images/sip-paint.jpg", features: ["Premium Villa Access", "Private Beach Dinner"] },
                 { id: "c3", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg", features: ["Executive Luxury Suite", "Private Boat Cruise"] }
             ],
@@ -226,9 +230,6 @@
             ]
         };
 
-        const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBvO2JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pub?output=csv';
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwpQ9FZiLRbL695i1Eni-r69KSyCONRsdygRrqKDybZOZCkEXbKd_2S1RRZGaYU7vrC/exec';
-
         async function loadReviews() {
             try {
                 const response = await fetch(sheetURL + '&v=' + Date.now());
@@ -239,7 +240,7 @@
                     const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if(cols.length >= 4) {
                         const name = cols[0].replace(/"/g, '').trim(), location = cols[1].replace(/"/g, '').trim(), review = cols[2].replace(/"/g, '').trim(), starVal = parseInt(cols[3]) || 5;
-                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl font-black">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
+                        html += `<div class="review-card"><div><div class="text-yellow-500 mb-4 text-xl">${'★'.repeat(starVal)}${'☆'.repeat(5-starVal)}</div><p class="italic text-sm text-slate-300">"${review}"</p></div><p class="text-white font-black text-[10px] mt-8 uppercase tracking-widest">— ${name}, ${location}</p></div>`;
                     }
                 });
                 document.getElementById('dynamic-reviews').innerHTML = html || '<p class="text-center col-span-3 opacity-50">Connecting stories...</p>';
@@ -274,10 +275,7 @@
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
             document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
         }
-        function formatPrice(v) { 
-            if (currentCurrency === 'XAF') return new Intl.NumberFormat('fr-CM').format(v) + ' CFA';
-            return (currentCurrency === 'EUR' ? '€' : '$') + (v * rates[currentCurrency]).toFixed(2);
-        }
+        function formatPrice(v) { return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + (v * rates[currentCurrency]).toFixed(2); }
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); updateCartUI(); }
         function switchCategory(cat) { currentCategory = cat; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab')); document.getElementById('tab-' + cat).classList.add('active-tab'); renderUI(); }
         function processWhatsApp() { window.open("https://wa.me/237653827999?text=" + encodeURIComponent("WonderWay Booking:\n" + cart.map((i, idx) => `${idx + 1}. ${i.name} (${formatPrice(i.price)})`).join("\n") + "\nTotal: " + document.getElementById('cart-total').innerText), '_blank'); }
