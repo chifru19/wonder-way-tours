@@ -75,6 +75,14 @@
                 <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Official Collection</span>
             </div>
         </div>
+
+        <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700">
+            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
+                <option value="XAF">CFA (XAF)</option>
+                <option value="EUR">Euro (€)</option>
+                <option value="USD">Dollar ($)</option>
+            </select>
+        </div>
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center">
@@ -138,8 +146,10 @@
     </footer>
 
     <script>
+        let currentCurrency = 'XAF'; 
         let currentCategory = 'activities'; 
         let cart = [];
+        const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         const servicesData = {
             activities: [
@@ -174,6 +184,16 @@
             }
         }
 
+        function formatPrice(v) { 
+            const conv = v * rates[currentCurrency]; 
+            if (currentCurrency === 'XAF') {
+                return new Intl.NumberFormat('fr-CM').format(v) + ' CFA';
+            } else {
+                const symbol = currentCurrency === 'EUR' ? '€' : '$';
+                return symbol + conv.toFixed(2);
+            }
+        }
+
         function renderUI() {
             const grid = document.getElementById('package-grid');
             grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
@@ -184,7 +204,7 @@
                     <div class="p-6 text-left flex-grow flex flex-col justify-between">
                         <div>
                             <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
-                            <p class="text-md font-bold mb-4 text-yellow-500">${item.price.toLocaleString()} CFA</p>
+                            <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
                         </div>
                         <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800 text-white'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
                             ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
@@ -197,8 +217,10 @@
             list.innerHTML = cart.map(item => `
                 <div class="flex justify-between border-b border-white/10 py-6">
                     <span class="text-sm font-black uppercase text-white">${item.name}</span>
-                    <span class="text-yellow-500 font-bold">${item.price.toLocaleString()} CFA</span>
+                    <span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span>
                 </div>`).join('');
+            
+            updateCartUI();
         }
 
         function toggleService(id, name, price) {
@@ -207,22 +229,26 @@
             const manifest = document.getElementById('booking-engine');
             const bar = document.getElementById('checkout-bar');
             cart.length > 0 ? (manifest.classList.add('folder-visible'), bar.classList.remove('translate-y-full')) : (manifest.classList.remove('folder-visible'), bar.classList.add('translate-y-full'));
-            updateCartUI();
             renderUI();
         }
 
         function updateCartUI() {
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cart-total').innerText = `Total: ${total.toLocaleString()} CFA`;
+            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
+        }
+
+        function updateCurrency() { 
+            currentCurrency = document.getElementById('currency-select').value; 
+            renderUI(); 
         }
 
         function processWhatsApp() {
             if (cart.length === 0) return;
             let msg = "WONDERWAY BOOKING REQUEST:\n-------------------------\n";
-            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - ${item.price.toLocaleString()} CFA\n`; });
+            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - ${formatPrice(item.price)}\n`; });
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            msg += `-------------------------\n*TOTAL: ${total.toLocaleString()} CFA*`;
+            msg += `-------------------------\n*TOTAL: ${formatPrice(total)}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
