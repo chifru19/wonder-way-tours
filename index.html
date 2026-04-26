@@ -61,7 +61,7 @@
             background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
         }
         
-        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20 -40px rgba(0,0,0,0.4); }
+        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
     </style>
 </head>
 
@@ -220,8 +220,8 @@
                 { id: "a1", name: "Jet Ski", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/jetski-action.jpg" },
                 { id: "a2", name: "Horse Riding", price: 2000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/horse-riding.jpg" },
                 { id: "a3", name: "Quad Biking", price: 5000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Quad.jpg" },
-                { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/Zorb Ball.jpg" },
-                { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/camp fire.jpg" },
+                { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/Zorb Ball.jpg" }, 
+                { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/camp fire.jpg" }, 
                 { id: "a6", name: "Sip & Paint", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/sip-paint.jpg" },
                 { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/museum.jpg" },
                 { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/seaport%20visit.jpg" },
@@ -241,9 +241,9 @@
                 { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/group-action.jpg" }
             ],
             concierge: [
-                { id: "con1", name: "Private Photographer", price: 30000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7572.jpg" },
-                { id: "con2", name: "Luxury Transport", price: 50000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7154.jpg" },
-                { id: "con3", name: "Beach Bonfire Setup", price: 20000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Need%20%F0%9F%94%A5%F0%9F%8C%8A.webp" }
+                { id: "con1", name: "Private Photographer", price: 30000, img: "images/4K6A7572.jpg" },
+                { id: "con2", name: "Luxury Transport", price: 50000, img: "images/4K6A7154.jpg" },
+                { id: "con3", name: "Beach Bonfire Setup", price: 20000, img: "images/Need .webp" }
             ]
         };
 
@@ -284,7 +284,9 @@
             grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
                 const isS = cart.some(c => c.id === item.id);
                 return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
-                    <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                    <div class="h-48 overflow-hidden">
+                        <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'">
+                    </div>
                     <div class="p-6">
                         <h4 class="text-lg font-black uppercase mb-1">${item.name}</h4>
                         <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
