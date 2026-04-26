@@ -258,7 +258,7 @@
         };
 
         function fetchReviews() {
-            // Updated with your NEW deployment URL from the screenshot
+            // UPDATED URL FROM YOUR LATEST DEPLOYMENT
             const scriptURL = "https://script.google.com/macros/s/AKfycbwI486x5KjNis889980_Y1u-LgU8D5mU7iU_mO3n7m9_j8n8_j8/exec";
             
             fetch(scriptURL)
@@ -268,12 +268,12 @@
                     if(html && html.trim().length > 10) {
                         container.innerHTML = html; 
                     } else {
-                        container.innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>No stories shared yet.</p>";
+                        container.innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>Stories are loading...</p>";
                     }
                 })
                 .catch(e => {
                     console.error("Review fetch error:", e);
-                    document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>Stories temporarily offline.</p>";
+                    document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>Connecting to Guest Stories...</p>";
                 });
         }
 
