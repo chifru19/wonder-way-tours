@@ -231,7 +231,7 @@
                 { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" },
                 { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" },
                 { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/Zorb Ball.jpg" }, 
-                { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/camp fire.jpg" }, 
+                { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
                 { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg" },
                 { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "images/museum.jpg" },
                 { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "images/seaport visit.jpg" },
@@ -258,7 +258,8 @@
         };
 
         function fetchReviews() {
-            const scriptURL = "https://script.google.com/macros/s/AKfycbwAxQkcyvVqjtfAE3LIyV1lJ38wNILpRVK-nHKCqDhvbvVPh6NahOORFGZyFYYNJygs/exec";
+            // UPDATED URL FROM YOUR LATEST SCREENSHOT
+            const scriptURL = "https://script.google.com/macros/s/AKfycbwmXHylG2uKSQCK0bW02lFXBwN8fMvR2j3aEevtWsUrdoKu016NauY02Ev_flKQajwT/exec";
             fetch(scriptURL)
                 .then(r => r.text())
                 .then(html => { 
