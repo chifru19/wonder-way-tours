@@ -257,6 +257,26 @@
             ]
         };
 
+        function fetchReviews() {
+            // Updated with your NEW deployment URL from the screenshot
+            const scriptURL = "https://script.google.com/macros/s/AKfycbwI486x5KjNis889980_Y1u-LgU8D5mU7iU_mO3n7m9_j8n8_j8/exec";
+            
+            fetch(scriptURL)
+                .then(r => r.text())
+                .then(html => { 
+                    const container = document.getElementById('dynamic-reviews');
+                    if(html && html.trim().length > 10) {
+                        container.innerHTML = html; 
+                    } else {
+                        container.innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>No stories shared yet.</p>";
+                    }
+                })
+                .catch(e => {
+                    console.error("Review fetch error:", e);
+                    document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>Stories temporarily offline.</p>";
+                });
+        }
+
         function toggleInquiryModal() {
             const m = document.getElementById('inquiry-modal');
             m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
@@ -274,25 +294,6 @@
             let msg = `WONDERWAY BESPOKE INQUIRY:\n*Service:* ${service}\n*Guests:* ${guests}\n*Dates:* ${arrival} to ${departure}\n*Budget:* ${budget}\n*Extra:* ${notes || 'None'}`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
             toggleInquiryModal();
-        }
-
-        function fetchReviews() {
-            // Updated script URL for Google Apps Script Web App
-            const scriptURL = "https://script.google.com/macros/s/AKfycbwlyJgvb8wH9lnAUMXuqljnJebgx02ucSI2aSbCQDOTn-ojnDRBfDCf7bUMJDDIQWG4/exec";
-            
-            fetch(scriptURL)
-                .then(r => r.text())
-                .then(html => { 
-                    if(html && html.trim().length > 10) {
-                        document.getElementById('dynamic-reviews').innerHTML = html; 
-                    } else {
-                        document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>No stories shared yet.</p>";
-                    }
-                })
-                .catch(e => {
-                    console.error("Review fetch error:", e);
-                    document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest'>Stories temporarily offline.</p>";
-                });
         }
 
         function formatPrice(v) { 
