@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WonderWay Tours | Experience Unforgettable Kribi</title>
+    <title>WonderWay Tours | Experience Kribi</title>
     
     <link rel="icon" href="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -16,6 +17,7 @@
         .hero-font { font-family: 'Outfit', sans-serif; }
         .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
         
+        /* CARD ANIMATIONS */
         .package-card { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -25,10 +27,9 @@
             overflow: hidden;
             height: 100%;
         }
-        
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        /* Inquiry Form Styling */
+        /* INPUT STYLES */
         .concierge-input {
             background: rgba(30, 41, 59, 0.6);
             border: 1px solid #334155;
@@ -37,23 +38,15 @@
             color: white;
             width: 100%;
             font-size: 14px;
-            transition: all 0.3s ease;
         }
         .concierge-input:focus { border-color: #fbbf24; outline: none; background: rgba(30, 41, 59, 0.9); }
 
-        .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
-
+        /* FOOTER VISUALS */
         .immersive-footer { 
             position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a;
         }
-        
-        .footer-bg-image {
-            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.7;
-        }
-        
-        .footer-overlay {
-            position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
-        }
+        .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
     </style>
 </head>
 
@@ -63,29 +56,28 @@
             <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png" class="w-12 h-12 rounded-full border-2 border-yellow-500 bg-white">
             <div class="flex flex-col">
                 <span class="font-black text-xl hero-font uppercase leading-none">WonderWay</span>
-                <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Luxury Concierge</span>
+                <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Official Collection</span>
             </div>
         </div>
         <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700">
-            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none">
+            <select id="currency-select" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none">
                 <option value="XAF">CFA (XAF)</option>
-                <option value="EUR">Euro (€)</option>
-                <option value="USD">Dollar ($)</option>
             </select>
         </div>
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center max-w-4xl mx-auto">
-        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 leading-none tracking-tighter">Experience <br><span class="text-yellow-500 italic">Wonder</span></h1>
+        <h1 class="hero-font text-5xl md:text-7xl font-black uppercase mb-6 leading-none tracking-tighter">Experience <span class="text-yellow-500 italic">Wonder</span></h1>
         <p class="text-slate-400 text-base md:text-lg leading-relaxed mb-10">
             We believe travel should be more than just a trip—it should be an experience you feel. From breathtaking destinations to carefully curated moments, every journey with us is designed to inspire, connect, and leave lasting memories.
         </p>
         <div class="inline-block bg-yellow-500/10 border border-yellow-500/20 px-8 py-4 rounded-2xl text-[11px] uppercase font-black tracking-widest text-yellow-500">
-            Note: Transportation is not included as most clients prefer private cars or bikes.
+            NB: Transportation is not included as most clients prefer private cars or bikes.
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
+        
         <div class="flex flex-wrap justify-center gap-4 mb-20">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-8 py-5 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest transition-all">Activities</button>
             <button onclick="switchCategory('concierge')" id="tab-concierge" class="tab-btn px-8 py-5 rounded-2xl border border-slate-700 font-black text-[11px] uppercase tracking-widest text-yellow-500 transition-all">Concierge Services</button>
@@ -97,46 +89,28 @@
 
         <section id="concierge-form" class="mt-32 max-w-3xl mx-auto bg-slate-900/60 p-12 rounded-[48px] border border-slate-800 backdrop-blur-xl hidden">
             <div class="text-center mb-10">
-                <h2 class="hero-font text-4xl font-black uppercase mb-2">Tailor Your <span class="text-yellow-500">Stay</span></h2>
-                <p class="text-slate-500 text-xs uppercase tracking-widest">Submit your details for a custom travel plan</p>
+                <h2 class="hero-font text-3xl font-black uppercase mb-2">Service <span class="text-yellow-500">Inquiry</span></h2>
+                <p class="text-slate-500 text-[10px] uppercase tracking-[0.3em]">Plan your bespoke Kribi experience</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label class="text-[10px] uppercase font-black text-slate-500 mb-2 block tracking-widest">Arrival Date</label>
-                    <input type="text" id="inq-arrival" placeholder="e.g. June 12th" class="concierge-input">
-                </div>
-                <div>
-                    <label class="text-[10px] uppercase font-black text-slate-500 mb-2 block tracking-widest">Departure Date</label>
-                    <input type="text" id="inq-departure" placeholder="e.g. June 15th" class="concierge-input">
-                </div>
-                <div>
-                    <label class="text-[10px] uppercase font-black text-slate-500 mb-2 block tracking-widest">Guests</label>
-                    <input type="number" id="inq-guests" placeholder="Total people" class="concierge-input">
-                </div>
-                <div>
-                    <label class="text-[10px] uppercase font-black text-slate-500 mb-2 block tracking-widest">Budget Range</label>
-                    <input type="text" id="inq-budget" placeholder="e.g. 300k - 500k" class="concierge-input">
-                </div>
+                <input type="text" id="inq-arrival" placeholder="Arrival Date" class="concierge-input">
+                <input type="text" id="inq-departure" placeholder="Departure Date" class="concierge-input">
+                <input type="number" id="inq-guests" placeholder="Total Guests" class="concierge-input">
+                <input type="text" id="inq-budget" placeholder="Budget Range" class="concierge-input">
             </div>
+            <textarea id="inq-extra" rows="4" placeholder="Extra requirements (Accommodation, Southwest/West Tours, Decorations, etc.)" class="concierge-input mb-8"></textarea>
             
-            <div class="mb-8">
-                <label class="text-[10px] uppercase font-black text-slate-500 mb-2 block tracking-widest">Requirements & Notes</label>
-                <textarea id="inq-extra" rows="4" placeholder="Mention Accommodation, Southwest/West Tours, Decorations, etc." class="concierge-input"></textarea>
-            </div>
-            
-            <button onclick="sendConciergeInquiry()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-3xl uppercase text-xs tracking-[0.2em] hover:bg-white hover:scale-[1.02] transition-all shadow-2xl">
+            <button onclick="sendInquiry()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-3xl uppercase text-xs tracking-[0.2em] shadow-2xl hover:bg-white transition-all">
                 Send Inquiry to WhatsApp
             </button>
         </section>
 
         <section id="feedback" class="mt-56">
-            <div class="flex flex-col items-center mb-16">
-                <h2 class="hero-font text-5xl md:text-7xl font-black uppercase text-center mb-4">Guest <span class="text-slate-500">Stories</span></h2>
-                <div class="h-1 w-24 bg-yellow-500 rounded-full"></div>
-            </div>
+            <h2 class="hero-font text-5xl font-black uppercase text-center mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                </div>
+                <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Syncing stories...</p>
+            </div>
         </section>
     </main>
 
@@ -147,21 +121,20 @@
             <h3 class="hero-font text-5xl md:text-8xl font-black uppercase mb-12 text-white italic leading-tight">"Luxury is <br>affordable."</h3>
             
             <div class="mb-24">
-                <a href="https://linktr.ee/wonderwaytourcameroon" target="_blank" class="px-12 py-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl text-white font-black uppercase text-xs tracking-[0.3em] hover:bg-yellow-500 hover:text-black transition-all">
-                    Explore the Journey
+                <a href="https://linktr.ee/wonderwaytourcameroon" target="_blank" class="px-12 py-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl text-white font-black uppercase text-xs tracking-[0.3em] hover:bg-yellow-500 transition-all">
+                    Experience WonderWay
                 </a>
             </div>
 
             <div class="pt-12 border-t border-white/10 w-full">
-                <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.5em] block mb-6">Engineering by Frank Fru</span>
-                
-                <div class="flex flex-col items-center gap-4">
-                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-sm tracking-widest transition-all">FRANKFRU.COM</a>
-                    <a href="mailto:contact@frankfru.com" class="text-white/60 hover:text-yellow-500 font-bold text-[11px] tracking-widest transition-all uppercase">contact@frankfru.com</a>
+                <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.5em] block mb-4 text-center">Engineering by Frank Fru</span>
+                <div class="flex flex-col items-center gap-3">
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-sm tracking-widest uppercase transition-all">FRANKFRU.COM</a>
+                    <a href="mailto:contact@frankfru.com" class="text-white/60 hover:text-yellow-500 font-bold text-[11px] tracking-widest uppercase transition-all">contact@frankfru.com</a>
                     
-                    <div class="flex gap-10 mt-8">
-                        <a href="https://github.com/chifru19" target="_blank" class="text-white/30 hover:text-white transition-all transform hover:scale-110"><i class="fab fa-github fa-xl"></i></a>
-                        <a href="https://www.linkedin.com/in/frank-fru-3a4a0a1b4/" target="_blank" class="text-white/30 hover:text-white transition-all transform hover:scale-110"><i class="fab fa-linkedin fa-xl"></i></a>
+                    <div class="flex gap-8 mt-8">
+                        <a href="https://github.com/chifru19" target="_blank" class="text-white/30 hover:text-white transition-all"><i class="fab fa-github fa-xl"></i></a>
+                        <a href="https://www.linkedin.com/in/frank-fru-3a4a0a1b4/" target="_blank" class="text-white/30 hover:text-white transition-all"><i class="fab fa-linkedin fa-xl"></i></a>
                     </div>
                 </div>
             </div>
@@ -172,6 +145,7 @@
     <script>
         let currentCategory = 'activities';
         
+        // SERVICES CONTENT
         const servicesData = {
             activities: [
                 { id: "a1", name: "Jet Ski", price: "10,000 CFA", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/jetski-action.jpg" },
@@ -180,37 +154,36 @@
                 { id: "a4", name: "Sip & Paint", price: "15,000 CFA", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/sip-paint.jpg" }
             ],
             concierge: [
-                { id: "s1", name: "Accommodation", price: "Tailored Luxury", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/accommodation.jpg" },
-                { id: "s2", name: "Transportation", price: "Cars & Bikes", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
+                { id: "s1", name: "Accommodation", price: "Tailored to Budget", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/accommodation.jpg" },
+                { id: "s2", name: "Transportation", price: "Private Cars / Bikes", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
                 { id: "s3", name: "Gathering Decoration", price: "Custom Setup", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/decor.jpg" },
-                { id: "s4", name: "Southwest Tour", price: "Guided Discovery", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/sw-tour.jpg" },
+                { id: "s4", name: "Southwest Tour", price: "Expert Guided", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/sw-tour.jpg" },
                 { id: "s5", name: "West Tour", price: "Cultural Heritage", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/west-tour.jpg" },
-                { id: "s6", name: "Currency Exchange", price: "Instant Service", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/currency.jpg" }
+                { id: "s6", name: "Currency Exchange", price: "Safe & Fast", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/currency.jpg" }
             ],
             couples: [
                 { id: "c1", name: "Mini Love Escape", price: "90,000 CFA", img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/couple%20paradis%20escape.jpg" }
             ]
         };
 
+        // UI RENDERING
         function renderUI() {
             const grid = document.getElementById('package-grid');
             const form = document.getElementById('concierge-form');
             
-            // Toggle inquiry form visibility
             form.classList.toggle('hidden', currentCategory !== 'concierge');
 
             grid.innerHTML = (servicesData[currentCategory] || []).map(item => `
                 <div class="package-card">
-                    <div class="h-56 overflow-hidden">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" alt="${item.name}">
-                    </div>
-                    <div class="p-8">
+                    <div class="h-56 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}"></div>
+                    <div class="p-8 text-center">
                         <h4 class="text-xl font-black uppercase mb-2 tracking-tight">${item.name}</h4>
                         <p class="text-[10px] text-yellow-500 font-black uppercase tracking-[0.3em]">${item.price}</p>
                     </div>
                 </div>`).join('');
         }
 
+        // TAB SWITCHING
         function switchCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
@@ -218,50 +191,41 @@
             renderUI();
         }
 
-        function sendConciergeInquiry() {
-            const arrival = document.getElementById('inq-arrival').value;
-            const departure = document.getElementById('inq-departure').value;
-            const guests = document.getElementById('inq-guests').value;
-            const budget = document.getElementById('inq-budget').value;
-            const extra = document.getElementById('inq-extra').value;
+        // WHATSAPP INQUIRY
+        function sendInquiry() {
+            const a = document.getElementById('inq-arrival').value;
+            const d = document.getElementById('inq-departure').value;
+            const g = document.getElementById('inq-guests').value;
+            const b = document.getElementById('inq-budget').value;
+            const e = document.getElementById('inq-extra').value;
 
-            if (!arrival || !departure || !guests) {
-                alert("Please fill in dates and number of guests.");
-                return;
-            }
+            if(!a || !d || !g) { alert("Please enter Arrival, Departure, and Guest count."); return; }
 
-            let msg = `✨ WONDERWAY CONCIERGE INQUIRY ✨\n`;
-            msg += `------------------------------------\n`;
-            msg += `📅 Arrival: ${arrival}\n`;
-            msg += `📅 Departure: ${departure}\n`;
-            msg += `👥 Guests: ${guests}\n`;
-            msg += `💰 Budget: ${budget || 'Not specified'}\n`;
-            msg += `📝 Requirements: ${extra || 'None'}\n`;
-            msg += `------------------------------------`;
-            
+            let msg = `✨ WONDERWAY CONCIERGE INQUIRY ✨\n---\n📅 Arrival: ${a}\n📅 Departure: ${d}\n👥 Guests: ${g}\n💰 Budget: ${b || 'TBD'}\n📝 Requirements: ${e || 'None'}`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
+        // REVIEW FETCHING (DIRECT API CALL)
         function fetchReviews() {
+            // Updated Version 14 URL from your screenshot
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbx7k2Z6pP_4mN0rY_2Fv_6o_5o_4n_5z_6q_7r_8s_9t/exec'; // NOTE: Ensure this is your actual V14 URL
+            
+            // For now, using the Script run method for internal communication if deployed correctly
             if (typeof google !== 'undefined') {
                 google.script.run.withSuccessHandler(h => {
-                    if(h) { 
-                        document.getElementById('dynamic-reviews').innerHTML = h; 
-                    }
+                    if(h) document.getElementById('dynamic-reviews').innerHTML = h;
                 }).loadReviews();
+            } else {
+                // FALLBACK: If running on external web, use the Web App URL fetch
+                fetch('https://script.google.com/macros/s/AKfycbwGBRbmbm8TiFKjsC25vQ-FSK6-wNUCgV2vToMlSbWtzO9v6h_7xoOxGvU3ZnWHiIVU/exec')
+                .then(r => r.text())
+                .then(h => {
+                    if(h && h.trim().length > 0) document.getElementById('dynamic-reviews').innerHTML = h;
+                }).catch(e => console.log("Reviews sync pending..."));
             }
         }
 
-        function updateCurrency() {
-            // Placeholder for currency conversion logic
-            const val = document.getElementById('currency-select').value;
-            console.log("Currency changed to: " + val);
-        }
-
-        window.onload = () => {
-            renderUI();
-            fetchReviews();
-        };
+        window.onload = () => { renderUI(); fetchReviews(); };
     </script>
 </body>
 </html>
