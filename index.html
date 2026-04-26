@@ -30,7 +30,8 @@
         #booking-engine { display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
         .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
-        .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 24px; border: 1px solid #334155; padding: 40px; }
+        #inquiry-modal { display: none; }
+        .modal-open { overflow: hidden; }
 
         .immersive-footer { 
             position: relative; 
@@ -85,6 +86,11 @@
 
     <header class="pt-24 pb-12 px-6 text-center">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
+        
+        <p class="max-w-2xl mx-auto mb-10 text-[10px] uppercase tracking-[0.2em] font-bold text-white/50 leading-relaxed italic">
+            "Because most clients have the possibility of going to Kribi with private cars and some prefer bikes as means of transportation which makes their stay more affordable, we don’t include transportation in our packages."
+        </p>
+
         <div class="flex flex-wrap justify-center gap-3">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Couples</button>
@@ -95,11 +101,20 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
-        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"></div>
+
+        <section class="mb-32 text-center border-t border-slate-800 pt-20">
+            <h2 class="hero-font text-3xl font-black uppercase mb-6 tracking-tight">Need a <span class="text-yellow-500">Bespoke</span> Experience?</h2>
+            <p class="text-white/60 text-xs mb-8 uppercase tracking-widest">Accommodation • Regional Tours • Event Decor • Logistics</p>
+            <button onclick="toggleInquiryModal()" class="group relative inline-flex items-center gap-4 px-12 py-6 bg-white text-black font-black rounded-full uppercase text-xs tracking-[0.3em] overflow-hidden transition-all hover:pr-16">
+                <span class="relative z-10">Access Service Manifest</span>
+                <i class="fas fa-arrow-right absolute right-6 opacity-0 group-hover:opacity-100 transition-all"></i>
+            </button>
+        </section>
 
         <section id="booking-engine" class="mt-32">
             <div class="flex flex-col items-center text-center mb-12">
-                <h2 class="hero-font text-4xl font-black uppercase text-white">Service <span class="text-yellow-500">Manifest</span></h2>
+                <h2 class="hero-font text-4xl font-black uppercase text-white">Selection <span class="text-yellow-500">Manifest</span></h2>
             </div>
             <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10 max-w-4xl mx-auto">
                 <div id="service-list" class="space-y-4 text-left mb-10"></div>
@@ -113,6 +128,53 @@
             </div>
         </section>
     </main>
+
+    <div id="inquiry-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-[#0f172a]/95 backdrop-blur-2xl">
+        <div class="bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-2xl p-10 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="toggleInquiryModal()" class="absolute top-8 right-8 text-white/40 hover:text-white transition"><i class="fas fa-times text-2xl"></i></button>
+            
+            <div class="mb-10 text-center">
+                <h3 class="hero-font text-4xl font-black uppercase mb-2">Bespoke Inquiry</h3>
+                <p class="text-yellow-500 font-bold uppercase text-[10px] tracking-widest">Custom Logistics & Travel Engineering</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Services Needed</label>
+                    <select id="inq-service" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-yellow-500 transition appearance-none">
+                        <option value="Accommodation">Accommodation</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Decorations for Gatherings">Decorations for Gatherings</option>
+                        <option value="Southwest Tour">Southwest Tour</option>
+                        <option value="West Tour">West Tour</option>
+                        <option value="Currency Exchange">Currency Exchange</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Number of Guests</label>
+                    <input type="number" id="inq-guests" placeholder="e.g. 4" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-yellow-500 transition">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Arrival Date</label>
+                    <input type="date" id="inq-arrival" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-yellow-500 transition">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Departure Date</label>
+                    <input type="date" id="inq-departure" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-yellow-500 transition">
+                </div>
+                <div class="space-y-2 md:col-span-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Estimated Budget Range</label>
+                    <input type="text" id="inq-budget" placeholder="e.g. 500,000 CFA - 1,000,000 CFA" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-yellow-500 transition">
+                </div>
+                <div class="space-y-2 md:col-span-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Extra Requirements</label>
+                    <textarea id="inq-notes" rows="4" placeholder="Dietary needs, specific decor styles, airport pickup details..." class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-yellow-500 transition resize-none"></textarea>
+                </div>
+            </div>
+
+            <button onclick="submitInquiry()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-2xl">Push Inquiry to WhatsApp</button>
+        </div>
+    </div>
 
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -130,7 +192,7 @@
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
             
-            <div class="mb-20">
+            <div class="mb-20 flex flex-col gap-6 items-center">
                 <a href="https://linktr.ee/wonderwaytourcameroon" target="_blank" class="px-10 py-5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-yellow-500 hover:text-black transition-all">
                     Experience WonderWay
                 </a>
@@ -184,12 +246,32 @@
             ]
         };
 
-        function fetchReviews() {
-            if (typeof google !== 'undefined') {
-                google.script.run.withSuccessHandler(function(h) {
-                    if(h) { document.getElementById('dynamic-reviews').innerHTML = h; }
-                }).loadReviews();
-            }
+        function toggleInquiryModal() {
+            const m = document.getElementById('inquiry-modal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+            document.body.classList.toggle('modal-open');
+        }
+
+        function submitInquiry() {
+            const service = document.getElementById('inq-service').value;
+            const guests = document.getElementById('inq-guests').value;
+            const arrival = document.getElementById('inq-arrival').value;
+            const departure = document.getElementById('inq-departure').value;
+            const budget = document.getElementById('inq-budget').value;
+            const notes = document.getElementById('inq-notes').value;
+
+            if(!guests || !arrival || !budget) { alert('Please fill in guests, arrival, and budget range.'); return; }
+
+            let msg = `WONDERWAY BESPOKE INQUIRY:\n-------------------------\n`;
+            msg += `*Service:* ${service}\n`;
+            msg += `*Guests:* ${guests}\n`;
+            msg += `*Dates:* ${arrival} to ${departure}\n`;
+            msg += `*Budget:* ${budget}\n`;
+            msg += `*Extra Requirements:* ${notes || 'None'}\n`;
+            msg += `-------------------------`;
+
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+            toggleInquiryModal();
         }
 
         function formatPrice(v) { 
@@ -269,7 +351,11 @@
 
         window.onload = () => {
             renderUI();
-            fetchReviews();
+            if (typeof google !== 'undefined') {
+                google.script.run.withSuccessHandler(function(h) {
+                    if(h) { document.getElementById('dynamic-reviews').innerHTML = h; }
+                }).loadReviews();
+            }
         };
     </script>
 </body>
