@@ -160,10 +160,10 @@
                 { id: "a2", name: "Horse Riding", price: 2000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/horse-riding.jpg" },
                 { id: "a3", name: "Quad Biking", price: 5000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Quad.jpg" },
                 { id: "a4", name: "Sip & Paint", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/sip-paint.jpg" },
-                { id: "a5", name: "Museum Visit", price: 2000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/museum.jpg" },
-                { id: "a6", name: "Seaport Visit", price: 2000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/seaport%20visit.jpg" },
+                { id: "a5", name: "Grand Batanga Museum", price: 3000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/museum.jpg" },
+                { id: "a6", name: "Kribi Seaport Visit", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/seaport%20visit.jpg" },
                 { id: "a7", name: "Canoe Trip", price: 3000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/canoe.jpg" },
-                { id: "a8", name: "Pigmi Village", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/pigmi%20village.jpg" }
+                { id: "a8", name: "Baka Pygmy Village", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/pigmi%20village.jpg" }
             ],
             couples: [
                 { id: "c1", name: "Mini Love Escape", price: 90000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/couple%20paradis%20escape.jpg" },
@@ -179,7 +179,8 @@
             ],
             concierge: [
                 { id: "con1", name: "Private Photographer", price: 30000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7572.jpg" },
-                { id: "con2", name: "Luxury Transport", price: 50000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7154.jpg" }
+                { id: "con2", name: "Luxury Transport", price: 50000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7154.jpg" },
+                { id: "con3", name: "Beach Bonfire Setup", price: 20000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Need%20%F0%9F%94%A5%F0%9F%8C%8A.webp" }
             ]
         };
 
@@ -207,7 +208,7 @@
                 const isS = cart.some(c => c.id === item.id);
                 return `
                 <div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
-                    <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                    <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>
                     <div class="p-6 text-left flex-grow flex flex-col justify-between">
                         <div>
                             <h4 class="text-lg font-black uppercase mb-1 tracking-tight">${item.name}</h4>
