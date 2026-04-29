@@ -33,7 +33,6 @@
         #inquiry-modal { display: none; }
         .modal-open { overflow: hidden; }
 
-        /* --- STABLE REVIEW ENGINE STYLES --- */
         .iframe-wrapper {
             background: #ffffff; 
             border-radius: 32px;
@@ -151,6 +150,15 @@
             </button>
         </section>
 
+        <section id="booking-engine" class="mt-32">
+            <div class="flex flex-col items-center text-center mb-12">
+                <h2 class="hero-font text-4xl font-black uppercase text-white">Selection <span class="text-yellow-500">Manifest</span></h2>
+            </div>
+            <div class="bg-slate-900/50 rounded-[40px] border border-slate-800 p-10 max-w-4xl mx-auto">
+                <div id="service-list" class="space-y-4 text-left mb-10"></div>
+            </div>
+        </section>
+
         <section id="feedback" class="mt-40 scroll-mt-24">
             <div class="max-w-4xl mx-auto text-center px-6">
                 <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
@@ -168,14 +176,73 @@
         </section>
     </main>
 
+    <div id="inquiry-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-[#0f172a]/95 backdrop-blur-2xl">
+        <div class="bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-2xl p-10 relative max-h-[90vh] overflow-y-auto text-left">
+            <button onclick="toggleInquiryModal()" class="absolute top-8 right-8 text-white/40 hover:text-white transition"><i class="fas fa-times text-2xl"></i></button>
+            <div class="mb-10 text-center">
+                <h3 class="hero-font text-4xl font-black uppercase mb-2">Bespoke Inquiry</h3>
+                <p class="text-yellow-500 font-bold uppercase text-[10px] tracking-widest">Custom Logistics & Travel Engineering</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Services Needed</label>
+                    <select id="inq-service" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none">
+                        <option value="Accommodation">Accommodation</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Decorations for Gatherings">Decorations for Gatherings</option>
+                        <option value="Southwest Tour">Southwest Tour</option>
+                        <option value="West Tour">West Tour</option>
+                        <option value="Currency Exchange">Currency Exchange</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Number of Guests</label>
+                    <input type="number" id="inq-guests" placeholder="e.g. 4" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Arrival Date</label>
+                    <input type="date" id="inq-arrival" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Departure Date</label>
+                    <input type="date" id="inq-departure" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none">
+                </div>
+                <div class="space-y-2 md:col-span-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Estimated Budget Range</label>
+                    <input type="text" id="inq-budget" placeholder="e.g. 500,000 CFA" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none">
+                </div>
+                <div class="space-y-2 md:col-span-2">
+                    <label class="text-[10px] font-black uppercase text-white/40 tracking-widest ml-2">Extra Requirements</label>
+                    <textarea id="inq-notes" rows="4" placeholder="Extra details..." class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-6 py-4 text-sm font-bold outline-none resize-none"></textarea>
+                </div>
+            </div>
+            <button onclick="submitInquiry()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest shadow-2xl">Push Inquiry to WhatsApp</button>
+        </div>
+    </div>
+
+    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-left">
+                <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
+                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
+            </div>
+            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
+        </div>
+    </div>
+
     <footer class="immersive-footer">
         <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/footer.jpg" alt="Founder" class="footer-bg-image">
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
+            <div class="mb-20 flex flex-col gap-6 items-center">
+                <a href="https://linktr.ee/wonderwaytourcameroon" target="_blank" class="px-10 py-5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-yellow-500 hover:text-black transition-all">
+                    Experience WonderWay
+                </a>
+            </div>
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Engineering by Frank Fru</span>
-                <div class="flex justify-center items-center gap-6">
+                <div class="flex justify-center items-center gap-6 mb-4">
                     <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-xs tracking-widest transition underline decoration-yellow-500/20">Portfolio</a>
                     <a href="https://github.com/chifru19" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-github"></i></a>
                     <a href="https://linkedin.com/in/frankfru" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-linkedin"></i></a>
@@ -245,6 +312,15 @@
                     </div>
                 </div>`;
             }).join('');
+            
+            const list = document.getElementById('service-list');
+            list.innerHTML = cart.map(item => `<div class="flex justify-between border-b border-white/10 py-6 text-white"><span class="text-sm font-black uppercase">${item.name}</span><span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span></div>`).join('');
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
+            document.getElementById('cart-count').innerText = `${cart.length} Selected`;
+            document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
+            document.getElementById('booking-engine').classList.toggle('folder-visible', cart.length > 0);
         }
 
         function toggleService(id, name, price) {
