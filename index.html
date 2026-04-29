@@ -30,22 +30,20 @@
         #booking-engine { display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
         .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* --- LUXURY DARK REVIEW ENGINE --- */
+        #inquiry-modal { display: none; }
+        .modal-open { overflow: hidden; }
+
+        /* --- REVIEW SECTION STYLES --- */
         .iframe-wrapper {
-            background: #1e293b; 
+            background: #ffffff; 
             border-radius: 32px;
             overflow: hidden;
             height: 600px;
             border: 1px solid #334155;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-        /* Dark Mode Filter for Google Sheets */
-        .iframe-wrapper iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: none; 
-            filter: invert(90%) hue-rotate(180deg) brightness(1.2); 
-        }
+        .iframe-wrapper iframe { width: 100%; height: 100%; border: none; }
+
         .review-cta {
             display: inline-block;
             background: #fbbf24;
@@ -103,6 +101,7 @@
                 <span class="text-[8px] uppercase tracking-widest text-yellow-500 font-black">Official Collection</span>
             </div>
         </div>
+
         <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700">
             <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
                 <option value="XAF">CFA (XAF)</option>
@@ -114,11 +113,12 @@
 
     <header class="pt-24 pb-12 px-6 text-center">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
+        
         <p class="max-w-2xl mx-auto mb-16 text-[10px] uppercase tracking-[0.2em] font-bold text-white/50 leading-relaxed italic">
-            "Travel with us—and turn every getaway into something unforgettable."
+            "We don’t include transportation in our packages because most clients prefer private cars and bikes."
         </p>
 
-        <div class="flex flex-wrap justify-center gap-3">
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Activities</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Couples</button>
             <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (4)</button>
@@ -136,7 +136,7 @@
                     Guest <span class="text-yellow-500">Stories</span>
                 </h2>
                 <p class="text-white/60 text-xs mb-10 uppercase tracking-[0.2em] font-bold">
-                    Transparency powered by Infrastructure Engineering
+                    Transparent traveler experiences from our community
                 </p>
                 
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7z893p7R3G8a-jG8X-M1C-uU6YV8G2z6G8aX-jG8X-M1C-uU/viewform" 
@@ -146,7 +146,7 @@
                 </a>
 
                 <div class="iframe-wrapper">
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBv02JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pubhtml?gid=65154260&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false&amp;range=B2:E100"></iframe>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBv02JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pubhtml?widget=true&amp;headers=false"></iframe>
                 </div>
             </div>
         </section>
@@ -158,11 +158,10 @@
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
             <div class="pt-10 border-t border-white/10">
-                <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Engineering by Frank Fru</span>
+                <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Infrastructure Engineered by Frank Fru</span>
                 <div class="flex justify-center items-center gap-6">
                     <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-xs tracking-widest transition underline decoration-yellow-500/20">Portfolio</a>
                     <a href="https://github.com/chifru19" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/frankfru" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
@@ -170,22 +169,35 @@
     </footer>
 
     <script>
-        // Data and Rendering Logic
-        let currentCurrency = 'XAF'; let currentCategory = 'activities'; let cart = [];
+        let currentCurrency = 'XAF'; 
+        let currentCategory = 'activities'; 
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
-        
-        // (All service data and functions remain as established)
-        function formatPrice(v) { 
-            const conv = v * rates[currentCurrency]; 
-            return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
-        }
 
-        function switchCategory(cat) { 
-            currentCategory = cat; 
-            // Trigger UI update logic here...
-        }
-        
-        window.onload = () => { /* Initialize UI here... */ };
-    </script>
-</body>
-</html>
+        const servicesData = {
+            activities: [
+                { id: "a1", name: "Jet Ski", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/jetski-action.jpg" },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" },
+                { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" },
+                { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/Zorb Ball.jpg" }, 
+                { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
+                { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg" },
+                { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "images/museum.jpg" },
+                { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "images/seaport visit.jpg" },
+                { id: "a9", name: "Canoe Trip", price: 3000, img: "images/canoe.jpg" },
+                { id: "a10", name: "Baka Pygmy Village", price: 10000, img: "images/pigmi village.jpg" }
+            ],
+            couples: [
+                { id: "c1", name: "Mini Love Escape", price: 90000, img: "images/couple paradis escape.jpg" },
+                { id: "c2", name: "Paradise Gold", price: 250000, img: "images/paradise-gold.jpg" },
+                { id: "c3", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg" }
+            ],
+            group4: [
+                { id: "g4_1", name: "Crew Chill (4)", price: 230000, img: "images/group-action.jpg" },
+                { id: "g4_2", name: "Vibes & Memories (4)", price: 350000, img: "images/dinner-setup.jpg" }
+            ],
+            group6: [
+                { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "images/group-action.jpg" }
+            ],
+            concierge: [
+                { id: "con1", name: "Private Photographer", price: 30000, img: "images/4K6A7572.jpg" },
+                { id: "con2", name: "Luxury Transport", price: 50000, img:
