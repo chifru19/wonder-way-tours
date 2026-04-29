@@ -33,7 +33,14 @@
         #inquiry-modal { display: none; }
         .modal-open { overflow: hidden; }
 
-        .review-card { background: linear-gradient(145deg, #1e293b, #0f172a); border-radius: 32px; border: 1px solid #334155; padding: 40px; }
+        .review-card { 
+            background: linear-gradient(145deg, #1e293b, #0f172a); 
+            border-radius: 32px; 
+            border: 1px solid #334155; 
+            padding: 40px; 
+            transition: 0.3s;
+        }
+        .review-card:hover { border-color: #fbbf24; }
 
         .immersive-footer { 
             position: relative; 
@@ -62,6 +69,19 @@
         }
         
         #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
+
+        .story-cta {
+            background: #fbbf24;
+            color: #0f172a;
+            padding: 14px 30px;
+            border-radius: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 50px;
+        }
     </style>
 </head>
 
@@ -99,7 +119,7 @@
                 We believe travel should be more than just a trip—it should be an experience you feel. From breathtaking destinations to carefully curated moments, every journey with us is designed to inspire, connect, and leave lasting memories.
             </p>
             <div class="h-px w-20 bg-yellow-500/30 mx-auto my-6"></div>
-            <p class="text-white/80 text-sm leading-loose font-medium">
+            <p class="text-white/80 text-sm leading-loose font-medium text-center">
                 Whether you’re seeking relaxation, adventure, or meaningful time with others, we handle every detail so you can simply enjoy the moment.<br>
                 <span class="text-white font-black uppercase text-[10px] tracking-[0.3em] mt-4 block">Travel with us—and turn every getaway into something unforgettable.</span>
             </p>
@@ -135,10 +155,15 @@
             </div>
         </section>
 
-        <section id="feedback" class="mt-40">
-            <h2 class="hero-font text-5xl font-black uppercase text-center mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
+        <section id="feedback" class="mt-40 text-center">
+            <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
+            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7z893p7R3G8a-jG8X-M1C-uU/viewform" target="_blank" class="story-cta">
+                Share Your WonderWay Story
+            </a>
+
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Syncing stories...</p>
+                <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
             </div>
         </section>
     </main>
@@ -202,17 +227,11 @@
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
-            <div class="mb-20 flex flex-col gap-6 items-center">
-                <a href="https://linktr.ee/wonderwaytourcameroon" target="_blank" class="px-10 py-5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-yellow-500 hover:text-black transition-all">
-                    Experience WonderWay
-                </a>
-            </div>
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Engineering by Frank Fru</span>
                 <div class="flex justify-center items-center gap-6 mb-4">
                     <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-xs tracking-widest transition underline decoration-yellow-500/20">Portfolio</a>
                     <a href="https://github.com/chifru19" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/frankfru" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
@@ -265,9 +284,11 @@
                     const container = document.getElementById('dynamic-reviews');
                     if(html && html.trim().length > 10) {
                         container.innerHTML = html; 
+                    } else {
+                        container.innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Be the first to share a story.</p>";
                     }
                 })
-                .catch(e => console.error("Review fetch error:", e));
+                .catch(e => console.error("Story Injection Failed:", e));
         }
 
         function toggleInquiryModal() {
