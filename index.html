@@ -266,8 +266,6 @@
                     </div>
                 </div>`;
             }).join('');
-            const list = document.getElementById('service-list');
-            list.innerHTML = cart.map(item => `<div class="flex justify-between border-b border-white/10 py-6 text-white"><span class="text-sm font-black uppercase">${item.name}</span><span class="text-yellow-500 font-bold">${formatPrice(item.price)}</span></div>`).join('');
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
