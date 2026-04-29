@@ -30,9 +30,6 @@
         #booking-engine { display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
         .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
 
-        #inquiry-modal { display: none; }
-        .modal-open { overflow: hidden; }
-
         .iframe-wrapper {
             background: #ffffff; 
             border-radius: 32px;
@@ -84,8 +81,6 @@
             inset: 0;
             background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
         }
-        
-        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
     </style>
 </head>
 
@@ -165,7 +160,7 @@
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Engineering by Frank Fru</span>
-                <div class="flex justify-center items-center gap-6">
+                <div class="flex justify-center items-center gap-6 mb-4">
                     <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-xs tracking-widest transition underline decoration-yellow-500/20">Portfolio</a>
                     <a href="https://github.com/chifru19" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-github"></i></a>
                 </div>
@@ -212,21 +207,6 @@
             ]
         };
 
-        function fetchReviews() {
-            // OPTIONAL: USING THE SCRIPT URL YOU PROVIDED INSTEAD OF IFRAME
-            const scriptURL = "https://script.google.com/macros/s/AKfycbwmXHylG2uKSQCK0bW02lFXBwN8fMvR2j3aEevtWsUrdoKu016NauY02Ev_flKQajwT/exec";
-            fetch(scriptURL)
-                .then(r => r.text())
-                .then(html => { 
-                    if(html && html.length > 50) {
-                        document.querySelector('.iframe-wrapper').innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-10">${html}</div>`;
-                        document.querySelector('.iframe-wrapper').style.background = "transparent";
-                        document.querySelector('.iframe-wrapper').style.height = "auto";
-                    }
-                })
-                .catch(e => console.log("Iframe fallback active"));
-        }
-
         function formatPrice(v) { 
             const conv = v * rates[currentCurrency]; 
             return currentCurrency === 'XAF' ? new Intl.NumberFormat('fr-CM').format(v) + ' CFA' : (currentCurrency === 'EUR' ? '€' : '$') + conv.toFixed(2);
@@ -235,26 +215,19 @@
         function renderUI() {
             const grid = document.getElementById('package-grid');
             grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
-                const isS = cart.some(c => c.id === item.id);
-                return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
+                return `<div class="package-card">
                     <div class="h-48 overflow-hidden">
                         <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'">
                     </div>
                     <div class="p-6">
                         <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
                         <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
-                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
-                            ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
+                        <button class="w-full py-3 bg-slate-800 font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
+                            ADD TO TRIP
                         </button>
                     </div>
                 </div>`;
             }).join('');
-        }
-
-        function toggleService(id, name, price) {
-            const idx = cart.findIndex(i => i.id === id);
-            idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
-            renderUI();
         }
 
         function switchCategory(cat) { 
@@ -265,7 +238,7 @@
 
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
 
-        window.onload = () => { renderUI(); fetchReviews(); };
+        window.onload = () => { renderUI(); };
     </script>
 </body>
 </html>
