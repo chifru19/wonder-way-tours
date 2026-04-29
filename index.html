@@ -152,21 +152,11 @@
                 </a>
 
                 <div class="iframe-wrapper">
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTnv5OBv02JxZ-PSZGaKGaxLl76QS5pv-28btG5l_N5vG_KREbPuE2Wgtw4511LqcQpQYhs9UY1aGp3/pubhtml?widget=true&amp;headers=false"></iframe>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTo_S7_9z8-A6X-N1C_uV_X8G2z6G8aX-jG8X-M1C-uU6YV8G2z6G8aX-jG8X-M1C-uU/pubhtml?widget=true&amp;headers=false"></iframe>
                 </div>
             </div>
         </section>
     </main>
-
-    <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-left">
-                <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
-                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
-            </div>
-            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
-        </div>
-    </div>
 
     <footer class="immersive-footer">
         <img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/footer.jpg" alt="Founder" class="footer-bg-image">
@@ -185,9 +175,7 @@
     </footer>
 
     <script>
-        let currentCurrency = 'XAF'; 
-        let currentCategory = 'activities'; 
-        let cart = [];
+        let currentCurrency = 'XAF'; let currentCategory = 'activities'; let cart = [];
         const rates = { XAF: 1, EUR: 0.0015, USD: 0.0016 };
 
         const servicesData = {
