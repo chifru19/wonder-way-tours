@@ -33,6 +33,7 @@
         #inquiry-modal { display: none; }
         .modal-open { overflow: hidden; }
 
+        /* --- STABLE REVIEW ENGINE STYLES --- */
         .iframe-wrapper {
             background: #ffffff; 
             border-radius: 32px;
@@ -114,8 +115,20 @@
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
         
         <p class="max-w-2xl mx-auto mb-16 text-[10px] uppercase tracking-[0.2em] font-bold text-white/50 leading-relaxed italic">
-            "Travel with us—and turn every getaway into something unforgettable."
+            "Because most clients have the possibility of going to Kribi with private cars and some prefer bikes as means of transportation which makes their stay more affordable, we don’t include transportation in our packages."
         </p>
+
+        <section class="max-w-3xl mx-auto mb-20 px-6 py-10 bg-slate-800/20 rounded-[40px] border border-slate-700/50 backdrop-blur-sm text-center">
+            <h2 class="hero-font text-2xl font-black uppercase mb-6 text-yellow-500 tracking-wider">Our Philosophy</h2>
+            <p class="text-white/80 text-sm leading-loose font-medium italic">
+                We believe travel should be more than just a trip—it should be an experience you feel. From breathtaking destinations to carefully curated moments, every journey with us is designed to inspire, connect, and leave lasting memories.
+            </p>
+            <div class="h-px w-20 bg-yellow-500/30 mx-auto my-6"></div>
+            <p class="text-white/80 text-sm leading-loose font-medium">
+                Whether you’re seeking relaxation, adventure, or meaningful time with others, we handle every detail so you can simply enjoy the moment.<br>
+                <span class="text-white font-black uppercase text-[10px] tracking-[0.3em] mt-4 block">Travel with us—and turn every getaway into something unforgettable.</span>
+            </p>
+        </section>
 
         <div class="flex flex-wrap justify-center gap-3">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Activities</button>
@@ -128,6 +141,15 @@
 
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"></div>
+
+        <section class="mb-32 text-center border-t border-slate-800 pt-20">
+            <h2 class="hero-font text-3xl font-black uppercase mb-6 tracking-tight">Need a <span class="text-yellow-500">Bespoke</span> Experience?</h2>
+            <p class="text-white/60 text-xs mb-8 uppercase tracking-widest">Accommodation • Regional Tours • Event Decor • Logistics</p>
+            <button onclick="toggleInquiryModal()" class="group relative inline-flex items-center gap-4 px-12 py-6 bg-white text-black font-black rounded-full uppercase text-xs tracking-[0.3em] overflow-hidden transition-all hover:pr-16">
+                <span class="relative z-10">Access Service Manifest</span>
+                <i class="fas fa-arrow-right absolute right-6 opacity-0 group-hover:opacity-100 transition-all"></i>
+            </button>
+        </section>
 
         <section id="feedback" class="mt-40 scroll-mt-24">
             <div class="max-w-4xl mx-auto text-center px-6">
@@ -156,6 +178,7 @@
                 <div class="flex justify-center items-center gap-6">
                     <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-xs tracking-widest transition underline decoration-yellow-500/20">Portfolio</a>
                     <a href="https://github.com/chifru19" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/frankfru" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
@@ -173,7 +196,6 @@
                 { id: "a1", name: "Jet Ski", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/jetski-action.jpg" },
                 { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" },
                 { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" },
-                // --- FIXED ZORB BALL IMAGE FILENAME ---
                 { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/Zorb Ball.jpg" }, 
                 { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
                 { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg" },
