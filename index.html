@@ -263,6 +263,7 @@
                 { id: "a1", name: "Jet Ski", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/jetski-action.jpg" },
                 { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" },
                 { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" },
+                // CORRECTED IMAGE FILENAME
                 { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/Zorb Ball.jpg" }, 
                 { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
                 { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg" },
@@ -289,6 +290,25 @@
                 { id: "con3", name: "Beach Bonfire Setup", price: 20000, img: "images/4K6A7343.jpg" }
             ]
         };
+
+        function toggleInquiryModal() {
+            const m = document.getElementById('inquiry-modal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+            document.body.classList.toggle('modal-open');
+        }
+
+        function submitInquiry() {
+            const service = document.getElementById('inq-service').value;
+            const guests = document.getElementById('inq-guests').value;
+            const arrival = document.getElementById('inq-arrival').value;
+            const departure = document.getElementById('inq-departure').value;
+            const budget = document.getElementById('inq-budget').value;
+            const notes = document.getElementById('inq-notes').value;
+            if(!guests || !arrival || !budget) { alert('Please fill in required fields.'); return; }
+            let msg = `WONDERWAY BESPOKE INQUIRY:\n*Service:* ${service}\n*Guests:* ${guests}\n*Dates:* ${arrival} to ${departure}\n*Budget:* ${budget}\n*Extra:* ${notes || 'None'}`;
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+            toggleInquiryModal();
+        }
 
         function formatPrice(v) { 
             const conv = v * rates[currentCurrency]; 
