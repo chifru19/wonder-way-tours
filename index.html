@@ -114,6 +114,12 @@
                     <input type="date" id="bk-departure" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
                 </div>
                 <input type="number" id="bk-guests" placeholder="Number of Guests" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                <select id="bk-budget" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                    <option value="">Budget Range</option>
+                    <option value="Budget">Budget</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Luxury">Luxury</option>
+                </select>
                 <textarea id="bk-extra" placeholder="Extra Requirements..." class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
                 <button onclick="sendWhatsAppBooking()" class="w-full py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Send to WhatsApp</button>
             </div>
@@ -127,6 +133,11 @@
             <input type="hidden" id="inquiry-service">
             <div class="space-y-4">
                 <input type="text" id="inq-name" placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="date" id="inq-arrival" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                    <input type="date" id="inq-departure" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                </div>
+                <input type="number" id="inq-guests" placeholder="Number of Guests" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
                 <textarea id="inq-extra" placeholder="Extra Requirements" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
                 <button onclick="submitInquiry()" class="w-full py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Send Inquiry</button>
             </div>
