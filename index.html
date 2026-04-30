@@ -77,6 +77,9 @@
             display: inline-block;
             margin-bottom: 50px;
         }
+
+        /* Modal Styles */
+        .modal-bg { background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); }
     </style>
 </head>
 
@@ -128,18 +131,74 @@
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"></div>
 
+        <section id="services-section" class="hidden mt-20">
+            <h2 class="hero-font text-4xl font-black uppercase mb-10 text-white border-l-4 border-yellow-500 pl-4">Concierge Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="package-card p-8 bg-slate-800/40">
+                    <h4 class="text-xl font-black mb-4">Accommodation</h4>
+                    <p class="text-sm text-white/60 mb-6">Tailored stays for every budget.</p>
+                    <button onclick="openInquiry('Accommodation')" class="w-full py-3 bg-slate-700 hover:bg-yellow-500 hover:text-black font-black uppercase text-[10px] rounded-xl transition-all">Inquire Now</button>
+                </div>
+                <div class="package-card p-8 bg-slate-800/40">
+                    <h4 class="text-xl font-black mb-4">Transportation</h4>
+                    <p class="text-sm text-white/60 mb-6">Safe and reliable travel arrangements.</p>
+                    <button onclick="openInquiry('Transportation')" class="w-full py-3 bg-slate-700 hover:bg-yellow-500 hover:text-black font-black uppercase text-[10px] rounded-xl transition-all">Inquire Now</button>
+                </div>
+                <div class="package-card p-8 bg-slate-800/40">
+                    <h4 class="text-xl font-black mb-4">Decorations</h4>
+                    <p class="text-sm text-white/60 mb-6">For your special gatherings and parties.</p>
+                    <button onclick="openInquiry('Decorations for Gatherings')" class="w-full py-3 bg-slate-700 hover:bg-yellow-500 hover:text-black font-black uppercase text-[10px] rounded-xl transition-all">Inquire Now</button>
+                </div>
+                <div class="package-card p-8 bg-slate-800/40">
+                    <h4 class="text-xl font-black mb-4">Southwest Tour</h4>
+                    <p class="text-sm text-white/60 mb-6">Discover the beauty of the Southwest.</p>
+                    <button onclick="openInquiry('Southwest Tour')" class="w-full py-3 bg-slate-700 hover:bg-yellow-500 hover:text-black font-black uppercase text-[10px] rounded-xl transition-all">Inquire Now</button>
+                </div>
+                <div class="package-card p-8 bg-slate-800/40">
+                    <h4 class="text-xl font-black mb-4">West Tour</h4>
+                    <p class="text-sm text-white/60 mb-6">Cultural exploration in the West.</p>
+                    <button onclick="openInquiry('West Tour')" class="w-full py-3 bg-slate-700 hover:bg-yellow-500 hover:text-black font-black uppercase text-[10px] rounded-xl transition-all">Inquire Now</button>
+                </div>
+                <div class="package-card p-8 bg-slate-800/40">
+                    <h4 class="text-xl font-black mb-4">Currency Exchange</h4>
+                    <p class="text-sm text-white/60 mb-6">Hassle-free exchange services.</p>
+                    <button onclick="openInquiry('Currency Exchange')" class="w-full py-3 bg-slate-700 hover:bg-yellow-500 hover:text-black font-black uppercase text-[10px] rounded-xl transition-all">Inquire Now</button>
+                </div>
+            </div>
+        </section>
+
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
-            
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">
-                Share Your WonderWay Story
-            </a>
-
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">Share Your WonderWay Story</a>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
             </div>
         </section>
     </main>
+
+    <div id="inquiry-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 modal-bg">
+        <div class="bg-slate-900 border border-slate-700 p-8 rounded-3xl w-full max-w-lg relative">
+            <button onclick="closeInquiry()" class="absolute top-4 right-4 text-white hover:text-yellow-500 text-xl"><i class="fa fa-times"></i></button>
+            <h3 class="text-2xl font-black mb-6 text-white uppercase hero-font">Inquire: <span id="modal-service-name" class="text-yellow-500">Service</span></h3>
+            <form id="inquiry-form" class="space-y-4">
+                <input type="hidden" id="inquiry-service">
+                <input type="text" id="inquiry-name" placeholder="Full Name" required class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white placeholder:text-slate-500">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="date" id="inquiry-arrival" required class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                    <input type="date" id="inquiry-departure" required class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                </div>
+                <input type="number" id="inquiry-guests" placeholder="Number of Guests" required class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                <select id="inquiry-budget" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                    <option value="">Budget Range</option>
+                    <option value="Budget">Budget</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Luxury">Luxury</option>
+                </select>
+                <textarea id="inquiry-extra" placeholder="Extra Requirements..." class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
+                <button type="button" onclick="submitInquiry()" class="w-full py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Submit to WhatsApp</button>
+            </form>
+        </div>
+    </div>
 
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -156,7 +215,6 @@
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
-            
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Infrastructure Engineered by Frank Fru</span>
                 <div class="flex justify-center items-center gap-6 mb-4">
@@ -219,6 +277,34 @@
             ]
         };
 
+        // --- Inquiry Modal Functions ---
+        function openInquiry(service) {
+            document.getElementById('inquiry-service').value = service;
+            document.getElementById('modal-service-name').innerText = service;
+            document.getElementById('inquiry-modal').classList.remove('hidden');
+            document.getElementById('inquiry-modal').classList.add('flex');
+        }
+        function closeInquiry() {
+            document.getElementById('inquiry-modal').classList.add('hidden');
+            document.getElementById('inquiry-modal').classList.remove('flex');
+        }
+        function submitInquiry() {
+            const name = document.getElementById('inquiry-name').value;
+            const arr = document.getElementById('inquiry-arrival').value;
+            const dep = document.getElementById('inquiry-departure').value;
+            const guest = document.getElementById('inquiry-guests').value;
+            const budget = document.getElementById('inquiry-budget').value;
+            const extra = document.getElementById('inquiry-extra').value;
+            const svc = document.getElementById('inquiry-service').value;
+
+            if(!name || !arr || !dep || !guest) { alert("Please fill in the required fields."); return; }
+
+            const msg = `*NEW SERVICE INQUIRY: ${svc}*\n\n*Name:* ${name}\n*Arrival:* ${arr}\n*Departure:* ${dep}\n*Guests:* ${guest}\n*Budget:* ${budget}\n*Extra:* ${extra}`;
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+            closeInquiry();
+        }
+
+        // --- Standard Logic ---
         function fetchReviews() {
             const scriptURL = "https://script.google.com/macros/s/AKfycbwGlQJUMBz-88OabMig8E8tYuhlidNrd1CHkAmZYtlNMPC5c3FVKQEqJOP7SePr4Fyt/exec";
             fetch(scriptURL)
@@ -236,14 +322,9 @@
                                 <h6 class="text-white font-black uppercase text-[10px] tracking-widest">- ${item.name}</h6>
                             </div>`;
                     }).join('');
-                } else {
-                    container.innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Be the first to share a story.</p>";
                 }
             })
-            .catch(e => {
-                console.error("Sync Error:", e);
-                document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Chronicles are updating...</p>";
-            });
+            .catch(e => console.error("Sync Error:", e));
         }
 
         function createCard(item) {
@@ -262,15 +343,15 @@
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
+            const servicesSection = document.getElementById('services-section');
+            
+            // Toggle Services visibility
+            servicesSection.classList.toggle('hidden', currentCategory !== 'activities');
             
             if(currentCategory === 'events') {
-                // Event Flyer first
                 let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="${servicesData.events[0].img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>`;
-                // Then ALL packages
-                let packagesHtml = servicesData.packages.map(item => createCard(item)).join('');
-                grid.innerHTML = flyerHtml + packagesHtml;
+                grid.innerHTML = flyerHtml + servicesData.packages.map(item => createCard(item)).join('');
             } else {
-                // Standard category rendering
                 grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
             }
             
