@@ -77,7 +77,6 @@
             display: inline-block;
             margin-bottom: 50px;
         }
-        .modal-bg { background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); }
     </style>
 </head>
 
@@ -129,6 +128,24 @@
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"></div>
 
+        <section id="inquiry-section" class="mt-20 p-10 bg-slate-800/20 rounded-[40px] border border-slate-700/50 backdrop-blur-sm max-w-2xl mx-auto">
+            <h2 class="hero-font text-3xl font-black uppercase mb-8 text-yellow-500 text-center">Plan Your Trip</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="inq-name" placeholder="Full Name" class="col-span-2 bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                <input type="date" id="inq-arrival" placeholder="Arrival Date" class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                <input type="date" id="inq-departure" placeholder="Departure Date" class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                <input type="number" id="inq-guests" placeholder="Number of Guests" class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                <select id="inq-budget" class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                    <option value="">Budget Range</option>
+                    <option value="Budget">Budget</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Luxury">Luxury</option>
+                </select>
+                <textarea id="inq-extra" placeholder="Extra Requirements..." class="col-span-2 bg-slate-900 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
+                <button onclick="sendWhatsAppInquiry()" class="col-span-2 py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Submit Inquiry to WhatsApp</button>
+            </div>
+        </section>
+
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
             
@@ -142,36 +159,13 @@
         </section>
     </main>
 
-    <div id="booking-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 modal-bg">
-        <div class="bg-slate-900 border border-slate-700 p-8 rounded-3xl w-full max-w-lg relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-yellow-500 text-xl"><i class="fa fa-times"></i></button>
-            <h3 class="text-2xl font-black mb-6 text-white uppercase hero-font">Inquiry Form</h3>
-            <div class="space-y-4">
-                <input type="text" id="bk-name" placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="date" id="bk-arrival" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
-                    <input type="date" id="bk-departure" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
-                </div>
-                <input type="number" id="bk-guests" placeholder="Number of Guests" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
-                <select id="bk-budget" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
-                    <option value="">Budget Range</option>
-                    <option value="Budget">Budget</option>
-                    <option value="Moderate">Moderate</option>
-                    <option value="Luxury">Luxury</option>
-                </select>
-                <textarea id="bk-extra" placeholder="Extra Requirements..." class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
-                <button onclick="sendWhatsAppBooking()" class="w-full py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Send Inquiry</button>
-            </div>
-        </div>
-    </div>
-
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-left">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
                 <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="openModal()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
+            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
         </div>
     </div>
 
@@ -243,24 +237,31 @@
             ]
         };
 
-        function formatPrice(val) {
-            const converted = val * rates[currentCurrency];
-            const suffix = currentCurrency === 'XAF' ? ' CFA' : (currentCurrency === 'EUR' ? ' €' : ' $');
-            return new Intl.NumberFormat('fr-FR').format(Math.round(converted)) + suffix;
-        }
-
         function fetchReviews() {
             const scriptURL = "https://script.google.com/macros/s/AKfycbwGlQJUMBz-88OabMig8E8tYuhlidNrd1CHkAmZYtlNMPC5c3FVKQEqJOP7SePr4Fyt/exec";
             fetch(scriptURL)
-            .then(r => r.json())
+            .then(response => response.json())
             .then(data => {
                 let reviews = typeof data === 'string' ? JSON.parse(data) : data;
                 const container = document.getElementById('dynamic-reviews');
                 if(reviews && reviews.length > 0) {
-                    container.innerHTML = reviews.map(item => `<div class="review-card"><div class="text-yellow-500 mb-4">${'★'.repeat(item.rating || 5)}</div><p class="text-white/80 italic text-sm mb-6">"${item.review || item.text}"</p><h6 class="text-white font-black uppercase text-[10px]">- ${item.name}</h6></div>`).join('');
+                    container.innerHTML = reviews.map(item => {
+                        const stars = '★'.repeat(item.rating || 5) + '☆'.repeat(5 - (item.rating || 5));
+                        return `
+                            <div class="review-card">
+                                <div class="text-yellow-500 mb-4">${stars}</div>
+                                <p class="text-white/80 italic text-sm mb-6 leading-loose">"${item.review || item.text}"</p>
+                                <h6 class="text-white font-black uppercase text-[10px] tracking-widest">- ${item.name}</h6>
+                            </div>`;
+                    }).join('');
+                } else {
+                    container.innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Be the first to share a story.</p>";
                 }
             })
-            .catch(e => console.error("Sync Error"));
+            .catch(e => {
+                console.error("Sync Error:", e);
+                document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Chronicles are updating...</p>";
+            });
         }
 
         function createCard(item) {
@@ -279,12 +280,15 @@
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
+            
             if(currentCategory === 'events') {
                 let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="${servicesData.events[0].img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>`;
-                grid.innerHTML = flyerHtml + servicesData.packages.map(item => createCard(item)).join('');
+                let packagesHtml = servicesData.packages.map(item => createCard(item)).join('');
+                grid.innerHTML = flyerHtml + packagesHtml;
             } else {
                 grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
             }
+            
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
@@ -297,25 +301,31 @@
             renderUI();
         }
 
-        function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
-        function openModal() { document.getElementById('booking-modal').classList.remove('hidden'); document.getElementById('booking-modal').classList.add('flex'); }
-        function closeModal() { document.getElementById('booking-modal').classList.add('hidden'); }
-        
-        function sendWhatsAppBooking() {
-            const name = document.getElementById('bk-name').value;
-            const arr = document.getElementById('bk-arrival').value;
-            const dep = document.getElementById('bk-departure').value;
-            const guests = document.getElementById('bk-guests').value;
-            const budget = document.getElementById('bk-budget').value;
-            const extra = document.getElementById('bk-extra').value;
-            const cartList = cart.map((item, i) => `${i+1}. ${item.name}`).join('\n');
-            const total = formatPrice(cart.reduce((s, it) => s + it.price, 0));
-            
-            const msg = `*NEW BOOKING REQUEST*\n\n*Name:* ${name}\n*Arrival:* ${arr}\n*Departure:* ${dep}\n*Guests:* ${guests}\n*Budget:* ${budget}\n*Extra:* ${extra}\n\n*Selected Items:*\n${cartList}\n\n*TOTAL: ${total}*`;
-            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
-            closeModal();
+        function formatPrice(v) { 
+            const val = v * rates[currentCurrency];
+            const suffix = currentCurrency === 'XAF' ? ' CFA' : (currentCurrency === 'EUR' ? ' €' : ' $');
+            return new Intl.NumberFormat('fr-CM').format(Math.round(val)) + suffix; 
         }
+
+        function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
         
+        function processWhatsApp() {
+            let msg = "WONDERWAY BOOKING REQUEST:\n" + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function sendWhatsAppInquiry() {
+            const name = document.getElementById('inq-name').value;
+            const arrival = document.getElementById('inq-arrival').value;
+            const departure = document.getElementById('inq-departure').value;
+            const guests = document.getElementById('inq-guests').value;
+            const budget = document.getElementById('inq-budget').value;
+            const extra = document.getElementById('inq-extra').value;
+            
+            let msg = `WONDERWAY TRIP INQUIRY:\n\n*Name:* ${name}\n*Arrival:* ${arrival}\n*Departure:* ${departure}\n*Guests:* ${guests}\n*Budget:* ${budget}\n*Extra:* ${extra}\n\n*Items selected in app:* \n` + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n');
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
         function switchCategory(cat) { 
             currentCategory = cat; 
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active-tab', b.id === 'tab-' + cat)); 
