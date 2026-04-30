@@ -27,12 +27,6 @@
         
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        #booking-engine { display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
-        .folder-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
-
-        #inquiry-modal { display: none; }
-        .modal-open { overflow: hidden; }
-
         .review-card { 
             background: linear-gradient(145deg, #1e293b, #0f172a); 
             border-radius: 32px; 
@@ -108,20 +102,16 @@
     </nav>
 
     <header class="pt-24 pb-12 px-6 text-center">
-        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
-        
-        <p class="max-w-2xl mx-auto mb-16 text-[10px] uppercase tracking-[0.2em] font-bold text-white/50 leading-relaxed italic">
-            "Because most clients have the possibility of going to Kribi with private cars and some prefer bikes as means of transportation which makes their stay more affordable, we don’t include transportation in our packages."
-        </p>
+        <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-16 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
 
-        <div class="flex flex-wrap justify-center gap-3 mb-16">
-            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Activities</button>
-            <button onclick="switchCategory('packages')" id="tab-packages" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Packages</button>
-            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Couples</button>
-            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (4)</button>
-            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (6)</button>
-            <button onclick="switchCategory('concierge')" id="tab-concierge" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Concierge</button>
-            <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Events</button>
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
+            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-5 py-3 rounded-2xl border border-slate-700 font-black text-[9px] uppercase tracking-widest">Activities</button>
+            <button onclick="switchCategory('packages')" id="tab-packages" class="tab-btn px-5 py-3 rounded-2xl border border-slate-700 font-black text-[9px] uppercase tracking-widest">Packages</button>
+            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-5 py-3 rounded-2xl border border-slate-700 font-black text-[9px] uppercase tracking-widest">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-5 py-3 rounded-2xl border border-slate-700 font-black text-[9px] uppercase tracking-widest">Groups (4)</button>
+            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-5 py-3 rounded-2xl border border-slate-700 font-black text-[9px] uppercase tracking-widest">Groups (6)</button>
+            <button onclick="switchCategory('concierge')" id="tab-concierge" class="tab-btn px-5 py-3 rounded-2xl border border-slate-700 font-black text-[9px] uppercase tracking-widest">Concierge</button>
+            <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-5 py-3 rounded-2xl border border-slate-700 font-black text-[9px] uppercase tracking-widest">Events</button>
         </div>
     </header>
 
@@ -131,9 +121,7 @@
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">Share Your WonderWay Story</a>
-            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
-            </div>
+            <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
     </main>
 
@@ -234,21 +222,21 @@
             document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
         }
 
-        function formatPrice(v) { return new Intl.NumberFormat('fr-CM').format(v) + ' CFA'; }
         function toggleService(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
             renderUI();
         }
+        function formatPrice(v) { return new Intl.NumberFormat('fr-CM').format(v) + ' CFA'; }
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
-        function processWhatsApp() {
-            let msg = "WONDERWAY BOOKING REQUEST:\n" + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
-            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
-        }
         function switchCategory(cat) { 
             currentCategory = cat; 
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active-tab', b.id === 'tab-' + cat)); 
             renderUI(); 
+        }
+        function processWhatsApp() {
+            let msg = "WONDERWAY BOOKING REQUEST:\n" + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
         window.onload = () => { renderUI(); };
     </script>
