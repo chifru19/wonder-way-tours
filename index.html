@@ -217,8 +217,8 @@
             ],
             concierge: [
                 { id: "con1", name: "Full Day Photography", price: 60000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" },
-                { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7154.jpg" },
-                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7343.jpg" }
+                { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
+                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/beach-bonfire.jpg" }
             ],
             events: [
                 { id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
@@ -256,7 +256,7 @@
             const grid = document.getElementById('package-grid');
             if(currentCategory === 'events') {
                 grid.innerHTML = (servicesData.events || []).map(item => `
-                    <div class="package-card col-span-full">
+                    <div class="package-card col-span-full overflow-hidden rounded-3xl">
                         <img src="${item.img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'">
                     </div>
                 `).join('');
