@@ -38,12 +38,45 @@
         .review-card:hover { border-color: #fbbf24; }
 
         .immersive-footer { 
-            position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; 
+            position: relative; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+            background-color: #0f172a;
         }
-        .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.7; }
-        .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
+        
+        .footer-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            opacity: 0.7;
+        }
+        
+        .footer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
+        }
+        
         #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
-        .story-cta { background: #fbbf24; color: #0f172a; padding: 14px 30px; border-radius: 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; display: inline-block; margin-bottom: 50px; }
+
+        .story-cta {
+            background: #fbbf24;
+            color: #0f172a;
+            padding: 14px 30px;
+            border-radius: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 50px;
+        }
         .modal-bg { background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); }
     </style>
 </head>
@@ -71,6 +104,7 @@
 
     <header class="pt-24 pb-12 px-6 text-center">
         <h1 class="hero-font text-6xl md:text-8xl font-black uppercase mb-6 tracking-tighter leading-none">Kribi <span class="text-yellow-500">Luxury</span></h1>
+        
         <p class="max-w-2xl mx-auto mb-16 text-[10px] uppercase tracking-[0.2em] font-bold text-white/50 leading-relaxed italic">
             "Because most clients have the possibility of going to Kribi with private cars and some prefer bikes as means of transportation which makes their stay more affordable, we don’t include transportation in our packages."
         </p>
@@ -97,7 +131,11 @@
 
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">Share Your WonderWay Story</a>
+            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">
+                Share Your WonderWay Story
+            </a>
+
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
             </div>
@@ -107,21 +145,21 @@
     <div id="booking-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 modal-bg">
         <div class="bg-slate-900 border border-slate-700 p-8 rounded-3xl w-full max-w-lg relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-yellow-500 text-xl"><i class="fa fa-times"></i></button>
-            <h3 class="text-2xl font-black mb-6 text-white uppercase hero-font">Travel Inquiry</h3>
+            <h3 class="text-2xl font-black mb-6 text-white uppercase hero-font">Complete Booking</h3>
             <div class="space-y-4">
-                <input type="text" id="bk-name" placeholder="Full Name" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700">
+                <input type="text" id="bk-name" placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="date" id="bk-arrival" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700">
-                    <input type="date" id="bk-departure" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700">
+                    <input type="date" id="bk-arrival" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                    <input type="date" id="bk-departure" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
                 </div>
-                <input type="number" id="bk-guests" placeholder="Number of Guests" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700">
-                <select id="bk-budget" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700">
+                <input type="number" id="bk-guests" placeholder="Number of Guests" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                <select id="bk-budget" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
                     <option value="">Budget Range</option>
                     <option value="Budget">Budget</option>
                     <option value="Moderate">Moderate</option>
                     <option value="Luxury">Luxury</option>
                 </select>
-                <textarea id="bk-extra" placeholder="Extra Requirements..." class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700 h-24"></textarea>
+                <textarea id="bk-extra" placeholder="Extra Requirements..." class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
                 <button onclick="sendWhatsAppBooking()" class="w-full py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Send to WhatsApp</button>
             </div>
         </div>
@@ -142,6 +180,7 @@
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
+            
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Infrastructure Engineered by Frank Fru</span>
                 <div class="flex justify-center items-center gap-6 mb-4">
@@ -207,15 +246,28 @@
         function fetchReviews() {
             const scriptURL = "https://script.google.com/macros/s/AKfycbwGlQJUMBz-88OabMig8E8tYuhlidNrd1CHkAmZYtlNMPC5c3FVKQEqJOP7SePr4Fyt/exec";
             fetch(scriptURL)
-            .then(r => r.json())
+            .then(response => response.json())
             .then(data => {
                 let reviews = typeof data === 'string' ? JSON.parse(data) : data;
                 const container = document.getElementById('dynamic-reviews');
                 if(reviews && reviews.length > 0) {
-                    container.innerHTML = reviews.map(item => `<div class="review-card"><div class="text-yellow-500 mb-4">${'★'.repeat(item.rating || 5)}</div><p class="text-white/80 italic text-sm mb-6">"${item.review || item.text}"</p><h6 class="text-white font-black uppercase text-[10px]">- ${item.name}</h6></div>`).join('');
+                    container.innerHTML = reviews.map(item => {
+                        const stars = '★'.repeat(item.rating || 5) + '☆'.repeat(5 - (item.rating || 5));
+                        return `
+                            <div class="review-card">
+                                <div class="text-yellow-500 mb-4">${stars}</div>
+                                <p class="text-white/80 italic text-sm mb-6 leading-loose">"${item.review || item.text}"</p>
+                                <h6 class="text-white font-black uppercase text-[10px] tracking-widest">- ${item.name}</h6>
+                            </div>`;
+                    }).join('');
+                } else {
+                    container.innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Be the first to share a story.</p>";
                 }
             })
-            .catch(e => console.error("Sync Error"));
+            .catch(e => {
+                console.error("Sync Error:", e);
+                document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Chronicles are updating...</p>";
+            });
         }
 
         function createCard(item) {
@@ -232,10 +284,11 @@
             </div>`;
         }
 
-        function formatPrice(val) {
-            const converted = val * rates[currentCurrency];
-            const suffix = currentCurrency === 'XAF' ? ' CFA' : (currentCurrency === 'EUR' ? ' €' : ' $');
-            return new Intl.NumberFormat('fr-FR').format(Math.round(converted)) + suffix;
+        function formatPrice(v) { return new Intl.NumberFormat('fr-CM').format(v) + ' CFA'; }
+        function updateCurrency() { 
+            // Mock implementation: In the real app, you would swap rates based on selection
+            currentCurrency = document.getElementById('currency-select').value; 
+            renderUI(); 
         }
 
         function renderUI() {
@@ -258,7 +311,6 @@
             renderUI();
         }
 
-        function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
         function openModal() { document.getElementById('booking-modal').classList.remove('hidden'); document.getElementById('booking-modal').classList.add('flex'); }
         function closeModal() { document.getElementById('booking-modal').classList.add('hidden'); }
         
@@ -269,10 +321,9 @@
             const guests = document.getElementById('bk-guests').value;
             const budget = document.getElementById('bk-budget').value;
             const extra = document.getElementById('bk-extra').value;
-            const cartList = cart.map((item, i) => `${i+1}. ${item.name}`).join('\n');
-            const total = formatPrice(cart.reduce((s, it) => s + it.price, 0));
             
-            const msg = `*NEW BOOKING REQUEST*\n\n*Name:* ${name}\n*Arrival:* ${arr}\n*Departure:* ${dep}\n*Guests:* ${guests}\n*Budget:* ${budget}\n*Extra:* ${extra}\n\n*Selected Items:*\n${cartList}\n\n*TOTAL: ${total}*`;
+            let msg = `WONDERWAY BOOKING REQUEST:\n\n*Name:* ${name}\n*Arrival:* ${arr}\n*Departure:* ${dep}\n*Guests:* ${guests}\n*Budget:* ${budget}\n*Extra:* ${extra}\n\n*Selected Items:*\n` + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
+            
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
             closeModal();
         }
