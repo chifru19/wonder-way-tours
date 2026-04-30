@@ -142,7 +142,11 @@
 
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">Share Your WonderWay Story</a>
+            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">
+                Share Your WonderWay Story
+            </a>
+
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
             </div>
@@ -164,8 +168,14 @@
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
+            
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Infrastructure Engineered by Frank Fru</span>
+                <div class="flex justify-center items-center gap-6 mb-4">
+                    <a href="https://frankfru.com" target="_blank" class="text-white hover:text-yellow-500 font-black text-xs tracking-widest transition underline decoration-yellow-500/20">Portfolio</a>
+                    <a href="https://github.com/chifru19" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/frankfru/" target="_blank" class="text-white/60 hover:text-white transition text-lg"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
             <p class="mt-12 text-white/20 text-[10px] uppercase font-black tracking-[0.5em]">© 2026 WonderWay Tours Cameroon.</p>
         </div>
@@ -219,31 +229,6 @@
             events: [{ id: "e1", name: "Upcoming Events", price: 0 }]
         };
 
-        function renderUI() {
-            const grid = document.getElementById('package-grid');
-            if(currentCategory === 'events') {
-                grid.innerHTML = `<div class="col-span-full text-center py-20"><h2 class="text-4xl font-black uppercase text-yellow-500">Upcoming Events</h2><p class="mt-4 opacity-50">New event details coming soon.</p></div>`;
-            } else {
-                grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
-                    const isS = cart.some(c => c.id === item.id);
-                    return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
-                        ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
-                        <div class="p-6">
-                            <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
-                            <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
-                            <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
-                                ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
-                            </button>
-                        </div>
-                    </div>`;
-                }).join('');
-            }
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
-            document.getElementById('cart-count').innerText = `${cart.length} Selected`;
-            document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
-        }
-
         function fetchReviews() {
             const scriptURL = "https://script.google.com/macros/s/AKfycbwGlQJUMBz-88OabMig8E8tYuhlidNrd1CHkAmZYtlNMPC5c3FVKQEqJOP7SePr4Fyt/exec";
             fetch(scriptURL)
@@ -261,8 +246,39 @@
                                 <h6 class="text-white font-black uppercase text-[10px] tracking-widest">- ${item.name}</h6>
                             </div>`;
                     }).join('');
+                } else {
+                    container.innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Be the first to share a story.</p>";
                 }
+            })
+            .catch(e => {
+                console.error("Sync Error:", e);
+                document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Chronicles are updating...</p>";
             });
+        }
+
+        function renderUI() {
+            const grid = document.getElementById('package-grid');
+            if(currentCategory === 'events') {
+                grid.innerHTML = `<div class="col-span-full text-center py-20"><h2 class="text-4xl font-black uppercase text-yellow-500">Upcoming Events</h2><p class="mt-4 opacity-50">New event details coming soon.</p></div>`;
+            } else {
+                grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
+                    const isS = cart.some(c => c.id === item.id);
+                    return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
+                        ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
+                        <div class="p-6">
+                            <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
+                            <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
+                            <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
+                                ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
+                            </button>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
+            document.getElementById('cart-count').innerText = `${cart.length} Selected`;
+            document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
         }
 
         function toggleService(id, name, price) {
@@ -272,14 +288,14 @@
         }
         function formatPrice(v) { return new Intl.NumberFormat('fr-CM').format(v) + ' CFA'; }
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
+        function processWhatsApp() {
+            let msg = "WONDERWAY BOOKING REQUEST:\n" + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+        }
         function switchCategory(cat) { 
             currentCategory = cat; 
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active-tab', b.id === 'tab-' + cat)); 
             renderUI(); 
-        }
-        function processWhatsApp() {
-            let msg = "WONDERWAY BOOKING REQUEST:\n" + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
-            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
         window.onload = () => { renderUI(); fetchReviews(); };
     </script>
