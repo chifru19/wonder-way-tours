@@ -212,8 +212,8 @@
             ],
             concierge: [
                 { id: "con1", name: "Full Day Photography", price: 60000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" },
-                { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7154.jpg" },
-                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7343.jpg" }
+                { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
+                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/beach-bonfire.jpg" }
             ],
             events: [
                 { id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
@@ -247,28 +247,6 @@
             });
         }
 
-        function renderUI() {
-            const grid = document.getElementById('package-grid');
-            
-            if(currentCategory === 'events') {
-                // Display the Event Flyer + All Packages
-                let flyerHtml = `
-                    <div class="package-card col-span-full overflow-hidden rounded-3xl mb-8">
-                        <img src="${servicesData.events[0].img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'">
-                    </div>
-                `;
-                let packagesHtml = servicesData.packages.map(item => createCard(item)).join('');
-                grid.innerHTML = flyerHtml + packagesHtml;
-            } else {
-                grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
-            }
-            
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
-            document.getElementById('cart-count').innerText = `${cart.length} Selected`;
-            document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
-        }
-
         function createCard(item) {
             const isS = cart.some(c => c.id === item.id);
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
@@ -281,6 +259,26 @@
                     </button>
                 </div>
             </div>`;
+        }
+
+        function renderUI() {
+            const grid = document.getElementById('package-grid');
+            
+            if(currentCategory === 'events') {
+                // Event Flyer first
+                let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="${servicesData.events[0].img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>`;
+                // Then ALL packages
+                let packagesHtml = servicesData.packages.map(item => createCard(item)).join('');
+                grid.innerHTML = flyerHtml + packagesHtml;
+            } else {
+                // Standard category rendering
+                grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
+            document.getElementById('cart-count').innerText = `${cart.length} Selected`;
+            document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
         }
 
         function toggleService(id, name, price) {
