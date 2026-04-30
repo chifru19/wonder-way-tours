@@ -37,9 +37,7 @@
         }
         .review-card:hover { border-color: #fbbf24; }
 
-        .immersive-footer { 
-            position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; 
-        }
+        .immersive-footer { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; }
         .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.7; }
         .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
         #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
@@ -141,7 +139,7 @@
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
                 <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="openModal('booking-modal')" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm Booking</button>
+            <button onclick="openModal('booking-modal')" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
         </div>
     </div>
 
@@ -203,9 +201,9 @@
                 { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/group-action.jpg" }
             ],
             concierge: [
-                { id: "con1", name: "Accommodation", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
+                { id: "con1", name: "Accommodation", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/jetski-action.jpg" },
                 { id: "con2", name: "Transportation", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
-                { id: "con3", name: "Decorations for Gatherings", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" }
+                { id: "con3", name: "Full Day Photography", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" }
             ],
             events: [
                 { id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
@@ -252,7 +250,6 @@
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
             renderUI();
         }
-
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
@@ -269,8 +266,8 @@
             const dep = document.getElementById('bk-departure').value;
             const guests = document.getElementById('bk-guests').value;
             const extra = document.getElementById('bk-extra').value;
-            const cartList = cart.map((item, i) => `${i+1}. ${item.name}`).join('\n');
             const total = formatPrice(cart.reduce((s, it) => s + it.price, 0));
+            const cartList = cart.map((item, i) => `${i+1}. ${item.name}`).join('\n');
             const msg = `*NEW BOOKING REQUEST*\n\n*Name:* ${name}\n*Arrival:* ${arr}\n*Departure:* ${dep}\n*Guests:* ${guests}\n*Extra:* ${extra}\n\n*Selected Items:*\n${cartList}\n\n*TOTAL: ${total}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
             closeModal('booking-modal');
