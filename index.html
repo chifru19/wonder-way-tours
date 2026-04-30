@@ -221,7 +221,9 @@
                 { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/beach-bonfire.jpg" }
             ],
             events: [
-                { id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
+                { id: "e-flyer", isFlyer: true, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" },
+                { id: "p1", name: "The Tribe Escape", price: 600000 },
+                { id: "p2", name: "The Lover’s Nest", price: 300000 }
             ]
         };
 
@@ -254,27 +256,25 @@
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
-            if(currentCategory === 'events') {
-                grid.innerHTML = (servicesData.events || []).map(item => `
-                    <div class="package-card col-span-full overflow-hidden rounded-3xl">
-                        <img src="${item.img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'">
+            grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
+                // If it's the event flyer
+                if (item.isFlyer) {
+                    return `<div class="package-card col-span-full overflow-hidden rounded-3xl"><img src="${item.img}" class="w-full h-auto object-cover"></div>`;
+                }
+                // Standard package card
+                const isS = cart.some(c => c.id === item.id);
+                return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
+                    ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
+                    <div class="p-6">
+                        <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
+                        <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
+                        <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
+                            ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
+                        </button>
                     </div>
-                `).join('');
-            } else {
-                grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
-                    const isS = cart.some(c => c.id === item.id);
-                    return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
-                        ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
-                        <div class="p-6">
-                            <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
-                            <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
-                            <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
-                                ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
-                            </button>
-                        </div>
-                    </div>`;
-                }).join('');
-            }
+                </div>`;
+            }).join('');
+            
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
