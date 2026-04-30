@@ -222,11 +222,11 @@
                 { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/group-action.jpg" }
             ],
             concierge: [
-                { id: "con1", name: "Full Day Photography", price: 60000 },
-                { id: "con2", name: "Transport (Per Day)", price: 35000 },
-                { id: "con3", name: "Beach Bonfire", price: 15000 }
+                { id: "con1", name: "Full Day Photography", price: 60000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" },
+                { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7154.jpg" },
+                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/4K6A7343.jpg" }
             ],
-            events: [{ id: "e1", name: "Upcoming Events", price: 0 }]
+            events: [{ id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }]
         };
 
         function fetchReviews() {
@@ -259,7 +259,11 @@
         function renderUI() {
             const grid = document.getElementById('package-grid');
             if(currentCategory === 'events') {
-                grid.innerHTML = `<div class="col-span-full text-center py-20"><h2 class="text-4xl font-black uppercase text-yellow-500">Upcoming Events</h2><p class="mt-4 opacity-50">New event details coming soon.</p></div>`;
+                grid.innerHTML = (servicesData.events || []).map(item => `
+                    <div class="package-card col-span-full">
+                        <img src="${item.img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'">
+                    </div>
+                `).join('');
             } else {
                 grid.innerHTML = (servicesData[currentCategory] || []).map(item => {
                     const isS = cart.some(c => c.id === item.id);
