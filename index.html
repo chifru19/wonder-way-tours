@@ -37,46 +37,12 @@
         }
         .review-card:hover { border-color: #fbbf24; }
 
-        .immersive-footer { 
-            position: relative; 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
-            background-color: #0f172a;
-        }
-        
-        .footer-bg-image {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 15%;
-            opacity: 0.7;
-        }
-        
-        .footer-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
-        }
-        
+        .immersive-footer { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #0f172a; }
+        .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.7; }
+        .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
         #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
-
-        .story-cta {
-            background: #fbbf24;
-            color: #0f172a;
-            padding: 14px 30px;
-            border-radius: 14px;
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 2px;
-            display: inline-block;
-            margin-bottom: 50px;
-        }
+        .story-cta { background: #fbbf24; color: #0f172a; padding: 14px 30px; border-radius: 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; display: inline-block; margin-bottom: 50px; }
+        .modal-bg { background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); }
     </style>
 </head>
 
@@ -130,16 +96,42 @@
 
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
-            
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">
-                Share Your WonderWay Story
-            </a>
-
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">Share Your WonderWay Story</a>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
             </div>
         </section>
     </main>
+
+    <div id="booking-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 modal-bg">
+        <div class="bg-slate-900 border border-slate-700 p-8 rounded-3xl w-full max-w-lg relative">
+            <button onclick="closeModal('booking-modal')" class="absolute top-4 right-4 text-white hover:text-yellow-500 text-xl"><i class="fa fa-times"></i></button>
+            <h3 class="text-2xl font-black mb-6 text-white uppercase hero-font">Complete Booking</h3>
+            <div class="space-y-4">
+                <input type="text" id="bk-name" placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="date" id="bk-arrival" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                    <input type="date" id="bk-departure" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                </div>
+                <input type="number" id="bk-guests" placeholder="Number of Guests" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                <textarea id="bk-extra" placeholder="Extra Requirements..." class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
+                <button onclick="sendWhatsAppBooking()" class="w-full py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Send to WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="inquiry-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 modal-bg">
+        <div class="bg-slate-900 border border-slate-700 p-8 rounded-3xl w-full max-w-lg relative">
+            <button onclick="closeModal('inquiry-modal')" class="absolute top-4 right-4 text-white hover:text-yellow-500 text-xl"><i class="fa fa-times"></i></button>
+            <h3 class="text-2xl font-black mb-6 text-white uppercase hero-font">Inquire: <span id="modal-service-name"></span></h3>
+            <input type="hidden" id="inquiry-service">
+            <div class="space-y-4">
+                <input type="text" id="inq-name" placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white">
+                <textarea id="inq-extra" placeholder="Extra Requirements" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
+                <button onclick="submitInquiry()" class="w-full py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Send Inquiry</button>
+            </div>
+        </div>
+    </div>
 
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -147,7 +139,7 @@
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
                 <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
+            <button onclick="openModal('booking-modal')" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
         </div>
     </div>
 
@@ -156,7 +148,6 @@
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
-            
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Infrastructure Engineered by Frank Fru</span>
                 <div class="flex justify-center items-center gap-6 mb-4">
@@ -210,51 +201,34 @@
                 { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/group-action.jpg" }
             ],
             concierge: [
-                { id: "con1", name: "Full Day Photography", price: 60000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" },
-                { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
-                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/beach-bonfire.jpg" }
+                { id: "con1", name: "Accommodation", price: 0 },
+                { id: "con2", name: "Transportation", price: 0 },
+                { id: "con3", name: "Decorations for Gatherings", price: 0 },
+                { id: "con4", name: "Southwest Tour", price: 0 },
+                { id: "con5", name: "West Tour", price: 0 },
+                { id: "con6", name: "Currency Exchange", price: 0 }
             ],
             events: [
                 { id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
             ]
         };
 
-        function fetchReviews() {
-            const scriptURL = "https://script.google.com/macros/s/AKfycbwGlQJUMBz-88OabMig8E8tYuhlidNrd1CHkAmZYtlNMPC5c3FVKQEqJOP7SePr4Fyt/exec";
-            fetch(scriptURL)
-            .then(response => response.json())
-            .then(data => {
-                let reviews = typeof data === 'string' ? JSON.parse(data) : data;
-                const container = document.getElementById('dynamic-reviews');
-                if(reviews && reviews.length > 0) {
-                    container.innerHTML = reviews.map(item => {
-                        const stars = '★'.repeat(item.rating || 5) + '☆'.repeat(5 - (item.rating || 5));
-                        return `
-                            <div class="review-card">
-                                <div class="text-yellow-500 mb-4">${stars}</div>
-                                <p class="text-white/80 italic text-sm mb-6 leading-loose">"${item.review || item.text}"</p>
-                                <h6 class="text-white font-black uppercase text-[10px] tracking-widest">- ${item.name}</h6>
-                            </div>`;
-                    }).join('');
-                } else {
-                    container.innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Be the first to share a story.</p>";
-                }
-            })
-            .catch(e => {
-                console.error("Sync Error:", e);
-                document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Chronicles are updating...</p>";
-            });
+        function formatPrice(val) {
+            const converted = val * rates[currentCurrency];
+            const suffix = currentCurrency === 'XAF' ? ' CFA' : (currentCurrency === 'EUR' ? ' €' : ' $');
+            return new Intl.NumberFormat('fr-FR').format(Math.round(converted)) + suffix;
         }
 
         function createCard(item) {
             const isS = cart.some(c => c.id === item.id);
+            const isConcierge = currentCategory === 'concierge';
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
                 ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
                 <div class="p-6">
                     <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
-                    <p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>
-                    <button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
-                        ${isS ? 'ADDED ✓' : 'ADD TO TRIP'}
+                    <p class="text-md font-bold mb-4 text-yellow-500">${item.price > 0 ? formatPrice(item.price) : 'Inquire'}</p>
+                    <button onclick="${isConcierge ? `openInquiry('${item.name}')` : `toggleService('${item.id}', '${item.name}', ${item.price})`}" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">
+                        ${isConcierge ? 'Inquire Now' : (isS ? 'ADDED ✓' : 'ADD TO TRIP')}
                     </button>
                 </div>
             </div>`;
@@ -262,15 +236,12 @@
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
-            
             if(currentCategory === 'events') {
                 let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="${servicesData.events[0].img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>`;
-                let packagesHtml = servicesData.packages.map(item => createCard(item)).join('');
-                grid.innerHTML = flyerHtml + packagesHtml;
+                grid.innerHTML = flyerHtml + servicesData.packages.map(item => createCard(item)).join('');
             } else {
                 grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
             }
-            
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
@@ -282,16 +253,57 @@
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
             renderUI();
         }
-        function formatPrice(v) { return new Intl.NumberFormat('fr-CM').format(v) + ' CFA'; }
+
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
-        function processWhatsApp() {
-            let msg = "WONDERWAY BOOKING REQUEST:\n" + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
-            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
+        
+        function openInquiry(svc) {
+            document.getElementById('modal-service-name').innerText = svc;
+            document.getElementById('inquiry-service').value = svc;
+            openModal('inquiry-modal');
         }
+
+        function sendWhatsAppBooking() {
+            const name = document.getElementById('bk-name').value;
+            const arr = document.getElementById('bk-arrival').value;
+            const dep = document.getElementById('bk-departure').value;
+            const guests = document.getElementById('bk-guests').value;
+            const extra = document.getElementById('bk-extra').value;
+            const cartList = cart.map((item, i) => `${i+1}. ${item.name}`).join('\n');
+            const total = formatPrice(cart.reduce((s, it) => s + it.price, 0));
+            const msg = `*NEW BOOKING REQUEST*\n\n*Name:* ${name}\n*Arrival:* ${arr}\n*Departure:* ${dep}\n*Guests:* ${guests}\n*Extra:* ${extra}\n\n*Selected Items:*\n${cartList}\n\n*TOTAL: ${total}*`;
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+            closeModal('booking-modal');
+        }
+
+        function submitInquiry() {
+            const svc = document.getElementById('inquiry-service').value;
+            const name = document.getElementById('inq-name').value;
+            const extra = document.getElementById('inq-extra').value;
+            const msg = `*SERVICE INQUIRY: ${svc}*\n*Name:* ${name}\n*Requirement:* ${extra}`;
+            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
+            closeModal('inquiry-modal');
+        }
+
         function switchCategory(cat) { 
             currentCategory = cat; 
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active-tab', b.id === 'tab-' + cat)); 
             renderUI(); 
+        }
+
+        function fetchReviews() {
+            const scriptURL = "https://script.google.com/macros/s/AKfycbwGlQJUMBz-88OabMig8E8tYuhlidNrd1CHkAmZYtlNMPC5c3FVKQEqJOP7SePr4Fyt/exec";
+            fetch(scriptURL)
+            .then(r => r.json())
+            .then(data => {
+                let reviews = typeof data === 'string' ? JSON.parse(data) : data;
+                const container = document.getElementById('dynamic-reviews');
+                if(reviews && reviews.length > 0) {
+                    container.innerHTML = reviews.map(item => `<div class="review-card"><div class="text-yellow-500 mb-4">${'★'.repeat(item.rating || 5)}</div><p class="text-white/80 italic text-sm mb-6">"${item.review || item.text}"</p><h6 class="text-white font-black uppercase text-[10px]">- ${item.name}</h6></div>`).join('');
+                }
+            })
+            .catch(e => console.error("Sync Error"));
         }
         window.onload = () => { renderUI(); fetchReviews(); };
     </script>
