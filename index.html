@@ -128,7 +128,6 @@
             <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (4)</button>
             <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (6)</button>
             <button onclick="switchCategory('concierge')" id="tab-concierge" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Concierge</button>
-            <button onclick="switchCategory('logistics')" id="tab-logistics" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Logistics</button>
             <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Upcoming Events</button>
         </div>
     </header>
@@ -148,6 +147,12 @@
                 </div>
 
                 <textarea id="extra-notes" placeholder="Special Requirements (e.g., Transport needs, allergies, specific requests...)" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl text-white h-32"></textarea>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-[10px] font-black uppercase text-white/50 mb-4">Optional Logistics (Select to Add)</p>
+                <div id="logistics-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                   </div>
             </div>
 
             <div class="mb-8">
@@ -289,6 +294,9 @@
 
         function renderInquiry() {
             const list = document.getElementById('inquiry-cart-list');
+            const logGrid = document.getElementById('logistics-grid');
+            
+            // Render Selected Items
             if(cart.length === 0) {
                 list.innerHTML = "<p class='text-xs opacity-50'>No items selected yet.</p>";
             } else {
@@ -299,12 +307,19 @@
                     </div>
                 `).join('');
             }
+            
+            // Render Optional Logistics
+            logGrid.innerHTML = servicesData.logistics.map(item => {
+                const isS = cart.some(c => c.id === item.id);
+                return `<button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="px-4 py-3 rounded-lg border ${isS ? 'bg-yellow-500 text-black border-yellow-500' : 'bg-slate-900 border-slate-700 text-white'} text-[10px] font-bold uppercase transition">
+                    ${item.name}
+                </button>`;
+            }).join('');
         }
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
             
-            // Special handling for events to show the flyer + cards
             if(currentCategory === 'events') {
                 let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" class="w-full h-auto object-cover"></div>`;
                 grid.innerHTML = flyerHtml + (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
