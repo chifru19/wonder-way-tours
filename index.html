@@ -303,7 +303,14 @@
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
-            grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
+            
+            // Special handling for events to show the flyer + cards
+            if(currentCategory === 'events') {
+                let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" class="w-full h-auto object-cover"></div>`;
+                grid.innerHTML = flyerHtml + (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
+            } else {
+                grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
+            }
             
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
