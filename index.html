@@ -133,6 +133,31 @@
     <main class="max-w-7xl mx-auto px-6 py-12 mb-40">
         <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"></div>
 
+        <section id="inquiry-section" class="max-w-4xl mx-auto my-20 p-8 md:p-12 bg-slate-800/40 border-2 border-yellow-500/30 rounded-[40px] backdrop-blur-sm">
+            <h2 class="hero-font text-3xl font-black uppercase mb-8 text-center text-yellow-500">Finalize Your Inquiry</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-white/50 mb-2">Arrival Date</label>
+                    <input type="date" id="arrival-date" onchange="renderInquiry()" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-white/50 mb-2">Departure Date</label>
+                    <input type="date" id="departure-date" onchange="renderInquiry()" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-[10px] font-black uppercase text-white/50 mb-4">Selected Items</p>
+                <div id="inquiry-cart-list" class="space-y-2">
+                    </div>
+            </div>
+
+            <button onclick="processWhatsApp()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest hover:bg-white transition-all shadow-xl">
+                Submit Inquiry via WhatsApp
+            </button>
+        </section>
+
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
             
@@ -150,15 +175,9 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-left w-full md:w-auto">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
-                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase mb-4">Total: 0 CFA</h3>
-                
-                <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                    <input type="date" id="arrival-date" class="bg-slate-900 border border-slate-700 p-2 rounded-lg text-white text-xs" placeholder="Arrival Date">
-                    <input type="date" id="departure-date" class="bg-slate-900 border border-slate-700 p-2 rounded-lg text-white text-xs" placeholder="Departure Date">
-                </div>
+                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
             </div>
-            
-            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl whitespace-nowrap">Confirm & Send Inquiry</button>
+            <button onclick="document.getElementById('inquiry-section').scrollIntoView({behavior:'smooth'})" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl whitespace-nowrap">Go to Inquiry</button>
         </div>
     </div>
 
@@ -268,6 +287,20 @@
             </div>`;
         }
 
+        function renderInquiry() {
+            const list = document.getElementById('inquiry-cart-list');
+            if(cart.length === 0) {
+                list.innerHTML = "<p class='text-xs opacity-50'>No items selected yet.</p>";
+            } else {
+                list.innerHTML = cart.map((item, i) => `
+                    <div class="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-700">
+                        <span class="text-sm font-bold">${i+1}. ${item.name}</span>
+                        <span class="text-yellow-500 font-black">${formatPrice(item.price)}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
         function renderUI() {
             const grid = document.getElementById('package-grid');
             if(currentCategory === 'events') {
@@ -281,6 +314,7 @@
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
             document.getElementById('cart-count').innerText = `${cart.length} Selected`;
             document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
+            renderInquiry();
         }
 
         function toggleService(id, name, price) {
