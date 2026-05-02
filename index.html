@@ -136,21 +136,20 @@
         <section id="inquiry-section" class="max-w-4xl mx-auto my-20 p-8 md:p-12 bg-slate-800/40 border-2 border-yellow-500/30 rounded-[40px] backdrop-blur-sm">
             <h2 class="hero-font text-3xl font-black uppercase mb-8 text-center text-yellow-500">Finalize Your Inquiry</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-white/50 mb-2">Arrival Date</label>
+            <div class="grid grid-cols-1 gap-6 mb-8">
+                <input type="text" id="client-name" placeholder="Full Name" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <input type="date" id="arrival-date" onchange="renderInquiry()" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-white/50 mb-2">Departure Date</label>
                     <input type="date" id="departure-date" onchange="renderInquiry()" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
                 </div>
+
+                <textarea id="extra-notes" placeholder="Special Requirements (e.g., Transport needs, allergies, specific requests...)" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-xl text-white h-32"></textarea>
             </div>
 
             <div class="mb-8">
                 <p class="text-[10px] font-black uppercase text-white/50 mb-4">Selected Items</p>
-                <div id="inquiry-cart-list" class="space-y-2">
-                    </div>
+                <div id="inquiry-cart-list" class="space-y-2"></div>
             </div>
 
             <button onclick="processWhatsApp()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest hover:bg-white transition-all shadow-xl">
@@ -160,11 +159,7 @@
 
         <section id="feedback" class="mt-40 text-center">
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
-            
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">
-                Share Your WonderWay Story
-            </a>
-
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">Share Your WonderWay Story</a>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
             </div>
@@ -186,7 +181,6 @@
         <div class="footer-overlay"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             <h3 class="hero-font text-4xl md:text-7xl font-black uppercase mb-10 text-white italic">"Luxury is affordable."</h3>
-            
             <div class="pt-10 border-t border-white/10">
                 <span class="text-white/40 font-black uppercase text-[10px] tracking-[0.4em] block mb-2">Infrastructure Engineered by Frank Fru</span>
                 <div class="flex justify-center items-center gap-6 mb-4">
@@ -332,10 +326,14 @@
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
         
         function processWhatsApp() {
+            const name = document.getElementById('client-name').value;
             const arrival = document.getElementById('arrival-date').value;
             const departure = document.getElementById('departure-date').value;
+            const notes = document.getElementById('extra-notes').value;
             
-            let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n\n*Items Selected:*\n` + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
+            if(!name) { alert("Please enter your name"); return; }
+            
+            let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Name:* ${name}\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n*Notes/Transport:* ${notes || 'None'}\n\n*Items Selected:*\n` + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
