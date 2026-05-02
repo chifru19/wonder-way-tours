@@ -228,7 +228,9 @@
                 { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/group-action.jpg" }
             ],
             concierge: [
-                { id: "con1", name: "Full Day Photography", price: 60000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" }
+                { id: "con1", name: "Full Day Photography", price: 60000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" },
+                { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
+                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/beach-bonfire.jpg" }
             ],
             logistics: [
                 { id: "m1", name: "Accommodation", price: 0 },
@@ -292,7 +294,7 @@
                 list.innerHTML = cart.map((item, i) => `
                     <div class="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-700">
                         <span class="text-sm font-bold">${i+1}. ${item.name}</span>
-                        <span class="text-yellow-500 font-black">${formatPrice(item.price)}</span>
+                        <span class="text-yellow-500 font-black">${item.price > 0 ? formatPrice(item.price) : 'Selected'}</span>
                     </div>
                 `).join('');
             }
