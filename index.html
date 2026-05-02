@@ -92,12 +92,17 @@
             </div>
         </div>
 
-        <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700">
-            <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
-                <option value="XAF">CFA (XAF)</option>
-                <option value="EUR">Euro (€)</option>
-                <option value="USD">Dollar ($)</option>
-            </select>
+        <div class="flex items-center gap-4">
+            <a href="https://linktr.ee/wonderwaytourcameroon" target="_blank" class="text-white hover:text-yellow-500 transition-colors text-xl">
+                <i class="fa-solid fa-link"></i>
+            </a>
+            <div class="bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700">
+                <select id="currency-select" onchange="updateCurrency()" class="bg-transparent text-white text-[10px] font-bold uppercase outline-none cursor-pointer">
+                    <option value="XAF">CFA (XAF)</option>
+                    <option value="EUR">Euro (€)</option>
+                    <option value="USD">Dollar ($)</option>
+                </select>
+            </div>
         </div>
     </nav>
 
@@ -117,11 +122,10 @@
 
         <div class="flex flex-wrap justify-center gap-3">
             <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Activities</button>
-            <button onclick="switchCategory('manifest')" id="tab-manifest" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Manifest</button>
             <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Couples</button>
             <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (4)</button>
             <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Groups (6)</button>
-            <button onclick="switchCategory('concierge')" id="tab-concierge" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Concierge</button>
+            <button onclick="switchCategory('concierge')" id="tab-concierge" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Concierge & Logistics</button>
             <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-6 py-4 rounded-2xl border border-slate-700 font-black text-[10px] uppercase tracking-widest">Upcoming Events</button>
         </div>
     </header>
@@ -144,11 +148,17 @@
 
     <div id="checkout-bar" class="fixed bottom-0 w-full bg-[#0f172a]/95 backdrop-blur-2xl border-t-4 border-yellow-500 p-8 z-[100] transform translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-left">
+            <div class="text-left w-full md:w-auto">
                 <p id="cart-count" class="text-yellow-500 font-black text-[10px] uppercase mb-1">0 Selected</p>
-                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase">Total: 0 CFA</h3>
+                <h3 id="cart-total" class="text-3xl font-black hero-font uppercase mb-4">Total: 0 CFA</h3>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                    <input type="date" id="arrival-date" class="bg-slate-900 border border-slate-700 p-2 rounded-lg text-white text-xs" placeholder="Arrival Date">
+                    <input type="date" id="departure-date" class="bg-slate-900 border border-slate-700 p-2 rounded-lg text-white text-xs" placeholder="Departure Date">
+                </div>
             </div>
-            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl">Confirm via WhatsApp</button>
+            
+            <button onclick="processWhatsApp()" class="px-16 py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl whitespace-nowrap">Confirm & Send Inquiry</button>
         </div>
     </div>
 
@@ -189,23 +199,6 @@
                 { id: "a9", name: "Canoe Trip", price: 3000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/canoe.jpg" },
                 { id: "a10", name: "Baka Pygmy Village", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/pigmi%20village.jpg" }
             ],
-            manifest: [
-                { id: "m1", name: "Accommodation", price: 0 },
-                { id: "m2", name: "Transportation", price: 0 },
-                { id: "m3", name: "Decorations for Gatherings", price: 0 },
-                { id: "m4", name: "Southwest Tour", price: 0 },
-                { id: "m5", name: "West Tour", price: 0 },
-                { id: "m6", name: "Currency Exchange", price: 0 }
-            ],
-            packages: [
-                { id: "p1", name: "The Tribe Escape", price: 600000 },
-                { id: "p2", name: "The Lover’s Nest", price: 300000 },
-                { id: "p3", name: "Solo", price: 250000 },
-                { id: "p4", name: "The Platinum Romance Suite", price: 3750000 },
-                { id: "p5", name: "The Inner Circle Retreat", price: 500000 },
-                { id: "p6", name: "Royal Duo Suite", price: 350000 },
-                { id: "p7", name: "The Cozy Circle", price: 450000 }
-            ],
             couples: [
                 { id: "c1", name: "Mini Love Escape", price: 90000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/couple%20paradis%20escape.jpg" },
                 { id: "c2", name: "Paradise Gold", price: 250000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/paradise-gold.jpg" },
@@ -221,7 +214,13 @@
             concierge: [
                 { id: "con1", name: "Full Day Photography", price: 60000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/Photography.jpg" },
                 { id: "con2", name: "Transport (Per Day)", price: 35000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/transport.jpg" },
-                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/beach-bonfire.jpg" }
+                { id: "con3", name: "Beach Bonfire", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/beach-bonfire.jpg" },
+                { id: "m1", name: "Accommodation", price: 0 },
+                { id: "m2", name: "Logistics/Transport", price: 0 },
+                { id: "m3", name: "Decorations", price: 0 },
+                { id: "m4", name: "Southwest Tour", price: 0 },
+                { id: "m5", name: "West Tour", price: 0 },
+                { id: "m6", name: "Currency Exchange", price: 0 }
             ],
             events: [
                 { id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
@@ -271,26 +270,9 @@
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
-            
             if(currentCategory === 'events') {
                 let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="${servicesData.events[0].img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>`;
-                let packagesHtml = servicesData.packages.map(item => createCard(item)).join('');
-                grid.innerHTML = flyerHtml + packagesHtml;
-            } else if (currentCategory === 'manifest') {
-                // Render the 6 items + The Form
-                let itemsHtml = servicesData.manifest.map(item => createCard(item)).join('');
-                let formHtml = `
-                <div class="col-span-full mt-10 p-10 bg-slate-800/20 rounded-[40px] border border-slate-700/50 backdrop-blur-sm">
-                    <h2 class="hero-font text-3xl font-black uppercase mb-8 text-yellow-500 text-center">Manifest Request</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="m-name" placeholder="Client Name" class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
-                        <input type="date" id="m-date" placeholder="Date" class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
-                        <input type="text" id="m-budget" placeholder="Budget Range" class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-white">
-                        <textarea id="m-extra" placeholder="Extra Requirements..." class="col-span-1 md:col-span-2 bg-slate-900 border border-slate-700 p-4 rounded-xl text-white h-24"></textarea>
-                        <button onclick="sendManifestWhatsApp()" class="col-span-1 md:col-span-2 py-4 bg-yellow-500 text-black font-black uppercase rounded-xl tracking-widest hover:bg-white transition-all">Submit Manifest to WhatsApp</button>
-                    </div>
-                </div>`;
-                grid.innerHTML = itemsHtml + formHtml;
+                grid.innerHTML = flyerHtml;
             } else {
                 grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
             }
@@ -316,17 +298,10 @@
         function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
         
         function processWhatsApp() {
-            let msg = "WONDERWAY BOOKING REQUEST:\n" + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
-            window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        function sendManifestWhatsApp() {
-            const name = document.getElementById('m-name').value;
-            const date = document.getElementById('m-date').value;
-            const budget = document.getElementById('m-budget').value;
-            const extra = document.getElementById('m-extra').value;
+            const arrival = document.getElementById('arrival-date').value;
+            const departure = document.getElementById('departure-date').value;
             
-            let msg = `WONDERWAY MANIFEST REQUEST:\n\n*Name:* ${name}\n*Date:* ${date}\n*Budget:* ${budget}\n*Extra Requirements:* ${extra}\n\n*Selected Items:* \n` + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n');
+            let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n\n*Items Selected:*\n` + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
