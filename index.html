@@ -172,7 +172,7 @@
             <h2 class="hero-font text-5xl font-black uppercase mb-16 underline decoration-yellow-500 underline-offset-8">Guest Stories</h2>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScZsOtJJ2oxeVJeF8B0bkU4trS1FFNxxBCaAe61gsYio8bDig/viewform" target="_blank" class="story-cta">Share Your WonderWay Story</a>
             <div id="dynamic-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-center col-span-full opacity-50 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
+                <p class="text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest animate-pulse">Retrieving Guest Chronicles...</p>
             </div>
         </section>
     </main>
@@ -221,7 +221,8 @@
                 { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/museum.jpg" },
                 { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/seaport%20visit.jpg" },
                 { id: "a9", name: "Canoe Trip", price: 3000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/canoe.jpg" },
-                { id: "a10", name: "Baka Pygmy Village", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/pigmi%20village.jpg" }
+                { id: "a10", name: "Baka Pygmy Village", price: 10000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/pigmi%20village.jpg" },
+                { id: "a11", name: "Beach Volleyball", price: 2000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png" }
             ],
             couples: [
                 { id: "c1", name: "Mini Love Escape", price: 90000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/couple%20paradis%20escape.jpg" },
@@ -368,7 +369,7 @@
             
             if(!name) { alert("Please enter your name"); return; }
             
-            let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Name:* ${name}\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n*Notes/Transport:* ${notes || 'None'}\n\n*Items Selected:*\n` + cart.map((item, i) => `${i+1}. ${item.name} (${item.price > 0 ? formatPrice(item.price) : 'Selected'})`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
+            let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Name:* ${name}\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n*Notes/Transport:* ${notes || 'None'}\n\n*Items Selected:*\n` + cart.map((item, i) => `${i+1}. ${item.name} (${item.price > 0 ? formatPrice(item.price) : 'Included'})`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
