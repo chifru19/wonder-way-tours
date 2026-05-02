@@ -241,7 +241,8 @@
                 { id: "m6", name: "Currency Exchange", price: 0 }
             ],
             events: [
-                { id: "e1", name: "Upcoming Events", price: 0, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
+                { id: "e1", name: "Beach Gala Night", price: 25000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" },
+                { id: "e2", name: "Sunset Music Session", price: 15000, img: "https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/upcoming-event.jpg" }
             ]
         };
 
@@ -302,12 +303,7 @@
 
         function renderUI() {
             const grid = document.getElementById('package-grid');
-            if(currentCategory === 'events') {
-                let flyerHtml = `<div class="package-card col-span-full overflow-hidden rounded-3xl mb-8"><img src="${servicesData.events[0].img}" class="w-full h-auto object-cover" onerror="this.src='https://raw.githubusercontent.com/chifru19/wonder-way-tours/main/images/logo.png'"></div>`;
-                grid.innerHTML = flyerHtml;
-            } else {
-                grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
-            }
+            grid.innerHTML = (servicesData[currentCategory] || []).map(item => createCard(item)).join('');
             
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = `Total: ${formatPrice(total)}`;
