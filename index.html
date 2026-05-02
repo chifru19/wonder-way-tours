@@ -308,7 +308,7 @@
                 list.innerHTML = cart.map((item, i) => `
                     <div class="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-700">
                         <span class="text-sm font-bold">${i+1}. ${item.name}</span>
-                        <span class="text-yellow-500 font-black">${item.price > 0 ? formatPrice(item.price) : 'Selected'}</span>
+                        <span class="text-yellow-500 font-black">${item.price > 0 ? formatPrice(item.price) : 'Included'}</span>
                     </div>
                 `).join('');
             }
@@ -361,7 +361,7 @@
             
             if(!name) { alert("Please enter your name"); return; }
             
-            let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Name:* ${name}\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n*Notes/Transport:* ${notes || 'None'}\n\n*Items Selected:*\n` + cart.map((item, i) => `${i+1}. ${item.name}`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
+            let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Name:* ${name}\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n*Notes/Transport:* ${notes || 'None'}\n\n*Items Selected:*\n` + cart.map((item, i) => `${i+1}. ${item.name} (${item.price > 0 ? formatPrice(item.price) : 'Included'})`).join('\n') + `\n\n*TOTAL: ${formatPrice(cart.reduce((s, it) => s + it.price, 0))}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
