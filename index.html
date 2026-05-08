@@ -28,7 +28,6 @@
         
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        /* New Spots Badge Styling */
         .spots-badge {
             position: absolute;
             top: 20px;
@@ -309,7 +308,7 @@
             const isS = cart.some(c => c.id === item.id);
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
                 ${item.spots ? `<div class="spots-badge">${item.spots} ${item.spots === 1 ? 'SPOT' : 'SPOTS'} LEFT</div>` : ''}
-                ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
+                <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
                 <div class="p-6">
                     <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
                     ${item.price > 0 ? `<p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>` : '<div class="mb-8"></div>'}
