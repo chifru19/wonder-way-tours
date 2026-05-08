@@ -9,9 +9,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
-        .hero-font { font-family: 'Outfit', sans-serif; }
-        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0f172a; 
+            color: white; 
+            scroll-behavior: smooth; 
+        }
+
+        .hero-font { 
+            font-family: 'Outfit', sans-serif; 
+        }
+
+        .active-tab { 
+            background: #fbbf24 !important; 
+            color: black !important; 
+            border-color: #fbbf24 !important; 
+        }
+
         .package-card { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #1e293b; 
@@ -22,7 +37,13 @@
             height: 100%;
             position: relative;
         }
-        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
+
+        .package-card:hover { 
+            transform: translateY(-12px); 
+            border-color: #fbbf24; 
+            box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
+        }
+
         .spots-badge {
             position: absolute;
             top: 20px;
@@ -38,6 +59,7 @@
             z-index: 50;
             box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
         }
+
         .review-card { 
             background: linear-gradient(145deg, #1e293b, #0f172a); 
             border-radius: 32px; 
@@ -46,7 +68,11 @@
             transition: 0.3s;
             text-align: left;
         }
-        .review-card:hover { border-color: #fbbf24; }
+
+        .review-card:hover { 
+            border-color: #fbbf24; 
+        }
+
         .immersive-footer { 
             position: relative; 
             min-height: 100vh; 
@@ -56,6 +82,7 @@
             overflow: hidden;
             background-color: #0f172a;
         }
+        
         .footer-bg-image {
             position: absolute;
             inset: 0;
@@ -65,12 +92,18 @@
             object-position: center 15%;
             opacity: 0.7;
         }
+        
         .footer-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
         }
-        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
+        
+        #checkout-bar { 
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.4); 
+        }
+
         .story-cta {
             background: #fbbf24;
             color: #0f172a;
@@ -195,7 +228,7 @@
                 { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" },
                 { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/zorb.jpg" }, 
                 { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
-                { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip paint.jpg" },
+                { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg" },
                 { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "images/museum.jpg" },
                 { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "images/seaport visit.jpg" },
                 { id: "a9", name: "Canoe Trip", price: 3000, img: "images/canoe.jpg" },
@@ -229,6 +262,7 @@
                 { id: "e7", name: "Solo Package", price: 250000, img: "images/solo package.jpg", spots: 1 }
             ]
         };
+
         function fetchReviews() {
             const scriptURL = "https://script.google.com/macros/s/AKfycbwGlQJUMBz-88OabMig8E8tYuhlidNrd1CHkAmZYtlNMPC5c3FVKQEqJOP7SePr4Fyt/exec";
             fetch(scriptURL)
@@ -250,11 +284,13 @@
                 document.getElementById('dynamic-reviews').innerHTML = "<p class='text-center col-span-full opacity-30 uppercase text-[10px] tracking-widest'>Chronicles are updating...</p>";
             });
         }
+
         function createCard(item) {
             const isS = cart.some(c => c.id === item.id);
             const spotBadge = item.spots ? `<div class="spots-badge">${item.spots} ${item.spots === 1 ? 'SPOT' : 'SPOTS'} LEFT</div>` : '';
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">${spotBadge}<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'"></div><div class="p-6"><h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>${item.price > 0 ? `<p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>` : '<div class="mb-8"></div>'}<button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="w-full py-3 ${isS ? 'bg-yellow-500 text-black' : 'bg-slate-800'} font-black rounded-xl uppercase text-[9px] tracking-widest transition-all">${isS ? 'ADDED ✓' : 'ADD TO TRIP'}</button></div></div>`;
         }
+
         function renderInquiry() {
             const list = document.getElementById('inquiry-cart-list');
             if(cart.length === 0) {
@@ -263,6 +299,7 @@
                 list.innerHTML = cart.map((item, i) => `<div class="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-700"><span class="text-sm font-bold">${i+1}. ${item.name}</span><span class="text-yellow-500 font-black">${formatPrice(item.price)}</span></div>`).join('');
             }
         }
+
         function renderUI() {
             const grid = document.getElementById('package-grid');
             if(currentCategory === 'events') {
@@ -277,29 +314,43 @@
             document.getElementById('checkout-bar').classList.toggle('translate-y-full', cart.length === 0);
             renderInquiry();
         }
+
         function toggleService(id, name, price) {
             const idx = cart.findIndex(i => i.id === id);
             idx > -1 ? cart.splice(idx, 1) : cart.push({ id, name, price });
             renderUI();
         }
+
         function formatPrice(v) { 
             const val = v * rates[currentCurrency];
             const suffix = currentCurrency === 'XAF' ? ' CFA' : (currentCurrency === 'EUR' ? ' €' : ' $');
             return new Intl.NumberFormat('fr-CM').format(Math.round(val)) + suffix; 
         }
-        function updateCurrency() { currentCurrency = document.getElementById('currency-select').value; renderUI(); }
+
+        function updateCurrency() { 
+            currentCurrency = document.getElementById('currency-select').value; 
+            renderUI(); 
+        }
+
         function processWhatsApp() {
             const name = document.getElementById('client-name').value;
             const arrival = document.getElementById('arrival-date').value;
             const departure = document.getElementById('departure-date').value;
             const notes = document.getElementById('extra-notes').value;
-            if(!name) { alert("Please enter your name"); return; }
+            if(!name) { 
+                alert("Please enter your name"); 
+                return; 
+            }
             let itemsString = cart.map((item, i) => `${i+1}. ${item.name} - ${formatPrice(item.price)}`).join('\n');
             let total = cart.reduce((s, it) => s + it.price, 0);
             let msg = `WONDERWAY BOOKING INQUIRY:\n\n*Name:* ${name}\n*Arrival:* ${arrival || 'N/A'}\n*Departure:* ${departure || 'N/A'}\n*Notes/Transport:* ${notes || 'None'}\n\n*Items Selected:*\n${itemsString}\n\n*TOTAL: ${formatPrice(total)}*`;
             window.open(`https://wa.me/237653827999?text=${encodeURIComponent(msg)}`, '_blank');
         }
-        window.onload = () => { renderUI(); fetchReviews(); };
+
+        window.onload = () => { 
+            renderUI(); 
+            fetchReviews(); 
+        };
     </script>
     </body>
 </html>
