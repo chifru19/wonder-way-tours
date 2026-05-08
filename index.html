@@ -28,7 +28,6 @@
         
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
-        /* The "Spots Left" Badge */
         .spots-badge {
             position: absolute;
             top: 20px;
@@ -230,12 +229,12 @@
 
         const servicesData = {
             activities: [
-                { id: "a1", name: "Jet Ski", price: 10000, img: "images/jetski-action.jpg" },
-                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" },
+                { id: "a1", name: "Jet Ski", price: 10000, img: "images/jetski action.jpg" },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse riding.jpg" },
                 { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" },
                 { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/zorb.jpg" }, 
                 { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
-                { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg" },
+                { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip paint.jpg" },
                 { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "images/museum.jpg" },
                 { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "images/seaport visit.jpg" },
                 { id: "a9", name: "Canoe Trip", price: 3000, img: "images/canoe.jpg" },
@@ -309,7 +308,9 @@
             const isS = cart.some(c => c.id === item.id);
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
                 ${item.spots ? `<div class="spots-badge">${item.spots} ${item.spots === 1 ? 'SPOT' : 'SPOTS'} LEFT</div>` : ''}
-                <div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                <div class="h-48 overflow-hidden">
+                    <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'">
+                </div>
                 <div class="p-6">
                     <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
                     ${item.price > 0 ? `<p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>` : '<div class="mb-8"></div>'}
@@ -328,7 +329,6 @@
             const list = document.getElementById('inquiry-cart-list');
             const logGrid = document.getElementById('logistics-grid');
             
-            // Render Selected Items
             if(cart.length === 0) {
                 list.innerHTML = "<p class='text-xs opacity-50'>No items selected yet.</p>";
             } else {
@@ -340,7 +340,6 @@
                 `).join('');
             }
             
-            // Render Optional Logistics
             logGrid.innerHTML = servicesData.logistics.map(item => {
                 const isS = cart.some(c => c.id === item.id);
                 return `<button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="px-4 py-3 rounded-lg border ${isS ? 'bg-yellow-500 text-black border-yellow-500' : 'bg-slate-900 border-slate-700 text-white'} text-[10px] font-bold uppercase transition">
