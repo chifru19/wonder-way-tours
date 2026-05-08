@@ -11,9 +11,20 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
         
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0f172a; 
+            color: white; 
+            scroll-behavior: smooth; 
+        }
+
         .hero-font { font-family: 'Outfit', sans-serif; }
-        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
+        
+        .active-tab { 
+            background: #fbbf24 !important; 
+            color: black !important; 
+            border-color: #fbbf24 !important; 
+        }
         
         .package-card { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
@@ -26,7 +37,11 @@
             position: relative;
         }
         
-        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
+        .package-card:hover { 
+            transform: translateY(-12px); 
+            border-color: #fbbf24; 
+            box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
+        }
         
         .spot-badge {
             position: absolute;
@@ -51,6 +66,7 @@
             transition: 0.3s;
             text-align: left;
         }
+
         .review-card:hover { border-color: #fbbf24; }
 
         .immersive-footer { 
@@ -63,11 +79,39 @@
             background-color: #0f172a;
         }
         
-        .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.7; }
-        .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
-        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
+        .footer-bg-image { 
+            position: absolute; 
+            inset: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center 15%; 
+            opacity: 0.7; 
+        }
 
-        .story-cta { background: #fbbf24; color: #0f172a; padding: 14px 30px; border-radius: 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; display: inline-block; margin-bottom: 50px; }
+        .footer-overlay { 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); 
+        }
+
+        #checkout-bar { 
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.4); 
+        }
+
+        .story-cta { 
+            background: #fbbf24; 
+            color: #0f172a; 
+            padding: 14px 30px; 
+            border-radius: 14px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            font-size: 10px; 
+            letter-spacing: 2px; 
+            display: inline-block; 
+            margin-bottom: 50px; 
+        }
     </style>
 </head>
 
@@ -209,11 +253,11 @@
                 { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/zorb.jpg" }, 
                 { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
                 { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip and paint.jpg" },
-                { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "images/museum.jpg" },
+                { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "images/museum 11.55.26.jpg" },
                 { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "images/seaport visit.jpg" },
-                { id: "a9", name: "Canoe Trip", price: 3000, img: "images/canoe.jpg" },
+                { id: "a9", name: "Canoe Trip", price: 3000, img: "images/seaport.jpg" },
                 { id: "a10", name: "Baka Pygmy Village", price: 10000, img: "images/pigmi village.jpg" },
-                { id: "a11", name: "Beach Volleyball", price: 10000, img: "images/volleyball.jpg" }
+                { id: "a11", name: "Beach Volleyball", price: 10000, img: "images/volleyball 11.52.40.jpg" }
             ],
             couples: [
                 { id: "c1", name: "Mini Love Escape", price: 90000, img: "images/couple paradis escape.jpg" },
@@ -230,7 +274,7 @@
             concierge: [
                 { id: "con1", name: "Full Day Photography", price: 60000, img: "images/Photography.jpg" },
                 { id: "con2", name: "Transport (Per Day)", price: 35000, img: "images/transport.jpg" },
-                { id: "con3", name: "Beach Bonfire", price: 15000, img: "images/inner-circle-retreat.jpg" }
+                { id: "con3", name: "Beach Bonfire", price: 15000, img: "images/beach-bonfire.jpg" }
             ],
             logistics: [
                 { id: "m1", name: "Accommodation", price: 0 },
