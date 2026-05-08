@@ -23,11 +23,12 @@
             border-radius: 32px;
             overflow: hidden;
             height: 100%;
-            position: relative;
+            position: relative; /* Added for badge positioning */
         }
         
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
-        
+
+        /* New Spots Badge Styling */
         .spots-badge {
             position: absolute;
             top: 20px;
@@ -40,10 +41,10 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
-            z-index: 50;
+            z-index: 10;
             box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
         }
-
+        
         .review-card { 
             background: linear-gradient(145deg, #1e293b, #0f172a); 
             border-radius: 32px; 
@@ -229,12 +230,12 @@
 
         const servicesData = {
             activities: [
-                { id: "a1", name: "Jet Ski", price: 10000, img: "images/jetski action.jpg" },
-                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse riding.jpg" },
+                { id: "a1", name: "Jet Ski", price: 10000, img: "images/jetski-action.jpg" },
+                { id: "a2", name: "Horse Riding", price: 2000, img: "images/horse-riding.jpg" },
                 { id: "a3", name: "Quad Biking", price: 5000, img: "images/Quad.jpg" },
                 { id: "a4", name: "Zorb Ball Action", price: 15000, img: "images/zorb.jpg" }, 
                 { id: "a5", name: "Night Bonfire & Grill", price: 15000, img: "images/campfire.jpg" }, 
-                { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip paint.jpg" },
+                { id: "a6", name: "Sip & Paint", price: 15000, img: "images/sip-paint.jpg" },
                 { id: "a7", name: "Grand Batanga Museum", price: 3000, img: "images/museum.jpg" },
                 { id: "a8", name: "Kribi Seaport Visit", price: 10000, img: "images/seaport visit.jpg" },
                 { id: "a9", name: "Canoe Trip", price: 3000, img: "images/canoe.jpg" },
@@ -243,20 +244,20 @@
             ],
             couples: [
                 { id: "c1", name: "Mini Love Escape", price: 90000, img: "images/couple paradis escape.jpg" },
-                { id: "c2", name: "Paradise Gold", price: 250000, img: "images/paradise gold.jpg" },
+                { id: "c2", name: "Paradise Gold", price: 250000, img: "images/paradise-gold.jpg" },
                 { id: "c3", name: "Royal VIP Romance", price: 350000, img: "images/royal romance.jpg" }
             ],
             group4: [
-                { id: "g4_1", name: "Crew Chill (4)", price: 230000, img: "images/group action.jpg" },
-                { id: "g4_2", name: "Vibes & Memories (4)", price: 350000, img: "images/dinner setup.jpg" }
+                { id: "g4_1", name: "Crew Chill (4)", price: 230000, img: "images/group-action.jpg" },
+                { id: "g4_2", name: "Vibes & Memories (4)", price: 350000, img: "images/dinner-setup.jpg" }
             ],
             group6: [
-                { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "images/group action.jpg" }
+                { id: "g6_1", name: "Friends & Waves (6)", price: 270000, img: "images/group-action.jpg" }
             ],
             concierge: [
                 { id: "con1", name: "Full Day Photography", price: 60000, img: "images/Photography.jpg" },
                 { id: "con2", name: "Transport (Per Day)", price: 35000, img: "images/transport.jpg" },
-                { id: "con3", name: "Beach Bonfire", price: 15000, img: "images/beach bonfire.jpg" }
+                { id: "con3", name: "Beach Bonfire", price: 15000, img: "images/beach-bonfire.jpg" }
             ],
             logistics: [
                 { id: "m1", name: "Accommodation", price: 0 },
@@ -267,13 +268,13 @@
                 { id: "m6", name: "Currency Exchange", price: 0 }
             ],
             events: [
-                { id: "e1", name: "The Tribe Escape (6)", price: 600000, img: "images/the tribe escape.jpg", spots: 1 },
-                { id: "e2", name: "The Premium Romance Suite", price: 375000, img: "images/platinum romance suite.jpg", spots: 1 },
-                { id: "e3", name: "The Inner Circle Retreat (4)", price: 500000, img: "images/inner circle retreat.jpg", spots: 1 },
-                { id: "e4", name: "The Lover's Nest", price: 300000, img: "images/lovers nest.jpg", spots: 3 },
-                { id: "e5", name: "Royal Duo Suite", price: 350000, img: "images/royal duo suite.jpg", spots: 3 },
-                { id: "e6", name: "The Cozy Circle (3)", price: 450000, img: "images/cozy circle.jpg", spots: 1 },
-                { id: "e7", name: "Solo Package", price: 250000, img: "images/solo package.jpg", spots: 1 }
+                { id: "e1", name: "The Tribe Escape (6)", price: 600000, img: "images/the-tribe-escape.jpg", spots: 1 },
+                { id: "e2", name: "The Platinum Romance Suite", price: 375000, img: "images/platinum-romance-suite.jpg", spots: 1 },
+                { id: "e3", name: "The Inner Circle Retreat (4)", price: 500000, img: "images/inner-circle-retreat.jpg", spots: 1 },
+                { id: "e4", name: "The Lover's Nest", price: 300000, img: "images/lovers-nest.jpg", spots: 3 },
+                { id: "e5", name: "Royal Duo Suite", price: 350000, img: "images/royal-duo-suite.jpg", spots: 3 },
+                { id: "e6", name: "The Cozy Circle (3)", price: 450000, img: "images/cozy-circle.jpg", spots: 1 },
+                { id: "e7", name: "Solo Package", price: 250000, img: "images/solo-package.jpg", spots: 1 }
             ]
         };
 
@@ -306,11 +307,11 @@
 
         function createCard(item) {
             const isS = cart.some(c => c.id === item.id);
+            const spotBadge = item.spots ? `<div class="spots-badge">${item.spots} ${item.spots === 1 ? 'SPOT' : 'SPOTS'} LEFT</div>` : '';
+            
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
-                ${item.spots ? `<div class="spots-badge">${item.spots} ${item.spots === 1 ? 'SPOT' : 'SPOTS'} LEFT</div>` : ''}
-                <div class="h-48 overflow-hidden">
-                    <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'">
-                </div>
+                ${spotBadge}
+                ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
                 <div class="p-6">
                     <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
                     ${item.price > 0 ? `<p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>` : '<div class="mb-8"></div>'}
@@ -329,6 +330,7 @@
             const list = document.getElementById('inquiry-cart-list');
             const logGrid = document.getElementById('logistics-grid');
             
+            // Render Selected Items
             if(cart.length === 0) {
                 list.innerHTML = "<p class='text-xs opacity-50'>No items selected yet.</p>";
             } else {
@@ -340,6 +342,7 @@
                 `).join('');
             }
             
+            // Render Optional Logistics
             logGrid.innerHTML = servicesData.logistics.map(item => {
                 const isS = cart.some(c => c.id === item.id);
                 return `<button onclick="toggleService('${item.id}', '${item.name}', ${item.price})" class="px-4 py-3 rounded-lg border ${isS ? 'bg-yellow-500 text-black border-yellow-500' : 'bg-slate-900 border-slate-700 text-white'} text-[10px] font-bold uppercase transition">
