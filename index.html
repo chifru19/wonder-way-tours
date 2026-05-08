@@ -11,20 +11,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@200;400;800&display=swap');
         
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #0f172a; 
-            color: white; 
-            scroll-behavior: smooth; 
-        }
-
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
         .hero-font { font-family: 'Outfit', sans-serif; }
-        
-        .active-tab { 
-            background: #fbbf24 !important; 
-            color: black !important; 
-            border-color: #fbbf24 !important; 
-        }
+        .active-tab { background: #fbbf24 !important; color: black !important; border-color: #fbbf24 !important; }
         
         .package-card { 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
@@ -37,11 +26,7 @@
             position: relative;
         }
         
-        .package-card:hover { 
-            transform: translateY(-12px); 
-            border-color: #fbbf24; 
-            box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); 
-        }
+        .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
         
         .spot-badge {
             position: absolute;
@@ -66,7 +51,6 @@
             transition: 0.3s;
             text-align: left;
         }
-
         .review-card:hover { border-color: #fbbf24; }
 
         .immersive-footer { 
@@ -79,39 +63,11 @@
             background-color: #0f172a;
         }
         
-        .footer-bg-image { 
-            position: absolute; 
-            inset: 0; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            object-position: center 15%; 
-            opacity: 0.7; 
-        }
+        .footer-bg-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.7; }
+        .footer-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); }
+        #checkout-bar { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 -20px 40px rgba(0,0,0,0.4); }
 
-        .footer-overlay { 
-            position: absolute; 
-            inset: 0; 
-            background: linear-gradient(to top, #0f172a 20%, rgba(15, 23, 42, 0.4) 60%, transparent 100%); 
-        }
-
-        #checkout-bar { 
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-            box-shadow: 0 -20px 40px rgba(0,0,0,0.4); 
-        }
-
-        .story-cta { 
-            background: #fbbf24; 
-            color: #0f172a; 
-            padding: 14px 30px; 
-            border-radius: 14px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            font-size: 10px; 
-            letter-spacing: 2px; 
-            display: inline-block; 
-            margin-bottom: 50px; 
-        }
+        .story-cta { background: #fbbf24; color: #0f172a; padding: 14px 30px; border-radius: 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; display: inline-block; margin-bottom: 50px; }
     </style>
 </head>
 
