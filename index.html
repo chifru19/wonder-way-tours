@@ -23,6 +23,7 @@
             border-radius: 32px;
             overflow: hidden;
             height: 100%;
+            position: relative;
         }
         
         .package-card:hover { transform: translateY(-12px); border-color: #fbbf24; box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.3); }
@@ -76,6 +77,22 @@
             letter-spacing: 2px;
             display: inline-block;
             margin-bottom: 50px;
+        }
+
+        .spots-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ef4444;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            z-index: 10;
         }
     </style>
 </head>
@@ -250,13 +267,13 @@
                 { id: "m6", name: "Currency Exchange", price: 0 }
             ],
             events: [
-                { id: "e1", name: "The Tribe Escape (6)", price: 600000, img: "images/the-tribe-escape.jpg" },
-                { id: "e2", name: "The Platinum Romance Suite", price: 375000, img: "images/platinum-romance-suite.jpg" },
-                { id: "e3", name: "The Inner Circle Retreat (4)", price: 500000, img: "images/inner-circle-retreat.jpg" },
-                { id: "e4", name: "The Lover's Nest", price: 300000, img: "images/lovers-nest.jpg" },
-                { id: "e5", name: "Royal Duo Suite", price: 350000, img: "images/royal-duo-suite.jpg" },
-                { id: "e6", name: "The Cozy Circle (3)", price: 450000, img: "images/cozy-circle.jpg" },
-                { id: "e7", name: "Solo Package", price: 250000, img: "images/solo-package.jpg" }
+                { id: "e1", name: "The Tribe Escape (6)", price: 600000, img: "images/the-tribe-escape.jpg", spots: 1 },
+                { id: "e2", name: "The Platinum Romance Suite", price: 375000, img: "images/platinum-romance-suite.jpg", spots: 1 },
+                { id: "e3", name: "The Inner Circle Retreat (4)", price: 500000, img: "images/inner-circle-retreat.jpg", spots: 1 },
+                { id: "e4", name: "The Lover's Nest", price: 300000, img: "images/lovers-nest.jpg", spots: 3 },
+                { id: "e5", name: "Royal Duo Suite", price: 350000, img: "images/royal-duo-suite.jpg", spots: 3 },
+                { id: "e6", name: "The Cozy Circle (3)", price: 450000, img: "images/cozy-circle.jpg", spots: 1 },
+                { id: "e7", name: "Solo Package", price: 250000, img: "images/solo-package.jpg", spots: 1 }
             ]
         };
 
@@ -290,6 +307,7 @@
         function createCard(item) {
             const isS = cart.some(c => c.id === item.id);
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
+                ${item.spots ? `<div class="spots-badge">${item.spots} ${item.spots === 1 ? 'SPOT' : 'SPOTS'} LEFT</div>` : ''}
                 ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
                 <div class="p-6">
                     <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
