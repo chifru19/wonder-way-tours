@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WonderWay | Kribi Collection</title>    
-    <link rel="icon" href="images/logo.png">
+    <link rel="icon" href="images/logo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -84,7 +84,7 @@
     <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/95 backdrop-blur-xl px-6 py-5 flex justify-between items-center border-b border-slate-800">
         <div class="flex items-center gap-4 cursor-pointer" onclick="switchCategory('activities')">
             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-500 bg-white">
-                <img src="images/logo.png" alt="WonderWay" class="w-full h-full object-cover">
+                <img src="images/logo.jpg" alt="WonderWay" class="w-full h-full object-cover">
             </div>
             <div class="flex flex-col text-left">
                 <span class="font-black text-xl hero-font text-white uppercase leading-none">WonderWay</span>
@@ -290,7 +290,7 @@
         function createCard(item) {
             const isS = cart.some(c => c.id === item.id);
             return `<div class="package-card ${isS ? 'border-[#fbbf24]' : 'border-slate-800'}">
-                ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
+                ${item.img ? `<div class="h-48 overflow-hidden"><img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.jpg'"></div>` : '<div class="h-48 bg-slate-800 flex items-center justify-center"><i class="fa fa-calendar text-4xl opacity-20"></i></div>'}
                 <div class="p-6">
                     <h4 class="text-lg font-black uppercase mb-1 text-white">${item.name}</h4>
                     ${item.price > 0 ? `<p class="text-md font-bold mb-4 text-yellow-500">${formatPrice(item.price)}</p>` : '<div class="mb-8"></div>'}
